@@ -190,7 +190,7 @@ npx promptfoo eval
 | License | MIT |
 | 推薦度 | ⭐⭐⭐⭐⭐ |
 
-**教什麼**：Anthropic 全新（2026 年初推出）的 **agent 專用 SDK**，跟基礎 `anthropic-sdk-python` 不同——這個內建 tool use loop、file access、sandbox 執行、subagent 編排。等於把 Claude Code 的 agent runtime 開放給 Python 應用直接用。
+**教什麼**：Anthropic 在 2025 年中釋出的 **agent 專用 SDK**，跟基礎 `anthropic-sdk-python` 不同——這個內建 tool use loop、file access、sandbox 執行、subagent 編排，把 Claude Code 用的 agent capabilities 開放給 Python 應用直接用。
 
 **適合誰**：要打造 Claude-based agent 而不是只呼叫 API 的開發者。比起手刻 ReAct loop、自己管 tool execution，這個 SDK 把這些抽象都做好了。
 

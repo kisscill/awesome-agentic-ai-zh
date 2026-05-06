@@ -24,7 +24,7 @@
 通用的寫作 / 腦力激盪 skill。可改用在備課上。
 
 #### [Claude Code](https://github.com/anthropics/claude-code)（搭配自訂 CLAUDE.md）⭐⭐⭐⭐⭐
-★ 120k+ — 教師最好的入口。低門檻先用 Claude.ai（網頁版）開始；如果是會重複的流程，再升級到 Claude Code。
+★ 120k+ — 教師很適合先從這裡開始。低門檻先用 Claude.ai（網頁版）試水溫；如果是會重複的流程，再升級到 Claude Code。
 
 ### 教學課程素材（給教師備課用）
 

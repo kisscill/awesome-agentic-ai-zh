@@ -236,7 +236,7 @@ pip install langgraph langchain-anthropic
 
 **Best for**: Pushing agents toward "serveable + observable" without the full LangGraph + LangSmith stack. Also fine for prototype-phase quick design.
 
-**Notes**: Cross-stage tool — Stage 4 for the agent API, Stage 7 for the runtime / monitoring side.
+**Notes**: Stage 4 for the agent API, Stage 7 for the runtime / monitoring side.
 
 ---
 
@@ -253,7 +253,7 @@ pip install langgraph langchain-anthropic
 
 **Best for**: Agents that switch between Claude / GPT / Gemini / open-source models without rewriting code.
 
-**Notes**: Strictly speaking not an agent framework — it's the provider-abstraction layer that frameworks sit on. Listed in Stage 4 because most multi-provider agent work needs it; Stage 7 deploy also touches it. The `enterprise/` directory is separately licensed.
+**Notes**: Strictly speaking not an agent framework — it's the provider-abstraction layer that frameworks sit on. Listed in Stage 4 because multi-provider agent work commonly needs it; Stage 7 deploy also touches it. The `enterprise/` directory is separately licensed.
 
 ---
 

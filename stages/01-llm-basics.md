@@ -102,7 +102,7 @@ jupyter notebook guide.ipynb
 
 **適合誰**：剛開始用 Claude API 的人。跟 Cookbook 互補：Cookbook 是「想做 X 怎麼做」的查詢手冊，Courses 是「從零開始系統性學一遍」的完整課程。
 
-**備註**：跟 Cookbook 一起用效果最好。建議先跑 `anthropic_api_fundamentals` 跟 `prompt_engineering_interactive_tutorial`。
+**備註**：建議先跑 `anthropic_api_fundamentals` 跟 `prompt_engineering_interactive_tutorial`。
 
 ---
 
@@ -239,7 +239,7 @@ jupyter notebook guide.ipynb
 | 形式 | 文件 |
 | 推薦度 | ⭐⭐⭐⭐⭐ |
 
-**教什麼**：Claude API 的權威官方文件。
+**教什麼**：Claude API 的官方文件。
 
 **適合誰**：直接當參考用，加到書籤。
 

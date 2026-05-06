@@ -238,7 +238,7 @@ pip install langgraph langchain-anthropic
 
 **適合誰**：要把 agent 推到「能 serve、能監控」的階段，但又不想全套 LangGraph + LangSmith 的人。也適合 prototype 階段的快速設計。
 
-**備註**：跨 Stage 4-7 的工具——Stage 4 學它的 agent API，Stage 7 用它的 runtime / 監控功能。
+**備註**：Stage 4 學它的 agent API，Stage 7 再用它的 runtime / 監控功能。
 
 ---
 
@@ -255,7 +255,7 @@ pip install langgraph langchain-anthropic
 
 **適合誰**：要做能切換 Claude / GPT / Gemini / 開源模型的 agent，不想為了切換 provider 改一堆程式碼的人。
 
-**備註**：嚴格來說 LiteLLM 不是 agent framework，而是 framework 底下的「provider 抽象層」——放在 Stage 4 是因為這是寫 multi-provider agent 時最常需要的工具。Stage 7 deploy 時也會再用到。Repo 內 `enterprise/` 目錄是另外的授權條款。
+**備註**：嚴格來說 LiteLLM 不是 agent framework，而是 framework 底下的「provider 抽象層」——放在 Stage 4 是因為寫 multi-provider agent 時很常會用到。Stage 7 deploy 時也會再用到。Repo 內 `enterprise/` 目錄是另外的授權條款。
 
 ---
 

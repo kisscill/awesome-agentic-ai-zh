@@ -15,7 +15,7 @@
 ### Workflow Tools
 
 #### [n8n](https://github.com/n8n-io/n8n) ⭐⭐⭐⭐
-Self-hostable workflow automation with AI integrations. Visual node-based.
+Self-hostable workflow automation platform with built-in AI integration; visual node-based editor.
 
 **Best for**: When you need glue between many SaaS tools (Slack + Gmail + Notion + AI).
 

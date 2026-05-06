@@ -186,7 +186,7 @@ npx promptfoo eval
 | License | MIT |
 | Recommendation | ⭐⭐⭐⭐⭐ |
 
-**What it teaches**: Anthropic's brand-new (early 2026) **agent-specific SDK** — distinct from the lower-level `anthropic-sdk-python`. Built-in tool use loop, file access, sandboxed execution, subagent orchestration. Effectively exposes the Claude Code agent runtime for Python apps to use directly.
+**What it teaches**: Anthropic's **agent-specific SDK** (released mid-2025) — distinct from the lower-level `anthropic-sdk-python`. Built-in tool use loop, file access, sandboxed execution, subagent orchestration. Exposes Claude Code's agent capabilities for Python apps to use directly.
 
 **Best for**: Developers building Claude-based agents rather than just calling the API. Saves you from hand-rolling a ReAct loop, managing tool execution, etc.
 

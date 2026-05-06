@@ -63,7 +63,7 @@
 
 **適合誰**：想學「**outline-driven 寫作**」的人。從零產主題 brief 時的好工具，類似 NotebookLM structured report 流程的開源版。
 
-**備註**：維護節奏較慢（接近 6 個月以上未推送），使用前先確認最新 commit 日期。
+**備註**：最後一次推送已超過 6 個月，使用前確認最新 commit 日期。
 
 ---
 

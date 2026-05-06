@@ -215,7 +215,7 @@ results = collection.query(query_texts=["query"], n_results=1)
 
 **What it teaches**: Topic-by-topic LLM / RAG / agent tutorial collection — one notebook per topic, from basic RAG to agent applications.
 
-**Best for**: Learners who want "the same concept, implemented in different ways" for comparison. Cross-stage in nature, but lives here because RAG topics dominate.
+**Best for**: Learners who want "the same concept, implemented in different ways" for comparison. Cross-stage material; placed in Stage 6 because RAG topics dominate.
 
 ---
 

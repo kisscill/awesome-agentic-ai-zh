@@ -61,7 +61,7 @@ Claude Code infrastructure for PhD researchers — skills, agents, hooks, rules 
 
 **Best for**: Learning **outline-driven writing**. Great for producing topic briefs from scratch; the closest open-source analog to NotebookLM's structured report flow.
 
-**Notes**: Maintenance pace has slowed (close to or beyond 6 months without a push); double-check the latest commit date before relying on it.
+**Notes**: Last push was over 6 months ago — verify the latest commit date before relying on it.
 
 ---
 

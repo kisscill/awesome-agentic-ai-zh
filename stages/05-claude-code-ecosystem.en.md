@@ -77,7 +77,7 @@ After this stage you will be able to extend Claude Code, write your own MCP serv
 
 ### Required Reading
 1. [**Anthropic — Introducing MCP**](https://www.anthropic.com/news/model-context-protocol) — original announcement, conceptual overview
-2. [**MCP Specification**](https://spec.modelcontextprotocol.io/) — the actual protocol spec
+2. [**MCP Specification**](https://modelcontextprotocol.io/specification) — the actual protocol spec
 3. [**Complete Guide to MCP in 2026**](https://dev.to/x4nent/complete-guide-to-mcp-model-context-protocol-in-2026-architecture-implementation-and-4a11) — implementation walkthrough
 
 ### Hello-X
@@ -286,7 +286,7 @@ pip install mcp
 
 | Field | Value |
 |---|---|
-| Stars | ★ 59k+ |
+| Stars | ★ 61k+ |
 | License | MIT |
 | Recommendation | ⭐⭐⭐⭐ |
 
@@ -340,7 +340,7 @@ pip install mcp
 
 **What it teaches**: Anthropic's official marketplace template — `.claude-plugin/marketplace.json` standard schema, `plugins/` for inline plugins, and `external_plugins/` for plugins referenced from external repos.
 
-**Best for**: The authoritative answer to "**what should marketplace.json look like?**" Required reading before publishing your own marketplace.
+**Best for**: Before publishing your own marketplace, this is the official template you'd most want to copy from for the **what should marketplace.json look like?** question.
 
 **Notes**: Beyond schema, this also shows how Anthropic categorizes its official plugins (chrome-devtools, deepwiki, code-research, jam, etc.).
 

@@ -79,7 +79,7 @@ flowchart TB
 
 ### 必修閱讀
 1. [**Anthropic — Introducing MCP**](https://www.anthropic.com/news/model-context-protocol) — 最初發表，概念總覽
-2. [**MCP Specification**](https://spec.modelcontextprotocol.io/) — 實際的協定規格
+2. [**MCP Specification**](https://modelcontextprotocol.io/specification) — 實際的協定規格
 3. [**Complete Guide to MCP in 2026**](https://dev.to/x4nent/complete-guide-to-mcp-model-context-protocol-in-2026-architecture-implementation-and-4a11) — 實作導讀
 
 ### Hello-X
@@ -293,13 +293,13 @@ pip install mcp
 
 | 欄位 | 內容 |
 |---|---|
-| Stars | ★ 59k+ |
+| Stars | ★ 61k+ |
 | License | MIT |
 | 推薦度 | ⭐⭐⭐⭐ |
 
 **教什麼**：Matt Pocock（TypeScript 社群知名教學者）公開自己工作中真實在用的 `.claude/` 目錄。每個 SKILL.md 都很短（10-50 行），不過度工程化。
 
-**適合誰**：想看「真實工程師日常用的 SKILL.md 長什麼樣子」的人。對照那種 200 行 over-engineered 的 skill，這份是反例的好例子。
+**適合誰**：想看「真實工程師日常用的 SKILL.md 長什麼樣子」的人。對照那些動輒 200 行的 over-engineered skill，這份特別有參考價值。
 
 ---
 
@@ -347,7 +347,7 @@ pip install mcp
 
 **教什麼**：Anthropic 官方的 marketplace 範本——`.claude-plugin/marketplace.json` 標準 schema、`plugins/` 內含 plugin 本體、`external_plugins/` 引用外部 repo 的 plugin。
 
-**適合誰**：「**marketplace.json 該長什麼樣**」這個問題的權威解答。寫自己的 marketplace 之前必看。
+**適合誰**：寫自己的 marketplace 之前，這是最該對著抄的官方範本——「**marketplace.json 該長什麼樣**」直接看這個。
 
 **備註**：除了 schema 之外，也是觀察 Anthropic 怎麼分類官方 plugin（chrome-devtools、deepwiki、code-research、jam 等）的好參考。
 

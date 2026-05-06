@@ -15,9 +15,9 @@
 >
 > 所有依賴一次裝完：`pip install anthropic openai requests beautifulsoup4 langgraph langchain-anthropic langchain-core chromadb langfuse fastapi uvicorn pydantic`
 
-我們要做的 agent：**Paper Summary Bot** — 給定一個 arXiv 論文 URL，輸出 3 段摘要 + 5 個關鍵詞 + 跟相關論文的比較。
+要做的 agent：**Paper Summary Bot** — 給定一個 arXiv 論文 URL，輸出 3 段摘要 + 5 個關鍵詞 + 跟相關論文的比較。
 
-每個 stage 都會把同一個 agent **加一層能力**。最後它會是一個跨多 LLM、有 memory、能 deploy 的 production agent。
+每個 stage 都會把同一個 agent **加一層能力**。最後它會是一個跨多 LLM、有 memory、能 deploy 的 agent。
 
 ---
 
@@ -401,7 +401,25 @@ def compare_with_memory(state):
     return {"comparison": response.content}
 ```
 
-**學到什麼**：vector DB 怎麼用、embedding 跟相似度查詢、把 agent 從「stateless」變成「有記憶」、persistent storage 的設計。
+把 `compare_with_memory` 接進 Stage 4 的 graph：
+
+```python
+# step6_memory.py 接續上面
+from step4_langgraph import State, react_agent, reflect, should_continue, MAX_REVISIONS
+from langgraph.graph import StateGraph, END
+
+graph = StateGraph(State)
+graph.add_node("agent", react_agent)
+graph.add_node("reflect", reflect)
+graph.add_node("compare", compare_with_memory)  # 新加的 node
+graph.add_edge("agent", "reflect")
+graph.add_conditional_edges("reflect", should_continue, {"agent": "agent", END: "compare"})
+graph.add_edge("compare", END)
+graph.set_entry_point("agent")
+app_with_memory = graph.compile()
+```
+
+**學到什麼**：vector DB 怎麼用、embedding 跟相似度查詢、把 agent 從「stateless」變成「有記憶」、persistent storage 的設計、graph 怎麼擴新 node 而不重寫前面的邏輯。
 
 ---
 

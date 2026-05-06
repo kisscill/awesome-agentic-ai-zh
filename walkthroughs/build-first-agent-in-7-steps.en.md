@@ -15,9 +15,9 @@ This is a **concrete cross-stage walkthrough** — the same agent, traced from S
 >
 > Install all deps at once: `pip install anthropic openai requests beautifulsoup4 langgraph langchain-anthropic langchain-core chromadb langfuse fastapi uvicorn pydantic`
 
-The agent we'll build: **Paper Summary Bot** — given an arXiv paper URL, output a 3-paragraph summary + 5 keywords + comparison with related work.
+The agent to build: **Paper Summary Bot** — given an arXiv paper URL, output a 3-paragraph summary + 5 keywords + comparison with related work.
 
-Each stage **adds one capability** to the same agent. By the end it will be a multi-LLM, memory-equipped, deployable production agent.
+Each stage **adds one capability** to the same agent. By the end it's a multi-LLM, memory-equipped, deployable agent.
 
 ---
 
@@ -401,7 +401,25 @@ List 2-3 unique contributions of the new paper not covered above."""
     return {"comparison": response.content}
 ```
 
-**What you learn**: how to use a vector DB, embeddings + similarity queries, taking an agent from "stateless" to "stateful," persistent storage design.
+Wire `compare_with_memory` into the Stage 4 graph:
+
+```python
+# step6_memory.py (continued)
+from step4_langgraph import State, react_agent, reflect, should_continue, MAX_REVISIONS
+from langgraph.graph import StateGraph, END
+
+graph = StateGraph(State)
+graph.add_node("agent", react_agent)
+graph.add_node("reflect", reflect)
+graph.add_node("compare", compare_with_memory)  # the new node
+graph.add_edge("agent", "reflect")
+graph.add_conditional_edges("reflect", should_continue, {"agent": "agent", END: "compare"})
+graph.add_edge("compare", END)
+graph.set_entry_point("agent")
+app_with_memory = graph.compile()
+```
+
+**What you learn**: how to use a vector DB, embeddings + similarity queries, taking an agent from "stateless" to "stateful," persistent storage design, and how to extend a graph with a new node without rewriting earlier logic.
 
 ---
 

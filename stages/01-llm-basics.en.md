@@ -100,7 +100,7 @@ jupyter notebook guide.ipynb
 
 **Best for**: Anyone starting with the Claude API. Complements the Cookbook: Cookbook is a "how do I do X?" lookup, Courses is a "learn it from zero, end-to-end" tutorial.
 
-**Notes**: Pair it with Cookbook for best results. Start with `anthropic_api_fundamentals` and `prompt_engineering_interactive_tutorial`.
+**Notes**: Start with `anthropic_api_fundamentals` and `prompt_engineering_interactive_tutorial`.
 
 ---
 
@@ -237,7 +237,7 @@ jupyter notebook guide.ipynb
 | Format | Documentation |
 | Recommendation | ⭐⭐⭐⭐⭐ |
 
-**What it teaches**: Authoritative documentation for the Claude API.
+**What it teaches**: The Claude API official documentation.
 
 **Best for**: Direct reference. Bookmark this.
 

@@ -158,7 +158,7 @@ results = collection.query(query_texts=["query"], n_results=1)
 
 **適合誰**：要做知識庫 / RAG 應用的中文使用者。預設值對中文斷詞 + embedding 處理得不錯。
 
-**備註**：最後一次更新是 2025 年 11 月（約 6 個月前——active maintenance 標準的邊緣）。
+**備註**：最後一次更新是 2025 年 11 月（約 6 個月前——還算活著，但已經到邊緣）。
 
 ---
 
@@ -217,7 +217,7 @@ results = collection.query(query_texts=["query"], n_results=1)
 
 **教什麼**：以主題為單位的 LLM / RAG / agent tutorial 集——每個主題一個 notebook，從 basic RAG 到 agent 應用都有。
 
-**適合誰**：想看「同一個概念在不同情境下怎麼實作」的對照組學習者。是 cross-stage 的補充，但放在 Stage 6 因為 RAG 主題佔多數。
+**適合誰**：想看「同一個概念在不同情境下怎麼實作」的對照組學習者。跨多個 stage 都用得上的補充材料，放在 Stage 6 是因為 RAG 主題佔多數。
 
 ---
 
