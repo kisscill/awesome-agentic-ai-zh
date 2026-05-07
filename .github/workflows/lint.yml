@@ -41,6 +41,30 @@ jobs:
           fi
           echo "✓ No banned words detected."
 
+      - name: Check zh-TW slips in zh-CN files
+        run: |
+          # 反向檢查：zh-CN 檔不能混入 zh-TW 用詞（避免翻譯不完整）
+          # 只掃 *.zh-CN.md。同樣不掃 policy doc（style-guide 必然提到對照詞）。
+          BANNED_TW=("使用者" "軟體" "硬體" "資訊" "品質" "資料" "專案" "腳本" "預設" "影片" "演算法" "應用程式" "網路" "連結" "服務" "範例" "範本" "設定" "註解" "終端機" "命令列" "編輯器" "瀏覽器" "客戶端" "伺服器" "倉儲" "必修閱讀" "飛書" "個別" "兩條")
+          FOUND=0
+          for word in "${BANNED_TW[@]}"; do
+            if grep -rn --include="*.zh-CN.md" \
+                  -F "$word" . 2>/dev/null \
+                  | grep -v "^./resources/style-guide.zh-CN.md" \
+                  | grep -v "^./resources/glossary.zh-CN.md" \
+                  | grep -v "^./.ai/" \
+                  | grep -v "^./book/"; then
+              echo "❌ zh-TW word found in zh-CN file: $word"
+              FOUND=$((FOUND+1))
+            fi
+          done
+          if [ $FOUND -gt 0 ]; then
+            echo ""
+            echo "Found $FOUND zh-TW residue in .zh-CN.md files. See .ai/zh-CN_glossary.md for translation table."
+            exit 1
+          fi
+          echo "✓ No zh-TW residue in zh-CN files."
+
       - name: Check overclaim phrases
         run: |
           # 同樣只掃「公開展示」的內容檔（zh + en），不掃 policy doc / .ai / book / scripts。
