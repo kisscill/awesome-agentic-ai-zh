@@ -8,7 +8,7 @@
 
 ### 🤖 AI Agent 學習地圖 — 從基本 LLM 概念到自己打造多 agent 系統
 
-<p><em>結構化 7 階段學習路徑，從「LLM 是什麼、token 怎麼算」一路到 multi-agent 編排、本地部署，<br/>每階段都有必跑 demo、必修閱讀、精選 project</em></p>
+<p><em>結構化 7 階段學習路徑，從「LLM 是什麼、token 怎麼算」一路到 multi-agent 編排、本地部署，<br/>每階段都有必做的 Hello-X 練習、必修閱讀、精選 project</em></p>
 
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Phase%207%20%C2%B7%202%20tracks%20%C2%B7%20170%2B%20entries%20%C2%B7%205%20branches-success?style=flat)](CONTRIBUTORS.md)
@@ -24,7 +24,7 @@
 
 這個專案是為**想學習 AI 或 AI agent 的人**設計的。
 
-本 repo 把網路上散落各處的高品質專案、教材、Hello-X demo、必修閱讀蒐集起來，按**從零開始、循序漸進**的順序整理成 **7 個階段**——每階段都會清楚指出**該學什麼、必跑哪些 demo、推薦哪幾個 project、進入下一階段前該檢查什麼**。
+本 repo 把網路上散落各處的高品質專案、教材、Hello-X demo、必修閱讀蒐集起來，按**從零開始、循序漸進**的順序整理成 **7 個階段**——每階段都會清楚指出**該學什麼、必做哪些 Hello-X 練習、推薦哪幾個 project、進入下一階段前該檢查什麼**。
 
 走完整條路線，你會從「**LLM 使用者**」進階到「**agent 系統建構者**」——能看懂 framework 在做什麼、能設計多 agent 協作、能寫自己的 MCP server。
 
@@ -64,7 +64,7 @@ cd awesome-agentic-ai-zh
 
 - 📖 **完全免費** — MIT 授權，所有內容開放共學
 - 🗺️ **兩條學習路徑** — Track A（CLI Power User）給「想 USE 現成 CLI agent」的人；Track B（Agent Builder）給「想 BUILD 自己 agent」的人。共用 Stage 0-2 基礎
-- 🛠️ **必跑 Hello-X demos** — 每階段都有 1-5 個必跑 mini project，光看不練不算學會
+- 🛠️ **必做 Hello-X 練習** — 每階段都有 1-5 個 mini project（題目 + 成功標準，**自己動手寫**，不是現成 demo），光看不練不算學會
 - 🎯 **精選 145+ 個 projects** — 每個都附星等推薦、適合誰、教什麼、怎麼跑（含本地 LLM 執行：Ollama、llama.cpp、LocalAI、MLX）
 - 🌏 **中文 / 英文雙語** — 繁中為主、英文版完整對照
 - 🎓 **不只「框架」、還有「Claude Code 生態」** — MCP / Skills / Plugins / SDK 完整堆疊
@@ -164,7 +164,7 @@ cd awesome-agentic-ai-zh
 直接看常用入口：
 
 - 🔑 **MCP / Skills / Plugins 用語怎麼解釋** → [RESOURCES.md §三個核心用語](RESOURCES.md#三個核心用語mcp--skills--plugins)
-- 🔌 **接 Notion / Obsidian / Excel / GitHub 等日常工具** → [RESOURCES.md §接日常工具](RESOURCES.md#接日常工具常用-mcp-server--skill) 或完整 48 條目錄 [`resources/mcp-skills-catalog.md`](resources/mcp-skills-catalog.md)
+- 🔌 **接 Notion / Obsidian / Excel / GitHub 等日常工具** → [RESOURCES.md §接日常工具](RESOURCES.md#接日常工具常用-mcp-server--skill) 或完整 54 條目錄 [`resources/mcp-skills-catalog.md`](resources/mcp-skills-catalog.md)
 - 🔬 **研究 workflow + multi-LLM delegation skill 對** → [RESOURCES.md §研究工作流](RESOURCES.md#研究工作流本-repo-維護者出品)
 - 📚 **同主題的 awesome list / 中文社群** → [RESOURCES.md §同主題清單](RESOURCES.md#同主題的清單型-awesome-lists)
 

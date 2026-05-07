@@ -2,7 +2,7 @@
 
 > [繁體中文](./mcp-skills-catalog.md) | **English**
 
-> Connect Claude Code (or any other CLI agent) to the apps you already use, without window-hopping. This page is a curated index of 48 MCP servers / Claude Skills / integrations grouped by use case (incl. research-workflow + multi-LLM-delegation dedicated sections).
+> Connect Claude Code (or any other CLI agent) to the apps you already use, without window-hopping. This page is a curated index of 54 MCP servers / Claude Skills / integrations grouped by use case (incl. research-workflow + multi-LLM-delegation dedicated sections).
 
 ---
 
@@ -654,7 +654,7 @@
 
 ## 13. Research Workflow Skills (academic / paper / lit)
 
-> Claude Code Skills for grad students, postdocs, PIs. The repo maintainer [@WenyuChiou](https://github.com/WenyuChiou) (Lehigh CEE PhD candidate) built these for his own daily use and open-sourced them for other researchers.
+> ⚠️ **Maintainer's own projects**: the following are skills the repo maintainer [@WenyuChiou](https://github.com/WenyuChiou) (Lehigh CEE PhD candidate) uses daily for research and open-sourced for other researchers. **Star counts are lower than general-purpose tools** because these are niche / research-specific. The ★ 100+ inclusion floor is relaxed in this section — the only criterion here is "actually useful in the maintainer's research workflow". Evaluate fit yourself.
 
 ### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 
@@ -708,7 +708,7 @@
 
 ## 14. Multi-LLM Delegation Skills
 
-> Skill set for using Claude as planner / reviewer while delegating token-heavy work to Codex / Gemini. Maintained workflows extracted from the repo author's daily use.
+> ⚠️ **Maintainer's own projects** (same as §13): delegation skills the maintainer extracted from daily workflow. Star floor is relaxed; criterion is "the Claude-planner + Codex/Gemini-executor combo runs reliably". Multi-LLM space evolves quickly — evaluate alongside the multi-agent frameworks listed in Stage 7 before adopting.
 
 ### [WenyuChiou/codex-delegate](https://github.com/WenyuChiou/codex-delegate) ⭐⭐⭐⭐⭐
 
@@ -734,17 +734,17 @@
 **Audience**: people writing long form, doing cross-language drafts, or needing a second-opinion review — researchers writing papers / Chinese reports especially.
 **Notes**: complements codex-delegate — "Codex for code, Gemini for prose" division of labor.
 
-### [WenyuChiou/agent-collab-skills](https://github.com/WenyuChiou/agent-collab-skills) ⭐⭐⭐
+### [WenyuChiou/agent-collab-skills](https://github.com/WenyuChiou/agent-collab-skills) ⭐⭐
 
 | Field | Value |
 |---|---|
-| Stars | ★ 0+ (recently published) |
+| Stars | recently published, no stars yet |
 | License | MIT |
-| Rating | ⭐⭐⭐ (multi-agent collab marketplace) |
+| Rating | ⭐⭐ (experimental — treat as reference) |
 
 **What it does**: Claude Code marketplace for multi-agent collaboration — task splitter, output reconciler, adversarial debate, shared memory, acceptance gate. Composes with codex-delegate / gemini-delegate.
-**Audience**: developers running 2+ delegate agents per round (Codex + Gemini in parallel / multiple Codex instances on independent subtasks).
-**Notes**: recently published; treat as reference implementation for now.
+**Audience**: people running 2+ delegate agents per round who want to see one way of packaging multi-agent coordination into a marketplace.
+**Notes**: **experimental** — don't treat this as a production-grade framework. It's the maintainer's own setup made public as a reference. For production-grade multi-agent, see LangGraph / AutoGen / CrewAI in Stage 7.
 
 ---
 

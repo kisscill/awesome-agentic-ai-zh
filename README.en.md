@@ -56,7 +56,7 @@ cd awesome-agentic-ai-zh
 
 - 📖 **Fully free** — MIT-licensed, all content open
 - 🗺️ **Two learning tracks** — Track A (CLI Power User) for "use existing CLIs"; Track B (Agent Builder) for "build your own". Shared Stages 0-2 foundation.
-- 🛠️ **Must-run Hello-X demos** — 1-5 mini projects per stage; reading-only doesn't count
+- 🛠️ **Must-do Hello-X exercises** — 1-5 mini projects per stage (specs + success criteria, **you write the code**, not turnkey demos); reading-only doesn't count
 - 🎯 **145+ curated projects** — each with star rating, audience, what it teaches, how to run (incl. local LLM runners: Ollama, llama.cpp, LocalAI, MLX)
 - 🌏 **Bilingual** — zh-TW canonical, English mirror
 - 🎓 **Beyond frameworks: Claude Code ecosystem** — MCP / Skills / Plugins / SDK full stack
@@ -158,7 +158,7 @@ The full related-resources block (term definitions + daily-tool MCP/Skill highli
 Common quick links:
 
 - 🔑 **What MCP / Skills / Plugins mean** → [RESOURCES.en.md §three core terms](RESOURCES.en.md#three-core-terms-mcp--skills--plugins)
-- 🔌 **Connect to Notion / Obsidian / Excel / GitHub / etc.** → [RESOURCES.en.md §daily-tool integrations](RESOURCES.en.md#daily-tool-integrations-mcp-servers--skills) or full 48-entry catalog [`resources/mcp-skills-catalog.en.md`](resources/mcp-skills-catalog.en.md)
+- 🔌 **Connect to Notion / Obsidian / Excel / GitHub / etc.** → [RESOURCES.en.md §daily-tool integrations](RESOURCES.en.md#daily-tool-integrations-mcp-servers--skills) or full 54-entry catalog [`resources/mcp-skills-catalog.en.md`](resources/mcp-skills-catalog.en.md)
 - 🔬 **Research workflow + multi-LLM delegation pair** → [RESOURCES.en.md §research workflow](RESOURCES.en.md#research-workflow-by-the-repo-maintainer)
 - 📚 **Topic-based awesome lists / Chinese community** → [RESOURCES.en.md §topic-based](RESOURCES.en.md#topic-based-awesome-lists)
 

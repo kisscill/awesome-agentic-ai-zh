@@ -2,7 +2,7 @@
 
 > **繁體中文** | [English](./mcp-skills-catalog.en.md)
 
-> 把 Claude Code（或其他 CLI agent）接到你已經在用的工具，不用反覆切換視窗。本頁是 48 個分類整理過的 MCP server / Claude Skill / 整合範例（含研究工作流 + multi-LLM delegation 兩個專屬區）。
+> 把 Claude Code（或其他 CLI agent）接到你已經在用的工具，不用反覆切換視窗。本頁是 54 個分類整理過的 MCP server / Claude Skill / 整合範例（含研究工作流 + multi-LLM delegation 兩個專屬區）。
 
 ---
 
@@ -654,7 +654,7 @@
 
 ## 13. 研究工作流 Skills（學術 / paper / 文獻）
 
-> 給研究生、博後、PI 用的 Claude Code Skills 集合。本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）順手做出來、自己每天在用的——順便公開讓其他研究者用。
+> ⚠️ **maintainer 自家專案區**：以下幾個是本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）日常在用的研究 skills，公開出來給其他研究者參考。**因為是自己的東西、又是相對 niche 的研究場景，star 數字會比泛用工具低**。star 門檻在這節是放寬的——選收的標準是「在我自己研究流程裡實際有用」。請自己評估是否合用。
 
 ### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 
@@ -708,7 +708,7 @@
 
 ## 14. Multi-LLM Delegation Skills
 
-> 用 Claude 當 planner / reviewer，把 token-heavy 工作 delegate 給 Codex / Gemini 的 skill set。本 repo 維護者把日常 workflow 抽出來公開。
+> ⚠️ **maintainer 自家專案區**：跟 §13 一樣，以下是維護者把自己 daily workflow 抽出來公開的 delegation skills。star 門檻放寬，選收標準是「真的能讓 Claude planner + Codex/Gemini 執行者組合穩定跑下去」。Multi-LLM 領域變化快，建議跟其他 multi-agent framework（Stage 7 列的）一起評估後再選。
 
 ### [WenyuChiou/codex-delegate](https://github.com/WenyuChiou/codex-delegate) ⭐⭐⭐⭐⭐
 
@@ -734,17 +734,17 @@
 **適合誰**：寫長文、跨語言 draft、需要第二意見 review 的人——研究者寫 paper / 中文報告場景特別合適。
 **備註**：跟 codex-delegate 互補——「Codex 寫 code、Gemini 寫 prose」分工。
 
-### [WenyuChiou/agent-collab-skills](https://github.com/WenyuChiou/agent-collab-skills) ⭐⭐⭐
+### [WenyuChiou/agent-collab-skills](https://github.com/WenyuChiou/agent-collab-skills) ⭐⭐
 
 | 欄位 | 內容 |
 |---|---|
-| Stars | ★ 0+（剛 push）|
+| Stars | 剛公開、stars 還沒累積 |
 | License | MIT |
-| 推薦度 | ⭐⭐⭐（多 agent 協作 marketplace） |
+| 推薦度 | ⭐⭐（experimental，當 reference 看就好） |
 
 **教什麼**：Claude Code marketplace for multi-agent collaboration——task splitter、output reconciler、adversarial debate、shared memory、acceptance gate。跟 codex-delegate / gemini-delegate 組合用。
-**適合誰**：一個 round 要跑 2+ delegate agent（Codex + Gemini 平行 / 多個 Codex 跑獨立子任務）的開發者。
-**備註**：剛 push，stars 還沒累積；當 reference implementation 用就好。
+**適合誰**：要跑 2+ delegate agent 在同一輪、想看 multi-agent coordination 怎麼包成 marketplace 的人。
+**備註**：experimental——別把它當生產級 framework，當作維護者把自己 setup 公開的 reference 看就好。要 production-grade 的請看 Stage 7 的 LangGraph / AutoGen / CrewAI。
 
 ---
 

@@ -28,7 +28,7 @@
 3. [**A Visual Guide to LLM Tokenizers**](https://huggingface.co/learn/llm-course/chapter6/1) — Hugging Face 的入門
 4. [**Anthropic API Pricing**](https://www.anthropic.com/pricing#anthropic-api) — 把計價表看完，算一下 1k input + 1k output 的成本
 
-## 🛠 Hello-X Projects（必跑，不是看過就好）
+## 🛠 Hello-X Projects（必做練習，不是看過就好）
 
 ### Hello, LLM API
 五行 Python 呼叫 Claude API 並印出回應。

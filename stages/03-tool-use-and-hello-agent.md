@@ -29,7 +29,7 @@
 3. [**OpenAI — Function Calling**](https://platform.openai.com/docs/guides/function-calling) — function calling 格式參考
 4. [**Build an agent from scratch**](https://shafiqulai.github.io/blogs/blog_3.html) — 從零打造 agent 的故事式導覽
 
-## 🛠 Hello-X Projects（必跑、不是看就好）
+## 🛠 Hello-X Projects（必做練習、不是看就好）
 
 ### Hello-1: Function Calling（一個工具、一次呼叫）
 給 Claude 一個工具（假的天氣 API）跟一個問題（「台北現在有下雨嗎？」）。看 Claude 怎麼呼叫工具、拿到結果、再回答你。

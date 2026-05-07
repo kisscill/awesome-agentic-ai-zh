@@ -20,7 +20,7 @@
 3. [**Pinecone — Learning Center**](https://www.pinecone.io/learn/) — vector DB 基礎
 4. [**Anthropic — Contextual Retrieval**](https://www.anthropic.com/news/contextual-retrieval) — Anthropic 搭配 prompt caching 的 RAG 寫法
 
-## 🛠 Hello-X Projects（必跑、不是看就好）
+## 🛠 Hello-X Projects（必做練習、不是看就好）
 
 ### Hello-1: Embeddings
 把 100 個句子做 embedding，找出某個 query 的最近鄰。理解 vector 之間的距離意義。

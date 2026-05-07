@@ -95,7 +95,7 @@ After this stage you will be able to extend Claude Code, write your own MCP serv
 ### Curated Projects
 
 > 💡 **Looking for MCP servers for daily tools (Notion / Obsidian / Excel / Postgres / Playwright / Figma…)?**
-> See [`resources/mcp-skills-catalog.en.md`](../resources/mcp-skills-catalog.en.md) — 41 commonly-used MCP servers / Skills grouped into 12 categories with stars / license / audience. The section below stays focused on "**reference for writing your own MCP server**" (official servers + SDKs).
+> See [`resources/mcp-skills-catalog.en.md`](../resources/mcp-skills-catalog.en.md) — 54 commonly-used MCP servers / Skills grouped into 14 categories with stars / license / audience. The section below stays focused on "**reference for writing your own MCP server**" (official servers + SDKs).
 
 #### [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) ⭐ Official
 
