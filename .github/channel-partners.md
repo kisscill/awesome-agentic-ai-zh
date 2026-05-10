@@ -27,7 +27,7 @@
 | 3 | [HuggingFace 中文社群](outreach/huggingface-zh.md) | HF community/discuss | not contacted | — | — | — | English ecosystem hub w/ growing zh segment |
 | 4 | [LangChain (kyrolabs/awesome-langchain)](outreach/langchain-ai.md) | GitHub PR | not contacted | — | — | — | Stage 4 covers LangChain; §11 lists Langchain-Chatchat |
 | 5 | [hesreallyhim/awesome-claude-code](outreach/awesome-claude-code.md) | GitHub **issue** | not contacted | — | — | — | ⚠️ Repo mid-reorg — open issue (not PR), park for new TOC |
-| 6 | [punkpeye/awesome-mcp-servers](outreach/awesome-mcp-servers.md) | GitHub PR | contacted | 2026-05-09 | — | — | [PR #6135](https://github.com/punkpeye/awesome-mcp-servers/pull/6135) — added to `## Tutorials` (alphabetical position 1). Skip wong2 (server-only policy). |
+| 6 | [punkpeye/awesome-mcp-servers](outreach/awesome-mcp-servers.md) | GitHub PR | contacted | 2026-05-09 | — | — | [PR #6135](https://github.com/punkpeye/awesome-mcp-servers/pull/6135). 2026-05-10: addressed bot name-check ([6f711ec](https://github.com/WenyuChiou/awesome-mcp-servers/commit/6f711ec3)) + replied to glama/emoji bot warnings ([comment](https://github.com/punkpeye/awesome-mcp-servers/pull/6135#issuecomment-4416517075)). Awaiting punkpeye human review. |
 | 7 | [Zhipu BigModel community](outreach/zhipu.md) | dev community / 知乎 | not contacted | — | — | — | Inviting them to PR a Zhipu agent entry to §11 |
 | 8 | [Moonshot Kimi](outreach/moonshot.md) | dev community / 知乎 | not contacted | — | — | — | Inviting them to PR a Kimi agent entry to §11 |
 
