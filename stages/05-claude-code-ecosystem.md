@@ -514,7 +514,7 @@ pip install mcp
 
 ## 5.6 — Harness Internals（agent runtime 的內部結構）⭐ Track B 必看
 
-到 5.5 為止你會**用** Subagent 了，但**沒看過 Claude Code 內部到底怎麼跑 agent loop**。本節打開引擎蓋——這節是 Track B（Agent Builder）的高潮章節：production agent 不是「LLM + tool」那麼簡單，中間還有一整套 runtime 層處理 dispatch / context / safety / retry / telemetry。
+到 5.5 為止你會**用** Subagent 了，但**沒看過 Claude Code 內部到底怎麼跑 agent loop**。本節打開引擎蓋——production agent 不是「LLM + tool」那麼簡單，中間還有一整套 runtime 層處理 dispatch / context / safety / retry / telemetry。Claude Code 本身就是一個高完成度的 reference harness，所以放在 Stage 5、不在 Stage 4（framework 之上的視角）或 Stage 7（deploy 之下的視角）。
 
 ### 學習目標
 
@@ -523,15 +523,9 @@ pip install mcp
 - 看得懂 `claude-agent-sdk-python` source 的 main loop（不是逐行、是抓得到主幹）
 - 講得清楚 **framework（Stage 4）vs harness 差在哪**：framework 規範 **API**（你呼叫的介面），harness 規範 **runtime**（怎麼跑、怎麼 recovery、怎麼觀測）
 
-### 為什麼這節在這裡（不在 Stage 4 / Stage 7）
-
-- **Stage 4** 教你「用」framework（LangGraph / CrewAI etc.）——抽象層之上的視角
-- **Stage 7** 教你 production 的 eval / observability / deploy——抽象層之下的視角
-- **本節** 在中間：framework 之下、deploy 之上，**runtime 內部解剖**。Claude Code 本身就是一個高完成度的 reference harness，所以放在 Stage 5
-
 ### 📚 必修閱讀
 
-1. [**Anthropic — Building Effective Agents**](https://www.anthropic.com/research/building-effective-agents) ⭐ — orchestrator / worker / handoff / reflection 等 pattern 的 canonical reference
+1. [**Anthropic — Building Effective Agents**](https://www.anthropic.com/engineering/building-effective-agents) ⭐ — orchestrator / worker / handoff / reflection 等 pattern 的 canonical reference
 2. [**anthropics/claude-agent-sdk-python**](https://github.com/anthropics/claude-agent-sdk-python) — Claude Code 官方 Python SDK 的 source；**重點 file：`src/claude_agent_sdk/_internal/client.py`**（main loop 在這）+ `query.py`（單回合 API）
 3. [**ai-boost/awesome-harness-engineering**](https://github.com/ai-boost/awesome-harness-engineering) ⭐（★ 780+） — community curation：harness pattern / eval / memory / observability 整合
 4. [**ZhangHanDong/harness-engineering-from-cc-to-ai-coding**](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) — 中文圈最完整的 Claude Code 內部解讀
@@ -557,39 +551,16 @@ pip install mcp
 
 ### 🎯 精選 Projects
 
-#### [anthropics/claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) ⭐⭐⭐⭐⭐
+4 個項目一張表搞定。**挑入口看「適合誰」、想深入點連結看 repo**。
 
-**適合誰**：所有 Track B 學習者、想搞清楚「Claude Code 內部怎麼跑」的工程師。
+| Project | ⭐ | 適合誰 | 為什麼推薦 / 備註 |
+|---|---|---|---|
+| [anthropics/claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) | ⭐⭐⭐⭐⭐ | 所有 Track B 學習者、想搞清楚「Claude Code 內部怎麼跑」 | **canonical Python harness、本節練習就是讀這個 repo**。後面 Stage 7 deploy 也會 import |
+| [ZhangHanDong/harness-engineering-from-cc-to-ai-coding](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) | ⭐⭐⭐⭐ | 中文 reader 想看「為什麼 Claude Code 這樣設計」 | 中文圈最完整 CC 內部解讀（harness 概念 → CC 實作 → 跟其他 AI coding tool 對比）。**配合 SDK source 互補看**——一個告訴你「怎麼做」、一個告訴你「為什麼這麼做」 |
+| [ai-boost/awesome-harness-engineering](https://github.com/ai-boost/awesome-harness-engineering) | ⭐⭐⭐⭐ | 5.6 讀完想擴大視野 | community curation：30+ harness / eval / memory / observability / MCP project（★ 780+）。**廣度資源庫、非教程**——挑感興趣的 sub-topic 鑽進去 |
+| [wshobson/agents](https://github.com/wshobson/agents) | ⭐⭐⭐⭐ | 寫完 §5.5 自己的 subagent 後想看 production-grade 範本 | 50+ subagent definition 的 ergonomic 設計（description / tool list / system prompt 分層）。**讀 source 比讀文件學得多**。在 5.5 已介紹、本節 cross-ref |
 
-**教什麼**：canonical Python harness。本練習就是讀這個 repo。也是後面 Stage 7 deploy 時你會 import 的 SDK。
-
----
-
-#### [ZhangHanDong/harness-engineering-from-cc-to-ai-coding](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) ⭐⭐⭐⭐
-
-**適合誰**：中文 reader 想看「為什麼 Claude Code 這樣設計」的高層 narrative，配合上面 SDK source 一起讀。
-
-**教什麼**：中文圈最完整的 Claude Code 內部解讀，從 harness 概念 → CC 實作 → 跟其他 AI coding tool 的對比都有。**配合 SDK source 看，互補**——一個告訴你「怎麼做」、一個告訴你「為什麼這麼做」。
-
----
-
-#### [ai-boost/awesome-harness-engineering](https://github.com/ai-boost/awesome-harness-engineering) ⭐⭐⭐⭐
-
-**適合誰**：Stage 5.6 讀完想擴大視野的人。
-
-**教什麼**：community curation：30+ harness / eval / memory / observability / MCP 相關 project。**廣度資源庫，不是教程**——挑你感興趣的 sub-topic 鑽進去。
-
----
-
-#### [wshobson/agents](https://github.com/wshobson/agents)（在 5.5 已介紹、本節 cross-ref）
-
-**適合誰**：寫完 §5.5 自己的 subagent 後想看更多 production-grade subagent 設計範本的人。
-
-**教什麼**：50+ 個 subagent definition 的 ergonomic 設計 — 包括 description 怎麼寫、tool list 怎麼選、system prompt 怎麼分層。**讀 source 比讀文件學得多**——本節練習做完應該已經有能力看懂為什麼某個 subagent 這樣寫。
-
----
-
-> 💡 **本節跟 Stage 7 的差別**：本節學「Claude Code 這個 harness 怎麼跑」（具體 reference）；Stage 7 學「production harness 一般要有什麼」（抽象 pattern）。先具體後抽象，看完本節再進 Stage 7 會輕鬆很多。
+> 💡 **本節跟 Stage 7 的差別**：本節學「Claude Code 這個 harness 怎麼跑」（具體 reference）；Stage 7 學「production harness 一般要有什麼」（抽象 pattern）。**先具體後抽象**、看完本節再進 Stage 7 會輕鬆很多。
 
 ---
 
