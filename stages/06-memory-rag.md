@@ -1,4 +1,4 @@
-# Stage 6 — Memory · RAG · 進階
+# Stage 6 — Memory · RAG · Context Engineering
 
 > **繁體中文** | [简体中文](./06-memory-rag.zh-Hans.md) | [English](./06-memory-rag.en.md)
 
@@ -6,8 +6,49 @@
 
 > 💡 這 stage 用語密度高（**RAG / 向量資料庫 / embedding / chunking / hybrid search / reranking⋯**）→ 不熟先翻 [`resources/glossary.md` §3](../resources/glossary.md#3-memory--retrieval--rag)。
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖：單元指引 + Chunking + Memory 設計三種 pattern〕→ 動手練習 → 精選 Projects → 自我檢查  
+> 📋 **本章組成**：〔Context Engineering 是什麼（先定位）+ 兩個概念對照表〕→ 學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖：單元指引 + Chunking + Memory 設計三種 pattern〕→ 進階 RAG 技巧（GraphRAG / Contextual Retrieval / Hybrid Search）→ 動手練習 → 常用工具推薦 → 精選 Projects → 自我檢查  
 > 🔑 **關鍵名詞**：見 [`resources/glossary.md` §3](../resources/glossary.md#3-memory--retrieval--rag)（memory / RAG / embedding / chunking / reranking）
+
+## 🎯 Context Engineering 是什麼（先定位）
+
+**Context Engineering = 跨多次 LLM call 怎麼動態組裝 prompt 的工程學科**。Stage 2 教你「**單次** prompt 怎麼寫」、本 stage 教你「**跨多次** call 怎麼管 context」——當你需要動態組 system prompt + 拉 memory + 塞 retrieved chunks + 接 tool definitions 時、就到了 context engineering 領域。
+
+**Discipline lineage**（你現在在第 2 層）：
+
+| 層 | Discipline | 解決什麼 | 在哪 stage |
+|---|---|---|---|
+| 1 | **Prompt Engineering** | 單次 LLM call 怎麼問才準 | [Stage 2](02-prompt-engineering.md) |
+| **2** | **Context Engineering**<br>（**本 stage**） | **跨多次 call 怎麼動態組 prompt** | **本 stage** |
+| 3 | **Harness Engineering** | 把多個 LLM call 包成 production runtime | [Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念) |
+
+**Context Engineering 的 3 個 problem domain**（本 stage 主軸是前兩個）：
+
+1. **Memory 管理** — short-term / long-term / episodic / semantic memory 怎麼分層、怎麼存、怎麼忘
+2. **Retrieval** — 怎麼從外部知識庫撈相關片段（RAG / vector search / GraphRAG / hybrid search）
+3. **Context window 預算** — 多少 token 給 prompt、多少給 history、多少給 retrieval；接 Stage 7 §Harness 處理
+
+### 4 個常被搞混的概念 — 一張表分清楚
+
+| 詞 | 是什麼（抽象 / 具體）| 範例工具 |
+|---|---|---|
+| **Memory** | agent 跨對話 / 跨 session 記事情的**能力**（抽象概念） | LangChain ConversationBufferMemory / mem0 / Letta |
+| **Embedding** | 把文字轉成 N 維**向量**、讓相似度可計算（資料轉換） | `sentence-transformers` 跑出 768 維向量 / OpenAI ada-002 |
+| **Vector DB** | 存 + 查 embedding 的**儲存層**（基礎設施） | Chroma / Qdrant / Weaviate / pgvector |
+| **RAG** | 「retrieve 相關片段 → 塞進 prompt → 生成」這個 **pattern**（架構模式） | LlamaIndex / LangChain RAG chain |
+
+→ **核心區分**：Memory 是**能力**、Embedding 是**資料轉換**、Vector DB 是**儲存**、RAG 是**架構 pattern**——這 4 個常被混用、實際上是 4 個不同層的概念。
+
+### RAG vs Long Context vs Fine-tuning — 何時用什麼
+
+LLM 知道你的私有 / 領域資料、有 3 種主要做法。**本 stage 教 RAG**，但你要知道何時不該用：
+
+| 選擇 | 適合 | 不適合 | 成本 |
+|---|---|---|---|
+| **RAG**<br>（外部 retrieve） | 大型 / 變動 / 私有知識庫、需要 citation 引用來源 | 推理需要全文一起看的任務、需要跨文件 multi-hop reasoning | 每 query 多 1 次 vector search 的 latency |
+| **Long Context**<br>（直接塞 prompt） | < 200k token 的中型文件、一次性查詢、需要 cross-doc reasoning | 知識庫大 / 經常變動 / 想要 citation | 每 query 燒大量 input token（即使有 prompt caching）|
+| **Fine-tuning**<br>（改 model 權重） | 風格 / 格式統一、特定領域語言（醫療、法律、code）| 知識會變、要 citation、不想練 model | 訓練成本 + 維護成本 + 模型 lock-in |
+
+→ **怎麼選**：先試 RAG（成本最低、變動最容易）→ RAG 撈不到才考慮 Long Context → 兩個都不行才考慮 Fine-tuning。**進 Stage 7 學 fine-tune deploy**。
 
 不會記住過去互動的 agent 沒什麼用。RAG（Retrieval-Augmented Generation）是目前的標準做法。這一章兩個都會講到。
 
@@ -209,210 +250,49 @@ Stage 3 §反思（基本版）                Stage 6 本節（完整版）
 ### 練習 5：Long-term Memory
 讓 agent 在多輪對話之間記得事情。可以用 `mem0` 或自己用 vector store 接。
 
-## 🎯 精選 Projects
+## 🎯 常用 Memory / RAG 工具推薦（按用途分類）
+
+不知道從哪裡開始挑工具？下面是 2025 後段業界常用搭配——**挑入口看「場景」、想深入點連結看 repo**：
+
+| 場景 | 推薦工具 | 為什麼 |
+|---|---|---|
+| **第一次跑 RAG**（最快上手）| [Chroma](https://github.com/chroma-core/chroma) + [LlamaIndex](https://github.com/run-llama/llama_index) | local-first、零 ops、quickstart 友善。Stage 6 練習默認 |
+| **agent 長期記憶**（個人助理 / chatbot）| [mem0](https://github.com/mem0ai/mem0) | 自動 fact extraction + forgetting + namespace、production memory layer |
+| **跨 session、persona-stable agent**（therapist / tutor / long-term assistant）| [Letta](https://github.com/letta-ai/letta) | OS-style paging memory、working + archival 雙層、long session 強項 |
+| **production scale RAG**（百萬 doc）| [Qdrant](https://github.com/qdrant/qdrant) + LlamaIndex | Rust 寫的 vector DB、scale 大時比 Chroma 快 |
+| **已有 Postgres 的環境** | [pgvector](https://github.com/pgvector/pgvector) | Postgres 擴充、SQL + vector 一起、運維最簡 |
+| **企業級 RAG + Web UI** | [RAGFlow](https://github.com/infiniflow/ragflow) | document parsing 強（含 OCR / 表格 / layout）、企業場景、含 Web UI |
+| **中文 RAG 範本** | [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) | 中文圈最完整、本機 LLM 整合好（ChatGLM / Qwen / Llama）|
+| **進階：Contextual Retrieval** | [Anthropic cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide) | Claude 搭配 prompt caching 的 contextual chunking（**詳見下方 §進階 RAG 技巧**） |
+| **進階：knowledge graph 推理** | [LightRAG](https://github.com/HKUDS/LightRAG) / [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | knowledge graph + RAG、entity-relation 推理（**詳見下方 §進階 RAG 技巧**） |
+| **跨主題 tutorial 集** | [ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub) | RAG + agent 教學 collection、Jupyter notebook 形式 |
+
+**建議入手順序**：
+1. 第一個必裝：**Chroma + LlamaIndex**（跑 Stage 6 練習）
+2. agent 要記事：加 **mem0**（最簡單的 memory layer）
+3. 開始 production-scale：換成 **Qdrant** 或 **pgvector**
+4. 想升級到進階 RAG：看下方 §進階 RAG 技巧 三個 subsection
+
+## 🎯 精選 Projects（範本 / spec / 範例 collection）
+
+按用途分類、13 個項目一張表搞定。**挑入口看「適合誰」、想深入點連結看 repo**。
+
+| 分類 | Project | ⭐ | 適合誰 | 為什麼推薦 / 備註 |
+|---|---|---|---|---|
+| **RAG framework**<br>（完整流水線） | [LlamaIndex](https://github.com/run-llama/llama_index) | ⭐⭐⭐⭐⭐ | 以文件為主的應用 | 以 RAG 為核心、document loader / chunking / retrieval / query engine 一條龍。★ 49k+ |
+| | [infiniflow/ragflow](https://github.com/infiniflow/ragflow) | ⭐⭐⭐⭐⭐ | 要把 RAG 真的 ship 給非開發者用 | production 等級 RAG engine、深度文件理解（layout / 表格 / OCR）+ hybrid retrieval + agent loop + Web UI。★ 79k+、Apache-2.0 |
+| | [HKUDS/LightRAG](https://github.com/HKUDS/LightRAG) | ⭐⭐⭐⭐ | 想看研究級 graph + long-context memory 方法 | graph + vector hybrid retrieval + summarization-based memory、EMNLP 2025 paper-backed。★ 34k+、MIT。研究風格 codebase |
+| **Vector DB**<br>（local-first） | [Chroma](https://github.com/chroma-core/chroma) | ⭐⭐⭐⭐⭐ | 練習 2 / 4、最容易上手的 vector DB | 開源 embedding 資料庫、本機跑、in-memory / SQLite 後端、零 ops。★ 27k+、Apache-2.0。**安裝**：`pip install chromadb` |
+| **Vector DB**<br>（production scale） | [Qdrant](https://github.com/qdrant/qdrant) | ⭐⭐⭐⭐⭐ | Chroma 跟不上時、需要 production scale | Rust 寫的 vector DB、有雲端版跟自架版。★ 31k+ |
+| **Vector DB**<br>（hybrid） | [Weaviate](https://github.com/weaviate/weaviate) | ⭐⭐⭐⭐ | production 部署 + schema 約束 | 內建模組（text2vec / generative / classification）、schema 驅動、內建 BM25 + vector hybrid。★ 16k+ |
+| **Vector DB**<br>（已有 Postgres） | [pgvector](https://github.com/pgvector/pgvector) | ⭐⭐⭐⭐ | 原本就在用 Postgres 的團隊 | Postgres 擴充、SQL + vector 同一個 DB、運維最簡。★ 21k+ |
+| **Memory framework**<br>（auto fact extraction） | [mem0ai/mem0](https://github.com/mem0ai/mem0) | ⭐⭐⭐⭐⭐ | 個人助理 / chatbot 需要 user-level memory | 自我精煉 memory 層、跨 session 儲存事實。★ 54k+ |
+| **Memory framework**<br>（OS-paging） | [Letta（前身 MemGPT）](https://github.com/letta-ai/letta) | ⭐⭐⭐⭐ | context 要跑很久的 agent（以月為單位） | 階層式 memory（working / archival）、OS-paging 概念。★ 22k+ |
+| **Memory（in-framework）** | [LangChain — Memory](https://python.langchain.com/docs/concepts/memory/) | ⭐⭐⭐ | 已用 LangChain | 4 種 memory 抽象（buffer / summary / vectorstore-backed / entity）|
+| **進階 RAG 技巧** | [Anthropic — Contextual Retrieval cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide) | ⭐⭐⭐⭐⭐ | 跑完基本 RAG 想升級 | Claude 搭配 prompt caching 的 contextual chunking、含完整端到端範例 |
+| **中文 RAG 樣板** | [chatchat-space/Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) | ⭐⭐⭐⭐ | 中文知識庫 / RAG 應用 | 中文社群最廣泛使用、可離線部署、中文預設好、支援 ChatGLM / Qwen / Llama / Ollama。★ 38k+、Apache-2.0。⚠️ 最後更新 2025-11（邊緣）|
+| **教材合集** | [patchy631/ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub) | ⭐⭐⭐⭐ | 想看「同概念在不同情境怎麼實作」 | 主題式 LLM / RAG / agent tutorial 集、Jupyter notebook、跨多個 stage 都用得上。★ 34k+、MIT |
 
-按用途分 4 類。**先看分類表挑入口、再點下面 detail block 看適合誰 / 教什麼**：
-
-| 分類 | Project | 推薦 | 為什麼推薦 |
-|---|---|---|---|
-| **RAG framework**（完整流水線） | [LlamaIndex](https://github.com/run-llama/llama_index) | ⭐⭐⭐⭐⭐ | 以 RAG 為核心、document loader / chunking / retrieval / query engine 一條龍 |
-| **RAG framework**（agentic RAG） | [infiniflow/ragflow](https://github.com/infiniflow/ragflow) | ⭐⭐⭐⭐⭐ | document parsing 強、企業級、含 Web UI |
-| **RAG framework**（graph-based）| [HKUDS/LightRAG](https://github.com/HKUDS/LightRAG) | ⭐⭐⭐⭐ | knowledge graph + RAG、適合需要 entity-relation 推理 |
-| **Vector DB**（local-first）| [Chroma](https://github.com/chroma-core/chroma) | ⭐⭐⭐⭐⭐ | 練習默認、in-memory / SQLite 後端、零 ops cost |
-| **Vector DB**（production scale）| [Qdrant](https://github.com/qdrant/qdrant) | ⭐⭐⭐⭐⭐ | Rust 寫、production-grade、scale 大 |
-| **Vector DB**（hybrid）| [Weaviate](https://github.com/weaviate/weaviate) | ⭐⭐⭐⭐ | 內建 BM25 + vector hybrid、modular schema |
-| **Vector DB**（已有 Postgres）| [pgvector](https://github.com/pgvector/pgvector) | ⭐⭐⭐⭐ | Postgres 擴充、SQL + vector 一起、運維最簡 |
-| **Memory framework**（auto fact extraction）| [mem0ai/mem0](https://github.com/mem0ai/mem0) | ⭐⭐⭐⭐⭐ | production-grade memory、auto-extract / forgetting / namespace |
-| **Memory framework**（OS-paging）| [Letta（前身 MemGPT）](https://github.com/letta-ai/letta) | ⭐⭐⭐⭐ | working / archival 兩級 memory、long session 場景強 |
-| **Memory（in-framework）**| [LangChain — Memory](https://python.langchain.com/docs/concepts/memory/) | ⭐⭐⭐ | 4 種 memory 抽象、適合已用 LangChain 的人 |
-| **進階 RAG 技巧** | [Anthropic — Contextual Retrieval cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide) | ⭐⭐⭐⭐⭐ | Claude 搭配 prompt caching 的 contextual chunking |
-| **中文 RAG 樣板** | [chatchat-space/Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) | ⭐⭐⭐⭐ | 中文圈最完整、跟本機 LLM 整合好 |
-| **教材合集** | [patchy631/ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub) | ⭐⭐⭐⭐ | RAG + agent 教學 collection、Jupyter notebook 形式 |
-
-### [LlamaIndex](https://github.com/run-llama/llama_index)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 49k+ |
-| 推薦度 | ⭐⭐⭐⭐⭐ |
-
-**教什麼**：以 RAG 為核心的 framework。document loader、切塊策略、retrieval pattern、query engine。
-
-**適合誰**：以文件為主的應用。RAG 是它的核心。
-
----
-
-### [Chroma](https://github.com/chroma-core/chroma)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 27k+ |
-| License | Apache-2.0 |
-| 推薦度 | ⭐⭐⭐⭐⭐ |
-
-**教什麼**：開源 embedding 資料庫。本機跑，不用搞基礎設施。
-
-**適合誰**：上面的練習 2、練習 4。最容易上手的 vector DB。
-
-**怎麼跑**：
-```python
-import chromadb
-client = chromadb.Client()
-collection = client.create_collection("hello")
-collection.add(documents=["doc 1", "doc 2"], ids=["1", "2"])
-results = collection.query(query_texts=["query"], n_results=1)
-```
-
----
-
-### [Qdrant](https://github.com/qdrant/qdrant)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 31k+ |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：production 等級的 vector DB，用 Rust 寫，規模大時比 Chroma 快。
-
-**適合誰**：當 Chroma 跟不上時。有雲端版跟自架版。
-
----
-
-### [Weaviate](https://github.com/weaviate/weaviate)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 16k+ |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：有內建模組（text2vec、generative、classification）的 vector DB。schema 驅動。
-
-**適合誰**：production 部署、需要 schema 約束的場景。
-
----
-
-### [pgvector](https://github.com/pgvector/pgvector)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 21k+ |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：在 PostgreSQL 裡做向量相似度搜尋。SQL 跟向量同一個 DB。
-
-**適合誰**：原本就在用 PostgreSQL、不想多維護一個向量儲存的團隊。
-
----
-
-### [LangChain — Memory](https://python.langchain.com/docs/concepts/memory/)
-
-**教什麼**：agent memory 模式（buffer、summary、vectorstore-backed）。
-
-**適合誰**：agent 需要跨 session 記得事情時。
-
----
-
-### [mem0ai/mem0](https://github.com/mem0ai/mem0)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 54k+ |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：給 AI agent 用的自我精煉 memory 層。跨 session 儲存使用者的事實。
-
-**適合誰**：個人助理或 chatbot，需要使用者層級 memory 的場景。
-
----
-
-### [Letta（前身 MemGPT）](https://github.com/letta-ai/letta)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 22k+ |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：有階層式 memory 的長 context agent。靈感來自 OS 的 memory management。
-
-**適合誰**：context 要跑很久的 agent（以月為單位、不是分鐘）。
-
----
-
-### [chatchat-space/Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat)
-
-| 欄位 | 內容 |
-|---|---|
-| 語言 | 中文 + Python |
-| Stars | ★ 38k+ |
-| License | Apache-2.0 |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：中文社群最廣泛使用的 RAG + Agent 應用 framework，可離線部署、中文友善的預設值，支援 ChatGLM / Qwen / Llama / Ollama 後端。
-
-**適合誰**：要做知識庫 / RAG 應用的中文使用者。預設值對中文斷詞 + embedding 處理得不錯。
-
-**備註**：最後一次更新是 2025 年 11 月（約 6 個月前——還算活著，但已經到邊緣）。
-
----
-
-### [Anthropic — Contextual Retrieval cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide)
-
-**教什麼**：Anthropic 的 contextual retrieval 技巧搭配 prompt caching，附完整端到端範例。
-
-**適合誰**：跑完基本 RAG 之後想升級到 contextual retrieval、在長文件上拿到更好 recall 的人。
-
-**備註**：Anthropic 在 2025 年把 `anthropic-cookbook` 改名為 `claude-cookbooks`。上面的線上 notebook 是現在的標準參考；GitHub 上的原始路徑可能會變動。
-
----
-
-### [infiniflow/ragflow](https://github.com/infiniflow/ragflow)
-
-| 欄位 | 內容 |
-|---|---|
-| 語言 | Python |
-| Stars | ★ 79k+ |
-| License | Apache-2.0 |
-| 推薦度 | ⭐⭐⭐⭐⭐ |
-
-**教什麼**：production 等級的 RAG engine，含深度文件理解（layout、表格、OCR）+ hybrid retrieval + agent loop。「**從零到 deploy RAG service**」的完整參考。
-
-**適合誰**：要把 RAG 真的 ship 給非開發者用的場景。比 LangChain RAG 完整很多，但複雜度也高。
-
-**備註**：是 open-source RAG engine（可自架，附 Docker / 原始碼部署），不是封閉的 hosted service。雲端 demo 只是體驗用。
-
----
-
-### [HKUDS/LightRAG](https://github.com/HKUDS/LightRAG)
-
-| 欄位 | 內容 |
-|---|---|
-| 語言 | Python |
-| Stars | ★ 34k+ |
-| License | MIT |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：graph + vector hybrid retrieval，加上 summarization-based 的 long-context memory。EMNLP 2025 paper-backed。
-
-**適合誰**：在「**長文件 / 長 context 怎麼記憶**」這個問題上想看研究級方法的人。跟 mem0、Letta 互補（它們偏 conversational memory）。
-
-**備註**：研究風格的 codebase，比 ragflow 沒那麼 polish；學概念好用。
-
----
-
-### [patchy631/ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub)
-
-| 欄位 | 內容 |
-|---|---|
-| 語言 | Python / Jupyter |
-| Stars | ★ 34k+ |
-| License | MIT |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：以主題為單位的 LLM / RAG / agent tutorial 集——每個主題一個 notebook，從 basic RAG 到 agent 應用都有。
-
-**適合誰**：想看「同一個概念在不同情境下怎麼實作」的對照組學習者。跨多個 stage 都用得上的補充材料，放在 Stage 6 是因為 RAG 主題佔多數。
-
----
 
 ## ✅ 進入 Stage 7 前的自我檢查
 
