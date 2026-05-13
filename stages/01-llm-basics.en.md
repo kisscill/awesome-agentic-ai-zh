@@ -28,7 +28,7 @@ If not — go back to Stage 0 first.
 
 ## 📚 Required Reading
 
-1. [**Anthropic — What is Claude?**](https://www.anthropic.com/news/claude-3-family) — official model overview
+1. [**Anthropic — Claude Model Overview**](https://docs.claude.com/en/about-claude/models/overview) — official model family overview, including 2026's latest Opus 4.7 / Sonnet 4.6 / Haiku 4.5
 2. [**OpenAI Quickstart**](https://platform.openai.com/docs/quickstart) — first API call walkthrough
 3. [**A Visual Guide to LLM Tokenizers**](https://huggingface.co/learn/llm-course/chapter6/1) — Hugging Face's intro
 4. [**Anthropic API Pricing**](https://www.anthropic.com/pricing#anthropic-api) — read the pricing table, calculate cost for 1k input + 1k output
@@ -245,11 +245,11 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import anthropic
 
-# Anthropic public pricing 2026 Q1 (per 1M tokens, USD) — verify at https://www.anthropic.com/pricing
+# Anthropic public pricing 2026 Q2 (per 1M tokens, USD) — verify at https://www.anthropic.com/pricing
 PRICING = {
     "claude-haiku-4-5":   {"input": 1.00, "output":  5.00},
-    "claude-sonnet-4-5":  {"input": 3.00, "output": 15.00},
-    "claude-opus-4-5":    {"input": 15.0, "output": 75.00},
+    "claude-sonnet-4-6":  {"input": 3.00, "output": 15.00},
+    "claude-opus-4-7":    {"input": 5.00, "output": 25.00},  # Opus 4.7 (April 2026) price reduced to 5/25
 }
 
 client = anthropic.Anthropic()
@@ -268,7 +268,17 @@ for name, r in PRICING.items():
     print(f"  {name:<22} ${c:.4f}")
 
 assert cost_one > 0, "Cloud LLM always has a cost"
-print(f"\n✅ Exercise 3 passed (Anthropic) — 1000 runs: haiku ≈ $0.25, sonnet ≈ $0.76, opus ≈ $3.81")
+print(f"\n✅ Exercise 3 passed (Anthropic) — 1000 runs: haiku ≈ $0.25, sonnet 4.6 ≈ $0.76, opus 4.7 ≈ $1.27")
+```
+
+**Expected output**:
+```
+model: claude-haiku-4-5
+single: input=14 output=48 → $0.000254
+1000 calls cost across model tiers:
+  claude-haiku-4-5       $0.2540
+  claude-sonnet-4-6      $0.7620
+  claude-opus-4-7        $1.2700
 ```
 
 **Trade-off**: local Ollama is $0 for 1000 runs but takes ~2 hr; Anthropic haiku is ~10 min for $0.25; sonnet ~10 min for $0.76. **Use cloud only for production; learning / experiments / debug stay local.**
