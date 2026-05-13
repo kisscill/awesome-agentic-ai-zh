@@ -72,12 +72,16 @@ If unsure, ask the user to run `ollama list` and verify.
 |---|---|
 | Stage 0-3 inline exercises (3 langs) | ✅ Done — Path A Ollama / Path B Anthropic + budget callouts |
 | Stage 3 folder `03-react-from-scratch` | ✅ Pilot rename done — `starter.py` (Ollama) + `starter_anthropic.py` (Anthropic) + dual test files |
-| Stage 3 folders `02/04/05/06` | ⚪ Pending — need Ollama `starter.py` + rename existing → `starter_anthropic.py` |
+| Stage 3 folders `02/04/05/06` | ✅ Phase 3 done (2026-05-12) — Ollama `starter.py` + rename existing → `starter_anthropic.py` + trilingual READMEs in dual-path style |
 | Stage 1 folder `04-cross-provider` | ✅ Multi-provider (already includes Ollama via `call_ollama` in README) |
-| Stage 1 folder `05-error-handling` | ⚪ Pending — needs Ollama version with openai SDK exceptions |
+| Stage 1 folder `05-error-handling` | ✅ Phase 3 done (2026-05-12) — openai SDK exceptions + same retry wrapper, trilingual READMEs |
 | Stage 4/5/6/7 + Track A (38 exercises) | ⚪ Pending T3+ — full new write, Ollama-default by design |
 | `examples/README` LLM list + budget table | ✅ Done (3 langs) |
 | Per-stage budget callouts | ✅ Done for Stage 1+2+3 (3 langs each) |
+
+## Known follow-up: pilot `03-react-from-scratch` README.en.md + README.zh-Hans.md drift
+
+The zh-TW `README.md` of `examples/stage-3/03-react-from-scratch/` already uses the dual-path layout (Path A primary / Path B optional + budget callouts + mock test mention for both backends). The `README.en.md` and `README.zh-Hans.md` siblings were NOT updated when the pilot's dual-path zh-TW README was written — they still describe the pre-dual-path layout (Anthropic-only `starter.py`, single `test.py`). After Phase 3 the other 5 folders all have aligned trilingual dual-path READMEs, so the pilot is now the lone outlier. Fix when revisiting Stage 3 docs polish — straight translation pass of the zh-TW README is enough.
 
 ## Reference scripts (in `.ai/2026/05/12/`)
 
