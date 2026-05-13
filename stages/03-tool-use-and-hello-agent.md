@@ -197,7 +197,7 @@ print(f"LLM 挑了: {tc.function.name}, args: {json.loads(tc.function.arguments)
 
 </details>
 
-→ **完整可跑版** → [`examples/stage-3/02-multi-tool-selection/`](../examples/stage-3/02-multi-tool-selection/)
+→ **基礎 starter 範本** → [`examples/stage-3/02-multi-tool-selection/`](../examples/stage-3/02-multi-tool-selection/)（starter.py 含 stub + 簡單 test，illustrative，**不是 chapter-length 完整教程**；深度章節見 stage 開頭 📚 hello-agents callout）
 
 ### 練習 3：從零實作 ReAct（不用 framework）
 用 50-80 行 Python 把 Thought → Action → Observation 迴圈寫出來。不要 LangChain、不要 LangGraph，就是純 `while not done: thought; action; observation; ...`。
@@ -234,7 +234,7 @@ for step in range(5):  # max_iter safety net
 
 </details>
 
-→ **完整可跑版** → [`examples/stage-3/03-react-from-scratch/`](../examples/stage-3/03-react-from-scratch/)（含 mock-based test.py、不花 API 錢也能驗）
+→ **基礎 starter 範本** → [`examples/stage-3/03-react-from-scratch/`](../examples/stage-3/03-react-from-scratch/)（含 mock-based test.py、不花 API 錢也能驗；illustrative，**不是 chapter-length 完整教程**——深度章節見 stage 開頭 📚 hello-agents callout）
 
 ### 練習 4：多步驟推理任務
 一個需要連續呼叫 3-5 次 tool 的任務。例如：「找出台北人口，除以紐約人口，再把比例換成百分比。」每一步用不同的工具。
@@ -259,7 +259,7 @@ TOOL_IMPL = {
 
 </details>
 
-→ **完整可跑版** → [`examples/stage-3/04-multi-step-reasoning/`](../examples/stage-3/04-multi-step-reasoning/)
+→ **基礎 starter 範本** → [`examples/stage-3/04-multi-step-reasoning/`](../examples/stage-3/04-multi-step-reasoning/)（starter.py 含 stub + 簡單 test，illustrative，**不是 chapter-length 完整教程**；深度章節見 stage 開頭 📚 hello-agents callout）
 
 ### 練習 5：錯誤處理
 讓某個工具失敗（網路錯誤、輸入無效）。看看 agent 會怎麼處理錯誤、能不能恢復，再加上 retry 機制。
@@ -296,7 +296,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 </details>
 
-→ **完整可跑版** → [`examples/stage-3/05-error-handling/`](../examples/stage-3/05-error-handling/)
+→ **基礎 starter 範本** → [`examples/stage-3/05-error-handling/`](../examples/stage-3/05-error-handling/)（starter.py 含 stub + 簡單 test，illustrative，**不是 chapter-length 完整教程**；深度章節見 stage 開頭 📚 hello-agents callout）
 
 ### 練習 6：Function schema 設計（壞 schema 修到好）
 **先給 LLM 一份故意寫爛的 schema**——`description` 模糊（「處理資料」）、參數全用 `type: string`、沒分 required / optional、enum 該用沒用。觀察 LLM 怎麼選錯 tool、傳錯參數。然後逐項修：
@@ -335,7 +335,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 </details>
 
-→ **完整可跑版** → [`examples/stage-3/06-schema-design/`](../examples/stage-3/06-schema-design/)（含 bad schema vs good schema 兩個版本對照）
+→ **基礎 starter 範本** → [`examples/stage-3/06-schema-design/`](../examples/stage-3/06-schema-design/)（含 bad schema vs good schema 兩個版本對照；illustrative，**不是 chapter-length 完整教程**——深度章節見 stage 開頭 📚 hello-agents callout）
 
 ## 🎯 精選 Projects
 

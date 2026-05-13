@@ -196,7 +196,7 @@ print(f"LLM picked: {tc.function.name}, args: {json.loads(tc.function.arguments)
 
 </details>
 
-→ **Full runnable version** → [`examples/stage-3/02-multi-tool-selection/`](../examples/stage-3/02-multi-tool-selection/)
+→ **Starter template** → [`examples/stage-3/02-multi-tool-selection/`](../examples/stage-3/02-multi-tool-selection/) (starter.py with stub + simple test — illustrative, **not a chapter-length tutorial**; for chapter-length depth see the 📚 hello-agents callout at the top of this stage)
 
 ### Exercise 3: ReAct from Scratch (no framework)
 Implement the Thought → Action → Observation loop in 50-80 lines of Python. No LangChain, no LangGraph. Just `while not done: thought; action; observation; ...`.
@@ -233,7 +233,7 @@ for step in range(5):  # max_iter safety net
 
 </details>
 
-→ **Full runnable version** → [`examples/stage-3/03-react-from-scratch/`](../examples/stage-3/03-react-from-scratch/) (includes mock-based test.py so you can validate the logic without spending API credits)
+→ **Starter template** → [`examples/stage-3/03-react-from-scratch/`](../examples/stage-3/03-react-from-scratch/) (includes mock-based test.py so you can validate the logic without spending API credits; illustrative, **not a chapter-length tutorial** — for chapter-length depth see the 📚 hello-agents callout at the top of this stage)
 
 ### Exercise 4: Multi-Step Reasoning Task
 A task that requires 3-5 tool calls in sequence. E.g., "Find the population of Taipei, then divide by the population of New York, and convert the ratio to percent." Each step uses a different tool.
@@ -258,7 +258,7 @@ TOOL_IMPL = {
 
 </details>
 
-→ **Full runnable version** → [`examples/stage-3/04-multi-step-reasoning/`](../examples/stage-3/04-multi-step-reasoning/)
+→ **Starter template** → [`examples/stage-3/04-multi-step-reasoning/`](../examples/stage-3/04-multi-step-reasoning/) (starter.py with stub + simple test — illustrative, **not a chapter-length tutorial**; for chapter-length depth see the 📚 hello-agents callout at the top of this stage)
 
 ### Exercise 5: Error Handling
 Make a tool fail (network error, invalid input). Watch how the agent recovers (or doesn't). Add retry logic.
@@ -295,7 +295,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 </details>
 
-→ **Full runnable version** → [`examples/stage-3/05-error-handling/`](../examples/stage-3/05-error-handling/)
+→ **Starter template** → [`examples/stage-3/05-error-handling/`](../examples/stage-3/05-error-handling/) (starter.py with stub + simple test — illustrative, **not a chapter-length tutorial**; for chapter-length depth see the 📚 hello-agents callout at the top of this stage)
 
 ### Exercise 6: Function schema design (fix a bad schema)
 **Start with a deliberately bad schema** — vague `description` ("processes data"), all params typed as `string`, no required/optional split, missing `enum` where it should exist. Watch the LLM pick the wrong tool / pass wrong args. Then fix it piece by piece:
@@ -334,7 +334,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 </details>
 
-→ **Full runnable version** → [`examples/stage-3/06-schema-design/`](../examples/stage-3/06-schema-design/) (includes bad-schema vs good-schema side-by-side)
+→ **Starter template** → [`examples/stage-3/06-schema-design/`](../examples/stage-3/06-schema-design/) (includes bad-schema vs good-schema side-by-side; illustrative, **not a chapter-length tutorial** — for chapter-length depth see the 📚 hello-agents callout at the top of this stage)
 
 ## 🎯 Curated Projects
 

@@ -37,8 +37,6 @@ Concretely:
 
 After the main path, you go from "**LLM user**" to "**agent system builder**" — capable of designing multi-agent collaboration, writing your own MCP server, and shipping real agent systems.
 
-> 🙏 **Special thanks to [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents)** — the most thorough chapter-length agent tutorial in the Chinese-language ecosystem (16 production capabilities; **memory / RAG section in particular** is the best treatment available). This repo is **roadmap + foundational exercises**, hello-agents is **chapter-length depth tutorial** — complementary roles, no duplication. Every stage / exercise folder has a 📚 callout pointing there.
-
 ---
 
 ## 📋 Table of Contents
@@ -244,7 +242,7 @@ PR process and style rules: [CONTRIBUTING.md](CONTRIBUTING.md) + [resources/styl
 
 ### Inspiration
 
-- [**Datawhale Hello-Agents**](https://github.com/datawhalechina/hello-agents) — model for systematic agent tutorial structure; inspired our chapter + progress design
+- [**Datawhale Hello-Agents**](https://github.com/datawhalechina/hello-agents) — the most thorough chapter-length agent tutorial in the Chinese-language ecosystem; inspired our chapter + progress structure. Every stage / exercise folder has a 📚 callout pointing to the relevant depth chapter. Special thanks.
 - [**Datawhale community**](https://github.com/datawhalechina) — landmark Chinese ML learning community; multiple anchor projects come from them
 - [**liyupi/ai-guide**](https://github.com/liyupi/ai-guide) — largest Chinese-language "AI mega-guide" + Vibe Coding tutorial (covers Agent Skills / RAG / MCP / A2A / Harness Engineering). This repo is a "structured roadmap"; ai-guide is a "breadth resource hub" — complementary
 

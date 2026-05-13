@@ -278,7 +278,7 @@ print(f"\n✅ Exercise 3 passed (Anthropic) — 1000 runs: haiku ≈ $0.25, sonn
 ### Exercise 4: Cross-Provider Comparison
 Send the same prompt to Claude, GPT, and Gemini simultaneously, compare their responses. Notice "why does the same input produce different answers" — answer style, length, and judgment all differ. Use the OpenAI, Anthropic, and Google SDKs side-by-side.
 
-→ **Full runnable version** → [`examples/stage-1/04-cross-provider/`](../examples/stage-1/04-cross-provider/) (parallel calls to all three SDKs + comparison table; missing keys are skipped gracefully)
+→ **Starter template** → [`examples/stage-1/04-cross-provider/`](../examples/stage-1/04-cross-provider/) (parallel calls to all three SDKs + comparison table; missing keys are skipped gracefully; illustrative, **not a chapter-length tutorial**)
 
 ### Exercise 5: Error Handling
 Trigger error conditions deliberately and write retry logic:
@@ -288,7 +288,7 @@ Trigger error conditions deliberately and write retry logic:
 
 This is foundational for Stage 3-7's production agent code.
 
-→ **Full runnable version** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/) (mock-based tests so you can verify the retry logic without unplugging your ethernet cable)
+→ **Starter template** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/) (mock-based tests so you can verify the retry logic without unplugging your ethernet cable; illustrative, **not a chapter-length tutorial**)
 
 ### Exercise 6: Local LLM
 **No API fees, runs on your machine**: use Ollama to pull a small model (recommend `llama3.2:3b` or `qwen2.5:3b`), call it via OpenAI-compatible API.

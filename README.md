@@ -37,8 +37,6 @@
 
 走完整條路線，你會從「**LLM 使用者**」進階到「**agent 系統建構者**」——能看懂 framework 在做什麼、能設計多 agent 協作、能寫自己的 MCP server。
 
-> 🙏 **特別感謝 [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents)**：中文圈最完整的 chapter-length agent 教材（16 種 production 能力、特別是 **memory / RAG 那段**寫得最完整）。本 repo 是**路線圖 + 入門練習**、hello-agents 是**深度章節教材**——兩個角色互補、不重做。每個 stage / 練習 folder 都有 📚 callout 點過去。
-
 ---
 
 ## 📋 目錄
@@ -245,7 +243,7 @@ PR 流程跟 style 規範請看 [CONTRIBUTING.md](CONTRIBUTING.md) 跟 [resource
 
 ### Inspiration
 
-- [**Datawhale Hello-Agents**](https://github.com/datawhalechina/hello-agents) — 系統性 agent 教學的範本，本 repo 的「章節 + 進度」結構就是受這份啟發
+- [**Datawhale Hello-Agents**](https://github.com/datawhalechina/hello-agents) — 中文圈最完整的 chapter-length agent 教材，本 repo 的「章節 + 進度」結構受這份啟發；每個 stage / 練習 folder 都有 📚 callout 點過去深度章節。特別感謝。
 - [**Datawhale 社群**](https://github.com/datawhalechina) — 中文 ML 共學社群的標竿，本 repo 多個 anchor project 來自這裡
 - [**liyupi/ai-guide**](https://github.com/liyupi/ai-guide) — 中文圈最大「AI 資源大全」，跟 Vibe Coding 教學齊全（涵蓋 Agent Skills / RAG / MCP / A2A / Harness Engineering）。本 repo 是「結構化路線」、ai-guide 是「廣度資源庫」，互為補充
 

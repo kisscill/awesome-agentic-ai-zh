@@ -327,7 +327,7 @@ single: input=14 output=48 → $0.000254
 ### 練習 4：Cross-Provider 比較
 同一個 prompt 同時送給 Claude、GPT、Gemini，比較三家的回應差異。觀察「同一句話為什麼產生不同答案」——回答風格、長度、判斷取捨都不一樣。建議用 OpenAI、Anthropic、Google 三家 SDK 各一段程式呼叫。
 
-→ **完整可跑版** → [`examples/stage-1/04-cross-provider/`](../examples/stage-1/04-cross-provider/)（含三家 SDK 並行呼叫 + table 對照、缺哪家 key 就 skip 哪家）
+→ **基礎 starter 範本** → [`examples/stage-1/04-cross-provider/`](../examples/stage-1/04-cross-provider/)（含三家 SDK 並行呼叫 + table 對照、缺哪家 key 就 skip 哪家；illustrative，**不是 chapter-length 完整教程**）
 
 ### 練習 5：Error Handling
 故意觸發錯誤情境並寫 retry：
@@ -337,7 +337,7 @@ single: input=14 output=48 → $0.000254
 
 這是後面 Stage 3-7 寫 production agent 一定會用到的基礎。
 
-→ **完整可跑版** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/)（含 mock-based test、不用真的斷網就能驗證 retry 邏輯）
+→ **基礎 starter 範本** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/)（含 mock-based test、不用真的斷網就能驗證 retry 邏輯；illustrative，**不是 chapter-length 完整教程**）
 
 ### 練習 6：Local LLM
 **不付 API 費用、跑在自己電腦上**：用 Ollama 下載一個小模型（建議 `llama3.2:3b` 或 `qwen2.5:3b`），用 OpenAI-相容 API 呼叫它。
