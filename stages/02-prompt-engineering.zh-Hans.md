@@ -67,6 +67,14 @@ for label, system in SYSTEM_PROMPTS.items():
     print(msg.content[0].text)
 
 # === 自我验证 ===
+import json
+last_text = msg.content[0].text
+assert "{" in last_text and "}" in last_text, "JSON 机器版输出应该含 JSON braces"
+try:
+    parsed = json.loads(last_text.strip().split("\n")[-1] if "\n" in last_text else last_text)
+    assert "answer" in parsed, "JSON schema 应包含 answer 字段"
+except json.JSONDecodeError:
+    pass  # 容许某些 model 回 JSON 含解释文字、最后一笔才是 JSON
 print(f"\n✅ 练习 1 通过 — 同一个问题、3 种人格 / 格式 / 语气")
 ```
 
@@ -207,6 +215,8 @@ for label, out, ans in [("A 纯 prompt", out_a, ans_a), ("B +step-by-step", out_
 
 # === 自我验证 ===
 correct = sum(1 for a in (ans_a, ans_b, ans_c) if a == ANSWER)
+assert correct >= 1, f"3 种 prompt 至少要 1 种答对、实际 {correct}/3"
+assert ans_b == ANSWER or ans_c == ANSWER, "B (step-by-step) 或 C (CoT example) 至少一种要答对 — CoT 对小 model 是基本功"
 print(f"\n✅ 练习 3 通过 — {correct}/3 答对")
 ```
 
@@ -238,6 +248,7 @@ PROMPTS = {
     "v5 加禁忌": "写一段介绍 ReAct 的文字、给写过 Python 的软件工程师看。100 字以内、用一个段落、结尾举一个具体例子（譬如查天气）。不要用「赋能」「驱动」「智能」这类空泛词汇。",
 }
 
+outputs = {}
 for label, prompt in PROMPTS.items():
     msg = client.messages.create(
         model="claude-haiku-4-5",
@@ -245,11 +256,18 @@ for label, prompt in PROMPTS.items():
         messages=[{"role": "user", "content": prompt}],
     )
     text = msg.content[0].text
+    outputs[label] = text
     print(f"\n--- [{label}] ({len(text)} chars) ---")
     print(text)
 
 # === 自我验证 ===
-print(f"\n✅ 练习 4 通过 — 你已实际感受 prompt 5 个维度的影响")
+v1_len, v5_len = len(outputs["v1 模糊"]), len(outputs["v5 加禁忌"])
+banned_words = ("赋能", "驱动", "智能")
+v5_has_banned = any(w in outputs["v5 加禁忌"] for w in banned_words)
+assert v5_len > 0, "v5 必须有输出"
+assert not v5_has_banned, f"v5 应该避免禁忌词、实际含: {[w for w in banned_words if w in outputs['v5 加禁忌']]}"
+print(f"\n✅ 练习 4 通过 — v5 长度 {v5_len}、无禁忌词")
+print(f"💡 观察：v1 ({v1_len} chars) 通常比 v5 ({v5_len} chars) 「松」、加约束会逼 prompt 收敛")
 print("💡 5 个 refine 维度：(1) 目标读者 (2) 格式 (3) 长度 (4) 范例要求 (5) 禁忌词")
 ```
 

@@ -69,6 +69,14 @@ for label, system in SYSTEM_PROMPTS.items():
     print(msg.content[0].text)
 
 # === 自我驗證 ===
+import json
+last_text = msg.content[0].text
+assert "{" in last_text and "}" in last_text, "JSON 機器版輸出應該含 JSON braces"
+try:
+    parsed = json.loads(last_text.strip().split("\n")[-1] if "\n" in last_text else last_text)
+    assert "answer" in parsed, "JSON schema 應包含 answer 欄位"
+except json.JSONDecodeError:
+    pass  # 容許某些 model 回 JSON 含解釋文字、最後一筆才是 JSON
 print(f"\n✅ 練習 1 通過 — 同一個問題、3 種人格 / 格式 / 語氣")
 print("💡 觀察：律師長、老師短、JSON 機器一定是 {...}")
 ```
@@ -241,6 +249,8 @@ for label, out, ans in [("A 純 prompt", out_a, ans_a), ("B +step-by-step", out_
 
 # === 自我驗證 ===
 correct = sum(1 for a in (ans_a, ans_b, ans_c) if a == ANSWER)
+assert correct >= 1, f"3 種 prompt 至少要 1 種答對、實際 {correct}/3"
+assert ans_b == ANSWER or ans_c == ANSWER, "B (step-by-step) 或 C (CoT example) 至少一種要答對 — CoT 對小 model 是基本功"
 print(f"\n✅ 練習 3 通過 — {correct}/3 答對")
 print(f"💡 觀察：A 容易直接給錯數字、B 跟 C 因為強制 step-by-step、推理過程明顯、答對機率高")
 ```
@@ -290,6 +300,7 @@ PROMPTS = {
     "v5 加禁忌": "寫一段介紹 ReAct 的文字、給寫過 Python 的軟體工程師看。100 字以內、用一個段落、結尾舉一個具體例子（譬如查天氣）。不要用「賦能」「驅動」「智能」這類空泛詞彙。",
 }
 
+outputs = {}
 for label, prompt in PROMPTS.items():
     msg = client.messages.create(
         model="claude-haiku-4-5",
@@ -297,13 +308,20 @@ for label, prompt in PROMPTS.items():
         messages=[{"role": "user", "content": prompt}],
     )
     text = msg.content[0].text
+    outputs[label] = text
     print(f"\n--- [{label}] ({len(text)} chars) ---")
     print(text)
 
 # === 自我驗證 ===
-print(f"\n✅ 練習 4 通過 — 你已實際感受 prompt 5 個維度的影響")
+# 不檢查內容質量（主觀）、但檢查約束有沒有被 honor
+v1_len, v5_len = len(outputs["v1 模糊"]), len(outputs["v5 加禁忌"])
+banned_words = ("賦能", "驅動", "智能")
+v5_has_banned = any(w in outputs["v5 加禁忌"] for w in banned_words)
+assert v5_len > 0, "v5 必須有輸出"
+assert not v5_has_banned, f"v5 應該避免禁忌詞、實際含: {[w for w in banned_words if w in outputs['v5 加禁忌']]}"
+print(f"\n✅ 練習 4 通過 — v5 長度 {v5_len}、無禁忌詞")
+print(f"💡 觀察：v1 ({v1_len} chars) 通常比 v5 ({v5_len} chars) 「鬆」、加約束會逼 prompt 收斂")
 print("💡 5 個 refine 維度：(1) 目標讀者 (2) 格式 (3) 長度 (4) 範例要求 (5) 禁忌詞")
-print("💡 把這 5 輪輸出存到檔案、之後拿來比照、是 prompt 優化的 baseline")
 ```
 
 > 🦙 **Ollama 對照**：用 gemma3:4b 跑 5 輪 refine 特別有教學價值——你會看到「v1 模糊」幾乎答不出有用內容、「v5 加禁忌」品質跳幅最大。小 model 對 prompt 質量 sensitivity 高，是練 prompt engineering 的好沙包。

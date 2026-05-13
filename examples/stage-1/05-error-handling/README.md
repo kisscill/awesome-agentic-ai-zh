@@ -82,3 +82,25 @@ python test.py
 - **加 circuit breaker**：連續 N 次 retry 失敗、暫時 stop call（避免 wave-after-wave 打死下游）
 - **改用 [tenacity](https://github.com/jd/tenacity)** library：production 不要自己寫 retry、用成熟 lib（這份 starter 只是給你看裡面是什麼）
 - **錯誤分類更細**：依 status code（429 / 503 / 502 / 500）給不同 backoff strategy
+
+## 🦙 Path B — 改用 Ollama（exception class 對應表）
+
+Anthropic SDK 的 exception class 跟 OpenAI SDK（Ollama 用的）不一樣。轉換 starter 到 Ollama 時、把 import + RETRIABLE whitelist 換成：
+
+| Anthropic | OpenAI SDK (Ollama) | 含義 |
+|---|---|---|
+| `anthropic.APIConnectionError` | `openai.APIConnectionError` | 網路斷 |
+| `anthropic.RateLimitError` | `openai.RateLimitError` | 429 限流 |
+| `anthropic.AuthenticationError` | `openai.AuthenticationError` | 401 key 錯 |
+| `anthropic.APIStatusError` | `openai.APIStatusError` | 一般 HTTP 錯 |
+
+替換後的 starter.py 開頭：
+
+```python
+from openai import OpenAI, APIConnectionError, RateLimitError, AuthenticationError, APIStatusError
+
+RETRIABLE = (APIConnectionError, RateLimitError)
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+```
+
+其餘 retry wrapper 邏輯完全相同。**注意**：本機 Ollama 不會真的撞 RateLimitError（沒 quota）、demo 用 mock 比較容易看到 retry 行為——所以 `python test.py` 在 Ollama path 反而更有教學價值。

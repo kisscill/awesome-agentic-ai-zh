@@ -23,3 +23,13 @@ python test.py
 ## 延伸閱讀
 
 schema 是 prompt 的一部分，而且是模型做工具選擇時最依賴的 prompt。寫 schema 時不要只想「人看得懂」，要想「模型能不能用它排除錯誤工具」。更多規則可以對照 [`resources/schema-design-cheatsheet.md`](../../../resources/schema-design-cheatsheet.md)：清楚用途、正確型別、必填欄位、enum 收斂，以及結構化錯誤回傳。
+
+## 🦙 Path B — 本機 Ollama（qwen2.5:3b）
+
+兩個 starter（`starter_bad.py` + `starter_good.py`）的對照邏輯**完全跨 backend**——bad schema 一樣會讓 qwen2.5:3b 挑錯 tool。Ollama 轉換照 [`../03-react-from-scratch/starter_ollama.py`](../03-react-from-scratch/starter_ollama.py) pattern：
+
+- TOOLS_SPEC 包一層 `{"type": "function", "function": {name, description, parameters}}`
+- response 從 `r.choices[0].message.tool_calls[0].function.name` 抓 tool 選擇
+- `function.arguments` 是 JSON string、`json.loads(...)` 才拿 dict
+
+**反而更有教學意義**：小 model（qwen2.5:3b）對 schema 質量比大 model **更敏感**——壞 schema 在 Claude haiku 上可能還能猜對，在 qwen2.5:3b 上幾乎必錯。**拿這題對照 Anthropic vs Ollama**、最能體會 schema 設計為什麼是 prompt engineering 的核心子題。

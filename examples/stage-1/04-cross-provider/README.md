@@ -86,6 +86,38 @@ client = OpenAI(
 )
 ```
 
+## 🦙 Path B — 加上本機 Ollama 當第 4 家對照
+
+`call_openai` 已經是 OpenAI-compatible client、把 `base_url` 跟 `model` 換掉就接 Ollama：
+
+```python
+def call_ollama(prompt: str) -> Reply | None:
+    """本機 Ollama (gemma3:4b 或 qwen2.5:3b)。沒裝就 return None、不 crash。"""
+    import requests
+    try:
+        requests.get("http://localhost:11434/api/tags", timeout=2)
+    except Exception:
+        return None  # Ollama 沒跑
+    from openai import OpenAI
+    client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+    t0 = time.time()
+    r = client.chat.completions.create(
+        model="gemma3:4b",
+        max_tokens=200,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return Reply(
+        provider="Ollama-local",
+        model="gemma3:4b",
+        text=r.choices[0].message.content or "",
+        in_tokens=r.usage.prompt_tokens,
+        out_tokens=r.usage.completion_tokens,
+        latency_ms=int((time.time() - t0) * 1000),
+    )
+```
+
+把 `call_ollama` 加進 `compare()` 的 caller list、就能看 4 家對照（包括本機 free $0 model）。實測你會發現 gemma3:4b 在 CPU 上的 latency 通常比 cloud 慢 5-10 倍、但 cost = 0。
+
 ## 延伸
 
 - **成本對照** → 接 [`examples/stage-1/03-pricing/`](../) 的 PRICING dict、印 dollar cost column

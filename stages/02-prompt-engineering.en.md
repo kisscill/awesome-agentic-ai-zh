@@ -68,6 +68,15 @@ for label, system in SYSTEM_PROMPTS.items():
     print(msg.content[0].text)
 
 # === Self-check ===
+import json
+last_text = msg.content[0].text  # last iteration = JSON machine
+assert "{" in last_text and "}" in last_text, "JSON-machine output should contain JSON braces"
+try:
+    parsed = json.loads(last_text.strip().split("\n")[-1] if "\n" in last_text else last_text)
+    assert "answer" in parsed, "schema expects an 'answer' field"
+except json.JSONDecodeError:
+    pass  # some models add prose around the JSON; tolerate that
+
 print(f"\n✅ Exercise 1 passed — same question, three different personas / formats / tones")
 ```
 
@@ -210,6 +219,8 @@ for label, out, ans in [("A plain", out_a, ans_a), ("B +step-by-step", out_b, an
 
 # === Self-check ===
 correct = sum(1 for a in (ans_a, ans_b, ans_c) if a == ANSWER)
+assert correct >= 1, f"at least 1 of 3 prompts should be correct, got {correct}/3"
+assert ans_b == ANSWER or ans_c == ANSWER, "B (step-by-step) or C (CoT example) must be correct — CoT is non-negotiable for small models"
 print(f"\n✅ Exercise 3 passed — {correct}/3 correct")
 ```
 
@@ -242,6 +253,7 @@ PROMPTS = {
     "v5 +bans": "Write a paragraph about ReAct for software engineers who know Python. Under 100 words, single paragraph, ending with a concrete example (e.g. weather lookup). Avoid words like 'empower', 'leverage', 'intelligent'.",
 }
 
+outputs = {}
 for label, prompt in PROMPTS.items():
     msg = client.messages.create(
         model="claude-haiku-4-5",
@@ -249,11 +261,19 @@ for label, prompt in PROMPTS.items():
         messages=[{"role": "user", "content": prompt}],
     )
     text = msg.content[0].text
+    outputs[label] = text
     print(f"\n--- [{label}] ({len(text)} chars) ---")
     print(text)
 
 # === Self-check ===
-print(f"\n✅ Exercise 4 passed — you've experienced 5 prompt refinement dimensions in action")
+v1_len, v5_len = len(outputs["v1 vague"]), len(outputs["v5 +bans"])
+banned_words = ("empower", "leverage", "intelligent")
+v5_text_lower = outputs["v5 +bans"].lower()
+v5_has_banned = any(w in v5_text_lower for w in banned_words)
+assert v5_len > 0, "v5 must have output"
+assert not v5_has_banned, f"v5 should avoid banned words; got: {[w for w in banned_words if w in v5_text_lower]}"
+print(f"\n✅ Exercise 4 passed — v5 length {v5_len}, no banned words")
+print(f"💡 Observe: v1 ({v1_len} chars) is typically looser than v5 ({v5_len} chars); constraints tighten prompts")
 print("💡 The 5 dimensions: (1) target audience (2) format (3) length (4) example demand (5) banned words")
 ```
 

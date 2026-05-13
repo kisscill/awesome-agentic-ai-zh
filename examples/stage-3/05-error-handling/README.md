@@ -22,3 +22,9 @@ python test.py
 ## 設計提醒
 
 錯誤也應該是結構化資料。只回傳 `"failed"` 會讓模型不知道下一步；加入 `retry_hint`、錯誤類型與可恢復建議，模型才有足夠 context 做決策。retry 次數也要有限制，否則 agent 會在壞掉的工具前面無限打轉。
+
+## 🦙 Path B — 本機 Ollama（qwen2.5:3b）
+
+ReAct loop 跟 tool_result 接回去的 pattern 跟 [`../03-react-from-scratch/starter_ollama.py`](../03-react-from-scratch/starter_ollama.py) 一樣。Tool error 設計**完全跨 backend**——`{"error": ..., "retry_hint": ...}` 這個結構化 error pattern 在 Anthropic / OpenAI / Ollama 都通用。
+
+**附加觀察**：小 model（qwen2.5:3b）對 retry hint 的 follow-up 可能不如 Claude 精細——可能會直接放棄、或無視 hint 重複同一個錯。**這恰好是教學點**：production 寫好 retry pattern 後、不同 model 對結構化 error 的「閱讀力」差距、是選 model 的考量之一（Stage 7 production tier 會再回來討論）。
