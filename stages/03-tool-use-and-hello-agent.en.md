@@ -37,6 +37,8 @@ You should already:
 
 > 🦙 **This stage defaults to Ollama qwen2.5:3b** (cost-driven; reliable tool-use support). Once you enter Stage 3 — tool calling and the ReAct loop — `gemma3n:e4b` no longer suffices; switch to `qwen2.5:3b` (1.9 GB; install with `ollama pull qwen2.5:3b`). Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional — when you want to see cloud-quality tool use).
 >
+> 💰 **Stage 3 budget estimate** (6 exercises, tool-use heavy): **all local = $0**, **all haiku ≈ $0.50**, **all sonnet ≈ $1.50**. A typical ReAct loop is 4-6 tool calls × 5 exercises × 5 reps ≈ $0.80 haiku. Full budget: [`examples/README.en.md#recommended-llm-list`](../examples/README.en.md#recommended-llm-list-local--cloud-user-perspective).
+>
 > Full three-path trade-off in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
 
 ### Exercise 1: Function Calling (single tool, single call)

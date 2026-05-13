@@ -98,6 +98,45 @@ Every exercise ships with all three paths:
 
 → **Recommended flow**: C first (validate logic, no cost), then A (see real model behaviour locally), then B at the Stage 7 production stage if cloud quality is needed.
 
+## Recommended LLM list (local + cloud, user-perspective)
+
+> 💡 You don't need to install every model — this table shows "which to use for practice" and "which to upgrade to for production". **Claude is the canonical / production reference; Ollama is the practice default.**
+
+### Local LLMs (practice default, via Ollama)
+
+| Model | Download | Recommended RAM | Stage | Tool-use | Speed (CPU/GPU) | Primary use |
+|---|---|---|---|---|---|---|
+| **`gemma3n:e4b`** ⭐ | 7.5 GB | 8 GB | 1+2 | basic | slow / med | Stage 1-2 plain chat / prompt eng (default) |
+| **`qwen2.5:3b`** ⭐ | 1.9 GB | 4 GB | 3+ | **reliable** | med / fast | Stage 3+ tool use / agent (default) |
+| `llama3.2:3b` | 2.0 GB | 4 GB | 3+ | reliable | med / fast | qwen2.5:3b alternative |
+| `mistral-nemo:12b` | 7.1 GB | 16 GB | 3+ | strong | slow / med | When you want closer-to-cloud quality |
+| `qwen2.5:14b` | 9.0 GB | 16 GB | advanced | strong | slow / med | Larger-model comparison (GPU preferred) |
+| `gemma3n:e2b` | 4.0 GB | 4 GB | 1+2 | basic | med / fast | 4 GB-RAM-machine alternative |
+
+Install: `ollama pull <model>` + `ollama serve`. Hardware tuning details: [resources/cli-agents-guide.en.md](../resources/cli-agents-guide.en.md).
+
+### Cloud LLMs (canonical / production stack, via Anthropic)
+
+| Model | $/1M input | $/1M output | Context | Primary use |
+|---|---|---|---|---|
+| **`claude-haiku-4-5`** ⭐ | $1 | $5 | 200k | Cheapest; fine for Stage 1-7 cloud-quality comparisons |
+| **`claude-sonnet-4-5`** ⭐ | $3 | $15 | 200k | **Production default**; Stage 5+ agent development |
+| `claude-opus-4-5` | $15 | $75 | 200k | Highest quality; complex reasoning / long-context refactors |
+
+Subscription alternative: Claude Pro $20/month (includes Sonnet usage); Claude Max $100/month (includes Opus). Details: [resources/cli-agents-guide.en.md](../resources/cli-agents-guide.en.md).
+
+### Budget estimate (completing all 54 exercises across Stage 1-7)
+
+| Learning path | Total time | Total cost | Best for |
+|---|---|---|---|
+| **All local Ollama** | ~30 hr (CPU) / ~10 hr (GPU) | **$0** | Budget-conscious, privacy needs, China-mainland no-cloud-access |
+| **Mixed: local practice + haiku final review** ⭐ | ~30 hr | **$2-5** | **Recommended default** — practice locally, run final 1-2 iterations on haiku to see cloud quality |
+| **All haiku** | ~10 hr | $5-15 | Want speed, budget allows, want full cloud experience |
+| **All sonnet** | ~8 hr | $20-50 | Production-grade practice, want high-quality answers |
+| **Mixed: sonnet + opus on hard problems** | ~8 hr | $30-80 | Already a production agent developer |
+
+> 🎯 **Beginner default**: run everything locally first; cap budget at $5. **Only consider upgrading to sonnet at the Stage 7 production tier.**
+
 ## Index by stage
 
 | Stage | Exercises | Example location |

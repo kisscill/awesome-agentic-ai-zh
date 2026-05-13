@@ -98,6 +98,45 @@ if hasattr(sys.stdout, "reconfigure"):
 
 → **建議流程**：先 C 驗邏輯（不花錢）、再 A 本機跑看實際 model 行為、production 階段（Stage 7）再升 B 看 cloud 品質。
 
+## 推薦 LLM 清單（本機 + cloud、user 視角）
+
+> 💡 不是要你全裝、是讓你看到「練習用哪個」「production 升級到哪個」。**Claude 是 canonical / production 主軸；Ollama 是練習默認**。
+
+### 本機 LLM（練習默認、用 Ollama）
+
+| Model | 下載大小 | 建議 RAM | 對應 Stage | Tool-use | 速度（CPU/GPU） | 主用途 |
+|---|---|---|---|---|---|---|
+| **`gemma3n:e4b`** ⭐ | 7.5 GB | 8 GB | 1+2 | 基本 | 慢 / 中 | Stage 1-2 純 chat / prompt eng（默認）|
+| **`qwen2.5:3b`** ⭐ | 1.9 GB | 4 GB | 3+ | **穩定** | 中 / 快 | Stage 3+ tool use / agent（默認）|
+| `llama3.2:3b` | 2.0 GB | 4 GB | 3+ | 穩定 | 中 / 快 | qwen2.5:3b 的替代 |
+| `mistral-nemo:12b` | 7.1 GB | 16 GB | 3+ | 強 | 慢 / 中 | 想看更接近 cloud 品質 |
+| `qwen2.5:14b` | 9.0 GB | 16 GB | 進階 | 強 | 慢 / 中 | 大 model 對照（需 GPU 偏好）|
+| `gemma3n:e2b` | 4.0 GB | 4 GB | 1+2 | 基本 | 中 / 快 | 4GB RAM 機器替代 |
+
+安裝：`ollama pull <model>` + `ollama serve`。詳細硬體配置看 [resources/cli-agents-guide.md](../resources/cli-agents-guide.md)。
+
+### Cloud LLM（canonical / production 主軸、用 Anthropic）
+
+| Model | 每 1M input | 每 1M output | Context | 主用途 |
+|---|---|---|---|---|
+| **`claude-haiku-4-5`** ⭐ | $1 | $5 | 200k | 最便宜、Stage 1-7 練習 cloud 對照都 OK |
+| **`claude-sonnet-4-5`** ⭐ | $3 | $15 | 200k | **production 默認**、Stage 5+ agent 開發 |
+| `claude-opus-4-5` | $15 | $75 | 200k | 最高品質、複雜推理 / 長 context refactor |
+
+訂閱替代：Claude Pro $20/月含 Sonnet 用量、Claude Max $100/月含 Opus。詳細看 [resources/cli-agents-guide.md](../resources/cli-agents-guide.md)。
+
+### 預算估算（跑完 Stage 1-7 全 54 練習）
+
+| 學習路徑 | 總時間 | 總成本 | 適合誰 |
+|---|---|---|---|
+| **全本機 Ollama** | ~30 hr (CPU) / ~10 hr (GPU) | **$0** | 預算敏感、隱私需求、中國大陸無 cloud 訪問 |
+| **混合：本機練 + haiku 終驗** ⭐ | ~30 hr | **$2-5** | **推薦默認**：練習 local 跑、最後 1-2 次用 haiku 看 cloud 品質 |
+| **全 haiku** | ~10 hr | $5-15 | 想快、預算允許、想看完整 cloud 體驗 |
+| **全 sonnet** | ~8 hr | $20-50 | production-grade 練習、想看高品質答案 |
+| **混合：sonnet 為主 + opus 難題** | ~8 hr | $30-80 | 已是 production agent 開發者 |
+
+> 🎯 **新手默認**：先全本機跑、預算上限 $5。**Stage 7 production tier 才考慮 sonnet 升級**。
+
 ### 怎麼從 Ollama 換到 Anthropic？
 
 每個練習都有 `<details>` Path B 區塊或 `starter_anthropic.py`、改 3 行：

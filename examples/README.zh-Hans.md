@@ -98,6 +98,45 @@ if hasattr(sys.stdout, "reconfigure"):
 
 → **建议流程**：先 C 验逻辑（不花钱）、再 A 本机跑看实际 model 行为、production 阶段（Stage 7）再升 B 看 cloud 品质。
 
+## 推荐 LLM 清单（本机 + cloud、user 视角）
+
+> 💡 不是要你全装、是让你看到「练习用哪个」「production 升级到哪个」。**Claude 是 canonical / production 主轴；Ollama 是练习默认**。
+
+### 本机 LLM（练习默认、用 Ollama）
+
+| Model | 下载大小 | 建议 RAM | 对应 Stage | Tool-use | 速度（CPU/GPU） | 主用途 |
+|---|---|---|---|---|---|---|
+| **`gemma3n:e4b`** ⭐ | 7.5 GB | 8 GB | 1+2 | 基本 | 慢 / 中 | Stage 1-2 纯 chat / prompt eng（默认）|
+| **`qwen2.5:3b`** ⭐ | 1.9 GB | 4 GB | 3+ | **稳定** | 中 / 快 | Stage 3+ tool use / agent（默认）|
+| `llama3.2:3b` | 2.0 GB | 4 GB | 3+ | 稳定 | 中 / 快 | qwen2.5:3b 的替代 |
+| `mistral-nemo:12b` | 7.1 GB | 16 GB | 3+ | 强 | 慢 / 中 | 想看更接近 cloud 品质 |
+| `qwen2.5:14b` | 9.0 GB | 16 GB | 进阶 | 强 | 慢 / 中 | 大 model 对照（需 GPU 偏好）|
+| `gemma3n:e2b` | 4.0 GB | 4 GB | 1+2 | 基本 | 中 / 快 | 4GB RAM 机器替代 |
+
+安装：`ollama pull <model>` + `ollama serve`。详细硬件配置看 [resources/cli-agents-guide.zh-Hans.md](../resources/cli-agents-guide.zh-Hans.md)。
+
+### Cloud LLM（canonical / production 主轴、用 Anthropic）
+
+| Model | 每 1M input | 每 1M output | Context | 主用途 |
+|---|---|---|---|---|
+| **`claude-haiku-4-5`** ⭐ | $1 | $5 | 200k | 最便宜、Stage 1-7 练习 cloud 对照都 OK |
+| **`claude-sonnet-4-5`** ⭐ | $3 | $15 | 200k | **production 默认**、Stage 5+ agent 开发 |
+| `claude-opus-4-5` | $15 | $75 | 200k | 最高品质、复杂推理 / 长 context refactor |
+
+订阅替代：Claude Pro $20/月含 Sonnet 用量、Claude Max $100/月含 Opus。详细看 [resources/cli-agents-guide.zh-Hans.md](../resources/cli-agents-guide.zh-Hans.md)。
+
+### 预算估算（跑完 Stage 1-7 全 54 练习）
+
+| 学习路径 | 总时间 | 总成本 | 适合谁 |
+|---|---|---|---|
+| **全本机 Ollama** | ~30 hr (CPU) / ~10 hr (GPU) | **$0** | 预算敏感、隐私需求、中国大陆无 cloud 访问 |
+| **混合：本机练 + haiku 终验** ⭐ | ~30 hr | **$2-5** | **推荐默认**：练习 local 跑、最后 1-2 次用 haiku 看 cloud 品质 |
+| **全 haiku** | ~10 hr | $5-15 | 想快、预算允许、想看完整 cloud 体验 |
+| **全 sonnet** | ~8 hr | $20-50 | production-grade 练习、想看高品质答案 |
+| **混合：sonnet 为主 + opus 难题** | ~8 hr | $30-80 | 已是 production agent 开发者 |
+
+> 🎯 **新手默认**：先全本机跑、预算上限 $5。**Stage 7 production tier 才考虑 sonnet 升级**。
+
 ## 对应 stage 索引
 
 | Stage | 练习 | 范例位置 |
