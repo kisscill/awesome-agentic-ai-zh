@@ -26,8 +26,6 @@
 - 從零寫過 ReAct（練習 3）
 - 對 async Python 上手（framework 大量依賴 async）
 
-⚠️ **Memory 預備（需要時偷看一下）**：有些 framework 功能會用到 memory 的概念 — LangGraph 用 checkpointing（狀態持久化），CrewAI 在 agent 之間傳遞任務結果（輕量 memory）。這些東西在 [Stage 6 — Memory & RAG](06-memory-rag.md) 會講清楚。你不必先讀完那篇，只是當某個 framework 功能讓你看不懂的時候，去那邊找答案就對了。
-
 ## 📚 必修閱讀
 
 1. [**Anthropic — Building Effective Agents**](https://www.anthropic.com/engineering/building-effective-agents) — 什麼時候用 framework、什麼時候直接用 raw API
@@ -98,7 +96,7 @@ Framework 把上面這 5 個 pattern 的 orchestration boilerplate（roles、han
 
 > 📚 **想要 chapter-length 深入版（中文）**：[`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents)（**16 production 能力含 multi-agent collaboration / role-based / sub-agents**）。
 >
-> 🌳 **Claude 生態有另一條路**：[Claude Code 原生 subagent 機制](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制)（`.claude/agents/` + Task tool）**不需要 framework**——直接寫一個 `.md` 檔就是一個 subagent。本 stage 講 framework path、Stage 5.5 講 Claude path。兩條路徑用途不同：framework 適合**跨 LLM provider** 的 production system；Claude subagent 適合**已經 commit Claude Code** 的工程團隊。
+> 🌳 **Claude 生態另一條路**：[Claude Code 原生 subagent](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制)（寫 `.claude/agents/X.md` 就是一個 subagent、不需 framework）。**framework 適合跨 LLM provider production；Claude subagent 適合已 commit Claude Code 的團隊**。
 
 ## 🛠 進階 tool patterns（framework 替你處理掉的東西）⭐ Track B 必看
 
@@ -109,11 +107,6 @@ Stage 3 教你寫 single tool / multi-tool selection（手寫 `if/elif/else` 路
 | **Dynamic tool selection** | 工具 > 30 個時、`tools=[...]` 塞不下 prompt（context 太大、selection 也變差） | [LlamaIndex tool router](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/) — embedding-based 路由：先 semantic search 找 top-K tool、只把這 K 個塞進 prompt |
 | **Tool composition / chaining** | tool A output → tool B input、不要 LLM 中間 narrative（省 token + 省 latency） | LangGraph `state graph` 直接連接 node、CrewAI `sequential tasks`、Pydantic AI 的 type-safe pipeline |
 | **Tool-augmented retrieval** | tool 本身是 RAG search → 回結果再 reason | Stage 6 練習 4 RAG pipeline + Stage 3 練習 2 multi-tool 結合（LangGraph 直接把 retriever 包成 tool node） |
-
-**為什麼這節在這裡而不是 Stage 3**：
-- Stage 3 教 mental model（手寫一次才懂 LLM-tool 介面長什麼樣）
-- 但 30+ tool 的 production system 手寫會死——這時 framework 的價值才浮現
-- 本節是 Stage 3 → Stage 4 的 mental bridge：**「為什麼我要用 framework」的具體答案就是這 3 個 pattern**
 
 **📚 深度資源**：
 - [**Anthropic — Tool Use best practices**](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) — 官方 tool design guide
@@ -177,6 +170,8 @@ Stage 3 教你寫 single tool / multi-tool selection（手寫 `if/elif/else` 路
 
 如果可以 → 進 [Stage 5 — Claude Code Ecosystem](05-claude-code-ecosystem.md)。
 
-## 💡 策略提示
+## 💡 策略提示 + 過程中可能踩到的坑
 
 不要想把這些全部學完。挑**一個 production 等級的（LangGraph）**跟**一個快速雛形用的（CrewAI）**深入學。其他的 README 瀏覽過去就好，知道有這些選項存在即可。
+
+**Memory 預備**（學的時候可能碰到、不用先讀）：有些 framework 功能會用到 memory 概念 — LangGraph 的 checkpointing（狀態持久化）、CrewAI agent 之間傳遞任務結果（輕量 memory）。這些在 [Stage 6 — Memory & RAG](06-memory-rag.md) 完整講；本 stage 看不懂某個 framework 功能時、再去那邊查就好，**不用先讀完才能進 Stage 4**。
