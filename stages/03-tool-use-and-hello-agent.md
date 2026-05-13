@@ -17,13 +17,15 @@
 ### 一張階層圖先建立認知
 
 ```
-AI（整個領域 / 一個學科）
- └── ML（其中一個方法：用資料學）
-      └── DL（其中一種：神經網路）
-           └── LLM（特定一種：文字 in、文字 out 的大型神經網路）
+AI (Artificial Intelligence、人工智慧)
+ └── ML (Machine Learning、機器學習) ─ 用資料學
+      └── DL (Deep Learning、深度學習) ─ 用神經網路
+           └── LLM (Large Language Model、大型語言模型)
+                                    └─ 文字 in、文字 out 的超大神經網路
 
    ┌──────────────────────────────────────────────────────────┐
-   │  Agent = 跨層 system，把 LLM 包進工具呼叫迴圈              │
+   │  Agent (智能體 / 代理人) = 跨層 system，把 LLM 包進          │
+   │  工具呼叫迴圈                                              │
    │         = LLM（當大腦）+ Tools（手腳）+ Loop（心跳）       │
    └──────────────────────────────────────────────────────────┘
                           ▲
@@ -53,7 +55,20 @@ AI（整個領域 / 一個學科）
 
 → **這 3 個合在一起就是 agent 的最低定義**。沒有 tools / loop，那只是「LLM + 你寫 retry」，不算 agent。
 
-> 💡 **延伸組件**（agent 變強的方式、但**不是「是不是 agent」的判準**）：
+### Agent 的經典範式（thinking patterns）
+
+學完最小 3 部件後、下一層是「**LLM 怎麼想**」。hello-agents Ch4「智能體經典範式構建」整章在講這個。簡短對照：
+
+| 範式 | 是什麼 | 在哪學 |
+|---|---|---|
+| **CoT**（Chain-of-Thought、思維鏈） | LLM 寫出推理過程再給答案、不只給結論——是個 **prompting 技巧**、不是 agent 結構 | **Stage 2** §學習目標 + §動手練習（推理任務 CoT） |
+| **ReAct**（Reasoning + Acting） | 在 Loop 裡套 CoT：Thought（想）→ Action（呼叫 tool）→ Observation（看結果）→ Thought ...，是 **Loop 部件最常見的實作** | **本 stage §練習 3** + [ReAct paper (Yao 2022)](https://arxiv.org/abs/2210.03629) |
+| **Reflection** | 跑完一輪後讓 LLM 批改自己、根據 feedback 重答 | **本 stage §反思**（concept + 路由） |
+| **Planning**（任務分解） | 把大任務拆成子任務、可分給多個 agent 各做 | **Stage 4** §什麼是 multi-agent framework |
+
+→ 這些範式都是「**LLM 自我引導**」的不同變化、堆疊在 3 部件（LLM + Tools + Loop）之上。**「Agent 是什麼」用 3 部件就講完了；「Agent 怎麼想」需要這 4 個範式才講得完整**。
+
+> 💡 **延伸組件**（agent 變強的 infrastructure、但**不是「是不是 agent」的判準**）：
 > - **記憶 / RAG**（agent 能跨對話記住東西）→ **Stage 6** 完整教
 > - **反思 / self-critique**（agent 看自己答案、發現問題、回頭改）→ 基本版見 **本 stage §反思**（concept + paper routing）；帶持久 memory 的進階版見 **Stage 6 §Reflexion with Memory**
 > - **Production harness**（telemetry / safety / retry / orchestration）→ **Stage 5 §5.6**
@@ -63,7 +78,7 @@ AI（整個領域 / 一個學科）
 ### 📚 深度入門資源（中英文 / 影片優先）
 
 **🀄 中文**：
-1. [**李宏毅 — 生成式 AI 導論（台大課程、YouTube 公開）**](https://www.youtube.com/@HungyiLeeNTU) ⭐⭐⭐ — 中文圈最高品質的 AI / LLM / agent 學術級導論。每年更新、每集 30-60 分鐘、台大授課。找「**生成式 AI 導論**」/「**Generative AI**」/「**AI Agent**」相關集數
+1. [**李宏毅 — 生成式 AI 導論（2024 春台大課程）**](https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php) ⭐⭐⭐ — 中文圈最高品質的 AI / LLM / agent 學術級導論。每集 30-60 分鐘、台大授課、官方頁含投影片 + YouTube 連結。LLM / agent 概念都涵蓋。最新整合版見 [**GenAI-ML 2025 秋**](https://speech.ee.ntu.edu.tw/~hylee/GenAI-ML/2025-fall.php)、YouTube 主頻道 [**@HungyiLeeNTU**](https://www.youtube.com/@HungyiLeeNTU)
 2. [**datawhalechina/hello-agents** Ch1「初識智能體」](https://github.com/datawhalechina/hello-agents) ⭐ — 文字版最完整中文 agent 導論
 3. [**datawhalechina/hello-agents** Ch2「智能體發展史」](https://github.com/datawhalechina/hello-agents) — BabyAGI → AutoGPT → Claude Code 演化脈絡
 4. [**3Blue1Brown 中文配音版**](https://www.youtube.com/@3Blue1BrownCN) — LLM / Transformer 視覺化解說（中文配音）

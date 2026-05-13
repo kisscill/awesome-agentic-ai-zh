@@ -35,6 +35,11 @@
 3. [**A Visual Guide to LLM Tokenizers**](https://huggingface.co/learn/llm-course/chapter6/1) — Hugging Face 的入門
 4. [**Anthropic API Pricing**](https://www.anthropic.com/pricing#anthropic-api) — 把計價表看完，算一下 1k input + 1k output 的成本
 
+**🎥 中文影片補充（強烈推薦）**：
+- [**李宏毅 — 生成式 AI 導論（2024 春台大課程）**](https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php) ⭐⭐⭐ — 第 1-5 集講 LLM 是什麼、怎麼運作、token / context window / temperature 怎麼影響輸出。中文圈最高品質的 LLM 學術級導論、台大授課、官方頁含投影片 + YouTube。最新整合版見 [**GenAI-ML 2025 秋**](https://speech.ee.ntu.edu.tw/~hylee/GenAI-ML/2025-fall.php)
+- [**3Blue1Brown — Transformer 視覺化**](https://www.youtube.com/watch?v=wjZofJX0v4M)（中文配音版：[3Blue1Brown 中文](https://www.youtube.com/@3Blue1BrownCN)）— LLM 內部運作 visual intro
+- [**Andrej Karpathy — Intro to LLMs**](https://www.youtube.com/watch?v=zjkBMFhNj_g) — 英文影片、1hr、英文圈最被推薦的 LLM 入門影片
+
 ## 🛠 動手練習（基礎 illustrative 練習）
 
 > 🦙 **本 stage 默認用 Ollama**（成本考量、本機 `gemma4:e4b` 跑得動、$0/run）。每個練習都有 Path A（Ollama、默認）+ Path B（Anthropic、選擇性、想看 cloud 高品質時用）。完整 3 路 trade-off 見 [`examples/README.md`](../examples/README.md#三條路徑--默認用-ollama成本考量)。
