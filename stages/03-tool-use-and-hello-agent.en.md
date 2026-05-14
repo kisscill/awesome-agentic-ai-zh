@@ -4,15 +4,15 @@
 
 ⏱️ **Estimated Time**: 2-3 weeks (approx. 10-20 hours)
 
-> 💡 Terminology-heavy (agent / tool use / function calling / ReAct / structured output) → See [`resources/glossary.md` §2](../resources/glossary.md#2-agent--tool-use).
+> 💡 Terminology-heavy (agent / tool use / function calling / ReAct / structured output) → See [`resources/glossary.md` 2](../resources/glossary.md#2-agent--tool-use).
 > 🗺️ **Before choosing Track A (CLI Power User) or Track B (Agent Builder)**, read [`resources/agent-paradigms.md`](../resources/agent-paradigms.md) — a panoramic view of 5 agent archetypes to help you choose your path.
 
 > 📋 **Chapter Structure**: [Opening Framing: The relationship between AI/LLM/Agent] → Learning Objectives → Prerequisites → Required Reading → [Optional · Concept Map] → Hands-on Exercises → Reflection (Concepts + Routing) → Curated Projects → Self-Check
-> 🔑 **Key Terms**: See [`resources/glossary.md` §2](../resources/glossary.md#2-agent--tool-use)
+> 🔑 **Key Terms**: See [`resources/glossary.md` 2](../resources/glossary.md#2-agent--tool-use)
 
 ## 🤖 Before We Start: AI / LLM / Agent — How Do They Differ?
 
-> **This section is for "opening framing" (a top-down pedagogy)**: First, build the mental hierarchy in the learner's mind, then move on to §Learning Objectives and §Exercises. This section provides only **brief explanations + comparisons**. In-depth introductory materials are already canonical references in both English and Chinese (see resources below). **This is not a rewrite of hello-agents Ch1.**
+> **This section is for "opening framing" (a top-down pedagogy)**: First, build the mental hierarchy in the learner's mind, then move on to Learning Objectives and Exercises. This section provides only **brief explanations + comparisons**. In-depth introductory materials are already canonical references in both English and Chinese (see resources below). **This is not a rewrite of hello-agents Ch1.**
 
 ### A Hierarchy Diagram to Establish Understanding
 
@@ -24,9 +24,9 @@ AI (Artificial Intelligence)
                                     └─ A massive neural network with text in, text out
 
    ┌──────────────────────────────────────────────────────────┐
-   │  Agent = A cross-layer system that wraps an LLM in a       │
-   │  tool-calling loop.                                        │
-   │         = LLM (the brain) + Tools (hands) + Loop (heartbeat) │
+   │ Agent = A cross-layer system that wraps an LLM in a │
+   │ tool-calling loop. │
+   │ = LLM (the brain) + Tools (hands) + Loop (heartbeat) │
    └──────────────────────────────────────────────────────────┘
                           ▲
                           │ Uses an LLM as one component
@@ -61,17 +61,17 @@ After learning the 3 minimum components, the next layer is "**how the LLM thinks
 
 | Paradigm | What It Is | Where to Learn |
 |---|---|---|
-| **CoT** (Chain-of-Thought) | The LLM writes out its reasoning process before giving the answer, not just the conclusion—it's a **prompting technique**, not an agent architecture | **Stage 2** §Learning Objectives + §Hands-on Exercises (Reasoning Task CoT) |
+| **CoT** (Chain-of-Thought) | The LLM writes out its reasoning process before giving the answer, not just the conclusion—it's a **prompting technique**, not an agent architecture | **Stage 2** Learning Objectives + Hands-on Exercises (Reasoning Task CoT) |
 | **ReAct** (Reasoning + Acting) | Applying CoT within a Loop: Thought → Action (call tool) → Observation (see result) → Thought... It's the **most common implementation of the Loop component** | **Exercise 3 of this stage** + [ReAct paper (Yao 2022)](https://arxiv.org/abs/2210.03629) |
-| **Reflection** | After a run, the LLM critiques its own work and re-answers based on feedback | **§Reflection of this stage** (concept + routing) |
-| **Planning** (Task Decomposition) | Breaking a large task into sub-tasks, which can be assigned to multiple agents | **Stage 4** §What is a multi-agent framework |
+| **Reflection** | After a run, the LLM critiques its own work and re-answers based on feedback | **Reflection of this stage** (concept + routing) |
+| **Planning** (Task Decomposition) | Breaking a large task into sub-tasks, which can be assigned to multiple agents | **Stage 4** What is a multi-agent framework |
 
 → These paradigms are all variations of "**LLM self-guidance**," built on top of the 3 components (LLM + Tools + Loop). **"What is an agent" is explained by the 3 components; "How an agent thinks" requires these 4 paradigms for a complete picture.**
 
 > 💡 **Extended Components** (infrastructure that makes agents stronger, but **not a criterion for "is it an agent?"**):
 > - **Memory / RAG** (agent can remember things across conversations) → Taught completely in **Stage 6**
-> - **Reflection / self-critique** (agent looks at its own answer, finds problems, and goes back to fix them) → Basic version in **§Reflection of this stage** (concept + paper routing); advanced version with persistent memory in **Stage 6 §Reflexion with Memory**
-> - **Production harness** (telemetry / safety / retry / orchestration) → **Stage 5 §5.6**
+> - **Reflection / self-critique** (agent looks at its own answer, finds problems, and goes back to fix them) → Basic version in **Reflection of this stage** (concept + paper routing); advanced version with persistent memory in **Stage 6 Reflexion with Memory**
+> - **Production harness** (telemetry / safety / retry / orchestration) → **Stage 5 5.6**
 >
 > These are all advanced patterns—Stage 3 teaches the minimum viable agent, and later stages teach how to make it stronger.
 
@@ -137,7 +137,7 @@ You should already have:
 >
 > 🆘 **Stuck?** Tool calling has the steepest learning curve in the entire curriculum. Install the [`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) skill—when you prompt Claude Code with "Why isn't my LLM calling my tool?" or "What's wrong with my schema?", it will auto-load and walk you through a 4-symptom diagnostic process.
 >
-> 🪜 **This stage is the starting point for single-agent**: one LLM + ReAct loop. For **multi-agent concepts** (multiple agents collaborating), see [Stage 4 § What is a multi-agent framework](04-agent-frameworks.md#-what-is-a-multi-agent-framework); for **Claude's native subagent mechanism** (`.claude/agents/` + Task tool, no framework needed), see [Stage 5.5](05-claude-code-ecosystem.md#55--subagents--claude-codes-native-multi-agent-mechanism-new-in-2025).
+> 🪜 **This stage is the starting point for single-agent**: one LLM + ReAct loop. For **multi-agent concepts** (multiple agents collaborating), see [Stage 4 What is a multi-agent framework](04-agent-frameworks.md#-what-is-a-multi-agent-framework); for **Claude's native subagent mechanism** (`.claude/agents/` + Task tool, no framework needed), see [Stage 5.5](05-claude-code-ecosystem.md#55--subagents--claude-codes-native-multi-agent-mechanism-new-in-2025).
 
 ### Exercise 1: Function Calling (One Tool, One Call)
 Give Claude a tool (a fake weather API) and a question ("Is it raining in Taipei right now?"). See how Claude calls the tool, gets the result, and then answers you.
@@ -306,7 +306,7 @@ Write the Thought → Action → Observation loop in 50-80 lines of Python. No L
 # Assuming TOOLS + TOOL_IMPL (dict: name → callable) are defined as in Exercise 2
 messages = [{"role": "user", "content": "Population of Taipei divided by population of New York?"}]
 
-for step in range(5):  # max_iter safety net
+for step in range(5): # max_iter safety net
     r = client.chat.completions.create(model="qwen2.5:3b", tools=TOOLS, messages=messages)
     msg = r.choices[0].message
     # Append the assistant's response back to messages (Important! So the LLM can see what it said in the last turn)
@@ -315,7 +315,7 @@ for step in range(5):  # max_iter safety net
         print(f"✅ Finishing: {msg.content}"); break
     for tc in msg.tool_calls:
         args = json.loads(tc.function.arguments)
-        obs = TOOL_IMPL[tc.function.name](args)  # Execute locally
+        obs = TOOL_IMPL[tc.function.name](args) # Execute locally
         # Append the observation back to messages (using role="tool", with tool_call_id)
         messages.append({"role": "tool", "tool_call_id": tc.id, "content": obs})
 ```
@@ -343,9 +343,9 @@ A task that requires 3-5 consecutive tool calls. For example: "Find the populati
 # No new code, purely a change in TOOLS / TOOL_IMPL content
 TOOL_IMPL = {
     "lookup_population": lambda i: lookup_population(i["city"]),
-    "divide":            lambda i: divide(i["a"], i["b"]),
-    "to_percentage":     lambda i: to_percentage(i["ratio"]),
-    "round_int":         lambda i: round_int(i["x"]),
+    "divide": lambda i: divide(i["a"], i["b"]),
+    "to_percentage": lambda i: to_percentage(i["ratio"]),
+    "round_int": lambda i: round_int(i["x"]),
 }
 # The loop is exactly the same as Exercise 3, just max_iter is increased to 8
 ```
@@ -373,7 +373,7 @@ def fetch_weather(city: str) -> dict:
 # in the loop:
 obs = fetch_weather(args["city"])
 messages.append({"role": "tool", "tool_call_id": tc.id,
-                 "content": json.dumps(obs, ensure_ascii=False)})  # the error dict is also stringified and appended
+                 "content": json.dumps(obs, ensure_ascii=False)}) # the error dict is also stringified and appended
 # On the next turn, the LLM sees the retry_hint and might retry, give up, or change the query.
 ```
 
@@ -440,7 +440,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 **Why is this section in Stage 3 and not Stage 6?**: Reflection is classified in both academia (Reflexion paper Shinn 2023, Self-Refine Madaan 2023) and production (Cursor / Claude Code) as a **planning / reasoning loop** mechanism—it's a sibling pattern to ReAct (Exercise 3), **not a memory pattern**. It's the same multi-turn loop of LLM self-guidance, just "what to do next" changes from "call a tool" to "critique myself."
 
-**Advanced version (full version of Reflexion with persistent memory) → [Stage 6 §Advanced: Full Reflexion with Persistent Memory](06-memory-rag.en.md#-advanced-full-reflexion-with-persistent-memory--track-b-elective)**—when reflection needs to be cross-session, storing past failures as context for the next round, this version truly needs a memory layer.
+**Advanced version (full version of Reflexion with persistent memory) → [Stage 6 Advanced: Full Reflexion with Persistent Memory](06-memory-rag.en.md#-advanced-full-reflexion-with-persistent-memory--track-b-elective)**—when reflection needs to be cross-session, storing past failures as context for the next round, this version truly needs a memory layer.
 
 ### A Comparison Chart
 
@@ -449,7 +449,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 | **Error handling** (Ex 5) | External catch + retry | No | **Exercise 5 of this stage** |
 | **ReAct loop** (Ex 3) | LLM → tool → result → LLM | No | **Exercise 3 of this stage** |
 | **Basic reflection / Self-Refine** | Actor → Critic → Actor, single session | No | **Routing in this section (below)** |
-| **Full Reflexion** (w/ episodic memory) | Above + store failure reflections, accumulate across sessions | **Yes** | **Stage 6 §Advanced: Reflexion with Memory** |
+| **Full Reflexion** (w/ episodic memory) | Above + store failure reflections, accumulate across sessions | **Yes** | **Stage 6 Advanced: Reflexion with Memory** |
 
 ### 📚 Want to get hands-on / go deeper? Read these directly
 
@@ -462,7 +462,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 - [**LangChain — Reflection Agents (blog)**](https://blog.langchain.dev/reflection-agents/) — A framework implementation reference + a complete working notebook.
 - [**datawhalechina/hello-agents**](https://github.com/datawhalechina/hello-agents) — The corresponding chapter (Self-reflection / Self-Refine section, a complete tutorial in Chinese).
 
-> 💡 **Want to see how reflection looks in a production agent?**: [Stage 5 §5.6 Harness Internals](05-claude-code-ecosystem.md#56--claude-code-source-dissection--reference-harness-implementation-track-b-must-read) dissects the Claude Code source where you can see it—the agent self-evaluates the patch after a tool call, goes back to fix problems, and commits after correction. **This is one of the core building blocks of modern production agents**.
+> 💡 **Want to see how reflection looks in a production agent?**: [Stage 5 5.6 Harness Internals](05-claude-code-ecosystem.md#56--claude-code-source-dissection--reference-harness-implementation-track-b-must-read) dissects the Claude Code source where you can see it—the agent self-evaluates the patch after a tool call, goes back to fix problems, and commits after correction. **This is one of the core building blocks of modern production agents**.
 
 ## 🎯 Curated Projects
 

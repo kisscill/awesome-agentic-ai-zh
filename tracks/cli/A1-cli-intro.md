@@ -6,8 +6,8 @@
 
 ⏱ **時間估算**：1 週（約 5-10 小時）
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../../resources/glossary.md)（CLI agent / MCP / skill / plugin 等收在 §5）
+> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../../resources/glossary.md)（CLI agent / MCP / skill / plugin 等收在 5）
 
 讀完 Stage 0-2 之後，你想直接用現成的 CLI agent 把工作做完，不打算自己從零寫 ReAct loop？這條軌就是給你的。第一站：**選一個 CLI agent，跑起來**。
 

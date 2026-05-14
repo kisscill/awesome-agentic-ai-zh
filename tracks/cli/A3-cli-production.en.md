@@ -20,7 +20,7 @@ After your CLI runs smoothly, the next step: **wire it into your real workflow**
 1. [**Stage 5.2 — MCP (Model Context Protocol)**](../../stages/05-claude-code-ecosystem.en.md#52--mcp-model-context-protocol-foundation) — MCP concept and basics
 2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — the key trick for 90% cost reduction
 3. [**Stage 7 — Observability section**](../../stages/07-multi-agent-production.en.md#observability) — langfuse / Helicone / weave
-4. [**`resources/cli-agents-guide.en.md`** §"Common pitfalls"](../../resources/cli-agents-guide.en.md) — most common production issues with CLIs
+4. [**`resources/cli-agents-guide.en.md`** "Common pitfalls"](../../resources/cli-agents-guide.en.md) — most common production issues with CLIs
 
 ## 🛠 Hands-on Exercises
 

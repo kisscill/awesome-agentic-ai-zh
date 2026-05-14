@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 long-term memory 章節**
 > - [mem0](https://github.com/mem0ai/mem0)（auto fact extraction + forgetting）+ [Letta / MemGPT](https://github.com/letta-ai/letta)（兩級 memory pattern）
-> - 完整 references 見 [Stage 6 § 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
+> - 完整 references 見 [Stage 6 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
 
 
 ## 任務
@@ -18,7 +18,7 @@ Agent 跨多輪對話記得 user 說過的事情。實作方式：
 ```
 Turn 1: user: "I live in Taipei and prefer Python."
         → maybe_remember_fact() 抓到「I + ...」格式、存進 vector store
-Turn 2: user: "What's 2+2?"        → recall 拿不到 relevant memory、純算術
+Turn 2: user: "What's 2+2?" → recall 拿不到 relevant memory、純算術
 Turn 3: user: "Recommend a language for me."
         → recall 拿到「prefer Python」、塞進 system prompt → LLM 知道推薦 Python
 ```
@@ -51,21 +51,21 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # 5 個 test、mock LLM
-python test_anthropic.py   # Anthropic mock
+python test.py # 5 個 test、mock LLM
+python test_anthropic.py # Anthropic mock
 ```
 
 ## MemoryStore + chat 流程
 
 ```python
 class MemoryStore:
-    def remember(self, fact: str) -> str:   # add to vector store
-    def recall(self, query: str) -> list:    # top-k semantic search
+    def remember(self, fact: str) -> str: # add to vector store
+    def recall(self, query: str) -> list: # top-k semantic search
 
 def chat(user_msg, memory):
-    memories = memory.recall(user_msg, top_k=3)   # 1. 撈相關 memory
-    system = f"Relevant memories: {memories}"      # 2. 塞進 system prompt
-    return llm.invoke(system + user_msg)           # 3. LLM 看 memory 回答
+    memories = memory.recall(user_msg, top_k=3) # 1. 撈相關 memory
+    system = f"Relevant memories: {memories}" # 2. 塞進 system prompt
+    return llm.invoke(system + user_msg) # 3. LLM 看 memory 回答
 ```
 
 **核心**：memory 不是當「context window history」存（會爆），而是當「semantic search index」存——LLM 只看到相關的幾條。

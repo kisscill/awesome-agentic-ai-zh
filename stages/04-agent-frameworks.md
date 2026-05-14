@@ -6,8 +6,8 @@
 
 > 💡 用語不熟（framework / supervisor / worker / handoff⋯）→ 翻 [`resources/glossary.md`](../resources/glossary.md)。
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖：multi-agent intro + 進階 tool patterns〕→ 動手練習 → 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../resources/glossary.md)（framework / agent loop / handoff / supervisor 等收在 §2、§4）
+> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖：multi-agent intro + 進階 tool patterns〕→ 動手練習 → 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../resources/glossary.md)（framework / agent loop / handoff / supervisor 等收在 2、4）
 
 你已經從零打造過一個 ReAct agent（Stage 3）。現在來看 framework 到底幫你做了什麼。**挑一個深入學**，其他的瀏覽過去就好，知道什麼時候該換。
 
@@ -39,7 +39,7 @@
 
 要看懂 multi-agent framework 之前、有一個有用的釐清方式——把 **workflow vs agent** 跟 **single vs multi LLM** 當成兩個正交維度。Anthropic「Building Effective Agents」原文的核心區分是 workflow（固定 code path）vs agent（LLM 自主決定 next step）；我們把它跟 single/multi 疊起來看 4 個象限：
 
-|  | **Workflow**<br>（你寫好的 code path） | **Agent**<br>（LLM 動態決定下一步） |
+| | **Workflow**<br>（你寫好的 code path） | **Agent**<br>（LLM 動態決定下一步） |
 |---|---|---|
 | **Single LLM** | 線性 pipeline、無分支判斷 | 一個 LLM + ReAct loop、自己 plan + adapt<br>（**Stage 3 寫的就是這個**） |
 | **Multi LLM** | 預設 routing（譬如「銷售問題 → agent A、技術問題 → agent B」） | 2+ agent 互相 handoff、orchestrator 動態分配<br>（**本 stage 主題**） |
@@ -80,11 +80,11 @@
 
 **4 個信號都不在？** → single agent + 好 prompt + tool use 就夠。**硬上 multi-agent 會付 3-10x token、debug 痛苦、其實不會比較準**。
 
-> 💡 **後續閱讀**：到 [Stage 7 §但你真的需要 multi-agent 嗎？](07-multi-agent-production.md#-但你真的需要-multi-agent-嗎) 會再帶 production 視角的決策——本節是設計階段的決策、那邊是 deploy 前的最後一次回頭檢查。
+> 💡 **後續閱讀**：到 [Stage 7 但你真的需要 multi-agent 嗎？](07-multi-agent-production.md#-但你真的需要-multi-agent-嗎) 會再帶 production 視角的決策——本節是設計階段的決策、那邊是 deploy 前的最後一次回頭檢查。
 
 ### Multi-agent 經典 pattern（按複雜度排序）
 
-> 📝 **跟 Stage 3 §經典範式怎麼分**：[Stage 3 的 4 個 paradigm](03-tool-use-and-hello-agent.md#agent-的經典範式thinking-patterns)（CoT / ReAct / Reflection / Planning）是**單一 agent 內部怎麼想**；本節這 5 個 pattern 是**多個 agent 之間怎麼協作**——正交的兩個層。
+> 📝 **跟 Stage 3 經典範式怎麼分**：[Stage 3 的 4 個 paradigm](03-tool-use-and-hello-agent.md#agent-的經典範式thinking-patterns)（CoT / ReAct / Reflection / Planning）是**單一 agent 內部怎麼想**；本節這 5 個 pattern 是**多個 agent 之間怎麼協作**——正交的兩個層。
 
 | Pattern | 複雜度 | 什麼樣 | 經典場景 | 代表 framework / paper |
 |---|---|---|---|---|

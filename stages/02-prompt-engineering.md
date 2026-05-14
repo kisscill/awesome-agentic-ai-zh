@@ -8,7 +8,7 @@
 
 > 💡 用語不熟（prompt / few-shot / CoT / system prompt⋯）→ 翻 [`resources/glossary.md`](../resources/glossary.md)。
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖〕→ 動手練習 → 精選 Projects → 自我檢查  
+> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖〕→ 動手練習 → 精選 Projects → 自我檢查
 > 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../resources/glossary.md)（每 stage 用到的術語都收在那裡）
 
 ## 📌 學習目標
@@ -93,7 +93,7 @@ try:
     parsed = json.loads(json_output.strip().split("\n")[-1] if "\n" in json_output else json_output)
     assert "answer" in parsed, "JSON schema 應包含 answer 欄位"
 except json.JSONDecodeError:
-    pass  # 容許 model 回 JSON 含解釋文字、最後一筆才是 JSON
+    pass # 容許 model 回 JSON 含解釋文字、最後一筆才是 JSON
 print(f"\n✅ 練習 1 通過 — 同一個問題、3 種人格 / 格式 / 語氣")
 print("💡 觀察：律師長、老師短、JSON 機器一定是 {...}")
 ```
@@ -208,7 +208,7 @@ def evaluate(use_few_shot: bool) -> tuple[int, int]:
     for text, label in TEST_SET:
         pred = classify(text, use_few_shot=use_few_shot)
         ok = label in pred
-        print(f"  {'✓' if ok else '✗'} [{label}] {text[:30]}... → '{pred}'")
+        print(f" {'✓' if ok else '✗'} [{label}] {text[:30]}... → '{pred}'")
         if ok:
             correct += 1
     return correct, len(TEST_SET)
@@ -276,7 +276,7 @@ from openai import OpenAI
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
 
 QUESTION = "小明有 3 顆蘋果。他給了小華 1 顆、又從媽媽那邊拿到 5 顆、然後吃了 2 顆。請問現在剩幾顆？"
-ANSWER = 5  # 3 - 1 + 5 - 2 = 5
+ANSWER = 5 # 3 - 1 + 5 - 2 = 5
 
 COT_EXAMPLE = """範例：
 Q: 一隻雞有 2 隻腳。3 隻雞跟 1 個人共有幾隻腳？
@@ -413,7 +413,7 @@ text = msg.content[0].text
 
 </details>
 
-**進階做法**：把這 5 輪輸出全存進 csv、Stage 7 練習 2 會教怎麼把這變成 eval harness（評估腳手架、即「跑評估用的外圍程式 / 控制層」、完整定義見下面 §進階：prompt → context → harness 三層 engineering）量化「prompt 改善了多少」。
+**進階做法**：把這 5 輪輸出全存進 csv、Stage 7 練習 2 會教怎麼把這變成 eval harness（評估腳手架、即「跑評估用的外圍程式 / 控制層」、完整定義見下面 進階：prompt → context → harness 三層 engineering）量化「prompt 改善了多少」。
 
 ## 🎯 精選 Projects
 
@@ -449,7 +449,7 @@ LLM-powered system 的工程實踐分成 **3 層 stack**（不是 1 次 call vs 
 |---|---|---|
 | **1. Prompt Engineering** | 送進 LLM 的字串本身（system prompt / few-shot / format） | **本 stage（Stage 2）** |
 | **2. Context Engineering** | context window 裡裝什麼資訊（RAG / memory / tool defs / history） | [Stage 6 — Memory · RAG · Context Engineering](06-memory-rag.md) |
-| **3. Harness Engineering** | LLM 外面的 runtime scaffolding（agent loop / retry / sandbox / observability） | [**Stage 7 §Harness Engineering**](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念) ⭐ 完整對照表 |
+| **3. Harness Engineering** | LLM 外面的 runtime scaffolding（agent loop / retry / sandbox / observability） | [**Stage 7 Harness Engineering**](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念) ⭐ 完整對照表 |
 
 > 💡 **Karpathy 2025-06**：「context engineering 是把對下一步有用的資訊**剛好填進** context window 的精細藝術」（it's about *what goes in the window*）。
 >

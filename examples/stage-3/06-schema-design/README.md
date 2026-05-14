@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 70-150 行 illustrative 版、聚焦 `核心 pattern + 兩條 SDK path`，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 [Extra08 — 如何寫出好的 Skill](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra08-如何写出好的Skill.md)**
 > - [OpenAI Function Calling guide](https://platform.openai.com/docs/guides/function-calling) + [](../../../resources/schema-design-cheatsheet.md)
-> - 完整 references 見 [Stage 3 § 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
+> - 完整 references 見 [Stage 3 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
 
 
 ## 為什麼這題重要
@@ -29,8 +29,8 @@ pip install -r requirements.txt
 ollama pull qwen2.5:3b
 ollama serve
 
-python starter_bad.py    # 觀察壞 schema 怎麼讓 qwen 挑錯
-python starter_good.py   # 觀察好 schema 怎麼讓 qwen 挑對
+python starter_bad.py # 觀察壞 schema 怎麼讓 qwen 挑錯
+python starter_good.py # 觀察好 schema 怎麼讓 qwen 挑對
 ```
 
 預算：**$0**。
@@ -50,8 +50,8 @@ python starter_good_anthropic.py
 ## 不花錢驗證程式邏輯（mock-based）
 
 ```bash
-python test.py            # 驗 Path A (Ollama) starter_bad + starter_good
-python test_anthropic.py  # 驗 Path B (Anthropic) starter_*_anthropic
+python test.py # 驗 Path A (Ollama) starter_bad + starter_good
+python test_anthropic.py # 驗 Path B (Anthropic) starter_*_anthropic
 ```
 
 兩條 test 都用 `unittest.mock`、不打真 API、$0/run。每組 test 都直接檢查 schema 結構（good 有 `required` + `enum`、bad 沒有），不只是看 LLM 怎麼選。

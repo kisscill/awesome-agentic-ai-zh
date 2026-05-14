@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 完整 RAG 流水線章節**
 > - [LlamaIndex RAG tutorial](https://docs.llamaindex.ai/en/stable/understanding/rag/) + [LangChain RAG cookbook](https://python.langchain.com/docs/tutorials/rag/)
-> - 完整 references 見 [Stage 6 § 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
+> - 完整 references 見 [Stage 6 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
 
 
 ## 任務
@@ -47,8 +47,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # 5 個 test、mock LLM 驗整條 pipeline
-python test_anthropic.py   # Anthropic mock
+python test.py # 5 個 test、mock LLM 驗整條 pipeline
+python test_anthropic.py # Anthropic mock
 ```
 
 `test.py` 用 mock LLM 跑整個 RAG pipeline（chunking → retrieval → generation）、確認 prompt 真的帶上 context、確認 generate 拿到 retrieval 結果。
@@ -57,9 +57,9 @@ python test_anthropic.py   # Anthropic mock
 
 ```python
 def rag(query, doc):
-    collection = build_kb(doc)           # 1. chunk + embed + index（一次性）
-    contexts = retrieve(collection, q)    # 2. top-k 語意搜
-    answer = generate(q, contexts)        # 3. LLM 看 context 回答
+    collection = build_kb(doc) # 1. chunk + embed + index（一次性）
+    contexts = retrieve(collection, q) # 2. top-k 語意搜
+    answer = generate(q, contexts) # 3. LLM 看 context 回答
     return {"contexts": contexts, "answer": answer}
 ```
 
@@ -75,7 +75,7 @@ def rag(query, doc):
 ## Generate prompt 經典 pattern
 
 ```python
-prompt = f"""Answer the user's question based ONLY on the context below. 
+prompt = f"""Answer the user's question based ONLY on the context below.
 If the context doesn't contain the answer, say "I don't have that information".
 
 Context:

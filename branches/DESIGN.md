@@ -68,7 +68,7 @@ audience 切太細會：
 
 ### 灰色地帶處理（同一 repo 出現在多 branch）
 
-**規則**：同一 repo 可以在多 branch 出現，但每處要有不同的 **framing**（適合誰、教什麼）。**推薦星等預設一致**——同一個工具的客觀價值不會因 audience 改變；除非有明確的 audience-specific 理由（譬如「進階度差太多」），且寫進 Notes 解釋。詳見 [`resources/style-guide.md`](../resources/style-guide.md) §2。
+**規則**：同一 repo 可以在多 branch 出現，但每處要有不同的 **framing**（適合誰、教什麼）。**推薦星等預設一致**——同一個工具的客觀價值不會因 audience 改變；除非有明確的 audience-specific 理由（譬如「進階度差太多」），且寫進 Notes 解釋。詳見 [`resources/style-guide.md`](../resources/style-guide.md) 2。
 
 **範例**：
 - `obra/superpowers` 出現在 Stage 5、for-developer、for-knowledge-worker、for-teacher

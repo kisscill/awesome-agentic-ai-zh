@@ -20,7 +20,7 @@ After installing a CLI and running first tasks, the next question: **how do I ma
 1. [**Anthropic — CLAUDE.md best practices**](https://docs.anthropic.com/en/docs/claude-code/memory) ⭐
 2. [**Stage 2 — Prompt Engineering**](../../stages/02-prompt-engineering.en.md) — workflow design and prompt design are two sides of the same coin
 3. [**Stage 5.1 — Claude Code Basics**](../../stages/05-claude-code-ecosystem.en.md#51--claude-code-basics) — slash command details
-4. [**`resources/cli-agents-guide.en.md`** §"Cross-CLI portable prompt patterns"](../../resources/cli-agents-guide.en.md) — portable prompt principles
+4. [**`resources/cli-agents-guide.en.md`** "Cross-CLI portable prompt patterns"](../../resources/cli-agents-guide.en.md) — portable prompt principles
 
 ## 🛠 Hands-on Exercises
 
@@ -103,7 +103,7 @@ Community-curated Claude Code resources. Browse the slash command examples.
 
 ### Multi-CLI Patterns
 
-#### [`resources/cli-agents-guide.en.md`](../../resources/cli-agents-guide.en.md) §"Three common combinations"
+#### [`resources/cli-agents-guide.en.md`](../../resources/cli-agents-guide.en.md) "Three common combinations"
 Look at Setup A / B / C and try one that fits.
 
 ## ✅ Self-Check Before A3

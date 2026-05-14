@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 embedding 章節**
 > - [sentence-transformers official docs](https://www.sbert.net/) + [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard)（embedding model 評分排行）
-> - 完整 references 見 [Stage 6 § 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
+> - 完整 references 見 [Stage 6 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
 
 
 ## 任務
@@ -21,7 +21,7 @@
 
 ```bash
 pip install -r requirements.txt
-python starter.py   # 第一次自動下載 model (~80 MB)
+python starter.py # 第一次自動下載 model (~80 MB)
 ```
 
 預算：**$0**。`sentence-transformers/all-MiniLM-L6-v2` 模型在 CPU 跑、約 100 句 < 1 秒。
@@ -41,19 +41,19 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # mock SentenceTransformer、不下載 model
-python test_anthropic.py   # mock OpenAI client、驗 normalize 邏輯
+python test.py # mock SentenceTransformer、不下載 model
+python test_anthropic.py # mock OpenAI client、驗 normalize 邏輯
 ```
 
 ## 核心觀念
 
 ```python
 # 1. Encode → vector
-sent_vecs = model.encode(sentences, normalize_embeddings=True)  # 100 × 384 vec
-q_vec = model.encode([query], normalize_embeddings=True)[0]      # 384 vec
+sent_vecs = model.encode(sentences, normalize_embeddings=True) # 100 × 384 vec
+q_vec = model.encode([query], normalize_embeddings=True)[0] # 384 vec
 
 # 2. Cosine similarity = dot product (因為 normalized)
-sims = sent_vecs @ q_vec        # 100 個 similarity score
+sims = sent_vecs @ q_vec # 100 個 similarity score
 
 # 3. Top-k
 top_idx = np.argsort(-sims)[:top_k]
@@ -86,11 +86,11 @@ top_idx = np.argsort(-sims)[:top_k]
 ```bash
 # 本機更大 model（精度更好、速度較慢）
 # 把 starter.py 的 MODEL_NAME 改成：
-#   "sentence-transformers/all-mpnet-base-v2"           # 768 維、accuracy↑
-#   "sentence-transformers/paraphrase-multilingual-..." # 多語
+# "sentence-transformers/all-mpnet-base-v2" # 768 維、accuracy↑
+# "sentence-transformers/paraphrase-multilingual-..." # 多語
 
 # Cloud 高精度
-EMBED_MODEL=text-embedding-3-large python starter_anthropic.py   # 3072 維、$$
+EMBED_MODEL=text-embedding-3-large python starter_anthropic.py # 3072 維、$$
 ```
 
 ## 延伸

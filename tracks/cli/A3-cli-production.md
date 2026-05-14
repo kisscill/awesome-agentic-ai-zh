@@ -6,8 +6,8 @@
 
 ⏱ **時間估算**：1-2 週（約 8-15 小時）
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md` §5 + §6](../../resources/glossary.md#5-claude-code-生態)（MCP / observability / eval / prompt caching / cost tracking）
+> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md` 5 + 6](../../resources/glossary.md#5-claude-code-生態)（MCP / observability / eval / prompt caching / cost tracking）
 
 CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**。MCP server 整合、CI 自動化、cost / observability。這節之後，CLI 不只是你個人在用的工具，而是 team 工作流的一部分。
 
@@ -33,7 +33,7 @@ CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**
 1. [**Stage 5.2 — MCP（Model Context Protocol）**](../../stages/05-claude-code-ecosystem.md#52--mcpmodel-context-protocol-基礎) — MCP 概念跟基礎
 2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — 90% cost reduction 的關鍵技巧
 3. [**Stage 7 — 常用 Multi-Agent / Production 工具推薦**](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) — langfuse / Helicone / weave 等 observability 工具表
-4. [**`resources/cli-agents-guide.md`** §「常見坑」](../../resources/cli-agents-guide.md) — production 用 CLI 最常踩的問題
+4. [**`resources/cli-agents-guide.md`** 「常見坑」](../../resources/cli-agents-guide.md) — production 用 CLI 最常踩的問題
 
 ## 🛠 動手練習
 
@@ -58,7 +58,7 @@ CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**
 ### 動手練習 CLI-11：Cost tracking
 跑你日常的一個 task，**先預估** token 用量，再實際跑、查 token usage。差距通常很大（多半你低估）。
 - 算式：input tokens + output tokens 各乘以 model 單價
-- 接 langfuse 或 Helicone（[Stage 7 §常用工具推薦](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) 表內 Observability 行）做 trace
+- 接 langfuse 或 Helicone（[Stage 7 常用工具推薦](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) 表內 Observability 行）做 trace
 - 觀察：哪個 sub-task 花最多 token？是不是有不必要的 long context？
 
 ### 動手練習 CLI-12：Skill / plugin 跨 team 分享
@@ -78,9 +78,9 @@ CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**
 | | [wong2/awesome-mcp-servers](https://github.com/wong2/awesome-mcp-servers) | ⭐⭐⭐⭐ | 想找特定領域的社群 MCP | 社群 MCP catalog、150+ 個依分類整理 |
 | **CI 整合 patterns** | [anthropics/claude-code-action](https://github.com/anthropics/claude-code-action) | ⭐⭐⭐⭐⭐ | 第一個 CI workflow 從官方範本起步 | 官方 GitHub Action 範本、PR review / issue triage / 自動 fix |
 | | [continuedev/continue](https://github.com/continuedev/continue) | ⭐⭐⭐⭐ | 想把 AI checks 接到 PR pipeline 強制執行 | ★ 33k+。完整介紹見 [`branches/for-developer.md`](../../branches/for-developer.md) |
-| **Observability + Cost** | [langfuse/langfuse](https://github.com/langfuse/langfuse) | ⭐⭐⭐⭐⭐ | 想把 trace / cost / session 都接起來 | open source LLM observability，★ 26k+。詳見 [Stage 7 §常用推薦](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) |
+| **Observability + Cost** | [langfuse/langfuse](https://github.com/langfuse/langfuse) | ⭐⭐⭐⭐⭐ | 想把 trace / cost / session 都接起來 | open source LLM observability，★ 26k+。詳見 [Stage 7 常用推薦](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) |
 | | [Helicone](https://github.com/Helicone/helicone) | ⭐⭐⭐⭐ | 想要最快的 logging（改 base_url 就好）| proxy-based 監控、改 base_url 就有 logging + caching，★ 5k+ |
-| | [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo) | ⭐⭐⭐⭐⭐ | CLI workflow 升 production 前跑回歸測試 | eval framework，★ 20k+。詳見 [Stage 7 §Agent Benchmark Landscape + Reward-Hacking 警告](../../stages/07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告) |
+| | [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo) | ⭐⭐⭐⭐⭐ | CLI workflow 升 production 前跑回歸測試 | eval framework，★ 20k+。詳見 [Stage 7 Agent Benchmark Landscape + Reward-Hacking 警告](../../stages/07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告) |
 | **Production CLI workflow 範本** | [obra/superpowers](https://github.com/obra/superpowers) | ⭐⭐⭐⭐ | 看完整 production-grade workflow 長什麼樣 | 整套 production-ready skill collection、★ 178k+。看別人怎麼把 CLI workflow 做完整 |
 | | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) | ⭐⭐⭐ | 要把 team 的 CLI workflow 打包共用 | 最簡 marketplace template、★ 900+ |
 

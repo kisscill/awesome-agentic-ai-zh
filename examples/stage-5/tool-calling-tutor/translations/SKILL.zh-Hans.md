@@ -1,6 +1,6 @@
 ---
 name: tool-calling-tutor
-description: When the user is building a tool-calling agent and gets stuck — "为什么 LLM 不调用我的 tool", "我这 schema 哪里写坏", "tool 被调用但 args 不对", "ReAct loop 跑不停", "the LLM won't call my tool", "help me design a function schema", "debug this tool-use behavior". Walks them through a 4-branch diagnostic + 5-step schema design walkthrough, with references to bad/good schema A/B and SDK-diff cheatsheet. Do NOT use for: pure LangChain / LangGraph / CrewAI framework questions (route to Stage 4 frameworks), MCP server building (route to cookbook §2), production agent observability (route to Stage 7).
+description: When the user is building a tool-calling agent and gets stuck — "为什么 LLM 不调用我的 tool", "我这 schema 哪里写坏", "tool 被调用但 args 不对", "ReAct loop 跑不停", "the LLM won't call my tool", "help me design a function schema", "debug this tool-use behavior". Walks them through a 4-branch diagnostic + 5-step schema design walkthrough, with references to bad/good schema A/B and SDK-diff cheatsheet. Do NOT use for: pure LangChain / LangGraph / CrewAI framework questions (route to Stage 4 frameworks), MCP server building (route to cookbook 2), production agent observability (route to Stage 7).
 ---
 
 # Tool Calling Tutor
@@ -85,7 +85,7 @@ When the user mentions tool calling problems, ask **which of these 4 symptoms** 
 这个 skill **不**处理：
 
 - **LangChain / LangGraph / CrewAI / Pydantic AI** 等 framework 问题 → 路 Stage 4
-- **MCP server / client** 设计 → 路 [`resources/cookbook.md` §2 写你的第一个 MCP server](../../../../resources/cookbook.md)
+- **MCP server / client** 设计 → 路 [`resources/cookbook.md` 2 写你的第一个 MCP server](../../../../resources/cookbook.md)
 - **Production 监控 / observability / cost tracking** → 路 Stage 7
 - **Prompt engineering 一般技巧** → 路 Stage 2
 
@@ -104,4 +104,4 @@ When the user mentions tool calling problems, ask **which of these 4 symptoms** 
 - [`references/schema-evolution.zh-Hans.md`](../references/schema-evolution.zh-Hans.md) — Bad → Good schema worked example（4 个改进步骤）
 - [`references/sdk-diff.zh-Hans.md`](../references/sdk-diff.zh-Hans.md) — Anthropic vs OpenAI-compat 并排表
 - [`resources/schema-design-cheatsheet.zh-Hans.md`](../../../../resources/schema-design-cheatsheet.zh-Hans.md) — 5 条黄金规则 + 5 个 anti-pattern（curriculum 既有资源）
-- [`resources/glossary.zh-Hans.md` §2](../../../../resources/glossary.zh-Hans.md) — Agent / Tool Use / ReAct 名词定义
+- [`resources/glossary.zh-Hans.md` 2](../../../../resources/glossary.zh-Hans.md) — Agent / Tool Use / ReAct 名词定义

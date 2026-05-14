@@ -2,7 +2,7 @@
 
 > [繁體中文](./for-developer.md) | [简体中文](./for-developer.zh-Hans.md) | **English**
 
-> 🚀 **First time installing Claude Code or writing `CLAUDE.md` / `SKILL.md`?** The quick setup guide is [`resources/setup-guide.en.md` §D-E](../resources/setup-guide.en.md). Skip it if you already know this.
+> 🚀 **First time installing Claude Code or writing `CLAUDE.md` / `SKILL.md`?** The quick setup guide is [`resources/setup-guide.en.md` D-E](../resources/setup-guide.en.md). Skip it if you already know this.
 
 > [← Back to main path README](../README.en.md) · Continue here after **Track A's A3** or **Track B's Stage 7**. Apply agentic AI to coding workflows.
 
@@ -75,7 +75,7 @@ aider --model anthropic/claude-sonnet-4-20250514
 > Add a timezone parameter to parse_date in utils.py, default UTC
 
 # Aider edits + commits automatically. To roll back:
-> /undo  # undoes the last AI commit
+> /undo # undoes the last AI commit
 ```
 
 **3. PR-time Claude code review (GitHub Action)**

@@ -4,10 +4,10 @@
 
 ⏱ **時間估算**：2-4 週（約 15-30 小時）
 
-> 💡 用語密度高（multi-agent / handoff / eval / observability / guardrails⋯）→ 翻 [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent)。
+> 💡 用語密度高（multi-agent / handoff / eval / observability / guardrails⋯）→ 翻 [`resources/glossary.md` 4 + 6](../resources/glossary.md#4-multi-agent)。
 
-> 📋 **本章組成**：〔Multi-Agent · Production 化 是什麼（先定位）+ 三層工程分工 + 何時用 multi-agent〕→ 學習目標 → 進入條件 → 必修閱讀 → Harness Engineering（**8 個核心元件含 Cost/Latency**）→ 動手練習（含練習 6 Cost Optimization）→ **Agent Benchmark Landscape：怎麼看，不要只看排行榜** → 常用工具推薦 → 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent)（multi-agent / orchestration / handoff / eval / observability / harness（模型外圍的執行與控制層））
+> 📋 **本章組成**：〔Multi-Agent · Production 化 是什麼（先定位）+ 三層工程分工 + 何時用 multi-agent〕→ 學習目標 → 進入條件 → 必修閱讀 → Harness Engineering（**8 個核心元件含 Cost/Latency**）→ 動手練習（含練習 6 Cost Optimization）→ **Agent Benchmark Landscape：怎麼看，不要只看排行榜** → 常用工具推薦 → 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md` 4 + 6](../resources/glossary.md#4-multi-agent)（multi-agent / orchestration / handoff / eval / observability / harness（模型外圍的執行與控制層））
 
 最後一個階段。你正從「我會做 agent」走向「我能讓 agent **真的給人穩定用**——多個 agent 協作、有 eval、有 observability、能部署到可用環境」。**「Production 化」 ≠ enterprise scale**——只要 agent 能穩定產出 + 能讓別人使用、就算進入這 stage 範圍。
 
@@ -61,7 +61,7 @@
 | **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents)、[How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | multi-agent 適合**高價值、可平行探索、需要大量工具或超出單一 context 的任務**；token 使用量可能比 single chat 高很多倍 |
 | **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | multi-agent 的 context fragmentation 嚴重、shared state 維護痛苦；先窮盡 single-agent + long-context 才考慮 |
 
-**4 個明確訊號**才上 multi-agent（詳見 [Stage 4 §什麼時候真的需要 multi-agent](04-agent-frameworks.md#什麼時候真的需要-multi-agent不要硬上)）：
+**4 個明確訊號**才上 multi-agent（詳見 [Stage 4 什麼時候真的需要 multi-agent](04-agent-frameworks.md#什麼時候真的需要-multi-agent不要硬上)）：
 
 1. **任務天然分解** — 大任務有清楚子步驟、能 step-by-step 完成 → Sequential / Planner-Executor
 2. **Token explosion** — single agent prompt 塞不下所有 tool description / context → Supervisor-Worker
@@ -82,7 +82,7 @@
 
 你應該已經：
 - 完成 Stage 4（用過至少一個 agent framework 跑 multi-agent demo）
-- 完成 Stage 5（懂 MCP / Skills / Plugins / Subagents 各自角色，並用 §5.6 解剖過 harness 內部）
+- 完成 Stage 5（懂 MCP / Skills / Plugins / Subagents 各自角色，並用 5.6 解剖過 harness 內部）
 - 完成 Stage 6（會基本 RAG，能講出 memory pattern 差異）
 - 對 Docker / git / CI 基礎熟悉（部署成可用服務會用到）
 

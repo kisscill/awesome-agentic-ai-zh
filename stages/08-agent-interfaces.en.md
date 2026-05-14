@@ -45,7 +45,7 @@
 - **2025-2026**: OpenAI (Atlas + Codex desktop) and Google (Gemini in Chrome) enter the field → Mainstream adoption.
 - **May 2026**: The OSWorld benchmark reaches **76.26%** (superhuman, vs. a 72.36% human baseline) → It transitions from a research curiosity to a production reality.
 
-**The curriculum gap without this stage**: After completing Stage 7, you might think you're done. In reality, your agent can only talk to APIs. **It can't operate software without APIs, interact with real webpages, or run code.** You also wouldn't have been warned about safety issues like the Comet injection or the Amazon injunction (see [§Safety](#-2026-safety--security-highlights)).
+**The curriculum gap without this stage**: After completing Stage 7, you might think you're done. In reality, your agent can only talk to APIs. **It can't operate software without APIs, interact with real webpages, or run code.** You also wouldn't have been warned about safety issues like the Comet injection or the Amazon injunction (see [Safety](#-2026-safety--security-highlights)).
 
 ### Why is this a Shared Hub?
 
@@ -76,7 +76,7 @@ You should have already:
 - Completed [Stage 7](07-multi-agent-production.md) (understand harness engineering, know what the reward-hacking warning is about).
 - Have a basic familiarity with Docker/VM concepts (this chapter explains the difference between microVMs and Containers, but you'll struggle if you've never touched Docker).
 - **For Track A only**: Completing Stage 5 is sufficient; Stage 7 is optional. The Track A portion of this chapter does not depend on building experience.
-- **For Track B**: Stage 7 is mandatory, otherwise you will get stuck on the build examples in §9.
+- **For Track B**: Stage 7 is mandatory, otherwise you will get stuck on the build examples in 9.
 
 If you don't meet these, go back and catch up.
 
@@ -310,7 +310,7 @@ A common sticking point for new readers, explained here:
 | Research / cross-page synthesis | **Comet** | Tuned for research, citation-backed. |
 | ChatGPT user / Agent Mode | **Atlas** | Built into Plus/Pro/Business. |
 | Chrome / Google ecosystem | **Gemini in Chrome** | Auto Browse + Skills, enterprise DLP. |
-| **Avoid**: Using Comet for e-commerce/banking| — | ⚠ Federal injunction in Mar 2026 (see [§Safety](#-2026-safety--security-highlights)). |
+| **Avoid**: Using Comet for e-commerce/banking| — | ⚠ Federal injunction in Mar 2026 (see [Safety](#-2026-safety--security-highlights)). |
 
 ### Example Cross-App Workflow
 
@@ -337,7 +337,7 @@ from langchain_openai import ChatOpenAI
 
 agent = Agent(
     task="Search Hacker News for top AI agent posts this week and summarize",
-    llm=ChatOpenAI(model="gpt-5.5"),  # Can also swap for Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
+    llm=ChatOpenAI(model="gpt-5.5"), # Can also swap for Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
 )
 result = await agent.run()
 ```
@@ -359,14 +359,14 @@ with Sandbox() as sandbox:
 
 ### 3. Use the Built-in Sandbox in the OpenAI Agents SDK (New in April 2026)
 
-**Why this SDK**: It used to be for prototypes only, but the April 2026 update made it architecturally sound for production (see end of §7).
+**Why this SDK**: It used to be for prototypes only, but the April 2026 update made it architecturally sound for production (see end of 7).
 
 ```python
 from openai.agents import Agent, Sandbox
 
 agent = Agent(
     model="gpt-5.5",
-    sandbox=Sandbox(provider="e2b"),  # or daytona / modal / vercel / ...
+    sandbox=Sandbox(provider="e2b"), # or daytona / modal / vercel / ...
     tools=[...]
 )
 ```
@@ -411,30 +411,30 @@ In March 2026, a US federal judge issued a preliminary injunction against Comet,
 
 ```
                     ┌──── User Request ────┐
-                    ▼                      │
-              ┌──── Agent ────┐            │
-              │               │            │
-   ┌─① approval gate          │            │
-   │  (User confirms before high-risk actions)│            │
-   │                          │            │
-   │  ┌─② sandbox ──┐          │            │
-   │  │ Agent runs code here │ │            │
-   │  └──────────────┘          │            │
-   │                          │            │
-   │  ┌─③ human-in-loop ─┐     │            │
-   │  │ Mid-task check for long tasks │            │
-   │  └──────────────────┘     │            │
-   │                          │            │
-   │  ┌─④ output filter ──┐    │            │
-   │  │ Whitelist destinations ││            │
-   │  └────────────────────┘   ▼            │
+                    ▼ │
+              ┌──── Agent ────┐ │
+              │ │ │
+   ┌─① approval gate │ │
+   │ (User confirms before high-risk actions)│ │
+   │ │ │
+   │ ┌─② sandbox ──┐ │ │
+   │ │ Agent runs code here │ │ │
+   │ └──────────────┘ │ │
+   │ │ │
+   │ ┌─③ human-in-loop ─┐ │ │
+   │ │ Mid-task check for long tasks │ │
+   │ └──────────────────┘ │ │
+   │ │ │
+   │ ┌─④ output filter ──┐ │ │
+   │ │ Whitelist destinations ││ │
+   │ └────────────────────┘ ▼ │
    └─────────────────► Execution ───────────┘
 ```
 
 | Pattern | How to Implement | When it's a Must |
 |---|---|---|
 | **① Approval gate** | A confirmation dialog before high-risk operations (deleting files, making payments, sending emails, DB deletes). | **All production agents**. |
-| **② Sandbox** | A must for agents that run code (choose one from the 7 in §7). | Any agent that runs code. |
+| **② Sandbox** | A must for agents that run code (choose one from the 7 in 7). | Any agent that runs code. |
 | **③ Human-in-the-loop**| A mid-task checkpoint for long-horizon tasks. | For tasks > 10 steps or > 5 minutes. |
 | **④ Output filter** | Restrict destinations to a whitelist (e.g., only post to internal Slack, only write to `/tmp`).| Agents that operate across systems. |
 

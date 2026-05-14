@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 graph workflow + HITL 章節**
 > - [LangGraph HITL tutorial](https://langchain-ai.github.io/langgraph/tutorials/human-in-the-loop/) + [LangGraph time-travel docs](https://langchain-ai.github.io/langgraph/concepts/time-travel/)
-> - 完整 references 見 [Stage 4 § 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
+> - 完整 references 見 [Stage 4 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
 
 
 ## 任務
@@ -32,8 +32,8 @@ python starter.py
 預算：**$0**。這份 demo 的節點都是 deterministic 邏輯、不打 LLM；要實接 Claude / Ollama 在 `respond_node` 改成 `llm.invoke(...)` 即可。
 
 ```bash
-python test.py             # 6 個 test，驗 routing + HITL 邏輯
-python test_anthropic.py   # Path B concept demo
+python test.py # 6 個 test，驗 routing + HITL 邏輯
+python test_anthropic.py # Path B concept demo
 ```
 
 ## LangGraph 圖結構（精簡）
@@ -86,8 +86,8 @@ state_after = graph.invoke(None, config=config)
 
 ```python
 # 在 respond_node 改：
-from langchain_openai import ChatOpenAI  # Path A
-# from langchain_anthropic import ChatAnthropic  # Path B
+from langchain_openai import ChatOpenAI # Path A
+# from langchain_anthropic import ChatAnthropic # Path B
 llm = ChatOpenAI(base_url="http://localhost:11434/v1", api_key="ollama", model="qwen2.5:3b")
 draft = llm.invoke(state["query"]).content
 return {"draft": draft}

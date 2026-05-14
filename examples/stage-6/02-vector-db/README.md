@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 vector store 章節**
 > - [ChromaDB official tutorial](https://docs.trychroma.com/) + [Qdrant / Weaviate / Pinecone 對照](https://github.com/zilliztech/VectorDBBench)（production scale benchmark）
-> - 完整 references 見 [Stage 6 § 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
+> - 完整 references 見 [Stage 6 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
 
 
 ## 任務
@@ -19,14 +19,14 @@
 
 ```bash
 pip install -r requirements.txt
-python starter.py   # 第一次自動下載 embedding model
+python starter.py # 第一次自動下載 embedding model
 ```
 
 預算：**$0**。Chroma in-memory mode、跑完就 release。
 
 ```bash
-python test.py             # 5 個 test、驗 index/query/ranking
-python test_anthropic.py   # Path B concept demo（同 starter）
+python test.py # 5 個 test、驗 index/query/ranking
+python test_anthropic.py # Path B concept demo（同 starter）
 ```
 
 ## Vector DB 為什麼 vs 為什麼不
@@ -71,7 +71,7 @@ Query: "where to drink good coffee in Asian cities"
 ## Chroma 核心 API
 
 ```python
-client = chromadb.EphemeralClient()    # in-memory；PersistentClient(path=...) 用磁碟
+client = chromadb.EphemeralClient() # in-memory；PersistentClient(path=...) 用磁碟
 embed_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="...")
 collection = client.get_or_create_collection(name="demo", embedding_function=embed_fn)
 
@@ -99,7 +99,7 @@ collection.delete(ids=[...])
 ```bash
 # Persistent mode
 # In starter.py:
-collection = build_collection(path="./chroma_db")   # 寫到磁碟
+collection = build_collection(path="./chroma_db") # 寫到磁碟
 
 # Cloud embedding（更高精度）
 # Replace SentenceTransformerEmbeddingFunction with:

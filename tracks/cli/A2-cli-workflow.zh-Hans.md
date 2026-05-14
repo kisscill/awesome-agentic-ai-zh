@@ -20,7 +20,7 @@
 1. [**Anthropic — CLAUDE.md best practices**](https://docs.anthropic.com/en/docs/claude-code/memory) ⭐
 2. [**Stage 2 — Prompt 设计**](../../stages/02-prompt-engineering.zh-Hans.md) — workflow design 跟 prompt design 是同一件事的两面
 3. [**Stage 5.1 — Claude Code 基础**](../../stages/05-claude-code-ecosystem.zh-Hans.md#51--claude-code-基础) — slash commands 细节
-4. [**`resources/cli-agents-guide.zh-Hans.md`** §“跨 CLI 都通用的 prompt 写法”](../../resources/cli-agents-guide.zh-Hans.md) — portable prompt 原则
+4. [**`resources/cli-agents-guide.zh-Hans.md`** “跨 CLI 都通用的 prompt 写法”](../../resources/cli-agents-guide.zh-Hans.md) — portable prompt 原则
 
 ## 🛠 动手练习
 
@@ -103,7 +103,7 @@ official — Claude Code memory / CLAUDE.md 编写的官方说明，含 best pra
 
 ### 多 CLI 并用 pattern
 
-#### [`resources/cli-agents-guide.zh-Hans.md`](../../resources/cli-agents-guide.zh-Hans.md) §“3 个常见搭配”
+#### [`resources/cli-agents-guide.zh-Hans.md`](../../resources/cli-agents-guide.zh-Hans.md) “3 个常见搭配”
 看 Setup A / B / C，挑一个合的试。
 
 ## ✅ 进 A3 前的自我检查

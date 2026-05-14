@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 進階 SDK feature 章節**
 > - [Anthropic Prompt Caching docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) + [Anthropic Batch API](https://docs.anthropic.com/en/docs/build-with-claude/batch-processing)
-> - 完整 references 見 [Stage 7 § 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
+> - 完整 references 見 [Stage 7 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
 
 
 ## Production 兩個必備 SDK feature
@@ -40,8 +40,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # 3 個 test、mock OpenAI streaming
-python test_anthropic.py   # mock Anthropic streaming + cache_control
+python test.py # 3 個 test、mock OpenAI streaming
+python test_anthropic.py # mock Anthropic streaming + cache_control
 ```
 
 ## Streaming 怎麼用
@@ -51,7 +51,7 @@ python test_anthropic.py   # mock Anthropic streaming + cache_control
 ```python
 stream = client.chat.completions.create(
     model=..., messages=[...],
-    stream=True,   # ← key
+    stream=True, # ← key
 )
 for chunk in stream:
     delta = chunk.choices[0].delta.content
@@ -80,7 +80,7 @@ resp = client.messages.create(
         {
             "type": "text",
             "text": "[2000-token reference material...]",
-            "cache_control": {"type": "ephemeral"},   # ← key
+            "cache_control": {"type": "ephemeral"}, # ← key
         }
     ],
     messages=[{"role": "user", "content": "..."}]

@@ -4,15 +4,15 @@
 
 ⏱ **時間估算**：2-3 週（約 10-20 小時）
 
-> 💡 用語密集（agent / tool use / function calling / ReAct / structured output⋯）→ 翻 [`resources/glossary.md` §2](../resources/glossary.md#2-agent--工具使用)。
+> 💡 用語密集（agent / tool use / function calling / ReAct / structured output⋯）→ 翻 [`resources/glossary.md` 2](../resources/glossary.md#2-agent--工具使用)。
 > 🗺️ **進 Track A（CLI Power User）還是 Track B（Agent Builder）前**，先看 [`resources/agent-paradigms.md`](../resources/agent-paradigms.md) — 5 種 agent 型態的全景圖，幫你選軌。
 
-> 📋 **本章組成**：〔開場框景：AI/LLM/Agent 三者關係〕→ 學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖〕→ 動手練習 → 反思（概念 + 路由）→ 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md` §2](../resources/glossary.md#2-agent--工具使用)
+> 📋 **本章組成**：〔開場框景：AI/LLM/Agent 三者關係〕→ 學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖〕→ 動手練習 → 反思（概念 + 路由）→ 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md` 2](../resources/glossary.md#2-agent--工具使用)
 
 ## 🤖 開始前：AI / LLM / Agent — 三者怎麼分？
 
-> **本節是「開場框景」（由大到小 pedagogy）**：先把學習者腦中的 mental hierarchy 建好，再進 §學習目標、§練習。這節只做**簡短說明 + 對照**，深度入門讀物已經是中英文圈各自的 canonical reference（見下方資源）。**不是重寫 hello-agents Ch1。**
+> **本節是「開場框景」（由大到小 pedagogy）**：先把學習者腦中的 mental hierarchy 建好，再進 學習目標、練習。這節只做**簡短說明 + 對照**，深度入門讀物已經是中英文圈各自的 canonical reference（見下方資源）。**不是重寫 hello-agents Ch1。**
 
 ### 一張階層圖先建立認知
 
@@ -24,9 +24,9 @@ AI (Artificial Intelligence、人工智慧)
                                     └─ 文字 in、文字 out 的超大神經網路
 
    ┌──────────────────────────────────────────────────────────┐
-   │  Agent (智能體 / 代理人) = 跨層 system，把 LLM 包進          │
-   │  工具呼叫迴圈                                              │
-   │         = LLM（當大腦）+ Tools（手腳）+ Loop（心跳）       │
+   │ Agent (智能體 / 代理人) = 跨層 system，把 LLM 包進 │
+   │ 工具呼叫迴圈 │
+   │ = LLM（當大腦）+ Tools（手腳）+ Loop（心跳） │
    └──────────────────────────────────────────────────────────┘
                           ▲
                           │ 用 LLM 當其中一個元件
@@ -61,17 +61,17 @@ AI (Artificial Intelligence、人工智慧)
 
 | 範式 | 是什麼 | 在哪學 |
 |---|---|---|
-| **CoT**（Chain-of-Thought、思維鏈） | LLM 寫出推理過程再給答案、不只給結論——是個 **prompting 技巧**、不是 agent 結構 | **Stage 2** §學習目標 + §動手練習（推理任務 CoT） |
-| **ReAct**（Reasoning + Acting） | 在 Loop 裡套 CoT：Thought（想）→ Action（呼叫 tool）→ Observation（看結果）→ Thought ...，是 **Loop 部件最常見的實作** | **本 stage §練習 3** + [ReAct paper (Yao 2022)](https://arxiv.org/abs/2210.03629) |
-| **Reflection** | 跑完一輪後讓 LLM 批改自己、根據 feedback 重答 | **本 stage §反思**（concept + 路由） |
-| **Planning**（任務分解） | 把大任務拆成子任務、可分給多個 agent 各做 | **Stage 4** §什麼是 multi-agent framework |
+| **CoT**（Chain-of-Thought、思維鏈） | LLM 寫出推理過程再給答案、不只給結論——是個 **prompting 技巧**、不是 agent 結構 | **Stage 2** 學習目標 + 動手練習（推理任務 CoT） |
+| **ReAct**（Reasoning + Acting） | 在 Loop 裡套 CoT：Thought（想）→ Action（呼叫 tool）→ Observation（看結果）→ Thought ...，是 **Loop 部件最常見的實作** | **本 stage 練習 3** + [ReAct paper (Yao 2022)](https://arxiv.org/abs/2210.03629) |
+| **Reflection** | 跑完一輪後讓 LLM 批改自己、根據 feedback 重答 | **本 stage 反思**（concept + 路由） |
+| **Planning**（任務分解） | 把大任務拆成子任務、可分給多個 agent 各做 | **Stage 4** 什麼是 multi-agent framework |
 
 → 這些範式都是「**LLM 自我引導**」的不同變化、堆疊在 3 部件（LLM + Tools + Loop）之上。**「Agent 是什麼」用 3 部件就講完了；「Agent 怎麼想」需要這 4 個範式才講得完整**。
 
 > 💡 **延伸組件**（agent 變強的 infrastructure、但**不是「是不是 agent」的判準**）：
 > - **記憶 / RAG**（agent 能跨對話記住東西）→ **Stage 6** 完整教
-> - **反思 / self-critique**（agent 看自己答案、發現問題、回頭改）→ 基本版見 **本 stage §反思**（concept + paper routing）；帶持久 memory 的進階版見 **Stage 6 §Reflexion with Memory**
-> - **Production harness**（telemetry / safety / retry / orchestration）→ **Stage 5 §5.6**
+> - **反思 / self-critique**（agent 看自己答案、發現問題、回頭改）→ 基本版見 **本 stage 反思**（concept + paper routing）；帶持久 memory 的進階版見 **Stage 6 Reflexion with Memory**
+> - **Production harness**（telemetry / safety / retry / orchestration）→ **Stage 5 5.6**
 >
 > 這些都是 advanced pattern——Stage 3 教最小可行 agent、後面 stage 教怎麼變強。
 
@@ -137,7 +137,7 @@ AI (Artificial Intelligence、人工智慧)
 >
 > 🆘 **卡住了？** Tool calling 是整個 curriculum 最陡的學習曲線。裝 [`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) skill——當你 prompt Claude Code「為什麼 LLM 不呼叫我的 tool」、「我這 schema 哪裡寫壞」會自動載入、走 4-symptom 診斷流程。
 >
-> 🪜 **本 stage 是 single-agent 起點**：一個 LLM + ReAct loop。**Multi-agent 概念**（多個 agent 協作）入門看 [Stage 4 § 什麼是 multi-agent framework](04-agent-frameworks.md#-什麼是-multi-agent-framework)、**Claude 原生 subagent 機制**（`.claude/agents/` + Task tool、不需 framework）看 [Stage 5.5](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制-2025-新功能)。
+> 🪜 **本 stage 是 single-agent 起點**：一個 LLM + ReAct loop。**Multi-agent 概念**（多個 agent 協作）入門看 [Stage 4 什麼是 multi-agent framework](04-agent-frameworks.md#-什麼是-multi-agent-framework)、**Claude 原生 subagent 機制**（`.claude/agents/` + Task tool、不需 framework）看 [Stage 5.5](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制-2025-新功能)。
 
 ### 練習 1：Function Calling（一個工具、一次呼叫）
 給 Claude 一個工具（假的天氣 API）跟一個問題（「台北現在有下雨嗎？」）。看 Claude 怎麼呼叫工具、拿到結果、再回答你。
@@ -306,7 +306,7 @@ print(f"LLM 挑了: {tc.function.name}, args: {json.loads(tc.function.arguments)
 # 假設 TOOLS + TOOL_IMPL（dict: name → callable）已經像練習 2 一樣定義好
 messages = [{"role": "user", "content": "台北人口除以紐約人口？"}]
 
-for step in range(5):  # max_iter safety net
+for step in range(5): # max_iter safety net
     r = client.chat.completions.create(model="qwen2.5:3b", tools=TOOLS, messages=messages)
     msg = r.choices[0].message
     # 把 assistant response 接回 messages（重要！下輪 LLM 才看得到自己上輪講什麼）
@@ -315,7 +315,7 @@ for step in range(5):  # max_iter safety net
         print(f"✅ 收尾：{msg.content}"); break
     for tc in msg.tool_calls:
         args = json.loads(tc.function.arguments)
-        obs = TOOL_IMPL[tc.function.name](args)  # 本地執行
+        obs = TOOL_IMPL[tc.function.name](args) # 本地執行
         # observation 接回 messages（用 role="tool"、配 tool_call_id）
         messages.append({"role": "tool", "tool_call_id": tc.id, "content": obs})
 ```
@@ -343,9 +343,9 @@ for step in range(5):  # max_iter safety net
 # 沒有新 code、純粹是 TOOLS / TOOL_IMPL 換內容
 TOOL_IMPL = {
     "lookup_population": lambda i: lookup_population(i["city"]),
-    "divide":            lambda i: divide(i["a"], i["b"]),
-    "to_percentage":     lambda i: to_percentage(i["ratio"]),
-    "round_int":         lambda i: round_int(i["x"]),
+    "divide": lambda i: divide(i["a"], i["b"]),
+    "to_percentage": lambda i: to_percentage(i["ratio"]),
+    "round_int": lambda i: round_int(i["x"]),
 }
 # loop 完全照 練習 3，只是 max_iter 拉大到 8
 ```
@@ -373,7 +373,7 @@ def fetch_weather(city: str) -> dict:
 # loop 裡：
 obs = fetch_weather(args["city"])
 messages.append({"role": "tool", "tool_call_id": tc.id,
-                 "content": json.dumps(obs, ensure_ascii=False)})  # error dict 也是 string 化接回去
+                 "content": json.dumps(obs, ensure_ascii=False)}) # error dict 也是 string 化接回去
 # 下一輪 LLM 看到 retry_hint、可能會 retry、可能會放棄、可能會改 query
 ```
 
@@ -440,7 +440,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 
 **為什麼這節在 Stage 3 而不是 Stage 6**：反思在學術（Reflexion paper Shinn 2023、Self-Refine Madaan 2023）跟 production（Cursor / Claude Code）上都被歸類在 **planning / reasoning loop** 機制——是 ReAct（練習 3）的 sibling pattern，**不是 memory pattern**。同樣是 LLM 自我引導的多輪迴圈，只是「下一輪要做什麼」從「呼叫 tool」換成「批改自己」。
 
-**進階版（帶 persistent memory 的 Reflexion 完整版）→ [Stage 6 §進階：Reflexion with Memory](06-memory-rag.md#-進階帶持久記憶的-reflexion-完整版--track-b-選讀)**——當反思要跨 session、把過去失敗存起來當下一輪 context，這個版本才真的需要 memory 層。
+**進階版（帶 persistent memory 的 Reflexion 完整版）→ [Stage 6 進階：Reflexion with Memory](06-memory-rag.md#-進階帶持久記憶的-reflexion-完整版--track-b-選讀)**——當反思要跨 session、把過去失敗存起來當下一輪 context，這個版本才真的需要 memory 層。
 
 ### 一張對照圖
 
@@ -449,7 +449,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 | **Error handling**（練習 5） | 外部 catch + retry | 不需 | **本 stage 練習 5** |
 | **ReAct loop**（練習 3） | LLM → tool → 結果 → LLM | 不需 | **本 stage 練習 3** |
 | **基本反思 / Self-Refine** | Actor → Critic → Actor，single session | 不需 | **本節 routing（下方）** |
-| **完整 Reflexion**（含 episodic memory） | 上面 + 把失敗反思存起來、跨 session 累積 | **需要** | **Stage 6 §進階：Reflexion with Memory** |
+| **完整 Reflexion**（含 episodic memory） | 上面 + 把失敗反思存起來、跨 session 累積 | **需要** | **Stage 6 進階：Reflexion with Memory** |
 
 ### 📚 想動手 / 想深入？直接讀這些
 
@@ -462,7 +462,7 @@ messages.append({"role": "tool", "tool_call_id": tc.id,
 - [**LangChain — Reflection Agents（blog）**](https://blog.langchain.dev/reflection-agents/) — framework 實作參考 + 完整 working notebook
 - [**datawhalechina/hello-agents**](https://github.com/datawhalechina/hello-agents) — 對應章節（自我反思 / Self-Refine 段落、中文完整教學）
 
-> 💡 **想看反思怎麼長進 production agent**：[Stage 5 §5.6 Harness Internals](05-claude-code-ecosystem.md#56--claude-code-source-解剖reference-harness-implementation-track-b-必看) 解剖 Claude Code source 時可以看到——agent 跑完 tool call 後自我評估 patch、有問題回頭改、修正後再 commit。**這是現代 production agent 的核心 building block 之一**。
+> 💡 **想看反思怎麼長進 production agent**：[Stage 5 5.6 Harness Internals](05-claude-code-ecosystem.md#56--claude-code-source-解剖reference-harness-implementation-track-b-必看) 解剖 Claude Code source 時可以看到——agent 跑完 tool call 後自我評估 patch、有問題回頭改、修正後再 commit。**這是現代 production agent 的核心 building block 之一**。
 
 ## 🎯 精選 Projects
 

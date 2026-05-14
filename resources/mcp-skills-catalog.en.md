@@ -828,16 +828,16 @@
 
 ## 14. Multi-LLM Delegation Skills
 
-> ⚠️ **Maintainer's own projects** (same as §13): delegation skills the maintainer extracted from daily workflow. Star floor is relaxed; criterion is "the Claude-planner + Codex/Gemini-executor combo runs reliably". Multi-LLM space evolves quickly — evaluate alongside the multi-agent frameworks listed in Stage 7 before adopting.
+> ⚠️ **Maintainer's own projects** (same as 13): delegation skills the maintainer extracted from daily workflow. Star floor is relaxed; criterion is "the Claude-planner + Codex/Gemini-executor combo runs reliably". Multi-LLM space evolves quickly — evaluate alongside the multi-agent frameworks listed in Stage 7 before adopting.
 
 ### How the three skills compose
 
 The 3 skills below are **designed to be used together**, not as standalone tools:
 
 ```
-                       ┌─ codex-delegate     →  code-heavy work
-Claude (planner +      ├─ gemini-delegate    →  long-form / CJK / 1M context
-        reviewer)      └─ agent-collab-skills →  splitter + reconciler + acceptance gate
+                       ┌─ codex-delegate → code-heavy work
+Claude (planner + ├─ gemini-delegate → long-form / CJK / 1M context
+        reviewer) └─ agent-collab-skills → splitter + reconciler + acceptance gate
                                                  (when running 2+ delegates in parallel)
 ```
 

@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 production deploy / harness 章節**
 > - [FastAPI official tutorial](https://fastapi.tiangolo.com/tutorial/) + [awesome-harness-engineering](https://github.com/ai-boost/awesome-harness-engineering)（harness pattern 全集）
-> - 完整 references 見 [Stage 7 § 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
+> - 完整 references 見 [Stage 7 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
 
 
 ## 任務
@@ -66,8 +66,8 @@ docker run -p 8000:8000 \
 ## 不啟 server 驗證
 
 ```bash
-python test.py             # 5 個 test、用 fastapi.TestClient
-python test_anthropic.py   # 3 個 test（含 429 rate limit）
+python test.py # 5 個 test、用 fastapi.TestClient
+python test_anthropic.py # 3 個 test（含 429 rate limit）
 ```
 
 `fastapi.TestClient` 用 in-process ASGI、不開真 port、不用 docker。

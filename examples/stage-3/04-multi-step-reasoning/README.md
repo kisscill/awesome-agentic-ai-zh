@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 70-150 行 illustrative 版、聚焦 `核心 pattern + 兩條 SDK path`，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 planning / multi-step workflow 章節**
 > - [Anthropic — Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)（什麼時候該拆步驟、什麼時候不要）
-> - 完整 references 見 [Stage 3 § 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
+> - 完整 references 見 [Stage 3 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
 
 
 ## 為什麼這題重要
@@ -58,8 +58,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯（mock-based）
 
 ```bash
-python test.py            # 驗 Path A (Ollama) starter.py 邏輯
-python test_anthropic.py  # 驗 Path B (Anthropic) starter_anthropic.py 邏輯
+python test.py # 驗 Path A (Ollama) starter.py 邏輯
+python test_anthropic.py # 驗 Path B (Anthropic) starter_anthropic.py 邏輯
 ```
 
 兩條 test 都用 `unittest.mock`、不打真 API、$0/run。Path A 用 OpenAI-compat response shape、Path B 用 Anthropic content blocks。
@@ -95,8 +95,8 @@ MODEL=claude-sonnet-4-5 python starter_anthropic.py
 或 Ollama path 換更大 model：
 
 ```bash
-MODEL=qwen2.5:7b python starter.py    # 4.7 GB、更穩
-MODEL=mistral-nemo:12b python starter.py  # 7.1 GB、更接近 cloud
+MODEL=qwen2.5:7b python starter.py # 4.7 GB、更穩
+MODEL=mistral-nemo:12b python starter.py # 7.1 GB、更接近 cloud
 ```
 
 ## 延伸

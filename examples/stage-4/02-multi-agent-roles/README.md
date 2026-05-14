@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 multi-agent roles / Crew 章節**
 > - [CrewAI Examples repo](https://github.com/crewAIInc/crewAI-examples)（官方 sequential / hierarchical 範本）
-> - 完整 references 見 [Stage 4 § 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
+> - 完整 references 見 [Stage 4 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
 
 
 ## 任務
@@ -17,7 +17,7 @@
 
 ```
 Researcher → Writer → Critic
-  (找資料)    (寫稿)    (審稿、PASS/ISSUES)
+  (找資料) (寫稿) (審稿、PASS/ISSUES)
 ```
 
 這種「role-based pipeline」**CrewAI 最拿手**——你描述角色 / 目標 / 任務，框架自己 orchestrate。
@@ -48,8 +48,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # tool 邏輯 + crew structure
-python test_anthropic.py   # starter_anthropic 載入
+python test.py # tool 邏輯 + crew structure
+python test_anthropic.py # starter_anthropic 載入
 ```
 
 CrewAI 整個 `kickoff()` 太黑盒、純 mock 困難。這份 test 只驗結構（3 agent + 3 task + sequential process + context dependencies）跟 tool 邏輯。實測請跑 starter.py。
@@ -61,8 +61,8 @@ CrewAI 整個 `kickoff()` 太黑盒、純 mock 困難。這份 test 只驗結構
 ```python
 researcher = Agent(
     role="Researcher",
-    goal="...",          # 一句話講「成功」長什麼樣
-    backstory="...",     # 提供 persona context、影響 prompt
+    goal="...", # 一句話講「成功」長什麼樣
+    backstory="...", # 提供 persona context、影響 prompt
     tools=[search],
     llm=MODEL,
 )
@@ -85,8 +85,8 @@ research_task = Task(
 ### Context dependency
 
 ```python
-write_task = Task(..., context=[research_task])   # writer 看 researcher 結果
-critic_task = Task(..., context=[research_task, write_task])  # critic 同時看兩個
+write_task = Task(..., context=[research_task]) # writer 看 researcher 結果
+critic_task = Task(..., context=[research_task, write_task]) # critic 同時看兩個
 ```
 
 **重點**：`context` 是 CrewAI 的 dataflow 機制。`critic_task.context=[a, b]` 表示 critic 看到 a, b 兩個 task 的 output。
@@ -94,8 +94,8 @@ critic_task = Task(..., context=[research_task, write_task])  # critic 同時看
 ### Sequential vs Hierarchical Process
 
 ```python
-Crew(..., process=Process.sequential)    # 線性走完
-Crew(..., process=Process.hierarchical)  # 多個 manager+worker、需設 manager_llm
+Crew(..., process=Process.sequential) # 線性走完
+Crew(..., process=Process.hierarchical) # 多個 manager+worker、需設 manager_llm
 ```
 
 這題用 sequential（最簡單、最 deterministic）。Hierarchical 是 ManagementAgent 派任務給其他 agent、適合更複雜場景。
@@ -122,8 +122,8 @@ Crew(..., process=Process.hierarchical)  # 多個 manager+worker、需設 manage
 ## 想看更聰明的答案？
 
 ```bash
-MODEL=anthropic/claude-sonnet-4-5 python starter_anthropic.py  # 高品質
-MODEL=ollama/qwen2.5:7b python starter.py                       # 較大本機 model
+MODEL=anthropic/claude-sonnet-4-5 python starter_anthropic.py # 高品質
+MODEL=ollama/qwen2.5:7b python starter.py # 較大本機 model
 ```
 
 ## 延伸

@@ -4,7 +4,7 @@
 
 ⏱ **Time estimate**: 3-4 weeks (~15-25 hours)
 
-> 💡 This entire stage revolves around 4 keywords (**MCP / Skills / Plugins / Marketplace**) → if you're not familiar with them, first check out [`resources/glossary.en.md` §5](../resources/glossary.en.md#5-claude-code-ecosystem).
+> 💡 This entire stage revolves around 4 keywords (**MCP / Skills / Plugins / Marketplace**) → if you're not familiar with them, first check out [`resources/glossary.en.md` 5](../resources/glossary.en.md#5-claude-code-ecosystem).
 
 **👥 Shared Hub**: This stage is used by both Track A (CLI Power User) and Track B (Agent Builder). Stage 5 and [Stage 8 — Agent Interfaces](08-agent-interfaces.en.md) are the two central hubs of this curriculum.
 
@@ -12,12 +12,12 @@
 > - **Track A (CLI Power User)**: A2 uses [5.1 (Claude Code Basics)](#51--claude-code-basics); A3 uses [5.2 (MCP)](#52--mcpmodel-context-protocol--foundation) + selectively uses [5.3 (Skills)](#53--skillsclaude-codes-behavior-layer--the-most-critical-layer-of-the-claude-code-ecosystem) and [5.4 (Plugins)](#54--plugins--marketplaces) (A3's Exercise CLI-12 will teach you how to package CLAUDE.md and commands into a plugin). The reading perspective is "**how to get work done with Claude Code**."
 > - **Track B (Agent Builder)**: Treats the entire stage as a deep dive into "**how Claude Code works internally**," from 5.1 all the way to 5.4.
 
-> 🗺️ **What kind of agent is Claude Code?** → See [`resources/agent-paradigms.en.md`](../resources/agent-paradigms.en.md) §Type 1 (IDE-coupled) + §Type 2 (Terminal pair-programmer); start there for a full comparison of all 5 paradigms.
+> 🗺️ **What kind of agent is Claude Code?** → See [`resources/agent-paradigms.en.md`](../resources/agent-paradigms.en.md) Type 1 (IDE-coupled) + Type 2 (Terminal pair-programmer); start there for a full comparison of all 5 paradigms.
 
 > ⚠️ **Looking to use a local LLM? This stage is not that path.** Claude Code requires the Anthropic API / OAuth and cannot be directly pointed to Ollama or a local endpoint. For offline work, sensitive data, or to avoid using API quota, please see [`resources/cookbook.en.md` Recipe 6](../resources/cookbook.en.md#6-local-llm--cli-agent-quick-walkthrough) and use a CLI agent that supports BYO LLM, like OpenCode / goose / Aider / Hermes.
 
-> 📋 **Structure of this chapter**: 6 sub-chapters (5.1 Basics / 5.2 MCP / 5.3 Skills / 5.4 Plugins / 5.5 Subagents / 5.6 Dissecting Claude Code Source), each with "Learning Goals → Required Reading → Hands-on Exercises → Curated Projects" → followed by a self-check at the end of the chapter. **Note**: The **discipline-level** concept of Harness Engineering (the engineering of an agent's execution system) is systematically covered in [Stage 7](07-multi-agent-production.en.md); 5.6 in this chapter uses Claude Code as a case study, observing how a mature agent tool handles tools, memory, configuration, permissions, and execution flow  
-> 🔑 **Key Terms**: See [`resources/glossary.en.md` §5](../resources/glossary.en.md#5-claude-code-ecosystem).
+> 📋 **Structure of this chapter**: 6 sub-chapters (5.1 Basics / 5.2 MCP / 5.3 Skills / 5.4 Plugins / 5.5 Subagents / 5.6 Dissecting Claude Code Source), each with "Learning Goals → Required Reading → Hands-on Exercises → Curated Projects" → followed by a self-check at the end of the chapter. **Note**: The **discipline-level** concept of Harness Engineering (the engineering of an agent's execution system) is systematically covered in [Stage 7](07-multi-agent-production.en.md); 5.6 in this chapter uses Claude Code as a case study, observing how a mature agent tool handles tools, memory, configuration, permissions, and execution flow
+> 🔑 **Key Terms**: See [`resources/glossary.en.md` 5](../resources/glossary.en.md#5-claude-code-ecosystem).
 
 ## Stack at a Glance
 
@@ -35,10 +35,10 @@ Each layer adds a capability:
 This stage has 4 sub-sections. **Please do them in order**—each one builds on the last.
 
 ```
-5.1  Claude Code Basics          3-5 days   (installation, slash commands, CLAUDE.md)
-5.2  MCP — Protocol Layer        5-7 days   (write your first MCP server)
-5.3  Skills — Behavior Layer     5-7 days   (write your first SKILL.md)
-5.4  Plugins & Marketplaces      5-7 days   (package and publish)
+5.1 Claude Code Basics 3-5 days (installation, slash commands, CLAUDE.md)
+5.2 MCP — Protocol Layer 5-7 days (write your first MCP server)
+5.3 Skills — Behavior Layer 5-7 days (write your first SKILL.md)
+5.4 Plugins & Marketplaces 5-7 days (package and publish)
 ```
 
 After completing this stage, you will be able to extend Claude Code, write your own MCP server, and publish a plugin marketplace.
@@ -98,24 +98,24 @@ For a complete list, see the official [Slash Commands documentation](https://doc
 ### `~/.claude/` Directory Structure (Get a mental map first)
 
 ```
-~/.claude/                          ← Global user-level
-├── settings.json                   ← Global behavior (env / hooks / permissions / model defaults)
-├── settings.local.json             ← Machine-specific (not checked into git)
-├── CLAUDE.md                       ← Global baseline (loaded in every session)
-├── skills/<name>/SKILL.md          ← User-level skills (5.3)
-├── agents/<name>.md                ← User-level subagents (5.5)
-├── plugins/                        ← Installed plugins (5.4)
-├── hooks/                          ← User-level hook scripts
-└── jobs/<id>/                      ← Background session states (5.5 background agent)
+~/.claude/ ← Global user-level
+├── settings.json ← Global behavior (env / hooks / permissions / model defaults)
+├── settings.local.json ← Machine-specific (not checked into git)
+├── CLAUDE.md ← Global baseline (loaded in every session)
+├── skills/<name>/SKILL.md ← User-level skills (5.3)
+├── agents/<name>.md ← User-level subagents (5.5)
+├── plugins/ ← Installed plugins (5.4)
+├── hooks/ ← User-level hook scripts
+└── jobs/<id>/ ← Background session states (5.5 background agent)
 
-<project-root>/.claude/             ← Project-level (with the repo)
-├── settings.local.json             ← Project behavior (including permissions)
-├── skills/<name>/SKILL.md          ← Project-level skills (higher priority than user-level)
-├── agents/<name>.md                ← Project-level subagents
-├── commands/<name>.md              ← Project-level slash commands
-└── hooks/                          ← Project-level hooks
+<project-root>/.claude/ ← Project-level (with the repo)
+├── settings.local.json ← Project behavior (including permissions)
+├── skills/<name>/SKILL.md ← Project-level skills (higher priority than user-level)
+├── agents/<name>.md ← Project-level subagents
+├── commands/<name>.md ← Project-level slash commands
+└── hooks/ ← Project-level hooks
 
-<project-root>/CLAUDE.md            ← Project baseline (loaded in every session)
+<project-root>/CLAUDE.md ← Project baseline (loaded in every session)
 ```
 
 **Priority Order** (who wins in a conflict): project > user > built-in default.
@@ -175,12 +175,12 @@ For a complete list, see the official [Slash Commands documentation](https://doc
 
 ### Hands-on Exercises
 - **Exercise: MCP client** — Install `modelcontextprotocol/servers/filesystem` and connect to it from Claude Desktop. Watch Claude read your files.
-- **Exercise: MCP server** — Write a Python MCP server that provides one tool (e.g., "convert temperature"). Connect to it from Claude Code. **For step-by-step instructions** → see [`resources/cookbook.en.md` §2](../resources/cookbook.en.md#2-write-your-first-mcp-server).
+- **Exercise: MCP server** — Write a Python MCP server that provides one tool (e.g., "convert temperature"). Connect to it from Claude Code. **For step-by-step instructions** → see [`resources/cookbook.en.md` 2](../resources/cookbook.en.md#2-write-your-first-mcp-server).
 - **Exercise: MCP in production** — In the same Claude session, connect to 2-3 MCP servers simultaneously and watch them coordinate.
 
 ### Curated Projects (for spec / SDK / template reference)
 
-> 💡 **Looking for MCP servers for everyday tools (Notion / Obsidian / Excel / Postgres / Playwright / Figma, etc.)?**  
+> 💡 **Looking for MCP servers for everyday tools (Notion / Obsidian / Excel / Postgres / Playwright / Figma, etc.)?**
 > Check out [`resources/mcp-skills-catalog.en.md`](../resources/mcp-skills-catalog.en.md)—it organizes 62 common MCP servers / Skills into 14 categories, each with stars / license / intended audience. The table below retains official servers / SDKs that serve as a "**reference for writing your own MCP server**."
 
 | Project | ⭐ | Best for | Why it's recommended / Notes |
@@ -238,11 +238,11 @@ These layers are often confused. **A one-line comparison**:
 4. [**Hello-Agents — Extra05 A Comparative Interpretation of Agent Skills and MCP**](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra05-AgentSkills解读.md) — A conceptual comparison of Skills vs MCP
 
 ### Hands-on Exercises
-- **Exercise: SKILL.md** — Write a 200-word skill that solves one of your daily work tasks. **For step-by-step instructions** → see [`resources/cookbook.en.md` §1](../resources/cookbook.en.md#1-write-your-first-skill).
+- **Exercise: SKILL.md** — Write a 200-word skill that solves one of your daily work tasks. **For step-by-step instructions** → see [`resources/cookbook.en.md` 1](../resources/cookbook.en.md#1-write-your-first-skill).
 - **Exercise: SKILL with references** — Add a `references/` markdown file that the skill can reference.
 - **Exercise: SKILL eval** — Add `evals/evals.json` with 3-5 self-tests.
 
-> 📦 **This repo includes a meta-example**: [`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) is the corresponding skill template for this stage—with complete frontmatter (including trigger phrases + "Do NOT use for"), 3 `references/` files, and 5 test cases in `evals/evals.json`. **Fork it directly to create your own skill**. It serves a dual purpose: (a) for learners to use themselves, auto-loading to help debug when stuck on tool calling; (b) as a reference template for writing a SKILL.md in Stage 5 §5.3.
+> 📦 **This repo includes a meta-example**: [`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) is the corresponding skill template for this stage—with complete frontmatter (including trigger phrases + "Do NOT use for"), 3 `references/` files, and 5 test cases in `evals/evals.json`. **Fork it directly to create your own skill**. It serves a dual purpose: (a) for learners to use themselves, auto-loading to help debug when stuck on tool calling; (b) as a reference template for writing a SKILL.md in Stage 5 5.3.
 
 ### Recommended Skills (by category)
 
@@ -297,11 +297,11 @@ These layers are often confused. **A one-line comparison**:
 
 ```
 Plugin
-├── .mcp.json                 ← MCP server config from 5.2 (provides tools / data)
-├── skills/<name>/SKILL.md    ← Skill from 5.3 (behavior package)
-├── commands/<name>.md        ← Slash command from 5.1 (custom prompt entry point)
-├── hooks/                    ← Trigger point hooks (e.g., PreToolUse, SessionStart)
-├── agents/<name>.md          ← Subagent from 5.5 (if any)
+├── .mcp.json ← MCP server config from 5.2 (provides tools / data)
+├── skills/<name>/SKILL.md ← Skill from 5.3 (behavior package)
+├── commands/<name>.md ← Slash command from 5.1 (custom prompt entry point)
+├── hooks/ ← Trigger point hooks (e.g., PreToolUse, SessionStart)
+├── agents/<name>.md ← Subagent from 5.5 (if any)
 └── .claude-plugin/plugin.json ← Packaging metadata
 ```
 
@@ -434,7 +434,7 @@ tools:
   - Read
   - Grep
   - Bash
-model: claude-haiku-4-5  # Optional, use to route to a cheaper model to save costs
+model: claude-haiku-4-5 # Optional, use to route to a cheaper model to save costs
 ---
 
 You are a senior code reviewer. When invoked:
@@ -462,7 +462,7 @@ Later, in the main session, if you type "review my changes," Claude will see the
 ### Required Reading
 
 1. [**Anthropic — Claude Code Subagents Official Documentation**](https://docs.claude.com/en/docs/claude-code/sub-agents) ⭐ — `.claude/agents/` structure, Task tool interface, best practices
-2. [**Anthropic — Building Effective Agents §orchestrator-workers**](https://www.anthropic.com/engineering/building-effective-agents) — Anthropic's own view on the orchestrator pattern (theory + examples)
+2. [**Anthropic — Building Effective Agents orchestrator-workers**](https://www.anthropic.com/engineering/building-effective-agents) — Anthropic's own view on the orchestrator pattern (theory + examples)
 3. [**Anthropic Cookbook — `customer_service_agent`**](https://github.com/anthropics/claude-cookbooks/tree/main/tool_use) — The canonical multi-agent orchestration example (a chapter-length deep dive; notebook is at `tool_use/customer_service_agent.ipynb`)
 
 ### Hands-on Exercises
@@ -496,7 +496,7 @@ A single table to cover 4 projects. **Pick an entry point by looking at "Best fo
 
 ## 5.6 — Dissecting Claude Code Source (reference harness implementation) ⭐ A must-read for Track B
 
-> **Positioning of this section**: This section is **not** a discipline-level tutorial on harness engineering—the definition, the **8 components**, and the three-layer lineage of prompt→context→harness are covered in **[Stage 7 §Harness Engineering](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage)**. **This section is a case study**—we're dissecting the source code of Claude Code (a production-grade reference harness) to find the corresponding locations in the implementation for the **first 6 runtime-internal components** of the 8 components listed in Stage 7 (the other two, Eval and Cost-Latency, are cross-cutting and not in the main source loop).
+> **Positioning of this section**: This section is **not** a discipline-level tutorial on harness engineering—the definition, the **8 components**, and the three-layer lineage of prompt→context→harness are covered in **[Stage 7 Harness Engineering](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage)**. **This section is a case study**—we're dissecting the source code of Claude Code (a production-grade reference harness) to find the corresponding locations in the implementation for the **first 6 runtime-internal components** of the 8 components listed in Stage 7 (the other two, Eval and Cost-Latency, are cross-cutting and not in the main source loop).
 
 ### Learning Goals
 
@@ -505,7 +505,7 @@ After completing this section, you will be able to:
 - Pinpoint in the source the file:line for the first 6 runtime-internal harness components from the [8 components listed in Stage 7](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage) (agent loop / tool registry / context manager / safety layer / retry / telemetry). The 7th, Eval, is a plugin, and the 8th, Cost / Latency, is cross-cutting; they are not in the main source loop and are outside the scope of this exercise.
 - Explain the difference between Claude Code's agent loop and the from-scratch ReAct from Stage 3, Exercise 3—what extra components make it production-grade.
 
-> **Where are the discipline-level concepts?**: What harness engineering is / the difference between a framework and a harness / the three-layer lineage of prompt→context→harness → all covered in **[Stage 7 §Harness Engineering](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage)**. This section is only responsible for the case study of the Claude Code source.
+> **Where are the discipline-level concepts?**: What harness engineering is / the difference between a framework and a harness / the three-layer lineage of prompt→context→harness → all covered in **[Stage 7 Harness Engineering](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage)**. This section is only responsible for the case study of the Claude Code source.
 
 ### 📚 Required Reading
 
@@ -543,7 +543,7 @@ A single table to cover 4 projects. **Pick an entry point by looking at "Best fo
 | [anthropics/claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) | ⭐⭐⭐⭐⭐ | All Track B learners who want to figure out "how Claude Code runs internally" | **The canonical Python harness, this is the repo you'll be reading for this section's exercise**. It will also be imported in the Stage 7 deployment. |
 | [ZhangHanDong/harness-engineering-from-cc-to-ai-coding](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) | ⭐⭐⭐⭐ | Chinese readers who want to understand "why Claude Code was designed this way" | The most complete interpretation of CC's internals in the Chinese community (harness concepts → CC implementation → comparison with other AI coding tools). **Use it as a complement to the SDK source**—one tells you "how," the other tells you "why." |
 | [ai-boost/awesome-harness-engineering](https://github.com/ai-boost/awesome-harness-engineering) | ⭐⭐⭐⭐ | Those who finish 5.6 and want to broaden their horizons | A community curation: 30+ harness / eval / memory / observability / MCP projects (★ 780+). **A breadth resource library, not a tutorial**—pick a sub-topic of interest and dive in. |
-| [wshobson/agents](https://github.com/wshobson/agents) | ⭐⭐⭐⭐ | Those who have written their own subagent in §5.5 and want to see a production-grade template | The ergonomic design of 50+ subagent definitions (description / tool list / system prompt layers). **You'll learn more from reading the source than from reading the docs**. Already introduced in 5.5, cross-referenced here. |
+| [wshobson/agents](https://github.com/wshobson/agents) | ⭐⭐⭐⭐ | Those who have written their own subagent in 5.5 and want to see a production-grade template | The ergonomic design of 50+ subagent definitions (description / tool list / system prompt layers). **You'll learn more from reading the source than from reading the docs**. Already introduced in 5.5, cross-referenced here. |
 
 > 💡 **The difference between this section and Stage 7**: This section teaches "how this specific harness, Claude Code, works" (a concrete reference); Stage 7 teaches "what a production harness should generally have" (an abstract pattern). **Go from concrete to abstract**—it will be much easier to get into Stage 7 after you've finished this section.
 
@@ -558,7 +558,7 @@ Can you:
 - [ ] Write a `SKILL.md` that auto-loads on a specific trigger phrase?
 - [ ] Package a skill into a plugin and publish it via `marketplace.json`?
 - [ ] **Write a custom subagent in `.claude/agents/` and invoke it from the Task tool?**
-- [ ] **Read the main loop of `claude-agent-sdk-python` and pinpoint in the source where the first 6 runtime-internal components of the [8 harness components listed in Stage 7](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage) are? (§5.6 exercise)**
+- [ ] **Read the main loop of `claude-agent-sdk-python` and pinpoint in the source where the first 6 runtime-internal components of the [8 harness components listed in Stage 7](07-multi-agent-production.en.md#-harness-engineering--the-engineering-of-a-production-agent-runtime--the-core-concept-of-this-stage) are? (5.6 exercise)**
 - [ ] Explain the respective roles of MCP, Skills, Plugins, Subagents, and the SDK?
 
 If yes to all → proceed to [Stage 6 — Memory & RAG](06-memory-rag.en.md).

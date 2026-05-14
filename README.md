@@ -114,8 +114,8 @@ cd awesome-agentic-ai-zh
 | **A1** | [選一個 CLI Agent，開始用它做事（CLI Agent Intro & Selection）](tracks/cli/A1-cli-intro.md) | 7 主流 CLI 比較 · 安裝 · 第一次跑 | 1 週 |
 | **A2** | [建立可重複使用的 CLI 工作流程（CLI Workflow Patterns）](tracks/cli/A2-cli-workflow.md) | CLAUDE.md · slash command · 多步驟拆解 | 1-2 週 |
 | **A3** | [把 CLI Agent 接進真實工作流程（Integration & Production）](tracks/cli/A3-cli-production.md) | MCP 接 CLI · CI 自動化 · cost / observability | 1-2 週 |
-| **+5** 🔄 | [Stage 5 — Claude Code 生態](stages/05-claude-code-ecosystem.md)（**共用 hub**） | MCP · Skills · Plugins · Subagents、Track A 必看 5.1-5.4 / 選讀 5.5-5.6 | 1-2 週（Track A 視角）|
-| **+8** 🔄 | [Stage 8 — Agent Interfaces](stages/08-agent-interfaces.md)（**共用 hub**）| Computer Use · Browser Use · Code Sandbox、Track A 視角看 §Track A 怎麼用 | 1-2 週（Track A 視角）|
+| **+5** | [Stage 5 — Claude Code 生態](stages/05-claude-code-ecosystem.md)（**共用 hub**） | MCP · Skills · Plugins · Subagents、Track A 必看 5.1-5.4 / 選讀 5.5-5.6 | 1-2 週（Track A 視角）|
+| **+8** | [Stage 8 — Agent Interfaces](stages/08-agent-interfaces.md)（**共用 hub**）| Computer Use · Browser Use · Code Sandbox、Track A 視角看 Track A 怎麼用 | 1-2 週（Track A 視角）|
 
 > **Track A 預估總時程**：含 Stage 0-2（共用基礎）+ A1-A3 + **Stage 5 + Stage 8（兩個共用 hub）= 約 8-10 週**。核心參考：[`resources/cli-agents-guide.md`](resources/cli-agents-guide.md)。
 
@@ -125,19 +125,19 @@ cd awesome-agentic-ai-zh
 |---|---|---|---|
 | **3** ⭐ | [工具使用與第一個 Agent（Tool Use & Hello Agent）](stages/03-tool-use-and-hello-agent.md) | function calling · ReAct · 5 個動手練習 | 2-3 週 |
 | **4** | [Agent 框架（Agent Frameworks）](stages/04-agent-frameworks.md) | LangGraph · AutoGen · CrewAI · Smolagents | 2-3 週 |
-| **5** ⭐⭐ 🔄 | [Claude Code 生態系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.md)（**共用 hub**、Track A 也學）| MCP · Skills · Plugins · Subagents | 3-4 週（Track B 視角）|
+| **5** ⭐⭐ | [Claude Code 生態系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.md)（**共用 hub**、Track A 也學）| MCP · Skills · Plugins · Subagents | 3-4 週（Track B 視角）|
 | **6** | [上下文管理（Context Engineering）：RAG 與 Memory](stages/06-memory-rag.md) | vector DB · long-term memory · contextual retrieval | 2 週 |
 | **7** | [多 Agent 系統與穩定運作（Multi-Agent & Production）](stages/07-multi-agent-production.md) | multi-agent orchestration · eval · observability · SDK 進階 | 2-4 週 |
 | **7.5** | [進階 Agentic Workflow 概念（Advanced Agentic Concepts）](stages/07.5-advanced-agentic-concepts.md)（reading map）| 工作邊界 · PAR loop · agent-as-judge · 12 個進階概念 + reading list | 1 週（不寫 code）|
-| **8** ⭐⭐ 🔄 | [Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.md)（**共用 hub**、Track A 也學）| Computer Use · Browser Use · Code Sandbox、2024-2026 frontier | 2-3 週（Track B 視角）|
+| **8** ⭐⭐ | [Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.md)（**共用 hub**、Track A 也學）| Computer Use · Browser Use · Code Sandbox、2024-2026 frontier | 2-3 週（Track B 視角）|
 
 > **Track B 預估總時程**：主幹最少 **16-22 週**、現實 **5-7 個月**（每週 5-8 hr 兼職）
 
-> 🔄 **兩個共用 hub（Track A + Track B 都會用到）**：
+> **兩個共用 hub（Track A + Track B 都會用到）**：
 > - **Stage 5** = Claude Code 生態（MCP / Skills / Plugins / Subagents）—— Track A 學 MCP 接 CLI、Track B 學 agent runtime 結構
 > - **Stage 8** = Agent Interfaces（Computer Use / Browser / Sandbox、2024-2026 frontier）—— Track A 學「**怎麼用**」委派任務、Track B 學「**怎麼 build**」embed 進 agent
 >
-> 兩個 hub 出現在兩條 track 內、視角不同、學的深度也不同（內文有 §Track A / §Track B 分視角段）。
+> 兩個 hub 出現在兩條 track 內、視角不同、學的深度也不同（內文有 Track A / Track B 分視角段）。
 
 > 💡 **想看跨 stage 的完整範例？** [7 步打造你的第一個 AI Agent](walkthroughs/build-first-agent-in-7-steps.md) — 同一個 Paper Summary Bot 從 Stage 1 一路寫到 Stage 7，~350 行真實程式碼（**Track B 適用**）
 
@@ -171,11 +171,11 @@ cd awesome-agentic-ai-zh
 
 - **Part 1（Stage 0-2）：基礎與 LLM 入門** — Python / git / API、什麼是 LLM、怎麼設計 prompt
 - **Part 2（Stage 3-4）：建構你的 Agent** — 從 tool use 進化到 agent，學主流 framework
-- **Part 3（Stage 5）🔄 共用 hub** — Claude Code 生態系（MCP / Skills / Plugins / Subagents、Track A + B 都會用到）
+- **Part 3（Stage 5） 共用 hub** — Claude Code 生態系（MCP / Skills / Plugins / Subagents、Track A + B 都會用到）
 - **Part 4（Stage 6-7）：進階整合** — memory / RAG / multi-agent 協作 / harness engineering
-- **Part 5（Stage 8）🔄 共用 hub** — Agent Interfaces（Computer Use / Browser Use / Code Sandbox、2024-2026 frontier、Track A + B 都會用到）
+- **Part 5（Stage 8） 共用 hub** — Agent Interfaces（Computer Use / Browser Use / Code Sandbox、2024-2026 frontier、Track A + B 都會用到）
 
-> 🔭 **三層概念進化**：**prompt engineering**（Stage 2、單一 prompt 怎麼寫）→ **context engineering**（Stage 3 之後、怎麼動態組 system prompt + memory + retrieved chunks + tool schema）→ **harness engineering**（Stage 7、agent loop / eval / observability / deploy 整套包成 production system）。3 個術語對應 3 個 phase、不必另外找資源。詳見 [`stages/02-prompt-engineering.md#-進階context-engineering不是-prompt-engineering-了`](stages/02-prompt-engineering.md) 跟 [`stages/07-multi-agent-production.md`](stages/07-multi-agent-production.md) 必修閱讀 §5+6。
+> 🔭 **三層概念進化**：**prompt engineering**（Stage 2、單一 prompt 怎麼寫）→ **context engineering**（Stage 3 之後、怎麼動態組 system prompt + memory + retrieved chunks + tool schema）→ **harness engineering**（Stage 7、agent loop / eval / observability / deploy 整套包成 production system）。3 個術語對應 3 個 phase、不必另外找資源。詳見 [`stages/02-prompt-engineering.md#-進階context-engineering不是-prompt-engineering-了`](stages/02-prompt-engineering.md) 跟 [`stages/07-multi-agent-production.md`](stages/07-multi-agent-production.md) 必修閱讀 5+6。
 
 走完主幹（14-19 週）後，依你的身分（研究員 / 開發者 / 老師 / 知識工作者 / 日常使用者）挑一條延伸路線繼續走。
 
@@ -198,8 +198,8 @@ cd awesome-agentic-ai-zh
 | 你的狀況 | 去哪 | 內容 |
 |---|---|---|
 | 完全沒寫過 code、第一次接觸 AI agent | [`resources/setup-guide.md`](resources/setup-guide.md) | 30-45 分鐘從零裝好（API key、Python、第一個 hello-world） |
-| 不知道挑哪個 LLM provider | [`resources/setup-guide.md` §A](resources/setup-guide.md#a--申請第一個-api-key約-10-分鐘) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM 對照 |
-| 同主題 awesome list / 中文社群 | [`RESOURCES.md` §同主題清單](RESOURCES.md#同主題的清單型-awesome-lists) | 5-10 分鐘逛一輪 |
+| 不知道挑哪個 LLM provider | [`resources/setup-guide.md` A](resources/setup-guide.md#a--申請第一個-api-key約-10-分鐘) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM 對照 |
+| 同主題 awesome list / 中文社群 | [`RESOURCES.md` 同主題清單](RESOURCES.md#同主題的清單型-awesome-lists) | 5-10 分鐘逛一輪 |
 
 ### 📖 概念 / 用語
 
@@ -207,7 +207,7 @@ cd awesome-agentic-ai-zh
 |---|---|---|
 | 不懂某個詞（LLM / agent / RAG / token / MCP / Skill / 向量資料庫…） | [`resources/glossary.md`](resources/glossary.md) | 30+ 詞、每個 30-80 字 + 哪 stage 講細的 |
 | 想搞懂 agent 為什麼有的在 terminal、有的在 Telegram、有的在 Jetson | [`resources/agent-paradigms.md`](resources/agent-paradigms.md) | 5 種 agent 型態 mental model + Hermes / OpenClaw 例子 |
-| MCP / Skills / Plugins 用語對照 | [`RESOURCES.md` §三個核心用語](RESOURCES.md#三個核心用語mcp--skills--plugins) | 1 頁速查表 |
+| MCP / Skills / Plugins 用語對照 | [`RESOURCES.md` 三個核心用語](RESOURCES.md#三個核心用語mcp--skills--plugins) | 1 頁速查表 |
 
 ### 🛠 動手實作
 
@@ -221,14 +221,14 @@ cd awesome-agentic-ai-zh
 
 | 你的狀況 | 去哪 | 規模 |
 |---|---|---|
-| 接 Notion / Obsidian / Excel / GitHub 等工具 | [`RESOURCES.md` §接日常工具](RESOURCES.md#接日常工具常用-mcp-server--skill) | 7-8 個 highlight |
+| 接 Notion / Obsidian / Excel / GitHub 等工具 | [`RESOURCES.md` 接日常工具](RESOURCES.md#接日常工具常用-mcp-server--skill) | 7-8 個 highlight |
 | 完整 MCP server / Skill 目錄（含星等、分類） | [`resources/mcp-skills-catalog.md`](resources/mcp-skills-catalog.md) | 62 條、6 大分類 |
 
 ### 🔬 研究 / production 級
 
 | 你的狀況 | 去哪 | 內容 |
 |---|---|---|
-| 研究 workflow + multi-LLM delegation skill | [`RESOURCES.md` §研究工作流](RESOURCES.md#研究工作流本-repo-維護者出品) | 本 repo 維護者出品的 Claude Code 研究 skill 對 |
+| 研究 workflow + multi-LLM delegation skill | [`RESOURCES.md` 研究工作流](RESOURCES.md#研究工作流本-repo-維護者出品) | 本 repo 維護者出品的 Claude Code 研究 skill 對 |
 | CLI agent 7 家對照 + production 搭配 | [`resources/cli-agents-guide.md`](resources/cli-agents-guide.md) | Track A 的核心參考、148 行 |
 | Schema 設計規則（tool calling 必看） | [`resources/schema-design-cheatsheet.md`](resources/schema-design-cheatsheet.md) | 5 條黃金規則 + 5 個 anti-pattern |
 
@@ -288,11 +288,11 @@ PR 流程跟 style 規範請看 [CONTRIBUTING.md](CONTRIBUTING.md) 跟 [resource
 
 ```bibtex
 @misc{awesome_agentic_ai_zh_2026,
-  title  = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
+  title = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
   author = {Chiou, Wenyu},
-  year   = {2026},
-  url    = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
-  note   = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
+  year = {2026},
+  url = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
+  note = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
 }
 ```
 

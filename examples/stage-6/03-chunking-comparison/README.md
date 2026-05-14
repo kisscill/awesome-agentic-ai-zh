@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 RAG chunking 章節**
 > - [LangChain RecursiveCharacterTextSplitter docs](https://python.langchain.com/docs/how_to/recursive_text_splitter/) + [LlamaIndex SemanticSplitter](https://docs.llamaindex.ai/en/stable/api_reference/node_parsers/semantic_splitter/)
-> - 完整 references 見 [Stage 6 § 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
+> - 完整 references 見 [Stage 6 精選 Projects](../../../stages/06-memory-rag.md#-精選-projects範本--spec--範例-collection)
 
 
 ## 任務
@@ -25,14 +25,14 @@
 
 ```bash
 pip install -r requirements.txt
-python starter.py   # 第一次自動下載 embedding model
+python starter.py # 第一次自動下載 embedding model
 ```
 
 預算：**$0**（純本機）。
 
 ```bash
-python test.py             # 4 個 test、驗 chunking 邏輯
-python test_anthropic.py   # Path B concept demo
+python test.py # 4 個 test、驗 chunking 邏輯
+python test_anthropic.py # Path B concept demo
 ```
 
 ## 3 種策略對照

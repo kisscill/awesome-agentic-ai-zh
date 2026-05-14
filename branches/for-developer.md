@@ -2,7 +2,7 @@
 
 > **繁體中文** | [简体中文](./for-developer.zh-Hans.md) | [English](./for-developer.en.md)
 
-> 🚀 **第一次裝 Claude Code / 寫 `CLAUDE.md` / `SKILL.md`？** 快速 setup 指南在 [`resources/setup-guide.md` §D-E](../resources/setup-guide.md)。已經熟可以跳過。
+> 🚀 **第一次裝 Claude Code / 寫 `CLAUDE.md` / `SKILL.md`？** 快速 setup 指南在 [`resources/setup-guide.md` D-E](../resources/setup-guide.md)。已經熟可以跳過。
 
 > [← 回主路線 README](../README.md) · 走完 **Track A 的 A3** 或 **Track B 的 Stage 7** 後從這裡接續。把 agentic AI 應用到開發流程上。
 
@@ -75,7 +75,7 @@ aider --model anthropic/claude-sonnet-4-20250514
 > 幫我把 utils.py 的 parse_date 加上時區參數，預設 UTC
 
 # Aider 會自動編輯 + commit。若不滿意：
-> /undo  # 退掉最後一次 AI commit
+> /undo # 退掉最後一次 AI commit
 ```
 
 **3. PR 上的 Claude code review（GitHub Action）**

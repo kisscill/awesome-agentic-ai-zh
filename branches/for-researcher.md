@@ -2,7 +2,7 @@
 
 > **繁體中文** | [简体中文](./for-researcher.zh-Hans.md) | [English](./for-researcher.en.md)
 
-> 🚀 **第一次裝 Python / 申請 API key？** 先看 [`resources/setup-guide.md` §A-C](../resources/setup-guide.md)。本分支預設你會跑 Python script、有 API key、會用 git。
+> 🚀 **第一次裝 Python / 申請 API key？** 先看 [`resources/setup-guide.md` A-C](../resources/setup-guide.md)。本分支預設你會跑 Python script、有 API key、會用 git。
 
 > [← 回主路線 README](../README.md) · 走完 **Track A 的 A3** 或 **Track B 的 Stage 7** 後從這裡接續。把 agentic AI 應用到研究流程上。
 
@@ -106,7 +106,7 @@
 
 ### 研究工作流 Skills（本 repo 維護者出品）
 
-> 這幾個是本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）日常在用的研究 skill / workspace。一併放到這裡讓其他研究者直接用。完整 entry 內容在 [`resources/mcp-skills-catalog.md` §13-§14](../resources/mcp-skills-catalog.md#13-研究工作流-skills學術--paper--文獻)。
+> 這幾個是本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）日常在用的研究 skill / workspace。一併放到這裡讓其他研究者直接用。完整 entry 內容在 [`resources/mcp-skills-catalog.md` 13-14](../resources/mcp-skills-catalog.md#13-研究工作流-skills學術--paper--文獻)。
 
 #### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 

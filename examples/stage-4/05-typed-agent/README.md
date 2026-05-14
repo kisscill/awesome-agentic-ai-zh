@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 structured output / type-safe 章節**
 > - [Pydantic AI 官方 docs](https://ai.pydantic.dev/) + [Instructor library](https://github.com/instructor-ai/instructor)（另一條 typed-output 路線）
-> - 完整 references 見 [Stage 4 § 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
+> - 完整 references 見 [Stage 4 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
 
 
 ## 任務
@@ -18,7 +18,7 @@ Agent 回問題、**強制** return `AnswerWithConfidence`：
 ```python
 class AnswerWithConfidence(BaseModel):
     answer: str
-    confidence: float = Field(ge=0.0, le=1.0)  # runtime 驗證 0-1
+    confidence: float = Field(ge=0.0, le=1.0) # runtime 驗證 0-1
     sources: list[str]
 ```
 
@@ -50,8 +50,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # Pydantic schema 驗證 + agent 結構
-python test_anthropic.py   # Path B 載入檢查
+python test.py # Pydantic schema 驗證 + agent 結構
+python test_anthropic.py # Path B 載入檢查
 ```
 
 `test.py` 直接驗 `AnswerWithConfidence` 對非法資料（confidence > 1.0、type 不對、sources 不是 list）的 ValidationError——不需要打 LLM、純 type 層測試。
@@ -85,11 +85,11 @@ Stage 4 練習 5：schema = Pydantic model in code
 ```python
 agent = Agent(
     model=...,
-    output_type=AnswerWithConfidence,   # ← 強制 LLM 回這個 shape
+    output_type=AnswerWithConfidence, # ← 強制 LLM 回這個 shape
     system_prompt="..."
 )
 result = agent.run_sync(question)
-answer: AnswerWithConfidence = result.output   # 已驗證的物件
+answer: AnswerWithConfidence = result.output # 已驗證的物件
 ```
 
 **重點**：framework 在背後把 Pydantic schema 轉成 LLM 的 structured output instruction、執行 validation、failure 時 retry。
@@ -105,7 +105,7 @@ confidence: float = Field(ge=0.0, le=1.0, description="...")
 ### 自動 retry
 
 ```python
-Agent(..., retries=3)  # default 1，可調
+Agent(..., retries=3) # default 1，可調
 ```
 
 Pydantic AI 看到 ValidationError、會把錯誤訊息塞回 prompt、要求 LLM 重產。
@@ -132,8 +132,8 @@ Pydantic AI 看到 ValidationError、會把錯誤訊息塞回 prompt、要求 LL
 ## 想看更聰明的答案？
 
 ```bash
-MODEL=claude-sonnet-4-5 python starter_anthropic.py    # 一次過機率最高
-MODEL=qwen2.5:7b python starter.py                      # 較大本機 model
+MODEL=claude-sonnet-4-5 python starter_anthropic.py # 一次過機率最高
+MODEL=qwen2.5:7b python starter.py # 較大本機 model
 ```
 
 ## 延伸

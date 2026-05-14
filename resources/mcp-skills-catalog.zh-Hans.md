@@ -832,7 +832,7 @@
 
 ## 14. Multi-LLM Delegation Skills
 
-> ⚠️ **maintainer 自家项目区**：跟 §13 一样，以下是维护者把自己 daily workflow 抽出来公开的 delegation skills。star 门槛放宽，选收标准是“真的能让 Claude planner + Codex/Gemini 执行者组合稳定跑下去”。Multi-LLM 领域变化快，建议跟其他 multi-agent framework（Stage 7 列的）一起评估后选择。
+> ⚠️ **maintainer 自家项目区**：跟 13 一样，以下是维护者把自己 daily workflow 抽出来公开的 delegation skills。star 门槛放宽，选收标准是“真的能让 Claude planner + Codex/Gemini 执行者组合稳定跑下去”。Multi-LLM 领域变化快，建议跟其他 multi-agent framework（Stage 7 列的）一起评估后选择。
 
 ### [WenyuChiou/codex-delegate](https://github.com/WenyuChiou/codex-delegate) ⭐⭐⭐⭐⭐
 

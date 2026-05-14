@@ -7,8 +7,8 @@
 
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 multi-agent collaboration / debate 章節**
-> - [Anthropic — Building Effective Agents §debate](https://www.anthropic.com/engineering/building-effective-agents) + [Microsoft AutoGen multi-agent docs](https://microsoft.github.io/autogen/)
-> - 完整 references 見 [Stage 7 § 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
+> - [Anthropic — Building Effective Agents debate](https://www.anthropic.com/engineering/building-effective-agents) + [Microsoft AutoGen multi-agent docs](https://microsoft.github.io/autogen/)
+> - 完整 references 見 [Stage 7 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
 
 
 ## 任務
@@ -17,7 +17,7 @@
 
 ```
             ┌────── PRO agent ──────┐
-question ──>│                       ├──> Judge ──> WINNER
+question ──>│ ├──> Judge ──> WINNER
             └────── CON agent ──────┘
 ```
 
@@ -56,7 +56,7 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯
 
 ```bash
-python test.py             # 3 個 test、mock 3 LLM call、驗 judge 看到 pro+con
+python test.py # 3 個 test、mock 3 LLM call、驗 judge 看到 pro+con
 python test_anthropic.py
 ```
 

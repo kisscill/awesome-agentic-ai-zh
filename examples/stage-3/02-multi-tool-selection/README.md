@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 70-150 行 illustrative 版、聚焦 `核心 pattern + 兩條 SDK path`，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 tool-calling / multi-tool dispatch 章節**
 > - [Anthropic Tool Use Cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/tool_use)（單工具→多工具→parallel 完整 notebook）
-> - 完整 references 見 [Stage 3 § 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
+> - 完整 references 見 [Stage 3 精選 Projects](../../../stages/03-tool-use-and-hello-agent.md#-精選-projects)
 
 
 ## 為什麼這題重要
@@ -51,8 +51,8 @@ python starter_anthropic.py
 ## 不花錢驗證程式邏輯（mock-based）
 
 ```bash
-python test.py            # 驗 Path A (Ollama) starter.py 邏輯
-python test_anthropic.py  # 驗 Path B (Anthropic) starter_anthropic.py 邏輯
+python test.py # 驗 Path A (Ollama) starter.py 邏輯
+python test_anthropic.py # 驗 Path B (Anthropic) starter_anthropic.py 邏輯
 ```
 
 兩條 test 都用 `unittest.mock`、不打真 API、$0/run。Path A 用 OpenAI-compat response shape、Path B 用 Anthropic content blocks。

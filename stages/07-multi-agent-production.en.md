@@ -4,10 +4,10 @@
 
 ⏱ **Estimated Time**: 2-4 weeks (approx. 15-30 hours)
 
-> 💡 High density of terminology (multi-agent / handoff / eval / observability / guardrails...) → Refer to [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent).
+> 💡 High density of terminology (multi-agent / handoff / eval / observability / guardrails...) → Refer to [`resources/glossary.md` 4 + 6](../resources/glossary.md#4-multi-agent).
 
 > 📋 **Chapter Composition**: [What is Multi-Agent · Productionization (Positioning) + Three-layer engineering split + When to use multi-agent] → Learning Objectives → Entry Conditions → Required Reading → Harness Engineering (**8 core components including Cost/Latency**) → Hands-on Exercises (including Exercise 6 Cost Optimization) → **Agent Benchmark Landscape: how to read it, not just the leaderboard** → Recommended Tools → Featured Projects → Self-Check
-> 🔑 **Key Terms**: See [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent) (multi-agent / orchestration / handoff / eval / observability / harness (the execution and control layer around the model))
+> 🔑 **Key Terms**: See [`resources/glossary.md` 4 + 6](../resources/glossary.md#4-multi-agent) (multi-agent / orchestration / handoff / eval / observability / harness (the execution and control layer around the model))
 
 This is the final stage. You are moving from "I can build an agent" to "I can make an agent **truly stable for people to use**"—with multiple agents collaborating, with eval, with observability, and deployable to a usable environment. **"Productionization" ≠ enterprise scale**—as long as an agent can produce stable output and be used by others, it falls within the scope of this stage.
 
@@ -41,9 +41,9 @@ Engineering work can be split into three layers, corresponding to different posi
 
 **This stage's 3 core questions**:
 
-1.  **Multi-agent collaboration** — debate / planner-executor / peer review / handoff / supervisor-worker patterns
-2.  **Harness Engineering** — agent loop / tool registry (the list of tools an agent can call + interface definitions) / context manager / safety / retry / telemetry / eval / cost (8 core components, detailed below)
-3.  **Productionization** — eval harness / observability / cost & latency optimization / deployment to a usable environment
+1. **Multi-agent collaboration** — debate / planner-executor / peer review / handoff / supervisor-worker patterns
+2. **Harness Engineering** — agent loop / tool registry (the list of tools an agent can call + interface definitions) / context manager / safety / retry / telemetry / eval / cost (8 core components, detailed below)
+3. **Productionization** — eval harness / observability / cost & latency optimization / deployment to a usable environment
 
 **Division of labor with Stage 5** (to avoid confusion):
 
@@ -61,12 +61,12 @@ Engineering work can be split into three layers, corresponding to different posi
 | **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents), [How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | Multi-agent is suitable for **high-value tasks that benefit from parallel exploration, need many tools, or exceed a single context**; token usage can be many times higher than a single chat. |
 | **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | Context fragmentation is severe in multi-agent systems, and maintaining shared state is painful; only consider it after exhausting single-agent + long-context options. |
 
-Only use multi-agent when you see these **4 clear signals** (for details, see [Stage 4 § When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it)):
+Only use multi-agent when you see these **4 clear signals** (for details, see [Stage 4 When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it)):
 
-1.  **Natural Task Decomposition** — A large task has clear sub-steps and can be completed step by step → Sequential / Planner-Executor
-2.  **Token Explosion** — A single-agent prompt cannot fit all tool descriptions / context → Supervisor-Worker
-3.  **Role Conflict** — Using the same LLM as both writer and critic leads to self-justification → Debate / Peer review
-4.  **Parallel Acceleration** — Running 3 research subtasks at the same time reduces wall-clock time to 1/3 → Parallel / Map-Reduce
+1. **Natural Task Decomposition** — A large task has clear sub-steps and can be completed step by step → Sequential / Planner-Executor
+2. **Token Explosion** — A single-agent prompt cannot fit all tool descriptions / context → Supervisor-Worker
+3. **Role Conflict** — Using the same LLM as both writer and critic leads to self-justification → Debate / Peer review
+4. **Parallel Acceleration** — Running 3 research subtasks at the same time reduces wall-clock time to 1/3 → Parallel / Map-Reduce
 
 **None of these 4 signals present?** → A single agent + good prompts + tool use is enough. Don't force multi-agent. **The harness engineering part of this stage (8 components / eval / observability) still applies even if you end up using a single agent**—so this stage is still required reading even if you decide against multi-agent.
 
@@ -82,7 +82,7 @@ Only use multi-agent when you see these **4 clear signals** (for details, see [S
 
 You should already have:
 - Completed Stage 4 (used at least one agent framework to run a multi-agent demo)
-- Completed Stage 5 (understand the roles of MCP / Skills / Plugins / Subagents, and have dissected a harness internally in §5.6)
+- Completed Stage 5 (understand the roles of MCP / Skills / Plugins / Subagents, and have dissected a harness internally in 5.6)
 - Completed Stage 6 (know basic RAG, can explain the differences between memory patterns)
 - Basic familiarity with Docker / git / CI (will be used in production deployment)
 
@@ -90,12 +90,12 @@ If not, go back and complete the previous stages. This stage is about "combining
 
 ## 📚 Required Reading
 
-1.  [**Anthropic — Building Effective Agents**](https://www.anthropic.com/engineering/building-effective-agents) — Reread it from a production perspective
-2.  [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — A technique for 90% cost reduction
-3.  [**Anthropic — Message Batches API**](https://docs.anthropic.com/en/docs/build-with-claude/batch-processing) — Asynchronous batch jobs
-4.  **Documentation for any eval framework** — promptfoo, LangSmith, or weave
-5.  [**ai-boost/awesome-harness-engineering**](https://github.com/ai-boost/awesome-harness-engineering) (★ 780+) — A collection of tools / patterns / eval / memory / MCP / observability for agent harnesses
-6.  [**ZhangHanDong/harness-engineering-from-cc-to-ai-coding**](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) (★ 1.3k+) — Learning harness design from Claude Code's source code (in Chinese)
+1. [**Anthropic — Building Effective Agents**](https://www.anthropic.com/engineering/building-effective-agents) — Reread it from a production perspective
+2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — A technique for 90% cost reduction
+3. [**Anthropic — Message Batches API**](https://docs.anthropic.com/en/docs/build-with-claude/batch-processing) — Asynchronous batch jobs
+4. **Documentation for any eval framework** — promptfoo, LangSmith, or weave
+5. [**ai-boost/awesome-harness-engineering**](https://github.com/ai-boost/awesome-harness-engineering) (★ 780+) — A collection of tools / patterns / eval / memory / MCP / observability for agent harnesses
+6. [**ZhangHanDong/harness-engineering-from-cc-to-ai-coding**](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) (★ 1.3k+) — Learning harness design from Claude Code's source code (in Chinese)
 
 ## 🏗 Harness Engineering — Engineering Design for a Production Agent Runtime ⭐ Core Concept of This Stage
 
@@ -259,11 +259,11 @@ Don't know where to start choosing tools? Below are the common pairings in the i
 | **Fine-tuning an open-source LLM** | [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) | Unified SFT/DPO/PPO/GRPO for 100+ models, no-code Web UI, widest Chinese community, ★ 70k+ |
 
 **Suggested adoption sequence**:
-1.  First multi-agent: **crewAI** (role-based, simplest)
-2.  Add eval: **promptfoo** (YAML, CI integration)
-3.  Add observability: **langfuse** (OSS, complete)
-4.  Production upgrade: Switch to **LangGraph** (stronger control) + **BentoML** (deploy)
-5.  Advanced: Self-host LLMs with **vLLM**, fine-tune with **LLaMA-Factory**
+1. First multi-agent: **crewAI** (role-based, simplest)
+2. Add eval: **promptfoo** (YAML, CI integration)
+3. Add observability: **langfuse** (OSS, complete)
+4. Production upgrade: Switch to **LangGraph** (stronger control) + **BentoML** (deploy)
+5. Advanced: Self-host LLMs with **vLLM**, fine-tune with **LLaMA-Factory**
 
 ## 🎯 Featured Projects (Templates / SDKs / Tool Collections)
 
@@ -311,7 +311,7 @@ If you can do all of these → proceed to [**Stage 8 — Agent Interfaces**](08-
 ## 💡 What's Next
 
 You now have the foundational skills. For the next 6-12 months, you should focus on:
-1.  **Picking one production system** and taking it from prototype to production.
-2.  **Contributing upstream** (LangGraph, AutoGen, MCP servers, Anthropic cookbook).
-3.  **Reading papers**—agent research is moving fast.
-4.  **Making something tangible**—open-source a real tool, stop just writing tutorials.
+1. **Picking one production system** and taking it from prototype to production.
+2. **Contributing upstream** (LangGraph, AutoGen, MCP servers, Anthropic cookbook).
+3. **Reading papers**—agent research is moving fast.
+4. **Making something tangible**—open-source a real tool, stop just writing tutorials.

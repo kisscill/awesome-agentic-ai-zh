@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 observability / tracing 章節（Extra Chapter）**
 > - [Langfuse](https://github.com/langfuse/langfuse) + [Arize Phoenix](https://github.com/Arize-ai/phoenix)（OpenTelemetry-native）
-> - 完整 references 見 [Stage 7 § 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
+> - 完整 references 見 [Stage 7 精選 Projects](../../../stages/07-multi-agent-production.md#-精選-projects範本--sdk--工具-collection)
 
 
 ## 任務
@@ -34,7 +34,7 @@ python starter.py
 預算：**$0**（Path A）。Path B 用 Claude：~$0.0001/run。
 
 ```bash
-python test.py             # 5 個 test
+python test.py # 5 個 test
 python test_anthropic.py
 ```
 
@@ -75,7 +75,7 @@ with trace_span(ctx, "search"):
     ...
 with trace_span(ctx, "llm_call"):
     ...
-print(ctx.summary())  # 看整個 request 的 timeline
+print(ctx.summary()) # 看整個 request 的 timeline
 ```
 
 ### Errors
@@ -87,7 +87,7 @@ def trace_span(ctx, name):
         yield
     except Exception as e:
         ctx.add_error(f"{name}: {e}")
-        raise   # ← 重要：raise 出去、不要吞 exception
+        raise # ← 重要：raise 出去、不要吞 exception
 ```
 
 ## Production tools（不要自己寫）

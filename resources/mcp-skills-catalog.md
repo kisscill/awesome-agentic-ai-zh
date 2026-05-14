@@ -828,16 +828,16 @@
 
 ## 14. Multi-LLM Delegation Skills
 
-> ⚠️ **maintainer 自家專案區**：跟 §13 一樣，以下是維護者把自己 daily workflow 抽出來公開的 delegation skills。star 門檻放寬，選收標準是「真的能讓 Claude planner + Codex/Gemini 執行者組合穩定跑下去」。Multi-LLM 領域變化快，建議跟其他 multi-agent framework（Stage 7 列的）一起評估後再選。
+> ⚠️ **maintainer 自家專案區**：跟 13 一樣，以下是維護者把自己 daily workflow 抽出來公開的 delegation skills。star 門檻放寬，選收標準是「真的能讓 Claude planner + Codex/Gemini 執行者組合穩定跑下去」。Multi-LLM 領域變化快，建議跟其他 multi-agent framework（Stage 7 列的）一起評估後再選。
 
 ### 三個 skill 的組合（composition）
 
 底下 3 個 skill 是**設計成一起用**的，不是獨立工具：
 
 ```
-                    ┌─ codex-delegate     →  跑 code-heavy
-Claude（planner +   ├─ gemini-delegate    →  跑 long-form / CJK / 1M 長 context
-        reviewer）  └─ agent-collab-skills →  splitter + reconciler + acceptance gate
+                    ┌─ codex-delegate → 跑 code-heavy
+Claude（planner + ├─ gemini-delegate → 跑 long-form / CJK / 1M 長 context
+        reviewer） └─ agent-collab-skills → splitter + reconciler + acceptance gate
                                               （多個 delegate 平行跑時用）
 ```
 

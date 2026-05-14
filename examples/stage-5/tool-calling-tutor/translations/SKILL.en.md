@@ -1,6 +1,6 @@
 ---
 name: tool-calling-tutor
-description: When the user is building a tool-calling agent and gets stuck — "why won't the LLM call my tool", "what's wrong with my schema", "tool was called but the args are wrong", "ReAct loop won't terminate", "help me design a function schema", "debug this tool-use behavior". Walks them through a 4-branch diagnostic + 5-step schema design walkthrough, with references to bad/good schema A/B and an SDK-diff cheatsheet. Do NOT use for: pure LangChain / LangGraph / CrewAI framework questions (route to Stage 4 frameworks), MCP server building (route to cookbook §2), production agent observability (route to Stage 7).
+description: When the user is building a tool-calling agent and gets stuck — "why won't the LLM call my tool", "what's wrong with my schema", "tool was called but the args are wrong", "ReAct loop won't terminate", "help me design a function schema", "debug this tool-use behavior". Walks them through a 4-branch diagnostic + 5-step schema design walkthrough, with references to bad/good schema A/B and an SDK-diff cheatsheet. Do NOT use for: pure LangChain / LangGraph / CrewAI framework questions (route to Stage 4 frameworks), MCP server building (route to cookbook 2), production agent observability (route to Stage 7).
 ---
 
 # Tool Calling Tutor
@@ -85,7 +85,7 @@ Full mock pattern → [`../../stage-3/03-react-from-scratch/test.py`](../../../s
 This skill does **NOT** handle:
 
 - **LangChain / LangGraph / CrewAI / Pydantic AI** framework questions → Stage 4
-- **MCP server / client** design → [`resources/cookbook.md` §2](../../../../resources/cookbook.md)
+- **MCP server / client** design → [`resources/cookbook.md` 2](../../../../resources/cookbook.md)
 - **Production monitoring / observability / cost tracking** → Stage 7
 - **General prompt engineering** → Stage 2
 
@@ -104,4 +104,4 @@ If the user asks about any of these, tell them "this skill handles tool-use mech
 - [`references/schema-evolution.en.md`](../references/schema-evolution.en.md) — Bad → good schema worked example (4 improvements)
 - [`references/sdk-diff.en.md`](../references/sdk-diff.en.md) — Anthropic vs OpenAI-compat side-by-side
 - [`resources/schema-design-cheatsheet.en.md`](../../../../resources/schema-design-cheatsheet.en.md) — 5 golden rules + 5 anti-patterns (existing curriculum resource)
-- [`resources/glossary.en.md` §2](../../../../resources/glossary.en.md) — Agent / Tool Use / ReAct term definitions
+- [`resources/glossary.en.md` 2](../../../../resources/glossary.en.md) — Agent / Tool Use / ReAct term definitions

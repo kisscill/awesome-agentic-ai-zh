@@ -328,7 +328,7 @@ Claude 會根據 user query 自動載入合適的 skill。
 
 ### 進一步
 
-- catalog §2 [`mcp-skills-catalog.md` §2 辦公文件](mcp-skills-catalog.md#2-辦公文件word--excel--powerpoint--pdf)：補強版 office skill / Excel / PPT 專用 MCP
+- catalog 2 [`mcp-skills-catalog.md` 2 辦公文件](mcp-skills-catalog.md#2-辦公文件word--excel--powerpoint--pdf)：補強版 office skill / Excel / PPT 專用 MCP
 - 中文圈 office workflow：[`leemysw/feishu-docx`](https://github.com/leemysw/feishu-docx) 飛書 / Lark docs ↔ Markdown
 
 ---
@@ -388,7 +388,7 @@ pip install notebooklm-py
 
 ```python
 from notebooklm import NotebookLM
-nlm = NotebookLM()  # OAuth 流程
+nlm = NotebookLM() # OAuth 流程
 
 # 建一個 notebook
 nb = nlm.create_notebook("My Research")
@@ -413,7 +413,7 @@ print(answer.citations)
 
 ### 進一步
 
-- catalog §1 [`mcp-skills-catalog.md` §1 筆記 / 知識庫](mcp-skills-catalog.md#1-筆記--知識庫)
+- catalog 1 [`mcp-skills-catalog.md` 1 筆記 / 知識庫](mcp-skills-catalog.md#1-筆記--知識庫)
 - 完整 research workspace：用 [`WenyuChiou/research-hub`](https://github.com/WenyuChiou/research-hub) 整合 NotebookLM + Zotero + Obsidian
 
 ---
@@ -535,7 +535,7 @@ curl http://localhost:11434/v1/chat/completions \
 
 ```bash
 npm install -g opencode-ai
-opencode auth login   # provider 選 Ollama，endpoint 設 http://localhost:11434/v1
+opencode auth login # provider 選 Ollama，endpoint 設 http://localhost:11434/v1
 opencode
 ```
 
@@ -543,7 +543,7 @@ opencode
 
 ```bash
 # 安裝方式看 https://block.github.io/goose
-goose configure       # provider 選 Ollama，model 設 qwen2.5:3b
+goose configure # provider 選 Ollama，model 設 qwen2.5:3b
 goose session start
 ```
 

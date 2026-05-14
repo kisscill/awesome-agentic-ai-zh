@@ -2,7 +2,7 @@
 
 > [繁體中文](./for-everyday-users.md) | [简体中文](./for-everyday-users.zh-Hans.md) | **English**
 
-> 🚀 **Never written code or installed Python before?** Start with [`resources/setup-guide.en.md` §A-C](../resources/setup-guide.en.md) (about 30 minutes from zero), then come back. If you already know Python and have an API key, skip it.
+> 🚀 **Never written code or installed Python before?** Start with [`resources/setup-guide.en.md` A-C](../resources/setup-guide.en.md) (about 30 minutes from zero), then come back. If you already know Python and have an API key, skip it.
 
 > [← Back to main path README](../README.en.md) · You **don't have to walk the full main path** to start here — this branch is for people who **just want to USE AI, not build agents**.
 
@@ -17,13 +17,13 @@
 ## Where to Start: 4 Tiers by "How Hands-On Are You?"
 
 ```
-Tier 0: Web / Mobile App  (recommended starting point)
+Tier 0: Web / Mobile App (recommended starting point)
    ↓
-Tier 1: Desktop App  (upgrade when you need to handle local files)
+Tier 1: Desktop App (upgrade when you need to handle local files)
    ↓
-Tier 2: CLI Agent  (willing to learn a bit of command line; automate daily flows)
+Tier 2: CLI Agent (willing to learn a bit of command line; automate daily flows)
    ↓
-Tier 3: Local LLM  (privacy-sensitive, cost-sensitive, want offline)
+Tier 3: Local LLM (privacy-sensitive, cost-sensitive, want offline)
 ```
 
 **Most people stay at Tier 0 / Tier 1** — Tiers 2-3 are for special needs or learners.

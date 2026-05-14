@@ -76,7 +76,7 @@ cd awesome-agentic-ai-zh
 走完 **Stage 0-2（共用基础）** 之后，依你的目的选一条学习路径：
 
 - **Track A — CLI Power User**：你想**用**现成的 CLI agent（Claude Code、Codex、OpenCode、Gemini CLI 等）把工作做顺、效率拉高，不打算自己从零写 agent。3 个 sub-stage（A1-A3）。
-- **Track B — Agent Builder**:  你想**从零构建**自己的 agent——学 framework、写 ReAct、设计 multi-agent。Stage 3-7 是主路线。
+- **Track B — Agent Builder**: 你想**从零构建**自己的 agent——学 framework、写 ReAct、设计 multi-agent。Stage 3-7 是主路线。
 
 两条学习路径**不互斥**——多数人是先走 A 把 CLI 用起来，再回到 B 学内部运作；或反过来也行。Stage 5（Claude Code 生态）两条路径都会用到。
 
@@ -95,8 +95,8 @@ cd awesome-agentic-ai-zh
 | **A1** | [选一个 CLI Agent，开始用它做事（CLI Agent Intro & Selection）](tracks/cli/A1-cli-intro.zh-Hans.md) | 7 个主流 CLI 比较 · 安装 · 第一次跑 | 1 周 |
 | **A2** | [建立可重复使用的 CLI 工作流程（CLI Workflow Patterns）](tracks/cli/A2-cli-workflow.zh-Hans.md) | CLAUDE.md · slash command · 多步骤拆解 | 1-2 周 |
 | **A3** | [把 CLI Agent 接进真实工作流程（Integration & Production）](tracks/cli/A3-cli-production.zh-Hans.md) | MCP 接 CLI · CI 自动化 · cost / observability | 1-2 周 |
-| **+5** 🔄 | [Stage 5 — Claude Code 生态系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.zh-Hans.md)（**共用 hub**）| MCP · Skills · Plugins · Subagents、Track A 必看 5.1-5.4 / 选读 5.5-5.6 | 1-2 周（Track A 视角）|
-| **+8** 🔄 | [Stage 8 — Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.zh-Hans.md)（**共用 hub**）| Computer Use · Browser Use · Code Sandbox、Track A 视角看 §Track A 怎么用 | 1-2 周（Track A 视角）|
+| **+5** | [Stage 5 — Claude Code 生态系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.zh-Hans.md)（**共用 hub**）| MCP · Skills · Plugins · Subagents、Track A 必看 5.1-5.4 / 选读 5.5-5.6 | 1-2 周（Track A 视角）|
+| **+8** | [Stage 8 — Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.zh-Hans.md)（**共用 hub**）| Computer Use · Browser Use · Code Sandbox、Track A 视角看 Track A 怎么用 | 1-2 周（Track A 视角）|
 
 > **Track A 预估总时程**：含 Stage 0-2（共用基础）+ A1-A3 + **Stage 5 + Stage 8（两个共用 hub）= 约 8-10 周**。核心参考：[`resources/cli-agents-guide.zh-Hans.md`](resources/cli-agents-guide.zh-Hans.md)。
 
@@ -106,15 +106,15 @@ cd awesome-agentic-ai-zh
 |---|---|---|---|
 | **3** ⭐ | [工具使用与第一个 Agent（Tool Use & Hello Agent）](stages/03-tool-use-and-hello-agent.zh-Hans.md) | function calling · ReAct · 5 个动手练习 | 2-3 周 |
 | **4** | [Agent 框架（Agent Frameworks）](stages/04-agent-frameworks.zh-Hans.md) | LangGraph · AutoGen · CrewAI · Smolagents | 2-3 周 |
-| **5** ⭐⭐ 🔄 | [Claude Code 生态系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.zh-Hans.md)（**共用 hub**、Track A 也学）| MCP · Skills · Plugins · Subagents | 3-4 周（Track B 视角）|
+| **5** ⭐⭐ | [Claude Code 生态系（Claude Code Ecosystem）](stages/05-claude-code-ecosystem.zh-Hans.md)（**共用 hub**、Track A 也学）| MCP · Skills · Plugins · Subagents | 3-4 周（Track B 视角）|
 | **6** | [上下文管理（Context Engineering）：RAG 与 Memory](stages/06-memory-rag.zh-Hans.md) | vector DB · long-term memory · contextual retrieval | 2 周 |
 | **7** | [多 Agent 系统与稳定运作（Multi-Agent & Production）](stages/07-multi-agent-production.zh-Hans.md) | multi-agent orchestration · eval · observability · SDK 进阶 | 2-4 周 |
 | **7.5** | [进阶 Agentic Workflow 概念（Advanced Agentic Concepts）](stages/07.5-advanced-agentic-concepts.zh-Hans.md)（reading map）| 工作边界 · PAR loop · agent-as-judge · 12 个进阶概念 + reading list | 1 周（不写 code）|
-| **8** ⭐⭐ 🔄 | [Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.zh-Hans.md)（**共用 hub**、Track A 也学）| Computer Use · Browser Use · Code Sandbox、2024-2026 frontier | 2-3 周（Track B 视角）|
+| **8** ⭐⭐ | [Agent 操作介面（Agent Interfaces）](stages/08-agent-interfaces.zh-Hans.md)（**共用 hub**、Track A 也学）| Computer Use · Browser Use · Code Sandbox、2024-2026 frontier | 2-3 周（Track B 视角）|
 
 > **Track B 预估总时程**：主干最少 **16-22 周**、现实 **5-7 个月**（每周 5-8 hr 兼职）
 
-> 🔄 **两个共用 hub（Track A + Track B 都会用到）**：
+> **两个共用 hub（Track A + Track B 都会用到）**：
 > - **Stage 5** = Claude Code 生态（MCP / Skills / Plugins / Subagents）—— Track A 学 MCP 接 CLI、Track B 学 agent runtime 结构
 > - **Stage 8** = Agent Interfaces（Computer Use / Browser / Sandbox、2024-2026 frontier）—— Track A 学「**怎么用**」委派任务、Track B 学「**怎么 build**」embed 进 agent
 
@@ -150,11 +150,11 @@ cd awesome-agentic-ai-zh
 
 - **Part 1（Stage 0-2）：基础与 LLM 入门** — Python / git / API、什么是 LLM、怎么设计 prompt
 - **Part 2（Stage 3-4）：构建你的 Agent** — 从 tool use 进化到 agent，学主流 framework
-- **Part 3（Stage 5）🔄 共用 hub** — Claude Code 生态系（MCP / Skills / Plugins / Subagents、Track A + B 都会用到）
+- **Part 3（Stage 5） 共用 hub** — Claude Code 生态系（MCP / Skills / Plugins / Subagents、Track A + B 都会用到）
 - **Part 4（Stage 6-7）：进阶集成** — memory / RAG / multi-agent 协作 / harness engineering
-- **Part 5（Stage 8）🔄 共用 hub** — Agent Interfaces（Computer Use / Browser Use / Code Sandbox、2024-2026 frontier、两条 track 都会用到）
+- **Part 5（Stage 8） 共用 hub** — Agent Interfaces（Computer Use / Browser Use / Code Sandbox、2024-2026 frontier、两条 track 都会用到）
 
-> 🔭 **三层概念进化**：**prompt engineering**（Stage 2、单一 prompt 怎么写）→ **context engineering**（Stage 3 之后、怎么动态组 system prompt + memory + retrieved chunks + tool schema）→ **harness engineering**（Stage 7、agent loop / eval / observability / deploy 整套包成 production system）。3 个术语对应 3 个 phase、不必另外找资源。详见 [`stages/02-prompt-engineering.zh-Hans.md`](stages/02-prompt-engineering.zh-Hans.md) §进阶：context engineering 跟 [`stages/07-multi-agent-production.zh-Hans.md`](stages/07-multi-agent-production.zh-Hans.md) 必修阅读 §5+6。
+> 🔭 **三层概念进化**：**prompt engineering**（Stage 2、单一 prompt 怎么写）→ **context engineering**（Stage 3 之后、怎么动态组 system prompt + memory + retrieved chunks + tool schema）→ **harness engineering**（Stage 7、agent loop / eval / observability / deploy 整套包成 production system）。3 个术语对应 3 个 phase、不必另外找资源。详见 [`stages/02-prompt-engineering.zh-Hans.md`](stages/02-prompt-engineering.zh-Hans.md) 进阶：context engineering 跟 [`stages/07-multi-agent-production.zh-Hans.md`](stages/07-multi-agent-production.zh-Hans.md) 必修阅读 5+6。
 
 走完主干（Track B 16-22 周 / Track A 8-10 周）后，依你的身份挑一条延伸路线继续走。
 
@@ -175,7 +175,7 @@ cd awesome-agentic-ai-zh
 | 你的状况 | 去哪 | 内容 |
 |---|---|---|
 | 完全没写过 code、第一次接触 AI agent | [`resources/setup-guide.zh-Hans.md`](resources/setup-guide.zh-Hans.md) | 30-45 分钟从零装好（API key、Python、第一个 hello-world） |
-| 不知道挑哪个 LLM provider | [`resources/setup-guide.zh-Hans.md` §A](resources/setup-guide.zh-Hans.md#a--申请第一个-api-key约-10-分钟) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM 对照 |
+| 不知道挑哪个 LLM provider | [`resources/setup-guide.zh-Hans.md` A](resources/setup-guide.zh-Hans.md#a--申请第一个-api-key约-10-分钟) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM 对照 |
 
 ### 📖 概念 / 用语
 
@@ -315,11 +315,11 @@ PR 流程跟 style 规范请看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [resource
 
 ```bibtex
 @misc{awesome_agentic_ai_zh_2026,
-  title  = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
+  title = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
   author = {Chiou, Wenyu},
-  year   = {2026},
-  url    = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
-  note   = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Code Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
+  year = {2026},
+  url = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
+  note = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Code Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
 }
 ```
 

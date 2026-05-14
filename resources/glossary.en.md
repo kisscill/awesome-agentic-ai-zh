@@ -132,9 +132,9 @@ The "LLM → tool → result → LLM" repeated cycle. Termination: LLM says "don
 
 The agent evaluates the previous round's output and changes the next round's behavior — an "Actor answers → Critic finds issues → Actor reads feedback and answers again" single-session loop. **It does not need a persistent memory layer**; it is purely a reasoning-loop mechanism, a sibling pattern to ReAct. Production agents (Cursor / Cline / Claude Code) run variants of this every day.
 
-Representative paper: [Self-Refine (Madaan 2023)](https://arxiv.org/abs/2303.17651). **For the full Reflexion version** (with episodic memory), see §3 Memory / Retrieval / RAG.
+Representative paper: [Self-Refine (Madaan 2023)](https://arxiv.org/abs/2303.17651). **For the full Reflexion version** (with episodic memory), see 3 Memory / Retrieval / RAG.
 
-📍 Detail + routing: [Stage 3 §Reflection](../stages/03-tool-use-and-hello-agent.en.md#-reflection-reflexion--self-refine--concept--routing)
+📍 Detail + routing: [Stage 3 Reflection](../stages/03-tool-use-and-hello-agent.en.md#-reflection-reflexion--self-refine--concept--routing)
 
 ---
 
@@ -149,7 +149,7 @@ Representative paper: [Self-Refine (Madaan 2023)](https://arxiv.org/abs/2303.176
 
 → The two axes do not conflict: long-term memory can contain **at the same time** episodic memory (what the user said last time), semantic memory (facts from the company's knowledge base), and procedural memory (tool sequences that worked before).
 
-📍 Detail: [Stage 6 §What is Memory + How to Design It](../stages/06-memory-rag.en.md#-what-is-memory--how-to-design-it) + [Stage 6 §CoALA Framework](../stages/06-memory-rag.en.md#advanced-coala-framework--a-4-layer-taxonomy-for-agent-memory)
+📍 Detail: [Stage 6 What is Memory + How to Design It](../stages/06-memory-rag.en.md#-what-is-memory--how-to-design-it) + [Stage 6 CoALA Framework](../stages/06-memory-rag.en.md#advanced-coala-framework--a-4-layer-taxonomy-for-agent-memory)
 
 ### RAG (Retrieval-Augmented Generation)
 
@@ -165,13 +165,13 @@ Two-stage architectural pattern:
 
 ### Reflexion (Full reflection / with episodic memory)
 
-Unlike Self-Refine (§2 Agents), Reflexion **requires a persistent episodic memory store** — after each trial, the agent **writes a reflection summary into memory**, then retrieves it into the prompt at the start of the next trial. **Accumulating lessons across trials** is the essence of Reflexion (not a single-session loop).
+Unlike Self-Refine (2 Agents), Reflexion **requires a persistent episodic memory store** — after each trial, the agent **writes a reflection summary into memory**, then retrieves it into the prompt at the start of the next trial. **Accumulating lessons across trials** is the essence of Reflexion (not a single-session loop).
 
-It is placed in §3 instead of §2 because it is **fundamentally a memory pattern** — the episodic memory store is core, not optional.
+It is placed in 3 instead of 2 because it is **fundamentally a memory pattern** — the episodic memory store is core, not optional.
 
 Representative paper: [Reflexion (Shinn 2023)](https://arxiv.org/abs/2303.11366).
 
-📍 Detail: [Stage 6 §Advanced: Full Reflexion with Persistent Memory](../stages/06-memory-rag.en.md#-advanced-full-reflexion-with-persistent-memory--track-b-elective)
+📍 Detail: [Stage 6 Advanced: Full Reflexion with Persistent Memory](../stages/06-memory-rag.en.md#-advanced-full-reflexion-with-persistent-memory--track-b-elective)
 
 ### Embedding
 
@@ -371,8 +371,8 @@ Contrast:
 - **Framework** (Stage 4) defines the **API**: what the interface you call looks like
 - **Harness** (this term) defines the **runtime**: how it runs, how it recovers, how it is observed
 
-📍 Discipline-level concept (**8 core components** / prompt→context→harness three-layer engineering split / framework vs harness): [Stage 7 §Harness Engineering](../stages/07-multi-agent-production.en.md)
-📍 Reference implementation case study (reading Claude Code source): [Stage 5 §5.6](../stages/05-claude-code-ecosystem.en.md)
+📍 Discipline-level concept (**8 core components** / prompt→context→harness three-layer engineering split / framework vs harness): [Stage 7 Harness Engineering](../stages/07-multi-agent-production.en.md)
+📍 Reference implementation case study (reading Claude Code source): [Stage 5 5.6](../stages/05-claude-code-ecosystem.en.md)
 📍 Further: [`anthropics/claude-agent-sdk-python`](https://github.com/anthropics/claude-agent-sdk-python), [`ai-boost/awesome-harness-engineering`](https://github.com/ai-boost/awesome-harness-engineering), [`ZhangHanDong/harness-engineering-from-cc-to-ai-coding`](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding)
 
 ---
@@ -383,25 +383,25 @@ Contrast:
 
 An agent operates real desktop apps via **screenshot → vision → coordinates → simulated mouse/keyboard** — no API needed, the agent uses the screen like a human. Representative: Anthropic Claude Computer Use (Opus 4.7 / Sonnet 4.6), OpenAI Codex desktop, Google Gemini in Chrome. **Anthropic public beta opened Oct 2024; OSWorld benchmark reached 76.26% (superhuman) by May 2026**.
 
-📍 Full coverage + 4-vendor comparison: [Stage 8 §Computer Use](../stages/08-agent-interfaces.en.md)
+📍 Full coverage + 4-vendor comparison: [Stage 8 Computer Use](../stages/08-agent-interfaces.en.md)
 
 ### Browser Use (web-level agent)
 
 An agent operates web pages, primarily via **DOM-aware navigation** (direct CSS selector queries) with vision fallback. Closed-source: Atlas / Comet / Dia / Gemini in Chrome. OSS leader: [browser-use](https://github.com/browser-use/browser-use) (★ 86k+).
 
-📍 Full coverage + 5-vendor comparison + OSS frameworks: [Stage 8 §Browser Use](../stages/08-agent-interfaces.en.md)
+📍 Full coverage + 5-vendor comparison + OSS frameworks: [Stage 8 Browser Use](../stages/08-agent-interfaces.en.md)
 
 ### Sandbox (code execution isolation)
 
 Runs agent-written code in an isolated environment instead of the host — avoids `rm -rf /`, internet data exfiltration, credential theft. Representatives: E2B (Firecracker microVM), Daytona (container), Modal (GPU sandbox), Vercel, Cloudflare. **OpenAI Agents SDK natively supports these as of April 2026**.
 
-📍 Full 9-row terminology glossary + 7-vendor comparison: [Stage 8 §Code Sandbox](../stages/08-agent-interfaces.en.md)
+📍 Full 9-row terminology glossary + 7-vendor comparison: [Stage 8 Code Sandbox](../stages/08-agent-interfaces.en.md)
 
 ### microVM (micro Virtual Machine)
 
 A slimmed-down VM with minimal footprint, < 100ms startup, yet still has an **independent kernel** — sits between Docker containers (fast + weak isolation) and full VMs (slow + strong isolation). **Most agent sandboxes choose microVM**. Implementation example: Firecracker (AWS, used by E2B).
 
-📍 Full comparison: [Stage 8 §terminology glossary](../stages/08-agent-interfaces.en.md)
+📍 Full comparison: [Stage 8 terminology glossary](../stages/08-agent-interfaces.en.md)
 
 ### Firecracker
 

@@ -11,12 +11,12 @@
 | Sync item | en | zh-Hans | Notes |
 |---|---|---|---|
 | **Anchor cleanup ⭐ + strict mode** | ✅ 37 broken anchors fixed (Codex delegation, commit 706d257) | ✅ same | `python scripts/check-anchors.py --strict` now exits 0. `anchor-validator.yml` flipped from warn-only to `--strict` mode |
-| **Stage 6 FULL catch-up** ⭐ | ✅ 318→576 lines (Gemini, commit 06181b6) | ✅ 321→576 lines | All new §positioning + §Memory/Reasoning/RAG advanced sections + 2024-2026 entries translated |
+| **Stage 6 FULL catch-up** ⭐ | ✅ 318→576 lines (Gemini, commit 06181b6) | ✅ 321→576 lines | All new positioning + Memory/Reasoning/RAG advanced sections + 2024-2026 entries translated |
 | **Stage 7 FULL restructure** ⭐ | ✅ 363→298 lines (Gemini, commit 75df682) | ✅ 364→298 lines | 22 H4 blocks consolidated, 8-component harness, Benchmark Landscape, multi-agent skepticism — all synced |
 | **Stage 8 FULL translation** ⭐ | ✅ 55→545 lines (Gemini, commit 3f4ea8f) | ✅ same | Replaced stubs with full translations, H2 parity 16/16 |
 | **Stage 1 pricing sync** ⭐ | ✅ Claude pricing 4.5 → 4.6/4.7 trio (Codex, commit fe989bd) | ✅ same | Pricing dict + Q1→Q2 comment + expected output + print line + URL all updated |
 | README structural | ✅ Stage 8 row + 8-stages + time + Part 5 + dual hub callout (commits d3c0119 / cbf4d12 / 21d9c28) | ✅ same | |
-| Glossary §8 Agent Interfaces | ✅ 6 new entries (commits cbf4d12 / 21d9c28) | ✅ same | Renumbered from §7→§8 to avoid duplicate H2 anchor |
+| Glossary 8 Agent Interfaces | ✅ 6 new entries (commits cbf4d12 / 21d9c28) | ✅ same | Renumbered from 7→8 to avoid duplicate H2 anchor |
 
 ---
 
@@ -64,12 +64,12 @@ audit which extra content is valuable and which is stale.
 
 zh-TW grew from ~320 lines to **576 lines** this session. Mirror still at 318/321 lines. Major net new content not in mirrors:
 
-- §Context Engineering 是什麼（先定位）+ 3-row lineage table + 4-row 概念對照表 (Memory / Embedding / Vector DB / RAG)
-- §RAG vs Long Context vs Fine-tuning trade-off table
-- §進階 Memory — CoALA framework + Generative Agents 三分數 + 2024-2026 縱覽（including A-MEM / HippoRAG 2 / ScrapMem / Memory Security survey）
-- §進階 Reasoning — Path 1 prompt-based table + Path 2 trained-in table (含 R2 / V4 / GPT-5.5 / Opus 4.7 / Gemini 3.1)
-- §進階 RAG 技巧 — GraphRAG / Contextual Retrieval / Hybrid Search & Reranking deep dives + 縱覽 (17 techniques)
-- §常用 Memory / RAG 工具推薦 + 精選 Projects 單一表
+- Context Engineering 是什麼（先定位）+ 3-row lineage table + 4-row 概念對照表 (Memory / Embedding / Vector DB / RAG)
+- RAG vs Long Context vs Fine-tuning trade-off table
+- 進階 Memory — CoALA framework + Generative Agents 三分數 + 2024-2026 縱覽（including A-MEM / HippoRAG 2 / ScrapMem / Memory Security survey）
+- 進階 Reasoning — Path 1 prompt-based table + Path 2 trained-in table (含 R2 / V4 / GPT-5.5 / Opus 4.7 / Gemini 3.1)
+- 進階 RAG 技巧 — GraphRAG / Contextual Retrieval / Hybrid Search & Reranking deep dives + 縱覽 (17 techniques)
+- 常用 Memory / RAG 工具推薦 + 精選 Projects 單一表
 
 **Estimated translation**: ~260 lines of new content × 2 locales.
 
@@ -77,11 +77,11 @@ zh-TW grew from ~320 lines to **576 lines** this session. Mirror still at 318/32
 
 zh-TW REFACTORED from 462 → 274 lines (net) but the structure is completely different:
 - 22 H4 detail blocks consolidated → single Projects table with 適合誰 column
-- New §Multi-Agent · Production 是什麼（先定位）opening with discipline lineage
-- New §但你真的需要 multi-agent 嗎? (Anthropic + Cognition essays)
+- New Multi-Agent · Production 是什麼（先定位）opening with discipline lineage
+- New 但你真的需要 multi-agent 嗎? (Anthropic + Cognition essays)
 - Harness 7→**8** components (added Cost/Latency Optimization)
-- New §Agent Benchmark Landscape + ⚠ Berkeley reward-hacking warning
-- New §常用工具推薦
+- New Agent Benchmark Landscape + ⚠ Berkeley reward-hacking warning
+- New 常用工具推薦
 - Title softened: "Multi-Agent · Production" → "Multi-Agent · 進階應用"
 
 Mirror still has the OLD structure (22 H4 detail blocks, 7 components, "Production" title).
@@ -90,8 +90,8 @@ Mirror still has the OLD structure (22 H4 detail blocks, 7 components, "Producti
 
 ### 🟡 MEDIUM — Stage 5 forward ref + Stage 4 enhancement + Stage 8 mention
 
-- Stage 4 §什麼時候真的需要 multi-agent gained Anthropic + Cognition essays table
-- Stage 5 §自我檢查 gained Stage 8 forward ref
+- Stage 4 什麼時候真的需要 multi-agent gained Anthropic + Cognition essays table
+- Stage 5 自我檢查 gained Stage 8 forward ref
 - Stage 5.6 H2/H3 sub-stage updates for 6→8 harness components
 
 **Estimated translation**: ~30 lines diff × 2 locales.
@@ -105,7 +105,7 @@ Mirror still has the OLD structure (22 H4 detail blocks, 7 components, "Producti
 
 ### 🟢 LOW — tracks/cli/A3-cli-production.md anchor fixes
 
-3 dead-anchor link target updates after Stage 7 §Observability + §Evaluation Frameworks sections were consolidated into §常用工具推薦 + §Benchmark Landscape.
+3 dead-anchor link target updates after Stage 7 Observability + Evaluation Frameworks sections were consolidated into 常用工具推薦 + Benchmark Landscape.
 
 **Estimated translation**: 3 line diffs × 2 locales.
 
@@ -128,10 +128,10 @@ Task: translate Stage 8 (and/or other mirror sync) from zh-TW canonical to en + 
 
 Source files (zh-TW canonical):
 - stages/08-agent-interfaces.md (~547 lines)
-- stages/06-memory-rag.md (the new §進階 sections)
+- stages/06-memory-rag.md (the new 進階 sections)
 - stages/07-multi-agent-production.md (full restructure)
 - README.md (already structurally synced this session — diff against current mirrors)
-- resources/glossary.md §7 Agent Interfaces (already synced this session)
+- resources/glossary.md 7 Agent Interfaces (already synced this session)
 
 Style:
 - Match existing mirror style (see stages/01-llm-basics.en.md / stages/03-tool-use-and-hello-agent.en.md for tone)

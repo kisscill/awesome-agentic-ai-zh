@@ -6,8 +6,8 @@
 
 ⏱ **時間估算**：1-2 週（約 8-15 小時）
 
-> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查  
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md` §5](../../resources/glossary.md#5-claude-code-生態)（CLAUDE.md / slash command / SKILL.md / plugin / portable prompt）
+> 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查
+> 🔑 **關鍵名詞**：見 [`resources/glossary.md` 5](../../resources/glossary.md#5-claude-code-生態)（CLAUDE.md / slash command / SKILL.md / plugin / portable prompt）
 
 裝好 CLI、跑過第一個任務之後，下一個問題：**怎麼讓 CLI 一致地、可重複地、可分享地做事**？這節講 workflow pattern——把「我每次都要重打一遍 prompt」變成「設好一次後 CLI 自己會用對方法」。
 
@@ -32,7 +32,7 @@
 1. [**Anthropic — CLAUDE.md best practices**](https://docs.anthropic.com/en/docs/claude-code/memory) ⭐
 2. [**Stage 2 — Prompt 設計**](../../stages/02-prompt-engineering.md) — workflow design 跟 prompt design 是同一件事的兩面
 3. [**Stage 5.1 — Claude Code 基礎**](../../stages/05-claude-code-ecosystem.md#51--claude-code-基礎) — slash commands 細節
-4. [**`resources/cli-agents-guide.md`** §「跨 CLI 都通用的 prompt 寫法」](../../resources/cli-agents-guide.md) — portable prompt 原則
+4. [**`resources/cli-agents-guide.md`** 「跨 CLI 都通用的 prompt 寫法」](../../resources/cli-agents-guide.md) — portable prompt 原則
 
 ## 🛠 動手練習
 
@@ -94,8 +94,8 @@ description: Review staged changes for security + style
 | | [mattpocock/skills](https://github.com/mattpocock/skills) | ⭐⭐⭐⭐ | 想看工程師日常用的 skill 庫 | `.claude/` 結構是好參考（★ 59k+）。**更多 skill 範例見 [Stage 5.3](../../stages/05-claude-code-ecosystem.md#53--skillsclaude-code-的行為層-claude-code-生態最關鍵的一層)** |
 | **Slash Commands / Custom Prompts** | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | ⭐⭐⭐⭐⭐ | 找官方 plugin 範本 | 官方 plugin marketplace、每個 plugin 內的 commands / skills 是 slash command 範例（★ 18k+） |
 | | [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | ⭐⭐⭐ | 想逛社群 slash command 範例 | 社群整理的 Claude Code 資源清單 |
-| **Prompt 設計參考** | [f/awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) | ⭐⭐⭐⭐ | 卡關時找 CLI 通用的 prompt 模式 | ChatGPT 起家、prompt 寫法 90% 在 CLI 上也通（★ 161k+、CC0）。完整 prompt engineering 進階見 [Stage 2 §精選 Projects](../../stages/02-prompt-engineering.md#-精選-projects)（DSPy、dair-ai 等） |
-| **多 CLI 並用 pattern** | [`resources/cli-agents-guide.md`](../../resources/cli-agents-guide.md) §「3 個常見搭配」 | ⭐⭐⭐⭐ | 想試多 CLI 配對策略 | 本 repo 內部資源、看 Setup A / B / C 挑一個合的試 |
+| **Prompt 設計參考** | [f/awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) | ⭐⭐⭐⭐ | 卡關時找 CLI 通用的 prompt 模式 | ChatGPT 起家、prompt 寫法 90% 在 CLI 上也通（★ 161k+、CC0）。完整 prompt engineering 進階見 [Stage 2 精選 Projects](../../stages/02-prompt-engineering.md#-精選-projects)（DSPy、dair-ai 等） |
+| **多 CLI 並用 pattern** | [`resources/cli-agents-guide.md`](../../resources/cli-agents-guide.md) 「3 個常見搭配」 | ⭐⭐⭐⭐ | 想試多 CLI 配對策略 | 本 repo 內部資源、看 Setup A / B / C 挑一個合的試 |
 
 > 💡 **建議入手路徑**：先抄 Anthropic 官方 CLAUDE.md 結構 → 加自己的 repo context → 看 obra/superpowers 看「完整 `.claude/` 長什麼樣」→ 然後寫 1-2 個 slash command（從 hesreallyhim awesome 列表撈靈感）。
 

@@ -109,8 +109,8 @@ The two tracks are **not mutually exclusive** — most people start with A to ge
 | **A1** | [CLI Agent Intro & Selection](tracks/cli/A1-cli-intro.en.md) | 7-CLI comparison · install · first run | 1 wk |
 | **A2** | [CLI Workflow Patterns](tracks/cli/A2-cli-workflow.en.md) | CLAUDE.md · slash commands · multi-step decomposition | 1-2 wks |
 | **A3** | [Integration & Production](tracks/cli/A3-cli-production.en.md) | MCP-into-CLI · CI automation · cost / observability | 1-2 wks |
-| **+5** 🔄 | [Stage 5 — Claude Code Ecosystem](stages/05-claude-code-ecosystem.en.md) (**Shared Hub**) | MCP · Skills · Plugins · Subagents; Track A reads 5.1-5.4 (5.5-5.6 optional) | 1-2 wks (Track A view) |
-| **+8** 🔄 | [Stage 8 — Agent Interfaces](stages/08-agent-interfaces.en.md) (**Shared Hub**) | Computer Use · Browser Use · Code Sandbox; Track A reads §Track A usage | 1-2 wks (Track A view) |
+| **+5** | [Stage 5 — Claude Code Ecosystem](stages/05-claude-code-ecosystem.en.md) (**Shared Hub**) | MCP · Skills · Plugins · Subagents; Track A reads 5.1-5.4 (5.5-5.6 optional) | 1-2 wks (Track A view) |
+| **+8** | [Stage 8 — Agent Interfaces](stages/08-agent-interfaces.en.md) (**Shared Hub**) | Computer Use · Browser Use · Code Sandbox; Track A reads Track A usage | 1-2 wks (Track A view) |
 
 > **Track A total time**: includes Stages 0-2 (shared foundations) + A1-A3 + **Stage 5 + Stage 8 (two shared hubs) ≈ 8-10 weeks**. Core reference: [`resources/cli-agents-guide.en.md`](resources/cli-agents-guide.en.md).
 
@@ -120,15 +120,15 @@ The two tracks are **not mutually exclusive** — most people start with A to ge
 |---|---|---|---|
 | **3** ⭐ | [Tool Use & Hello Agent](stages/03-tool-use-and-hello-agent.en.md) | function calling · ReAct · 5 hands-on exercises | 2-3 wks |
 | **4** | [Agent Frameworks](stages/04-agent-frameworks.en.md) | LangGraph · AutoGen · CrewAI · Smolagents | 2-3 wks |
-| **5** ⭐⭐ 🔄 | [Claude Code Ecosystem](stages/05-claude-code-ecosystem.en.md) (**Shared Hub**, Track A also studies) | MCP · Skills · Plugins · Subagents | 3-4 wks (Track B view) |
+| **5** ⭐⭐ | [Claude Code Ecosystem](stages/05-claude-code-ecosystem.en.md) (**Shared Hub**, Track A also studies) | MCP · Skills · Plugins · Subagents | 3-4 wks (Track B view) |
 | **6** | [Context Engineering: RAG and Memory](stages/06-memory-rag.en.md) | vector DB · long-term memory · contextual retrieval | 2 wks |
 | **7** | [Multi-Agent · Productionization](stages/07-multi-agent-production.en.md) | multi-agent orchestration · eval · observability · advanced SDK | 2-4 wks |
 | **7.5** | [Advanced Agentic Workflow Concepts](stages/07.5-advanced-agentic-concepts.en.md) (reading map) | work boundary · PAR loop · agent-as-judge · 12 advanced concepts + reading list | 1 wk (no code) |
-| **8** ⭐⭐ 🔄 | [Agent Interfaces](stages/08-agent-interfaces.en.md) (**Shared Hub**, Track A also studies) | Computer Use · Browser Use · Code Sandbox; 2024-2026 frontier | 2-3 wks (Track B view) |
+| **8** ⭐⭐ | [Agent Interfaces](stages/08-agent-interfaces.en.md) (**Shared Hub**, Track A also studies) | Computer Use · Browser Use · Code Sandbox; 2024-2026 frontier | 2-3 wks (Track B view) |
 
 > **Track B total time**: minimum **16-22 weeks**, realistic **5-7 months** (5-8 hr/week part-time)
 
-> 🔄 **Two shared hubs (used by both Track A + Track B)**:
+> **Two shared hubs (used by both Track A + Track B)**:
 > - **Stage 5** = Claude Code Ecosystem (MCP / Skills / Plugins / Subagents) — Track A learns MCP-into-CLI, Track B learns agent runtime structure
 > - **Stage 8** = Agent Interfaces (Computer Use / Browser / Sandbox, 2024-2026 frontier) — Track A learns "how to use" for task delegation, Track B learns "how to build" with embedded interfaces
 
@@ -166,11 +166,11 @@ The main path has 5 parts:
 
 - **Part 1 (Stages 0-2): Foundations & LLM Basics** — Python / git / API, what's an LLM, prompt design
 - **Part 2 (Stages 3-4): Build Your Agent** — from tool use to agents, learn the major frameworks
-- **Part 3 (Stage 5) 🔄 Shared Hub** — Claude Code Ecosystem (MCP / Skills / Plugins / Subagents; used by both Track A + B)
+- **Part 3 (Stage 5) Shared Hub** — Claude Code Ecosystem (MCP / Skills / Plugins / Subagents; used by both Track A + B)
 - **Part 4 (Stages 6-7): Advanced Integration** — memory / RAG / multi-agent collaboration / harness engineering
-- **Part 5 (Stage 8) 🔄 Shared Hub** — Agent Interfaces (Computer Use / Browser Use / Code Sandbox, 2024-2026 frontier; used by both tracks)
+- **Part 5 (Stage 8) Shared Hub** — Agent Interfaces (Computer Use / Browser Use / Code Sandbox, 2024-2026 frontier; used by both tracks)
 
-> 🔭 **Three layers of concept evolution**: **prompt engineering** (Stage 2 — how to write a single prompt) → **context engineering** (Stage 3 onward — how to dynamically assemble system prompt + memory + retrieved chunks + tool schema) → **harness engineering** (Stage 7 — agent loop / eval / observability / deploy as a complete production system). Three terms, three phases; you don't need to look elsewhere. See [`stages/02-prompt-engineering.en.md`](stages/02-prompt-engineering.en.md) §"Beyond prompts: context engineering" and [`stages/07-multi-agent-production.en.md`](stages/07-multi-agent-production.en.md) Required Reading §5+6.
+> 🔭 **Three layers of concept evolution**: **prompt engineering** (Stage 2 — how to write a single prompt) → **context engineering** (Stage 3 onward — how to dynamically assemble system prompt + memory + retrieved chunks + tool schema) → **harness engineering** (Stage 7 — agent loop / eval / observability / deploy as a complete production system). Three terms, three phases; you don't need to look elsewhere. See [`stages/02-prompt-engineering.en.md`](stages/02-prompt-engineering.en.md) "Beyond prompts: context engineering" and [`stages/07-multi-agent-production.en.md`](stages/07-multi-agent-production.en.md) Required Reading 5+6.
 
 After the main path (16-22 weeks for Track B, 8-10 weeks for Track A), pick a branch.
 
@@ -193,8 +193,8 @@ Common quick links, grouped by **scenario**:
 | Your situation | Where | What's there |
 |---|---|---|
 | Never written code, first time with AI agents | [`resources/setup-guide.en.md`](resources/setup-guide.en.md) | 30-45 min from zero (API key, Python, first hello-world) |
-| Not sure which LLM provider to pick | [`resources/setup-guide.en.md` §A](resources/setup-guide.en.md#a--apply-for-your-first-api-key-about-10-minutes) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM comparison |
-| Topic-based awesome lists / Chinese community | [`RESOURCES.en.md` §topic-based](RESOURCES.en.md#topic-based-awesome-lists) | 5-10 min skim |
+| Not sure which LLM provider to pick | [`resources/setup-guide.en.md` A](resources/setup-guide.en.md#a--apply-for-your-first-api-key-about-10-minutes) | Anthropic / OpenAI / DeepSeek / Kimi / NVIDIA NIM comparison |
+| Topic-based awesome lists / Chinese community | [`RESOURCES.en.md` topic-based](RESOURCES.en.md#topic-based-awesome-lists) | 5-10 min skim |
 
 ### 📖 Concepts / Terminology
 
@@ -202,7 +202,7 @@ Common quick links, grouped by **scenario**:
 |---|---|---|
 | Don't know a term (LLM / agent / RAG / token / MCP / Skill / vector DB…) | [`resources/glossary.en.md`](resources/glossary.en.md) | 30+ terms, 30-80 words each + which stage covers it |
 | Why some agents live in terminal vs Telegram vs Jetson | [`resources/agent-paradigms.en.md`](resources/agent-paradigms.en.md) | 5 paradigms mental model + Hermes Agent / OpenClaw examples |
-| MCP / Skills / Plugins glossary mapping | [`RESOURCES.en.md` §three core terms](RESOURCES.en.md#three-core-terms-mcp--skills--plugins) | 1-page lookup |
+| MCP / Skills / Plugins glossary mapping | [`RESOURCES.en.md` three core terms](RESOURCES.en.md#three-core-terms-mcp--skills--plugins) | 1-page lookup |
 
 ### 🛠 Hands-on
 
@@ -216,14 +216,14 @@ Common quick links, grouped by **scenario**:
 
 | Your situation | Where | Scope |
 |---|---|---|
-| Connect to Notion / Obsidian / Excel / GitHub / etc. | [`RESOURCES.en.md` §daily-tool integrations](RESOURCES.en.md#daily-tool-integrations-mcp-servers--skills) | 7-8 highlights |
+| Connect to Notion / Obsidian / Excel / GitHub / etc. | [`RESOURCES.en.md` daily-tool integrations](RESOURCES.en.md#daily-tool-integrations-mcp-servers--skills) | 7-8 highlights |
 | Full MCP server / Skill catalog (stars, categories) | [`resources/mcp-skills-catalog.en.md`](resources/mcp-skills-catalog.en.md) | 62 entries, 6 categories |
 
 ### 🔬 Research / Production
 
 | Your situation | Where | What's there |
 |---|---|---|
-| Research workflow + multi-LLM delegation skill pair | [`RESOURCES.en.md` §research workflow](RESOURCES.en.md#research-workflow-by-the-repo-maintainer) | Maintainer's own Claude Code research skill set |
+| Research workflow + multi-LLM delegation skill pair | [`RESOURCES.en.md` research workflow](RESOURCES.en.md#research-workflow-by-the-repo-maintainer) | Maintainer's own Claude Code research skill set |
 | CLI agent 7-way comparison + production combos | [`resources/cli-agents-guide.en.md`](resources/cli-agents-guide.en.md) | Track A's core reference, ~148 lines |
 | Schema design rules (must-read for tool calling) | [`resources/schema-design-cheatsheet.en.md`](resources/schema-design-cheatsheet.en.md) | 5 golden rules + 5 anti-patterns |
 
@@ -283,11 +283,11 @@ If this learning roadmap helps your study or work, please cite:
 
 ```bibtex
 @misc{awesome_agentic_ai_zh_2026,
-  title  = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
+  title = {awesome-agentic-ai-zh: A Structured Learning Roadmap for Agentic AI},
   author = {Chiou, Wenyu},
-  year   = {2026},
-  url    = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
-  note   = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Code Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
+  year = {2026},
+  url = {https://github.com/WenyuChiou/awesome-agentic-ai-zh},
+  note = {8-stage learning path from prerequisites to Agent Interfaces (Computer Use / Browser Use / Code Sandbox), with curated projects + hello-X demos. Bilingual (zh-TW / English).}
 }
 ```
 

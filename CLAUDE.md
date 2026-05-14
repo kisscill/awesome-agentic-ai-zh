@@ -19,7 +19,7 @@
 | New chapter-length tutorial inside this repo | **Push back**. If the topic deserves chapter-length, the right move is: write a 1-page summary + simple illustrative case + 📚 callout to a canonical source (hello-agents / Anthropic Cookbook / framework's own docs). |
 | Trilingual mirror priority | zh-TW canonical first; en + zh-Hans mirror when capacity allows. Don't block shipping waiting for 3-lang. |
 
-**One-line summary**: **route → depth, not reinvent**. Every exercise folder ends with 📚 "want chapter-length? go to hello-agents §X + [extra ref]".
+**One-line summary**: **route → depth, not reinvent**. Every exercise folder ends with 📚 "want chapter-length? go to hello-agents X + [extra ref]".
 
 **Existing examples of this pattern** (as of 2026-05-13):
 - All Stage 3 / 4 / 6 / 7 example READMEs have the 📚 callout (20 folders × 1 callout)
@@ -100,12 +100,12 @@ If unsure, ask the user to run `ollama list` and verify.
 | Stage 1 folder `04-cross-provider` | ✅ Multi-provider (already includes Ollama via `call_ollama` in README) |
 | Stage 1 folder `05-error-handling` | ✅ Phase 3 done (2026-05-12) — openai SDK exceptions + same retry wrapper, trilingual READMEs |
 | Stage 3 doc inline simplified examples (練習 2-6) | ✅ Done (2026-05-12) — 5 new `<details>` blocks added inline (Path A 8-15 line cores), trilingual mirror, zh-Hans Trad-char drift fixed at lines 44/47/77/110/152 |
-| `examples/stage-5/tool-calling-tutor/` skill | ✅ Done (2026-05-12) — installable Claude Code skill (frontmatter + 5-step body), 3 references (debug-flowchart / schema-evolution / sdk-diff), evals.json with 5 cases, trilingual READMEs + translations. Dual purpose: learner-aid + Stage 5 §5.3 meta-example. Cross-referenced from stages/03 + stages/05 |
+| `examples/stage-5/tool-calling-tutor/` skill | ✅ Done (2026-05-12) — installable Claude Code skill (frontmatter + 5-step body), 3 references (debug-flowchart / schema-evolution / sdk-diff), evals.json with 5 cases, trilingual READMEs + translations. Dual purpose: learner-aid + Stage 5 5.3 meta-example. Cross-referenced from stages/03 + stages/05 |
 | Stage 4 (5 exercises) | ✅ Verified 2026-05-13 — ex1 LangGraph+CrewAI comparison, ex2 CrewAI multi-agent roles (CrewAI install fails on Python 3.14, code unmodified), ex3 LangGraph branching+HITL, ex4 Smolagents CodeAct, ex5 Pydantic AI typed output. 14 of 15 test suites verified green; ex2 CrewAI untestable on 3.14 due to tiktoken/regex wheel build failures |
 | Stage 6 (5 exercises) | ✅ Verified 2026-05-13 — all 10 test suites green. Fixed 2 bugs: ChromaDB 'kb' collection name (needs 3-512 chars; renamed knowledge_base) + EphemeralClient state leak across test fixtures (added uuid suffix per test) |
 | Stage 7 (5 exercises) | ✅ Verified 2026-05-13 — all 10 test suites green. Fixed 1 bug: eval test fake_agent operator precedence (and binds tighter than or) caused test_run_eval_aggregates to fail. FastAPI deploy includes Dockerfile |
 | Track A1-A3 (12 CLI exercises) | 🟡 Outline complete (`tracks/cli/A{1,2,3}-*.md` × 3 langs, ~367 lines zh-TW; 12 numbered exercises documented end-to-end with goal / required-reading / hands-on / curated-projects / self-check). `examples/track-a/` folder intentionally NOT built — these exercises are bash + CLAUDE.md + slash command + MCP integration + GitHub Actions yml, **NOT** Python SDK code; the dual-path Ollama/Anthropic framing doesn't apply. Reference doc: [`resources/cli-agents-guide.md`](resources/cli-agents-guide.md) (148 lines). |
-| Stage 5 (11 sub-exercises) | ⚪ Pending — different shape (bash / MCP / markdown / CLAUDE.md / SKILL.md / plugin.json authoring, not OpenAI SDK Python). 5.3 has 1 meta-example shipped: [`examples/stage-5/tool-calling-tutor/`](examples/stage-5/tool-calling-tutor/). Other sub-§ framing TBD — see [`docs/TESTING_PLAN.md`](docs/TESTING_PLAN.md). |
+| Stage 5 (11 sub-exercises) | ⚪ Pending — different shape (bash / MCP / markdown / CLAUDE.md / SKILL.md / plugin.json authoring, not OpenAI SDK Python). 5.3 has 1 meta-example shipped: [`examples/stage-5/tool-calling-tutor/`](examples/stage-5/tool-calling-tutor/). Other sub- framing TBD — see [`docs/TESTING_PLAN.md`](docs/TESTING_PLAN.md). |
 | `examples/README` LLM list + budget table | ✅ Done (3 langs) |
 | Per-stage budget callouts | ✅ Done for Stage 1+2+3 (3 langs each) |
 

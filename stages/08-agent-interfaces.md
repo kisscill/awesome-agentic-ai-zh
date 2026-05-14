@@ -4,7 +4,7 @@
 
 ⏱ **時間估算**：2-3 週（約 12-20 小時）
 
-> 💡 用語密度高（Computer Use / DOM / microVM / Firecracker / Sandbox / Cold start⋯）→ **本章內部就地解釋**，不熟先讀過 §1 跟 §7 術語小辭典。
+> 💡 用語密度高（Computer Use / DOM / microVM / Firecracker / Sandbox / Cold start⋯）→ **本章內部就地解釋**，不熟先讀過 1 跟 7 術語小辭典。
 
 > 📋 **本章組成**：〔Agent Interfaces 是什麼（先定位）+ 三層 interface〕→ 學習目標 → 進入條件 → 必修閱讀 → 🖱 Computer Use（螢幕級）→ 🌐 Browser Use（web 級）→ 📦 Code Sandbox（隔離環境含**術語小辭典**）→ Track A 怎麼用 → Track B 怎麼 build → ⚠ 2026 Safety / Security → 動手練習 → 常用工具推薦 → 精選 Projects → 自我檢查 → 下一個 frontier（Voice / VLA forward note）
 
@@ -45,7 +45,7 @@
 - **2025-2026**：OpenAI（Atlas + Codex desktop）/ Google（Gemini in Chrome）全進場 → 主流化
 - **2026-05**：OSWorld benchmark 達 **76.26%**（superhuman vs 72.36% human baseline）→ 從研究 curiosity 變 production reality
 
-**沒這個 stage 的 curriculum gap**：學完 Stage 7 你以為 done、實際上 agent 只能跟 API 對話、**不能操作沒 API 的軟體 / 真實網頁 / 跑 code**——遇 safety issue（Comet 注入 / Amazon injunction、見[§Safety](#-2026-safety--security-重點)）也沒警告過。
+**沒這個 stage 的 curriculum gap**：學完 Stage 7 你以為 done、實際上 agent 只能跟 API 對話、**不能操作沒 API 的軟體 / 真實網頁 / 跑 code**——遇 safety issue（Comet 注入 / Amazon injunction、見[Safety](#-2026-safety--security-重點)）也沒警告過。
 
 ### 為什麼兩 track 共用
 
@@ -76,7 +76,7 @@
 - 完成 [Stage 7](07-multi-agent-production.md)（懂 harness engineering、knows what reward-hacking warning is about）
 - 對 Docker / VM 概念基礎熟悉（本章會解釋 microVM / Container 差異、但完全沒接觸過 Docker 會卡）
 - **若只 Track A**：Stage 5 完成就夠，Stage 7 可選；本章 Track A 部分不依賴 build 經驗
-- **若 Track B**：Stage 7 必修，否則 §9 build 範例會卡
+- **若 Track B**：Stage 7 必修，否則 9 build 範例會卡
 
 沒到 → 回前面補。
 
@@ -149,7 +149,7 @@ agent 收到任務
 - **跨多個 OS**：Ubuntu / Windows / macOS 都有
 - **跨應用 chain**：常要打開 3-4 個 app（Excel → Chrome → Slack）
 
-**Why 真實能力 ≠ 數字**（呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)）：
+**Why 真實能力 ≠ 數字**（呼應 [Stage 7 reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)）：
 - OSWorld 也在 [UC Berkeley 2026-04 reward-hacking 報告](https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/) 名單上、被證可 hack 到 100%
 - **看數字紀律**：別只看 leaderboard top、看你自己 use case 的 hold-out test 才是 ground truth
 
@@ -310,7 +310,7 @@ agent 收到任務
 | 研究 / 跨頁面 synthesis | **Comet** | research-tuned、citation-backed |
 | ChatGPT user / Agent Mode | **Atlas** | Plus/Pro/Business 內建 |
 | Chrome / Google ecosystem | **Gemini in Chrome** | Auto Browse + Skills、enterprise DLP |
-| **避開**：Comet 跑 e-commerce / banking | — | ⚠ 2026-03 federal injunction（詳見[§Safety](#-2026-safety--security-重點)）|
+| **避開**：Comet 跑 e-commerce / banking | — | ⚠ 2026-03 federal injunction（詳見[Safety](#-2026-safety--security-重點)）|
 
 ### 跨 app workflow 範例
 
@@ -337,7 +337,7 @@ from langchain_openai import ChatOpenAI
 
 agent = Agent(
     task="Search Hacker News for top AI agent posts this week and summarize",
-    llm=ChatOpenAI(model="gpt-5.5"),  # 也可換 Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
+    llm=ChatOpenAI(model="gpt-5.5"), # 也可換 Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
 )
 result = await agent.run()
 ```
@@ -359,14 +359,14 @@ with Sandbox() as sandbox:
 
 ### 3. 用 OpenAI Agents SDK 內建 sandbox（2026-04 新）
 
-**Why 這 SDK**：之前是 prototype-only、April 2026 update 後 production architecturally sound（見 §7 末）。
+**Why 這 SDK**：之前是 prototype-only、April 2026 update 後 production architecturally sound（見 7 末）。
 
 ```python
 from openai.agents import Agent, Sandbox
 
 agent = Agent(
     model="gpt-5.5",
-    sandbox=Sandbox(provider="e2b"),  # 或 daytona / modal / vercel / ...
+    sandbox=Sandbox(provider="e2b"), # 或 daytona / modal / vercel / ...
     tools=[...]
 )
 ```
@@ -411,34 +411,34 @@ agent = Agent(
 
 ```
                     ┌──── User Request ────┐
-                    ▼                      │
-              ┌──── Agent ────┐            │
-              │               │            │
-   ┌─① approval gate          │            │
-   │  (高風險前 user 確認)     │            │
-   │                          │            │
-   │  ┌─② sandbox ──┐          │            │
-   │  │ agent 跑 code │         │            │
-   │  └──────────────┘          │            │
-   │                          │            │
-   │  ┌─③ human-in-loop ─┐     │            │
-   │  │ long task 中段確認  │     │            │
-   │  └──────────────────┘     │            │
-   │                          │            │
-   │  ┌─④ output filter ──┐    │            │
-   │  │ destination 白名單  │   │            │
-   │  └────────────────────┘   ▼            │
+                    ▼ │
+              ┌──── Agent ────┐ │
+              │ │ │
+   ┌─① approval gate │ │
+   │ (高風險前 user 確認) │ │
+   │ │ │
+   │ ┌─② sandbox ──┐ │ │
+   │ │ agent 跑 code │ │ │
+   │ └──────────────┘ │ │
+   │ │ │
+   │ ┌─③ human-in-loop ─┐ │ │
+   │ │ long task 中段確認 │ │ │
+   │ └──────────────────┘ │ │
+   │ │ │
+   │ ┌─④ output filter ──┐ │ │
+   │ │ destination 白名單 │ │ │
+   │ └────────────────────┘ ▼ │
    └─────────────────► Execution ───────────┘
 ```
 
 | Pattern | 怎麼做 | 何時必加 |
 |---|---|---|
 | **① Approval gate** | 高風險操作（刪檔 / 付錢 / 發 email / DB delete）前彈窗 user 確認 | **所有 production agent** |
-| **② Sandbox** | agent 跑 code 必裝（見 §7 七選一）| 任何會跑 code 的 agent |
+| **② Sandbox** | agent 跑 code 必裝（見 7 七選一）| 任何會跑 code 的 agent |
 | **③ Human-in-loop** | long-horizon task 中段 checkpoint | task > 10 steps 或 > 5 分鐘 |
 | **④ Output filter** | destination 限定白名單（only post to internal Slack、only write to /tmp）| 跨 system 操作的 agent |
 
-→ **呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)**：curriculum 一致教「**別 blindly 信 agent**」紀律——Stage 7 講 eval 紀律、Stage 8 講 runtime 紀律。
+→ **呼應 [Stage 7 reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)**：curriculum 一致教「**別 blindly 信 agent**」紀律——Stage 7 講 eval 紀律、Stage 8 講 runtime 紀律。
 
 ## 🛠 動手練習（兩 track 各有）
 
@@ -513,7 +513,7 @@ agent = Agent(
 - [ ] 講出 prompt injection through web content 為什麼是新攻擊面、4 個防護 pattern 各擋什麼
 - [ ] 講出 OSWorld 76.26% SOTA 數字背後的 reward-hacking 紀律（為什麼不能 blindly 信）
 
-如果都可以 → 你已經跑完 curriculum 主幹。挑一個[特化分支](../README.md#️-學習地圖兩條學習路徑)、或往下看 §下一個 frontier。
+如果都可以 → 你已經跑完 curriculum 主幹。挑一個[特化分支](../README.md#️-學習地圖兩條學習路徑)、或往下看 下一個 frontier。
 
 ## 💡 下一個 frontier — Voice agents · VLA 機器人
 
@@ -543,4 +543,3 @@ agent = Agent(
 1. **挑一個 specialist branch**（[for-researcher](../branches/for-researcher.md) / [for-developer](../branches/for-developer.md) / [for-teacher](../branches/for-teacher.md) / [for-knowledge-workers](../branches/for-knowledge-worker.md) / [for-everyday-users](../branches/for-everyday-users.md)）
 2. **回饋上游**——browser-use / OmniParser / OSWorld 都歡迎 PR
 3. **追 2026 後續發展**——Voice / VLA 是下一波、follow Stage 9（待規劃）
-

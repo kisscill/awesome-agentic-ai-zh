@@ -111,7 +111,7 @@ stage 的價值 = 讀者學完後**能回答這個問題**。
 ```
 1. ⏱ 時間估算
 2. ## 📌 學習目標
-3. ## 🚪 進入條件        （Stage 1-4 有；Stage 6 / 7 省略，因為 Stage 5 已給足前置）
+3. ## 🚪 進入條件 （Stage 1-4 有；Stage 6 / 7 省略，因為 Stage 5 已給足前置）
 4. ## 📚 必修閱讀
 5. ## 🛠 動手練習
 6. ## 🎯 精選 Projects
@@ -119,7 +119,7 @@ stage 的價值 = 讀者學完後**能回答這個問題**。
 ```
 
 **已知例外**：
-- **Stage 0**：prerequisite gateway，沒有完整結構（見 §「Stage 0 為什麼可以 skip」）
+- **Stage 0**：prerequisite gateway，沒有完整結構（見 「Stage 0 為什麼可以 skip」）
 - **Stage 5**：分 4 個 sub-stage（5.1-5.4），每個 sub-stage 各有自己的 學習目標 / 必修閱讀 / 動手練習 / 精選 Projects
 - **Stage 6 / 7**：直接跳過 進入條件 section（前面 stage 已隱含 prerequisite）
 
@@ -148,7 +148,7 @@ stage 的價值 = 讀者學完後**能回答這個問題**。
 
 ### 精選 Projects
 - 跑完 動手練習 後的延伸學習
-- 每個 entry 照 [style guide](../resources/style-guide.md) §1 schema
+- 每個 entry 照 [style guide](../resources/style-guide.md) 1 schema
 - 數量：通常 7-15 個（Stage 5 例外，20 個分散在 4 個 sub-section）
 
 ### 自我檢查

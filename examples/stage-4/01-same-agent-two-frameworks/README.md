@@ -8,7 +8,7 @@
 > 📚 **想要 chapter-length 深入版？** 本 folder 的 starter 是 illustrative 版、聚焦核心 pattern + 兩條 SDK path，不是 production-grade tutorial。深度教材推薦：
 > - [`datawhalechina/hello-agents`](https://github.com/datawhalechina/hello-agents) ⭐ 中文圈最完整、章節式 + 16 種 production 能力。**本練習對應 hello-agents 的 framework 對照 / orchestration 章節**
 > - [LangGraph official tutorial](https://langchain-ai.github.io/langgraph/tutorials/) + [CrewAI 官方 docs](https://docs.crewai.com/)
-> - 完整 references 見 [Stage 4 § 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
+> - 完整 references 見 [Stage 4 精選 Projects](../../../stages/04-agent-frameworks.md#-精選-projects)
 
 
 ## 任務
@@ -30,8 +30,8 @@ pip install -r requirements.txt
 ollama pull qwen2.5:3b
 ollama serve
 
-python starter.py         # LangGraph + Ollama
-python starter_crewai.py  # CrewAI + Ollama（對照）
+python starter.py # LangGraph + Ollama
+python starter_crewai.py # CrewAI + Ollama（對照）
 ```
 
 預算：**$0**。
@@ -41,7 +41,7 @@ python starter_crewai.py  # CrewAI + Ollama（對照）
 ```bash
 pip install -r requirements.txt
 export ANTHROPIC_API_KEY=sk-ant-...
-python starter_anthropic.py   # LangGraph + Claude
+python starter_anthropic.py # LangGraph + Claude
 ```
 
 預算：每次 ≈ **$0.001**（claude-haiku-4-5）。
@@ -49,9 +49,9 @@ python starter_anthropic.py   # LangGraph + Claude
 ## 不花錢驗證程式邏輯（mock-based）
 
 ```bash
-python test.py             # LangGraph + mock LLM
-python test_anthropic.py   # starter_anthropic 可載入 + ChatAnthropic 可建構
-python test_crewai.py      # CrewAI tool 邏輯 + 模組可載入
+python test.py # LangGraph + mock LLM
+python test_anthropic.py # starter_anthropic 可載入 + ChatAnthropic 可建構
+python test_crewai.py # CrewAI tool 邏輯 + 模組可載入
 ```
 
 ## 兩個 framework 的並排比較
@@ -105,8 +105,8 @@ crew.kickoff()
 ## 想看更聰明的答案？
 
 ```bash
-MODEL=claude-sonnet-4-5 python starter_anthropic.py    # 更穩
-MODEL=qwen2.5:7b python starter.py                      # 大本機 model
+MODEL=claude-sonnet-4-5 python starter_anthropic.py # 更穩
+MODEL=qwen2.5:7b python starter.py # 大本機 model
 ```
 
 ## 延伸

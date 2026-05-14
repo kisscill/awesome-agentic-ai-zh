@@ -20,7 +20,7 @@ CLI 跑得顺了之后，下一步：**把它接到你的真实工作流程里**
 1. [**Stage 5.2 — MCP（Model Context Protocol）**](../../stages/05-claude-code-ecosystem.zh-Hans.md#52--mcpmodel-context-protocol-基础) — MCP 概念跟基础
 2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — 90% cost reduction 的关键技巧
 3. [**Stage 7 — Observability section**](../../stages/07-multi-agent-production.zh-Hans.md#observability) — langfuse / Helicone / weave
-4. [**`resources/cli-agents-guide.zh-Hans.md`** §“常见坑”]../../resources/cli-agents-guide.zh-Hans.md) — production 用 CLI 最常踩的问题
+4. [**`resources/cli-agents-guide.zh-Hans.md`** “常见坑”]../../resources/cli-agents-guide.zh-Hans.md) — production 用 CLI 最常踩的问题
 
 ## 🛠 动手练习
 

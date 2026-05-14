@@ -9,7 +9,7 @@ Format: `YYYY-MM-DD · category · 1-line summary (commit-sha)`.
 ## 2026-05-11
 
 - **accessibility** · `resources/setup-guide.md` (3 langs) — addresses the dev-fluency assumption gap that subagent audit flagged across 5 non-dev branches. 5 sections covering API key registration, Python install, hello-world, Claude Code first auth, SKILL.md primer (`3c88b2b`). Plus 15 branch-top callouts on all 5 audience branches. `resources/README.{en,zh-Hans}.md` created for trilingual parity.
-- **accessibility** · README — promoted setup-guide pointer to top of Quick Start across all 3 langs (`ad47706`). Was buried in §Related Resources where non-dev visitors hit technical walls before discovering it.
+- **accessibility** · README — promoted setup-guide pointer to top of Quick Start across all 3 langs (`ad47706`). Was buried in Related Resources where non-dev visitors hit technical walls before discovering it.
 - **accessibility** · setup-guide opens with a 4-tier on-ramp (Web / Desktop / CLI / API) + official download URLs for Claude.ai, ChatGPT, Gemini, Le Chat, Claude Desktop, ChatGPT Desktop, LM Studio (`3c89952`). Replaces the abstract "decide two things" intro so non-dev readers see "just use claude.ai for free" as the first option, not "register API key → install Python".
 - **accessibility** · setup-guide adds a 3rd tier between Desktop and CLI: **IDE with built-in AI** (Cursor, Windsurf, Cline, Continue, Roo Code, Zed, GitHub Copilot) with download URLs (`7e14093`). Distinguishes "AI sidekick while you write code" from "agent runs autonomous task in terminal".
 
@@ -27,7 +27,7 @@ Format: `YYYY-MM-DD · category · 1-line summary (commit-sha)`.
 
 - **outreach** · Day 1 PR sent: `punkpeye/awesome-mcp-servers#6135`, adding awesome-agentic-ai-zh to `## Tutorials` (`a0dc4d5`). Plan revised after upstream audit caught `hesreallyhim/awesome-claude-code` mid-reorg (Day 2 = issue not PR) (`708259c`).
 - **outreach** · 8 channel-partner pitch templates created in `.github/outreach/` plus tracking matrix `.github/channel-partners.md` (`2f63745`). Targets: Datawhale, liyupi, HuggingFace, LangChain (kyrolabs), awesome-claude-code, awesome-mcp-servers, Zhipu, Moonshot.
-- **catalog** · §11 中文圈專用 expanded from 2 → 7 entries: `QwenLM/Qwen-Agent`, `coze-dev/coze-studio`, `coze-dev/coze-loop`, `liaokongVFX/LangChain-Chinese-Getting-Started-Guide`, `chatchat-space/Langchain-Chatchat` (`4809039`).
+- **catalog** · 11 中文圈專用 expanded from 2 → 7 entries: `QwenLM/Qwen-Agent`, `coze-dev/coze-studio`, `coze-dev/coze-loop`, `liaokongVFX/LangChain-Chinese-Getting-Started-Guide`, `chatchat-space/Langchain-Chatchat` (`4809039`).
 - **funnel** · Stage 0 → Stage 1 callouts added (`3dfe761`).
 - **ci** · zh-Hans companion files excluded from zh-TW banned-word audit (closes #7) (`3acc3f2`).
 

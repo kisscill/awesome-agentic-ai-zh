@@ -45,7 +45,7 @@
 - **2025-2026**：OpenAI（Atlas + Codex desktop）/ Google（Gemini in Chrome）全线入场 → 主流化
 - **2026-05**：OSWorld benchmark 达到 **76.26%**（超越人类基线 72.36%）→ 从研究好奇心变为生产现实
 
-**没有本阶段的课程缺陷**：学完 Stage 7 你以为就结束了，实际上智能体只能与 API 对话，**不能操作没有 API 的软件 / 真实网页 / 运行代码**——遇到安全问题（如 Comet 注入 / 亚马逊禁令，见[§安全](#-2026-安全性--风险重点)）也得不到预警。
+**没有本阶段的课程缺陷**：学完 Stage 7 你以为就结束了，实际上智能体只能与 API 对话，**不能操作没有 API 的软件 / 真实网页 / 运行代码**——遇到安全问题（如 Comet 注入 / 亚马逊禁令，见[安全](#-2026-安全性--风险重点)）也得不到预警。
 
 ### 为什么两 track 共享
 
@@ -76,7 +76,7 @@
 - 完成 [Stage 7](07-multi-agent-production.zh-Hans.md)（了解 harness engineering，知道 reward-hacking 警告的含义）。
 - 对 Docker / VM 概念有基础了解（本章会解释 microVM / 容器的差异，但完全没接触过 Docker 会很困难）。
 - **如果只学 Track A**：完成 Stage 5 即可，Stage 7 可选；本章 Track A 部分不依赖构建经验。
-- **如果学 Track B**：Stage 7 必修，否则 §9 的构建示例会卡住。
+- **如果学 Track B**：Stage 7 必修，否则 9 的构建示例会卡住。
 
 如果没达到 → 回去补课。
 
@@ -149,7 +149,7 @@
 - **跨多个 OS**：覆盖 Ubuntu / Windows / macOS。
 - **跨应用链**：常需要打开 3-4 个应用（Excel → Chrome → Slack）。
 
-**为什么真实能力 ≠ 数据**（呼应 [Stage 7 §reward-hacking 警告](07-multi-agent-production.zh-Hans.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)）：
+**为什么真实能力 ≠ 数据**（呼应 [Stage 7 reward-hacking 警告](07-multi-agent-production.zh-Hans.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)）：
 - OSWorld 也在 [UC Berkeley 2026-04 reward-hacking 报告](https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/) 名单上，被证明可被 hack 到 100%。
 - **看数据的规范**：不要只看排行榜顶部，你自己的用例的 hold-out 测试才是基准真相。
 
@@ -310,7 +310,7 @@
 | 研究 / 跨页面综合 | **Comet** | 针对研究优化，有引用支持。 |
 | ChatGPT 用户 / Agent Mode | **Atlas** | Plus/Pro/Business 内置。 |
 | Chrome / Google 生态系统 | **Gemini in Chrome** | Auto Browse + Skills，企业级 DLP。 |
-| **避免**：Comet 运行电子商务 / 银行任务 | — | ⚠ 2026-03 联邦禁令（详见[§安全](#-2026-安全性--风险重点)）。|
+| **避免**：Comet 运行电子商务 / 银行任务 | — | ⚠ 2026-03 联邦禁令（详见[安全](#-2026-安全性--风险重点)）。|
 
 ### 跨应用工作流示例
 
@@ -337,7 +337,7 @@ from langchain_openai import ChatOpenAI
 
 agent = Agent(
     task="Search Hacker News for top AI agent posts this week and summarize",
-    llm=ChatOpenAI(model="gpt-5.5"),  # 也可换成 Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
+    llm=ChatOpenAI(model="gpt-5.5"), # 也可换成 Claude Opus 4.7 / Gemini 3.1 Pro / DeepSeek-V4-Pro
 )
 result = await agent.run()
 ```
@@ -359,14 +359,14 @@ with Sandbox() as sandbox:
 
 ### 3. 使用 OpenAI Agents SDK 内置沙箱（2026-04 新功能）
 
-**为何使用这个 SDK**：之前仅为原型设计，2026 年 4 月更新后在架构上已适合生产（见 §7 末尾）。
+**为何使用这个 SDK**：之前仅为原型设计，2026 年 4 月更新后在架构上已适合生产（见 7 末尾）。
 
 ```python
 from openai.agents import Agent, Sandbox
 
 agent = Agent(
     model="gpt-5.5",
-    sandbox=Sandbox(provider="e2b"),  # 或 daytona / modal / vercel / ...
+    sandbox=Sandbox(provider="e2b"), # 或 daytona / modal / vercel / ...
     tools=[...]
 )
 ```
@@ -411,34 +411,34 @@ agent = Agent(
 
 ```
                     ┌──── 用户请求 ────┐
-                    ▼                      │
-              ┌──── 智能体 ────┐            │
-              │               │            │
-   ┌─① 审批门             │            │
-   │  (高风险操作前用户确认)   │            │
-   │                          │            │
-   │  ┌─② 沙箱 ──┐          │            │
-   │  │ 智能体运行代码 │         │            │
-   │  └──────────────┘          │            │
-   │                          │            │
-   │  ┌─③ 人工介入 ─┐     │            │
-   │  │ 长任务中段确认  │     │            │
-   │  └──────────────────┘     │            │
-   │                          │            │
-   │  ┌─④ 输出过滤器 ──┐    │            │
-   │  │ 目标白名单  │   │            │
-   │  └────────────────────┘   ▼            │
+                    ▼ │
+              ┌──── 智能体 ────┐ │
+              │ │ │
+   ┌─① 审批门 │ │
+   │ (高风险操作前用户确认) │ │
+   │ │ │
+   │ ┌─② 沙箱 ──┐ │ │
+   │ │ 智能体运行代码 │ │ │
+   │ └──────────────┘ │ │
+   │ │ │
+   │ ┌─③ 人工介入 ─┐ │ │
+   │ │ 长任务中段确认 │ │ │
+   │ └──────────────────┘ │ │
+   │ │ │
+   │ ┌─④ 输出过滤器 ──┐ │ │
+   │ │ 目标白名单 │ │ │
+   │ └────────────────────┘ ▼ │
    └─────────────────► 执行 ───────────┘
 ```
 
 | 模式 | 如何实现 | 何时必须添加 |
 |---|---|---|
 | **① 审批门** | 高风险操作（删除文件 / 付款 / 发送邮件 / 数据库删除）前弹窗让用户确认。 | **所有生产级智能体** |
-| **② 沙箱** | 运行代码的智能体必须安装（见 §7 七选一）。| 任何会运行代码的智能体 |
+| **② 沙箱** | 运行代码的智能体必须安装（见 7 七选一）。| 任何会运行代码的智能体 |
 | **③ 人工介入** | 长时间任务的中段检查点。 | 任务 > 10 步或 > 5 分钟 |
 | **④ 输出过滤器** | 目标限定白名单（仅发布到内部 Slack，仅写入 /tmp）。| 跨系统操作的智能体 |
 
-→ **呼应 [Stage 7 §reward-hacking 警告](07-multi-agent-production.zh-Hans.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)**：课程始终强调“**不要盲目相信智能体**”的规范——Stage 7 讲评估规范，Stage 8 讲运行时规范。
+→ **呼应 [Stage 7 reward-hacking 警告](07-multi-agent-production.zh-Hans.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)**：课程始终强调“**不要盲目相信智能体**”的规范——Stage 7 讲评估规范，Stage 8 讲运行时规范。
 
 ## 🛠 动手练习（两 track 各有）
 
@@ -513,7 +513,7 @@ agent = Agent(
 - [ ] 解释为何通过 web 内容的 prompt injection 是新的攻击面，以及 4 个防护模式各防御什么
 - [ ] 解释 OSWorld 76.26% SOTA 数据背后的 reward-hacking 规范（为何不能盲目相信）
 
-如果都可以 → 你已完成课程主干。选择一个[特化分支](../README.zh-Hans.md#️-学习地图与两条学习路径)，或继续看下一节 §下一个前沿。
+如果都可以 → 你已完成课程主干。选择一个[特化分支](../README.zh-Hans.md#️-学习地图与两条学习路径)，或继续看下一节 下一个前沿。
 
 ## 💡 下一个前沿 — Voice agents · VLA 机器人
 

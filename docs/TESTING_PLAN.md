@@ -73,8 +73,8 @@ Stage 5 (`stages/05-claude-code-ecosystem.md`) has 4 sub-stages with hands-on ex
 
 | Sub-stage | Status |
 |---|---|
-| 5.1 Claude Code 基礎 | Outline only (in `stages/05-...md` §動手練習) |
-| 5.2 MCP (Model Context Protocol) | Outline only; cookbook §2 covers building first MCP server |
+| 5.1 Claude Code 基礎 | Outline only (in `stages/05-...md` 動手練習) |
+| 5.2 MCP (Model Context Protocol) | Outline only; cookbook 2 covers building first MCP server |
 | 5.3 Skills | Outline + **1 shipped meta-example**: [`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) (full SKILL.md + 3 references + evals.json, used as the Stage 5.3 authoring exemplar) |
 | 5.4 Plugins & Marketplaces | Outline only |
 
@@ -82,7 +82,7 @@ For v2, sub-stages 5.1 / 5.2 / 5.4 could ship sample artifacts (sample `CLAUDE.m
 
 ## v2 path (deferred)
 
-Per `docs/HOW_TO_USE.md` § "給維護者：v2 path":
+Per `docs/HOW_TO_USE.md` "給維護者：v2 path":
 - Split each `starter.py` → `starter_template.py` (TODO skeleton) + `starter_reference.py` (solution)
 - Make `test.py` behavioral (input → output contract) instead of implementation-bound
 - ~20 folders × 3 file changes = ~60 file changes
