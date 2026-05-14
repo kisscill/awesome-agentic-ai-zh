@@ -1,4 +1,4 @@
-# For Teachers — Specialized Branch
+# Extension Path: For Teachers / Educators
 
 > [繁體中文](./for-teacher.md) | [简体中文](./for-teacher.zh-Hans.md) | **English**
 

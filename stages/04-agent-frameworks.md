@@ -1,4 +1,4 @@
-# Stage 4 — Agent Frameworks
+# Stage 4 — Agent 框架（Agent Frameworks）
 
 > **繁體中文** | [简体中文](./04-agent-frameworks.zh-Hans.md) | [English](./04-agent-frameworks.en.md)
 
@@ -46,7 +46,7 @@
 
 **為什麼這個區分有用**：production 場景大多落在「single agent workflow」+「single agent」象限——多數任務根本不需要 multi-agent。**真正需要 multi-agent framework 的是右下角象限**——LLM 自主性高 + 多角色協作。但實作上四個象限的邊界有時模糊（LangGraph 的 conditional edge 可以同時看成 workflow routing 跟 agent 動態決策）、不要把這個 matrix 當互斥分類。
 
-→ 本 stage 後續討論都假設你已經知道：**multi-agent framework 解決的是右下角象限的 orchestration boilerplate**。
+→ 本 stage 後續討論都假設你已經知道：**Multi-agent framework 主要幫你處理多個 agent 之間的協調、交接、狀態管理與重複性程式碼，讓你不用從零寫整套協作流程**（右下角象限的 orchestration boilerplate）。
 
 ### Single-agent vs multi-agent — 一張對照表先看清楚差異
 

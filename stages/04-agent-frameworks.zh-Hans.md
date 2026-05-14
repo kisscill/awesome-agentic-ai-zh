@@ -1,4 +1,4 @@
-# Stage 4 — Agent Frameworks
+# Stage 4 — Agent 框架（Agent Frameworks）
 
 [繁體中文](./04-agent-frameworks.md) | **简体中文** | [English](./04-agent-frameworks.en.md)
 

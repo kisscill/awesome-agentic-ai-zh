@@ -512,7 +512,7 @@ Engineering practice for LLM-powered systems can be divided into **three stack l
 
 - **Prompt Engineering** (this stage) = engineering **the string sent into the model**
 - **Context Engineering** (Stage 6) = engineering **what information goes into the context window on each call** — dynamically assembling RAG retrieval results, memory, tool definitions, and conversation history
-- **Harness Engineering** (Stage 7) = engineering **the runtime / scaffolding around the model** — agent loops, retry, sandboxing, observability, deployment, and all other non-LLM code
+- **Harness Engineering** (Stage 7) = engineering **the execution and control layer around the model** — agent loops, retry, sandboxing, observability, deployment, and all other non-LLM code
 
 → The three layers are **orthogonal**: a one-call RAG app is still doing context engineering (the point is assembling context, not how many calls happen); a 50-call chatbot with no retrieval is still only doing prompt engineering.
 
@@ -522,7 +522,7 @@ Engineering practice for LLM-powered systems can be divided into **three stack l
 |---|---|---|
 | **1. Prompt Engineering** | The string sent into the LLM itself (system prompt / few-shot / format) | **This stage (Stage 2)** |
 | **2. Context Engineering** | What information goes into the context window (RAG / memory / tool defs / history) | [Stage 6 — Context Engineering: RAG and Memory](06-memory-rag.en.md) |
-| **3. Harness Engineering** | The runtime scaffolding around the LLM (agent loop / retry / sandbox / observability) | [Stage 7 — Multi-Agent · Production](07-multi-agent-production.en.md) |
+| **3. Harness Engineering** | The execution and control layer around the model (agent loop / retry / sandbox / observability) | [Stage 7 — Multi-Agent · Productionization](07-multi-agent-production.en.md) |
 
 > 💡 **Karpathy 2025-06**: context engineering is the delicate art of putting information that is **just useful for the next step** into the context window.
 >

@@ -1,4 +1,4 @@
-# Stage 1 - LLM 基础
+# Stage 1 — LLM 基础（LLM Basics）
 
 > [繁體中文](./01-llm-basics.md) | **简体中文** | [English](./01-llm-basics.en.md)
 

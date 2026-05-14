@@ -1,4 +1,4 @@
-# Stage 8 — Agent Interfaces · Computer Use · Browser Use · Code Sandbox
+# Stage 8 — Agent 操作介面（Agent Interfaces）：Computer Use · Browser Use · Code Sandbox
 
 > **繁體中文** | (zh-Hans / en mirror defer 中)
 
@@ -14,7 +14,7 @@
 
 ## 🎯 Agent Interfaces 是什麼（先定位）
 
-**Agent Interfaces = agent 跟「非 API 世界」互動的 IO 邊界層**。Stage 0-7 教你「**怎麼建 agent 本身**」（LLM → prompt → tool → context → memory → multi-agent → harness）；本 stage 教「**agent 蓋好後、怎麼操作真實環境**」。
+**Agent Interfaces 指的是 agent 如何操作 API 以外的真實環境，例如電腦畫面、網頁，或隔離的程式執行空間**——agent 與「非 API 世界」的對外互動層（IO boundary）。Stage 0-7 教你「**怎麼建 agent 本身**」（LLM → prompt → tool → context → memory → multi-agent → harness）；本 stage 教「**agent 蓋好後、怎麼操作真實環境**」。
 
 **3 層 interface**：
 

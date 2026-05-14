@@ -1,4 +1,4 @@
-# Stage 2 — Prompt Engineering
+# Stage 2 — Prompt 設計（Prompt Engineering）
 
 > **繁體中文** | [简体中文](./02-prompt-engineering.zh-Hans.md) | [English](./02-prompt-engineering.en.md)
 

@@ -1,4 +1,4 @@
-# Stage 3 — Tool Use & Agent 入门 ⭐
+# Stage 3 — 工具使用与第一个 Agent（Tool Use & Hello Agent）⭐
 
 > [繁體中文](./03-tool-use-and-hello-agent.md) | **简体中文** | [English](./03-tool-use-and-hello-agent.en.md)
 

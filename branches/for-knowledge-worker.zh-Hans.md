@@ -1,4 +1,4 @@
-# 给知识工作者 — 专业分支
+# 知识工作者延伸路线（For Knowledge Workers）
 
 > [繁體中文](./for-knowledge-worker.md) | **简体中文** | [English](./for-knowledge-worker.en.md)
 

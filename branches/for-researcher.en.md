@@ -1,4 +1,4 @@
-# For Researchers — Specialized Branch
+# Extension Path: For Researchers
 
 > [繁體中文](./for-researcher.md) | [简体中文](./for-researcher.zh-Hans.md) | **English**
 

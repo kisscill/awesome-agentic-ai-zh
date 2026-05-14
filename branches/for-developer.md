@@ -1,4 +1,4 @@
-# 給開發者 — 專業分支
+# 開發者延伸路線（For Developers）
 
 > **繁體中文** | [简体中文](./for-developer.zh-Hans.md) | [English](./for-developer.en.md)
 

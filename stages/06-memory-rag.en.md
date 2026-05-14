@@ -1,70 +1,96 @@
-# Stage 6 — Memory · RAG · Context Engineering
+# Stage 6 — Context Engineering: RAG and Memory
 
-> **Traditional Chinese** | [Simplified Chinese](./06-memory-rag.zh-Hans.md) | [English](./06-memory-rag.en.md)
+> [Traditional Chinese](./06-memory-rag.md) | [简体中文](./06-memory-rag.zh-Hans.md) | **English**
 
 ⏱ **Estimated Time**: 2 weeks (approx. 10 hours)
 
-> 💡 This stage is dense with terminology (**RAG / Vector Databases / Embedding / Chunking / Hybrid Search / Reranking⋯**) — if unfamiliar, first consult [`resources/glossary.md` §3](../resources/glossary.md#3-memory--retrieval--rag).
-
-> 📋 **Chapter Structure**: Positioning → Entry Point → **RAG Core** (Basics + Advanced + DSPy + Eval) → **Bridge** → **Memory Core** (3 Patterns + Trio + Advanced) → Chunking → Reflexion / Reasoning → Practice → Projects
+> 💡 This stage is dense with terminology (**RAG / vector databases / embedding / chunking / hybrid search / reranking...**) — if unfamiliar, first consult [`resources/glossary.md` §3](../resources/glossary.md#3-memory--retrieval--rag).
+>
+> 📋 **Chapter Structure**: Positioning → Entry Point → **RAG Core** (Basics + Advanced + DSPy + Eval) → **Bridge** → **Memory Core** (3 patterns + trio + advanced) → Chunking → Reflexion / Reasoning → Practice → Projects
 >
 > 🔑 **Key Terms**: See [`resources/glossary.md` §3](../resources/glossary.md#3-memory--retrieval--rag) (memory / RAG / embedding / chunking / reranking)
 
-## 🎯 What is Context Engineering? (Positioning First)
+This stage is not about memorizing more terminology. It is about understanding how agents manage context.
 
-**One-sentence version**: Context Engineering = deciding **what information to put into the window the LLM can see on each call** (the context window).
+- **RAG answers**: what data should be retrieved from an external knowledge base right now?
+- **Memory answers**: what should an agent remember across conversations, sessions, and tasks?
+- **Context Engineering is the higher-level question**: before each LLM call, what information should be assembled into the prompt so the model can make the right decision inside a limited context window?
 
-The point is not "how many conversations you opened," but "**what you put into each one**." Karpathy's June 2025 [tweet](https://x.com/karpathy/status/1937902205765607626) puts it best: the delicate art of "**filling the window with exactly the information useful for the next step**."
+→ This connects directly to Stage 7's three engineering layers: **Prompt = how to ask on this call / Context = what information to include on this call / Harness = how the whole agent system runs**. This stage is the middle layer.
+
+### The two context capabilities an agent needs
+
+1. **Retrieval**: pulling task-relevant information from an external knowledge base.
+2. **Memory**: preserving state, preferences, and experience across conversations, sessions, and tasks.
+
+**RAG (Retrieval-Augmented Generation)** is the most common retrieval architecture today. **Memory** is what lets an agent remember the user, task history, and its own past experience. This chapter treats them separately so "looking things up" and "remembering things" do not get mixed together.
+
+### Separate the terms first: Retrieval / RAG / Vector Store / Memory are not the same thing
+
+| Term | Do not confuse it with | Plain-language explanation |
+|---|---|---|
+| **Retrieval** | All of RAG | The act of finding information |
+| **RAG** | Vector DB | The full retrieve + generate workflow |
+| **Embedding** | Memory | Turning text into vectors so similarity search becomes possible |
+| **Vector store** | RAG | The place where embeddings are stored and searched |
+| **Chunking** | Retrieval itself | Splitting documents into searchable pieces |
+| **Memory** | RAG | Persistent management of user, task, and experience data |
+
+## 🎯 What is Context Engineering? (Positioning)
+
+**In one sentence**: Context Engineering = deciding **what information to put into the window the LLM can see on each call**.
+
+The point is not "how many conversations you opened." The point is "**what you put into each one**." Karpathy's June 2025 [tweet](https://x.com/karpathy/status/1937902205765607626) puts it best: the delicate art of putting **just the information useful for the next step** into the window.
 
 📺 **Visual Learning**: [Hung-Yi Lee 2025 Lecture 2 — Context Engineering: The Key Technology Behind AI Agents](https://www.youtube.com/watch?v=lVdajtNpaGI) (NTU Introduction to Generative AI & Machine Learning 2025)
 
-### Where It Sits in the 3-Layer Stack
+### Where it sits in the three-layer stack
 
 ```
-prompt eng (Stage 2)      → engineer the "string"
-context eng (this stage)  → engineer the "information" inside the window
-harness eng (Stage 7)     → engineer the "runtime" outside the model
+prompt eng (Stage 2)      → engineers the "string"
+context eng (this stage)  → engineers the "information" inside the window
+harness eng (Stage 7)     → engineers the "runtime" outside the model
 ```
 
-See the detailed comparison table in [Stage 2 §Advanced](02-prompt-engineering.md#-advanced-prompt--context--harness-three-layer-engineering).
+See [Stage 2](02-prompt-engineering.en.md) for the full comparison.
 
-### This Stage Covers 2 of the 4 Sub-problems (Lance Martin 2025 framework)
+### This stage covers 2 of the 4 sub-problems (Lance Martin 2025 framing)
 
 | Sub-problem | What it solves | Concrete example | Covered in this stage? |
 |---|---|---|---|
-| **Select** | Which external information to pull into the window | User asks "Which cafe near me is good?" → pull 3 highly rated places from a Yelp DB → put them into the prompt | ✅ Core theme (RAG / vector search / GraphRAG) |
-| **Write** | Which interactions / lessons to write into long-term memory | User said last week "I eat vegan" → write it to memory; when they ask for restaurant suggestions again, retrieve it so you do not recommend meat | ✅ Core theme (memory layers) |
-| **Compress** | How to shrink an overlong conversation | 50 turns exceed 200k tokens → auto-summarize the first 40 turns, keep the last 10 turns verbatim | ⚠️ Partial (here + Stage 7 §Harness `context manager`) |
-| **Isolate** | How to split windows across multiple agents | The supervisor sees the whole picture, workers see only their own slice, and they do not interfere with each other | ❌ Covered in Stage 7 §multi-agent |
+| **Select** | Which external information should be pulled into the window | User asks "Which cafe near me is good?" → pull 3 highly rated places from a Yelp DB → put them into the prompt | ✅ Core theme (RAG / vector search / GraphRAG) |
+| **Write** | Which interactions / lessons should be written into long-term memory | User said last week "I eat vegan" → write it to memory; when they ask for restaurant suggestions again, retrieve it so you do not recommend meat | ✅ Core theme (memory layers) |
+| **Compress** | How to compress an overlong conversation | 50 turns exceed 200k tokens → auto-summarize the first 40 turns, keep the last 10 turns verbatim | ⚠️ Partial (here + Stage 7 §Harness `context manager`) |
+| **Isolate** | How to split windows across multiple agents | The supervisor sees the whole picture, workers only see their own slice, and they do not interfere with one another | ❌ Covered in Stage 7 §multi-agent |
 
-### 4 Commonly Confused Concepts — Clarified in One Table
+### Four concepts commonly mixed up
 
-| Term | What it is (Abstract / Concrete) | Example Tools |
+| Term | What it is (abstract / concrete) | Example tools |
 |---|---|---|
 | **Memory** | An agent's **capability** to remember things across conversations / sessions (abstract concept) | LangChain ConversationBufferMemory / mem0 / Letta |
-| **Embedding** | Converting text into an N-dimensional **vector** for calculable similarity (data transformation) | `sentence-transformers` producing 768-dim vectors / OpenAI ada-002 |
+| **Embedding** | Turning text into an N-dimensional **vector** so similarity becomes computable (data transformation) | `sentence-transformers` producing 768-dim vectors / OpenAI ada-002 |
 | **Vector DB** | The **storage layer** for storing + querying embeddings (infrastructure) | Chroma / Qdrant / Weaviate / pgvector |
 | **RAG** | The **architectural pattern** of "retrieve relevant snippets → insert into prompt → generate" | LlamaIndex / LangChain RAG chain |
 
-→ **Core Distinction**: Memory is a **capability**, Embedding is **data transformation**, Vector DB is **storage**, and RAG is an **architectural pattern**—these 4 are often confused but are actually concepts at 4 different layers.
+→ **Core distinction**: Memory is a **capability**, Embedding is **data transformation**, Vector DB is **storage**, and RAG is an **architectural pattern**. These four are often confused, but they belong to different layers.
 
-### RAG vs Long Context vs Fine-tuning — When to Use What
+### RAG vs Long Context vs Fine-tuning — when to use what
 
-LLMs know your private/domain data through 3 main approaches. **This stage teaches RAG**, but you should know when NOT to use it:
+LLMs can use your private / domain data in three main ways. **This stage teaches RAG**, but you should know when not to use it:
 
-| Option | Suitable For | Not Suitable For | Cost |
+| Option | Suitable for | Not suitable for | Cost |
 |---|---|---|---|
-| **RAG**<br>(External Retrieve) | Large / dynamic / private knowledge bases, requires citations for sources | Tasks requiring full-text reasoning, multi-hop reasoning across documents | Latency of an additional vector search per query |
-| **Long Context**<br>(Directly in Prompt) | Medium-sized documents (< 200k tokens), one-off queries, cross-document reasoning | Large/frequently changing knowledge bases, need for citations | High input token usage per query (even with prompt caching) |
-| **Fine-tuning**<br>(Modifying Model Weights) | Uniform style/format, specific domain language (medical, legal, code) | Knowledge that changes frequently, need for citations, reluctance to train models | Training costs + maintenance costs + model lock-in |
+| **RAG**<br>(external retrieve) | Large / dynamic / private knowledge bases, citation-heavy use cases | Tasks requiring full-text reasoning, cross-document multi-hop reasoning | One extra vector-search latency per query |
+| **Long Context**<br>(directly in prompt) | Medium-sized documents under 200k tokens, one-off queries, cross-document reasoning | Large / frequently changing knowledge bases, citation-heavy use cases | High input-token usage per query, even with prompt caching |
+| **Fine-tuning**<br>(modifying model weights) | Consistent style / format, specific domain language (medical, legal, code) | Knowledge that changes, use cases requiring citations, cases where you do not want to train a model | Training + maintenance + model lock-in costs |
 
-→ **How to Choose**: Start with RAG (lowest cost, easiest to change) → Consider Long Context if RAG is insufficient → Consider Fine-tuning only if both fail. **Proceed to Stage 7 to learn fine-tuning deployment**.
+→ **How to choose**: start with RAG (lowest cost, easiest to change) → if RAG is insufficient, consider Long Context → if both fail, consider Fine-tuning. **Proceed to Stage 7 to learn fine-tuning deployment.**
 
 ## 📌 Learning Objectives
 
 - Build a basic RAG pipeline (chunk → embed → store → retrieve → generate)
-- Identify scenarios where RAG is not suitable (and where it is)
-- Differentiate between short-term, long-term, episodic, and semantic memory
+- Identify where RAG should and should not be used
+- Differentiate between working memory, long-term memory, episodic memory, semantic memory, and procedural memory
 - Understand vector embeddings and similarity search
 - Know when to add advanced RAG techniques (GraphRAG / Contextual Retrieval / Hybrid Search)
 
@@ -139,7 +165,7 @@ After implementing the basic skeleton, complete Exercises 1-4 (Embeddings / Vect
 The following six subsections represent common production RAG enhancements from 2024-2026, grouped by the stage they are added to the pipeline:
 -   **After Retrieve** — GraphRAG / Contextual Retrieval / Hybrid Search & Reranking
 -   **Before Retrieve** (Query Rewriting) — Query Transformations
--   **During Retrieve** (Control Flow) — Self-improving RAG
+-   **During Retrieve** (Control Flow) — Adaptive / Agentic RAG
 -   **Index Structure** — RAPTOR
 -   **2024-2026 Overview** — 17 other techniques worth knowing
 
@@ -194,7 +220,7 @@ The following six subsections represent common production RAG enhancements from 
 
 **Paired Techniques**: The same Anthropic blog also recommends combining this with **Contextual BM25** (using contextual chunks with both vector + BM25) + **reranking**—leading into the next section on §Hybrid Search & Reranking.
 
-### 🎯 Hybrid Search & Reranking — Two Essential Polishes for Production RAG
+### 🎯 Hybrid Search & Reranking — Two Common Reinforcement Components for Production RAG
 
 **Mental Model**:
 -   **Hybrid Search** = Combines vector similarity (semantic match) with BM25/keyword search (literal match), using methods like [RRF (Reciprocal Rank Fusion)](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf) to fuse scores. This addresses the dual blind spots of pure vector search: missing keyword matches due to different phrasing and weak semantic embedding for proper nouns, product IDs, technical terms, or rare words.
@@ -239,9 +265,9 @@ The following six subsections represent common production RAG enhancements from 
 -   [**RAG Fusion (Raudaschl 2023)**](https://github.com/Raudaschl/rag-fusion) — Reference implementation for Multi-Query + RRF.
 -   LangChain includes `MultiQueryRetriever` / LlamaIndex includes `HyDEQueryTransform` built-in.
 
-### 🔁 Self-improving RAG — Self-RAG / CRAG / Adaptive RAG (2024 Focus)
+### 🔁 Adaptive / Agentic RAG — Self-RAG / CRAG / Adaptive RAG (2024 Focus)
 
-**Mental Model**: All RAG techniques above assume a fixed pipeline: "query → retrieve → generate". Self-improving RAG transforms this into an **agentic loop** where the LLM decides whether to retrieve, evaluates retrieval quality, and adjusts the query if necessary. **This is a major focus of RAG research in 2024.**
+**Mental Model**: All RAG techniques above assume a fixed pipeline: "query → retrieve → generate". Adaptive / agentic RAG turns this into an **agentic loop** where the LLM decides whether to retrieve, evaluates retrieval quality, and adjusts the query if necessary. **This is a major focus of RAG research in 2024.**
 
 | Technique | How it Self-Corrects | Paper |
 |---|---|---|
@@ -298,7 +324,7 @@ Advanced RAG research in 2024-2025 is converging on **3 main themes**:
 
 1.  **🧠 Merging KG + Memory** — Moving from flat vector stores to "structured, evolving, associative" knowledge representations. Representatives: [**HippoRAG 2**](https://arxiv.org/abs/2502.14802) (Hippocampus-inspired, KG + PageRank, cross-document multi-hop), A-MEM, KAG.
 2.  **🎬 Multimodal RAG** — Moving from text retrieval to native image / video / table retrieval. Representatives: [**ColPali**](https://arxiv.org/abs/2407.01449) (direct image embedding from PDF pages, bypassing OCR), TV-RAG, MegaRAG.
-3.  **🤖 Agentic RAG** — Retrieval evolves from a fixed pipeline into a tool within an agent loop (agent decides how many times/how to retrieve). Representatives: A-RAG, Self-RAG (covered in §Self-improving RAG).
+3.  **🤖 Agentic RAG** — Retrieval evolves from a fixed pipeline into a tool within an agent loop (the agent decides how many times and how to retrieve). Representatives: A-RAG, Self-RAG (covered in §Adaptive / Agentic RAG).
 
 **2 Other Areas Worth Exploring**:
 -   **🛡 RAG Security** — Corpus poisoning / prompt injection become critical in production considerations. Representatives: [RAGPart / RAGMask](https://arxiv.org/abs/2512.24268).
@@ -358,76 +384,92 @@ RAG addresses "retrieve relevant snippets from **external knowledge bases**"—b
 
 ## 🧠 What is Memory + How to Design It
 
-> 📺 **Visual Learning**: [Hung-Yi Lee 2025 Lecture 2 — Understanding AI Agent Principles in One Lecture (Includes Read/Write/Reflection Memory Modules)](https://www.youtube.com/watch?v=M2Yg1kwPpts) (NTU Machine Learning in the Era of Generative AI 2025)
+> 📺 **Visual Learning**: [Hung-Yi Lee 2025 Lecture 2 — Understanding AI Agent Principles in One Lecture (Includes Read / Write / Reflection memory modules)](https://www.youtube.com/watch?v=M2Yg1kwPpts) (NTU Machine Learning in the Era of Generative AI 2025)
 
-### Short-term vs. Long-term Memory — Establishing a Mental Model First
+### Working memory vs. long-term memory — two time scales
 
-| Aspect | Short-term Memory | Long-term Memory |
+| Aspect | Working memory / short-term context | Long-term memory / persistent memory |
 |---|---|---|
-| **Chinese Term** | 短期記憶 | 長期記憶 |
-| **Source** | Current conversation content | Information preserved across sessions or over a long period |
-| **Duration** | Short, typically limited to the current session | Long, can span across sessions |
-| **Technical Basis** | Context window / prompt | Memory store / user profile / vector database |
-| **Suitable For** | Task details, recent conversation points | Stable preferences, long-term goals, background information |
-| **Limited by Context Length?** | Yes, due to model's limited view of content | Less so, as it can be stored externally and a small relevant piece retrieved and placed back into context |
-| **Real-world Analogy** | Phone verification code just received, the previous sentence in an ongoing conversation | Learned knowledge, library, knowledge base, books read |
+| **Chinese term** | 工作记忆 / 短期上下文 | 长期记忆 / 持久记忆 |
+| **Core meaning** | Information visible during this task or this conversation | Information stored externally and retrievable across sessions later |
+| **Duration** | Short, usually limited to the current session | Long, can span sessions |
+| **Technical basis** | Context window / prompt | Memory store / user profile / vector database |
+| **Best for** | Task details, what was just said | Stable preferences, long-term goals, background knowledge |
+| **Limited by context length?** | Yes, because the model can only see a limited amount at once | Much less, because it can be stored externally and only a relevant slice gets retrieved |
+| **Real-world analogy** | A verification code you just received, the previous sentence in an active conversation | Knowledge you have deeply learned, a library, a knowledge base, books you have read |
 
-Here, a "session" can be understood as a continuous interaction, such as a single chat conversation, a specific task, or a single agent execution.
+→ In agents, "short-term memory" is more precisely **working memory**. It is not external storage; it is whatever is currently visible inside the prompt / context window.
 
-### 3 Design Patterns (When to Use What) ⭐ Essential for Track B
+### Episodic / Semantic / Procedural memory — three content types
 
-**Not all agents require an external memory store. Choosing the wrong memory architecture can lead to 10x token usage for the same effect.**
+**Important**: working / long-term is a **time axis**. The three categories below are a **content axis**. The two classifications are **orthogonal, not mutually exclusive**. Long-term memory can contain episodic + semantic + procedural memory at the same time.
 
-This is the mental model to establish before starting exercises. The exercises (1-5) in the following section simulate "Pattern 3: Vector Store", but you might not need such complexity in production.
+| Type | Meaning | Core idea |
+|---|---|---|
+| **Episodic memory** | Experience memory | Concrete past tasks, interactions, or failures |
+| **Semantic memory** | Fact memory | Stable knowledge, user preferences, background facts |
+| **Procedural memory** | Skill memory | Rules, tools, workflows, and skills for how the agent acts |
 
-| Pattern | Suitable Scenarios | Implementation | Cost |
+→ These three types map to the [CoALA framework](#advanced-coala-framework--a-4-layer-taxonomy-for-agent-memory). **Reflexion** is a classic episodic-memory pattern because it accumulates success / failure lessons from prior trials.
+
+Here, a "session" can be understood as one continuous interaction: a chat, a task run, or a single agent execution.
+
+### 3 design patterns (when to use what) ⭐ Essential for Track B
+
+**Not all agents need an external memory store. Choosing the wrong memory architecture can cost 10x more tokens for the same result.**
+
+This is the mental model to establish before starting the exercises. The exercises below focus on Pattern 3 (vector store), but production systems may not need that much complexity.
+
+| Pattern | Suitable scenarios | How it works | Cost |
 |---|---|---|---|
-| **1. Naive Buffer**<br>(Stuff Everything in Context) | Short conversations, ≤ 10 turns, agent doesn't need to remember across sessions | Send the entire conversation history into the prompt every time | Linearly increasing; burns tokens quickly |
-| **2. Summary + Recent**<br>(Summarize old parts + Keep last N turns) | Medium-to-long conversations, ~50 turns, want to compress history without losing too much | Every N turns, ask the LLM to summarize older history into one part; Prompt = `summary + last N turns` | Moderate; involves LLM summarization cost |
-| **3. Vector Store + Retrieval**<br>(External Store + Semantic Search per turn) | Cross-session interactions, knowledge base scenarios, agent needs to "recall" distant information | Embed past messages → Store in Vector DB → Retrieve relevant snippets per query and include in prompt | High (vector computation + storage), but stable token usage |
+| **1. Naive buffer**<br>(stuff everything into context) | Short conversations, ≤ 10 turns, no cross-session memory requirement | Send the entire history into the prompt every time | Grows linearly and burns tokens quickly |
+| **2. Summary + recent**<br>(summarize old parts + keep the last N turns) | Medium-to-long conversations, ~50 turns, want compression without losing too much | Every N turns, ask the LLM to summarize older history; prompt = `summary + last N turns` | Moderate, with extra summarization cost |
+| **3. Vector store + retrieval**<br>(external store + semantic search each turn) | Cross-session interaction, knowledge-base scenarios, agents that need to "recall" distant information | Embed past messages → store them in a vector DB → retrieve relevant snippets per query and put them back into the prompt | High (vector compute + storage), but token usage stays stable |
 
-**How to Choose**:
+**How to choose**:
 
--   Conversational chatbots without cross-session needs → **Pattern 1**.
--   Agents with long conversations needing to recall today's discussion → **Pattern 2**.
--   Agents with cross-session needs + knowledge base (common scenario for this stage's exercises) → **Pattern 3**.
--   Large-scale production agents → Typically **a hybrid** of Pattern 2 for recent history and Pattern 3 for long-term memory.
+- Conversational chatbots without cross-session needs → **Pattern 1**
+- Agents with long conversations that need to remember what was discussed today → **Pattern 2**
+- Agents with cross-session needs + a knowledge base (the common scenario in this stage's exercises) → **Pattern 3**
+- Large production agents → usually **a hybrid**: recent history uses Pattern 1/2, long-term memory uses Pattern 3
 
-> 💡 **Track B Focus**: When building multi-agent systems in Stage 7, each agent will likely have its "own memory" + "shared memory"—requiring a combination of **Patterns 2 + 3**. Understanding these 3 patterns thoroughly in this stage will prevent memory design bottlenecks in Stage 7.
+> 💡 **Track B focus**: in Stage 7 multi-agent systems, each agent usually has "its own memory" + "shared memory". In practice that means a **Pattern 2 + Pattern 3 hybrid**. If you internalize these three patterns now, Stage 7 memory design becomes much easier.
 
-### ⭐ 5 Mainstream Production Memory Layers (Choose by Use Case)
+### ⭐ 5 mainstream memory layers that can ship (choose by use case)
 
-After understanding the 3 patterns, you don't need to build memory stores from scratch in production. Here are 5 active, Apache-2.0 / MIT licensed frameworks, each excelling in specific areas:
+> Star counts and benchmarks change. The point here is not ranking. The point is understanding the design orientation of each memory layer.
 
-| Framework | Stars | License | Primary Use Case | Key Features |
+After learning the three patterns, you do not need to build a memory store from scratch in production. These five are all actively maintained Apache-2.0 / MIT options, each with a different strength:
+
+| Framework | Stars | License | Primary use case | Key features |
 |---|---|---|---|---|
-| [**agentmemory**](https://github.com/rohitg00/agentmemory) | 7.7k★ | Apache-2.0 | **Coding agent cross-session memory** | MCP-universal (integrates with Claude Code, Cursor, Gemini CLI, Codex, Hermes, OpenClaw), 95.2% R@5, 92% token saving, 51 MCP tools + 12 auto hooks, benchmark-driven. |
-| [**mem0**](https://github.com/mem0ai/mem0) | 55.6k★ | Apache-2.0 | **Chatbot / Personal Assistant user-level memory** | Auto fact extraction + forgetting + namespace, production-tested, largest community. |
-| [**Letta**](https://github.com/letta-ai/letta) (formerly MemGPT) | 22.7k★ | Apache-2.0 | **Long-session agents** (monthly basis) | OS-style paging memory (working + archival layers), persona stability, original MemGPT paper origin. |
-| [**Zep**](https://github.com/getzep/zep) | 4.6k★ | Apache-2.0 | **Temporal KG-based memory** | Builds conversation history into a temporal knowledge graph, enabling time-aware reasoning and audit trails. |
-| [**LangMem**](https://github.com/langchain-ai/langmem) | 1.4k★ | MIT | **LangChain-native memory** | Official LangChain memory library, integrates directly with LangGraph, suitable for existing LangChain stacks. |
+| [**agentmemory**](https://github.com/rohitg00/agentmemory) | 7.7k★ | Apache-2.0 | **Coding-agent cross-session memory** | MCP-universal (Claude Code / Cursor / Gemini CLI / Codex / Hermes / OpenClaw), 95.2% R@5, 92% token saving, 51 MCP tools + 12 auto hooks, benchmark-driven |
+| [**mem0**](https://github.com/mem0ai/mem0) | 55.6k★ | Apache-2.0 | **Chatbot / personal-assistant user-level memory** | Auto fact extraction + forgetting + namespace, production-tested, largest community |
+| [**Letta**](https://github.com/letta-ai/letta) (formerly MemGPT) | 22.7k★ | Apache-2.0 | **Long-session agents** (measured in months) | OS-style paging memory (working + archival), persona stability, MemGPT paper lineage |
+| [**Zep**](https://github.com/getzep/zep) | 4.6k★ | Apache-2.0 | **Temporal KG-based memory** | Builds conversation history into a temporal KG for time-aware reasoning and audit trails |
+| [**LangMem**](https://github.com/langchain-ai/langmem) | 1.4k★ | MIT | **LangChain-native memory** | Official LangChain memory library, integrates directly with LangGraph, useful when you are already committed to the LangChain stack |
 
-**How to Choose**:
--   Building coding agents → **agentmemory** (MCP-native, aligns perfectly with Stage 5 ecosystem).
--   Developing chatbots / personal assistants → **mem0** (most mature, largest community).
--   Creating long-running agents (weeks/months) → **Letta** (OS-paging excels here).
--   Requiring time-series data + audit trails → **Zep** (temporal KG).
--   Already committed to LangChain stack → **LangMem** (avoid framework hopping).
+**How to choose**:
+- Building coding agents → **agentmemory** (MCP-native, aligned with the Stage 5 ecosystem)
+- Building chatbots / personal assistants → **mem0** (most mature, largest community)
+- Building long-running agents across weeks or months → **Letta** (strong OS-paging model)
+- Need time-aware reasoning + audit trails → **Zep** (temporal KG)
+- Already committed to the LangChain stack → **LangMem** (avoid framework hopping)
 
-**Additional Official Docs**: [Anthropic Memory Tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/memory-tool) (Claude's official tool-based memory, file-based, direct API calls), [LangChain Memory Concepts](https://python.langchain.com/docs/concepts/memory/) (comparison of memory classes within the framework).
+**Additional official docs**: [Anthropic Memory Tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/memory-tool) (Claude's official tool-based memory, file-based, direct API calls), [LangChain Memory Concepts](https://python.langchain.com/docs/concepts/memory/) (comparisons of memory classes within the framework).
 
 ### Advanced: CoALA Framework — A 4-Layer Taxonomy for Agent Memory
 
-[**Sumers et al. 2023 — Cognitive Architectures for Language Agents**](https://arxiv.org/abs/2309.02427) categorizes agent memory into 4 types, forming the most common mental model today:
+[**Sumers et al. 2023 — Cognitive Architectures for Language Agents**](https://arxiv.org/abs/2309.02427) categorizes agent memory into four types. This is one of the most useful mental models in practice:
 
-| Type | Stores What | Corresponding Example |
+| Type | What it stores | Corresponding example |
 |---|---|---|
-| **Working Memory** | Current task context | LLM context window itself |
-| **Episodic Memory** | Specific experiences from past tasks | Reflexion's self-reflection records, past trajectories |
-| **Semantic Memory** | Abstract facts / knowledge | RAG knowledge base, user profiles, preferences |
-| **Procedural Memory** | How to perform actions / skills | Tool definitions, [Skills (Stage 5.3)](05-claude-code-ecosystem.md#53--skillsclaude-code-的行為層-claude-code-生態最關鍵的一層) |
+| **Working memory** | Current task context | The LLM context window itself |
+| **Episodic memory** | Specific experiences from past tasks | Reflexion records, prior trajectories |
+| **Semantic memory** | Abstract facts / knowledge | RAG knowledge bases, user profiles, preferences |
+| **Procedural memory** | How to perform actions / skills | Tool definitions, [Skills (Stage 5.3)](05-claude-code-ecosystem.md#53--skillsclaude-code-的行為層-claude-code-生態最關鍵的一層) |
 
-→ **Why it's Useful**: The 3 patterns discussed (buffer / summary / vector) primarily handle working + episodic memory. Production agents need to design for all 4 layers—CoALA serves as a checklist to identify which layers your agent might be missing.
+→ **Why it is useful**: the three patterns above (buffer / summary / vector) mostly handle working + episodic memory. Production agents usually need to account for all four layers. CoALA is a practical checklist for spotting which layer your agent is missing.
 
 ### Advanced: Generative Agents — Triple Score Weighting (Classic Case Study)
 
@@ -437,7 +479,7 @@ The [**Park et al. 2023 — Generative Agents: Smallville**](https://arxiv.org/a
 -   **Recency**: Exponential decay based on time.
 -   **Relevance**: Embedding similarity to the current query.
 
-The final score = `α·importance + β·recency + γ·relevance`, ranked to retrieve top-k. **This is the conceptual framework for many production memory layers (mem0 / Letta) from 2024-2025.**
+The final score = `α·importance + β·recency + γ·relevance`, ranked to retrieve top-k. **This is the conceptual backbone used by many 2024-2025 production memory layer systems (mem0 / Letta).**
 
 > 💻 **Official Code**: [joonspk-research/generative_agents](https://github.com/joonspk-research/generative_agents) ★ The paper's accompanying Smallville simulation code repository. Refer here for implementing memory streams and triple-score retrieval.
 
@@ -466,7 +508,7 @@ Memory research in 2024-2026 is focusing on **3 main themes**:
 | **MemGPT → Letta GA** | OS-paging memory, working/archival layers, strong for long sessions | [Packer et al. 2023](https://arxiv.org/abs/2310.08560) → Letta GA |
 | **MemoryBank** | Ebbinghaus forgetting curve, accessed memories strengthened, unused ones decay | [Zhong et al. 2023](https://arxiv.org/abs/2305.10250) |
 | **MemoryLLM** | Self-updatable memory parameters embedded within the model weights, not context | [Wang et al. 2024](https://arxiv.org/abs/2402.04624) |
-| **mem0** (See §3 Mainstream Memory Layers) | Production memory layer, auto fact extraction + forgetting | [mem0ai/mem0](https://github.com/mem0ai/mem0) |
+| **mem0** (See §5 Mainstream Memory Layers) | A production memory layer with auto fact extraction + forgetting | [mem0ai/mem0](https://github.com/mem0ai/mem0) |
 | **Memory for Autonomous LLM Agents** (Survey) | Formalizes write-manage-read loop, covers 2022-2026 advancements | [arXiv:2603.07670](https://arxiv.org/abs/2603.07670) ⭐ 2026 |
 | **From Storage to Experience** (Survey) | Evolutionary framework: Storage → Reflection → Experience stages | [arXiv:2605.06716](https://arxiv.org/abs/2605.06716) ⭐ 2026 |
 | **ScrapMem** | Bio-inspired on-device memory, "Optical Forgetting" reduces resolution of old memories | [arXiv:2605.03804](https://arxiv.org/abs/2605.03804) ⭐ 2026-05 |
@@ -564,7 +606,7 @@ Actor → Critic → Actor    (Single-round loop, consistent with Stage 3 §Refl
 **Reference Implementations**:
 -   [**noahshinn/reflexion**](https://github.com/noahshinn/reflexion) — Reference implementation by the paper's lead author (includes full episodic memory workflow).
 -   [**LangChain — Reflexion**](https://langchain-ai.github.io/langgraph/tutorials/reflexion/reflexion/) — LangGraph version, directly integrable with the RAG pipeline exercise in this stage.
--   [**mem0**](https://github.com/mem0ai/mem0) (listed above) + [**Letta**](https://github.com/letta-ai/letta) (listed above) — Production memory layers that can directly serve as episodic stores for Reflexion.
+-   [**mem0**](https://github.com/mem0ai/mem0) (listed above) + [**Letta**](https://github.com/letta-ai/letta) (listed above) — Memory layers that can directly serve as episodic stores for Reflexion.
 
 > 💡 **Delineation with Stage 3 §Reflection**:
 > -   To understand "how the reflection loop works and runs in a single turn" → Stage 3 §Reflection.
@@ -664,7 +706,7 @@ Unsure where to start with tool selection? Here are commonly used combinations i
 |---|---|---|
 | **First RAG Implementation** (Quickest Start) | [Chroma](https://github.com/chroma-core/chroma) + [LlamaIndex](https://github.com/run-llama/llama_index) | Local-first, zero-ops, beginner-friendly quickstart. Default for Stage 6 exercises. |
 | **Enterprise-Grade RAG Framework** (Alternative to LangChain/LlamaIndex) | [Haystack (deepset)](https://github.com/deepset-ai/haystack) ★ 25.2k Apache-2.0 | Open-source by deepset, production-oriented orchestration, mature for enterprise NLP scenarios. |
-| **Agent Long-Term Memory** (See §3 Mainstream Memory Layers) | [agentmemory](https://github.com/rohitg00/agentmemory) / [mem0](https://github.com/mem0ai/mem0) / [Letta](https://github.com/letta-ai/letta) / [Zep](https://github.com/getzep/zep) / [LangMem](https://github.com/langchain-ai/langmem) | Detailed above in §5 Mainstream Production Memory Layers. |
+| **Agent Long-Term Memory** (See §5 mainstream memory layers that can ship) | [agentmemory](https://github.com/rohitg00/agentmemory) / [mem0](https://github.com/mem0ai/mem0) / [Letta](https://github.com/letta-ai/letta) / [Zep](https://github.com/getzep/zep) / [LangMem](https://github.com/langchain-ai/langmem) | Detailed above in §5 mainstream memory layers that can ship. |
 | **RAG / Memory Evaluation** (Must-Have) | [ragas](https://github.com/explodinggradients/ragas) ★ 13.9k | Standard RAG evaluation tool, 8+ metrics, reference-free + reference-based. |
 | **Production-Scale RAG** (Millions of Docs) | [Qdrant](https://github.com/qdrant/qdrant) + LlamaIndex | Rust-based vector DB, faster than Chroma at scale. |
 | **Existing Postgres Environment** | [pgvector](https://github.com/pgvector/pgvector) | Postgres extension, unified SQL + vector in one DB, simplest ops. |
@@ -714,4 +756,4 @@ Can you:
 - [ ] Differentiate between "giving an agent memory" and "using RAG"?
 - [ ] Explain where RAG and Memory complement each other (refer to the table in §From RAG to Memory)?
 
-If yes → Proceed to [Stage 7 — Multi-Agent · Advanced Applications](07-multi-agent-production.md).
+If yes → Proceed to [Stage 7 — Multi-Agent · Productionization](07-multi-agent-production.md).

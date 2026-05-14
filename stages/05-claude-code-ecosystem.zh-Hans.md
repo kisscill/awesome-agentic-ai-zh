@@ -1,4 +1,4 @@
-# Stage 5 — Claude Code 生态系 ⭐⭐
+# Stage 5 — Claude Code 生态系（Claude Code Ecosystem）⭐⭐
 
 > [繁體中文](./05-claude-code-ecosystem.md) | **简体中文** | [English](./05-claude-code-ecosystem.en.md)
 

@@ -1,4 +1,4 @@
-# For Everyday Users — Specialized Branch
+# Extension Path: For Everyday Users
 
 > [繁體中文](./for-everyday-users.md) | [简体中文](./for-everyday-users.zh-Hans.md) | **English**
 

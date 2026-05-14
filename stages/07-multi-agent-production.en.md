@@ -1,4 +1,4 @@
-# Stage 7 — Multi-Agent · Advanced Applications
+# Stage 7 — Multi-Agent · Productionization
 
 > [繁體中文](./07-multi-agent-production.md) | [简体中文](./07-multi-agent-production.zh-Hans.md) | **English**
 
@@ -6,62 +6,69 @@
 
 > 💡 High density of terminology (multi-agent / handoff / eval / observability / guardrails...) → Refer to [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent).
 
-> 📋 **Chapter Composition**: [What is Multi-Agent · Advanced Applications (Positioning) + Discipline Lineage + When to use multi-agent] → Learning Objectives → Entry Conditions → Required Reading → Harness Engineering (**8 core components including Cost/Latency**) → Hands-on Exercises (including Exercise 6 Cost Optimization) → **Agent Benchmark Landscape + Berkeley Reward-Hacking Warning (2026)** → Recommended Tools → Featured Projects → Self-Check
-> 🔑 **Key Terms**: See [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent) (multi-agent / orchestration / handoff / eval / observability / harness (the runtime / scaffolding around the LLM))
+> 📋 **Chapter Composition**: [What is Multi-Agent · Productionization (Positioning) + Three-layer engineering split + When to use multi-agent] → Learning Objectives → Entry Conditions → Required Reading → Harness Engineering (**8 core components including Cost/Latency**) → Hands-on Exercises (including Exercise 6 Cost Optimization) → **Agent Benchmark Landscape: how to read it, not just the leaderboard** → Recommended Tools → Featured Projects → Self-Check
+> 🔑 **Key Terms**: See [`resources/glossary.md` §4 + §6](../resources/glossary.md#4-multi-agent) (multi-agent / orchestration / handoff / eval / observability / harness (the execution and control layer around the model))
 
-This is the final stage. You are transitioning from "I can build an agent" to "I can make an agent **truly stable for others to use**"—with multiple agents collaborating, with eval, with observability, and ready for deployment. **"Advanced Applications / production" ≠ enterprise scale**—as long as an agent can produce stable output and be run by others, it falls within the scope of this stage.
+This is the final stage. You are moving from "I can build an agent" to "I can make an agent **truly stable for people to use**"—with multiple agents collaborating, with eval, with observability, and deployable to a usable environment. **"Productionization" ≠ enterprise scale**—as long as an agent can produce stable output and be used by others, it falls within the scope of this stage.
 
-## 🎯 What is Multi-Agent · Advanced Applications (Positioning)
+## 🎯 What Is Multi-Agent · Productionization (Positioning)
 
-**This stage = How multiple agents collaborate + How to take an agent from prototype to a state of stable usability.** Three sentences to clarify the scope:
+**This stage = how multiple agents collaborate + how to push an agent from prototype to the point where others can use it stably.** Three sentences clarify the scope:
 
-- **It's not just about learning frameworks**—Stage 4 already taught how to choose frameworks.
-- **It doesn't have to be enterprise scale**—as long as an agent can be used by others, it's considered "production".
-- **The core is harness engineering**—8 runtime components + eval + observability + cost / latency control.
+- **It is not just about learning frameworks** — Stage 4 already taught how to choose frameworks
+- **It does not have to be enterprise scale** — as long as an agent can be used by others, it counts as productionization
+- **The core is harness engineering** — 8 core components + eval + observability + cost / latency control
 
 **Division of labor with adjacent stages**:
 
-- **Stage 4** = How to choose a single-agent framework, patterns like ReAct / Plan-Execute.
-- **This stage** = **Multi-agent collaboration** + **harness engineering** (runtime engineering) + **deploy / observability / eval**.
+- **Stage 4** = how to choose a single-agent framework, patterns like ReAct / Plan-Execute
+- **This stage** = **multi-agent collaboration** + **harness engineering** (execution-system engineering) + **deployment to a usable environment / observability / eval**
 
-**Discipline lineage** (You are currently at the 3rd layer = the top layer):
+### The three-layer engineering split: Prompt → Context → Harness
 
-| Layer | Discipline | What it Solves | Which Stage |
-|---|---|---|---|
-| 1 | **Prompt Engineering** | How to ask a single LLM call accurately | [Stage 2](02-prompt-engineering.md) |
-| 2 | **Context Engineering** | How to dynamically assemble prompts across multiple calls | [Stage 6](06-memory-rag.md) |
-| **3** | **Harness Engineering**<br>(**This stage**) | **How to wrap multiple LLM calls into a runtime that can be run by people** | **This stage** |
+Engineering work can be split into three layers, corresponding to different positions in the stack (not the difference between one call and many calls):
 
-**This stage's 3 problem domains**:
+| Layer | Concept | Core question | Unit of concern | Corresponding stage |
+|---|---|---|---|---|
+| 1 | **Prompt Engineering** | How should I ask this time? | **single LLM call** | [Stage 2](02-prompt-engineering.md) |
+| 2 | **Context Engineering** | What information should the model receive this time? | **context across multiple interactions** | [Stage 6](06-memory-rag.md) |
+| **3** | **Harness Engineering**<br>(**This stage**) | How does the whole workflow run? | **executable LLM workflow / system** | **This stage** |
+
+**Plain-language difference**:
+- **Prompt** = design a good way of asking so the model answers correctly this time
+- **Context** = dynamically decide which background, memory, documents, and tool results to include so the model understands the current situation
+- **Harness** = connect prompt, context, tools, state, flow control, and error handling into a system that can actually run
+
+**This stage's 3 core questions**:
 
 1.  **Multi-agent collaboration** — debate / planner-executor / peer review / handoff / supervisor-worker patterns
-2.  **Harness Engineering** — agent loop / tool registry (the list of tools an agent can call + their interfaces) / context manager / safety / retry / telemetry / eval / cost (8 components, detailed below)
-3.  **Advanced applications** (production-grade) — eval harness / observability / cost & latency optimization / deploy
+2.  **Harness Engineering** — agent loop / tool registry (the list of tools an agent can call + interface definitions) / context manager / safety / retry / telemetry / eval / cost (8 core components, detailed below)
+3.  **Productionization** — eval harness / observability / cost & latency optimization / deployment to a usable environment
 
 **Division of labor with Stage 5** (to avoid confusion):
 
 | Comparison | What's Covered There | What's Covered in This Stage |
 |---|---|---|
 | **Stage 5.5 Subagents** | Claude Code's native subagent mechanism (markdown-based, no coding) | General multi-agent frameworks (autogen / crewAI / langgraph, vendor-agnostic) |
-| **Stage 5.6 Claude Code source** | Dissection of Claude Code source (a reference harness case study) | General principles of Harness engineering (discipline-level, not tied to a specific vendor) |
+| **Stage 5.6 Claude Code source** | Claude Code source dissection (reference implementation case study) | General harness engineering principles (not tied to a specific vendor) |
 
 ### ⚠ But do you really need multi-agent?
 
-**Multi-agent is not the default; it's a last resort.** **Both Anthropic and Cognition, two frontier labs, stated clearly in 2024-2025: 90% of use cases should not use multi-agent**—forcing it results in **3-10× token costs, difficult debugging, and severe context fragmentation (context gets split across multiple agents, so no one sees the full picture)**.
+**Multi-agent is not the default; it is a design you use only when the task truly needs it.** In most scenarios, you should first try a simple workflow or a single agent; **only when the task is naturally decomposable, needs parallel exploration, a single context is not enough, or explicit role separation is needed, is multi-agent worth introducing**. Forcing it brings **3-10× token cost, difficult debugging, and severe context fragmentation (context gets split across multiple agents, and no one sees the whole picture)**.
 
-| Stance | Source | Core Argument |
+| Stance | Source | Core argument |
 |---|---|---|
-| **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents), [How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | For most scenarios, a simple workflow + single agent is enough; multi-agent is only truly helpful for "**research-oriented / parallel exploration**" tasks. |
-| **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | The context fragmentation in multi-agent systems is severe, and maintaining shared state is painful; consider it only after exhausting single-agent + long-context options. |
+| **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents), [How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | Multi-agent is suitable for **high-value tasks that benefit from parallel exploration, need many tools, or exceed a single context**; token usage can be many times higher than a single chat. |
+| **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | Context fragmentation is severe in multi-agent systems, and maintaining shared state is painful; only consider it after exhausting single-agent + long-context options. |
 
-Only consider multi-agent when you see these **4 clear signals** (for details, see [Stage 4 § When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it)):
+Only use multi-agent when you see these **4 clear signals** (for details, see [Stage 4 § When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it)):
 
-1.  **Natural Task Decomposition** — A large task has clear sub-steps that can be completed step-by-step → Sequential / Planner-Executor
-2.  **Token Explosion** — A single agent's prompt cannot fit all tool descriptions / context → Supervisor-Worker
-3.  **Role Conflict** — Having the same LLM act as both writer and critic leads to self-justification → Debate / Peer review
-4.  **Parallel Acceleration** — Running 3 research sub-tasks simultaneously reduces wall-clock time to 1/3 → Parallel / Map-Reduce
+1.  **Natural Task Decomposition** — A large task has clear sub-steps and can be completed step by step → Sequential / Planner-Executor
+2.  **Token Explosion** — A single-agent prompt cannot fit all tool descriptions / context → Supervisor-Worker
+3.  **Role Conflict** — Using the same LLM as both writer and critic leads to self-justification → Debate / Peer review
+4.  **Parallel Acceleration** — Running 3 research subtasks at the same time reduces wall-clock time to 1/3 → Parallel / Map-Reduce
 
-**None of these 4 signals present?** → A single agent + good prompts + tool use is sufficient. Don't force multi-agent. **The harness engineering part of this stage (8 components / eval / observability) is applicable even if you end up using a single agent**—so this stage is still required reading even if you decide against multi-agent.
+**None of these 4 signals present?** → A single agent + good prompts + tool use is enough. Don't force multi-agent. **The harness engineering part of this stage (8 components / eval / observability) still applies even if you end up using a single agent**—so this stage is still required reading even if you decide against multi-agent.
 
 ## 📌 Learning Objectives
 
@@ -90,31 +97,35 @@ If not, go back and complete the previous stages. This stage is about "combining
 5.  [**ai-boost/awesome-harness-engineering**](https://github.com/ai-boost/awesome-harness-engineering) (★ 780+) — A collection of tools / patterns / eval / memory / MCP / observability for agent harnesses
 6.  [**ZhangHanDong/harness-engineering-from-cc-to-ai-coding**](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding) (★ 1.3k+) — Learning harness design from Claude Code's source code (in Chinese)
 
-## 🏗 Harness Engineering — The Engineering of Production Agent Runtimes ⭐ Core Concept of This Stage
+## 🏗 Harness Engineering — Engineering Design for a Production Agent Runtime ⭐ Core Concept of This Stage
 
-### Discipline Positioning: The Three Layers of Prompt → Context → Harness
+### Positioning: The execution and control layer around the model
 
-To turn an LLM into a usable agent, there are 3 **engineering disciplines**. **They map to different places in the stack**—not "one call vs. many calls."
+To turn an LLM into a usable agent, you usually run into three layers of engineering problems. These three layers correspond to different engineering positions, not simply "one call" versus "many calls."
 
-> 💡 Simon Willison 2025: "coding agent = LLM + harness"; a harness is all the code **that is not the model itself**. OpenAI used "Harness Engineering" as an official term in 2025.
+> 💡 **Simon Willison 2025**: "coding agent = LLM + harness"; harness = all the code **that is not the model itself**.
+>
+> 💡 **OpenAI also uses the term "Harness Engineering" in 2026** (see the [OpenAI Harness Engineering article](https://openai.com/index/harness-engineering), published 2026-02).
 
-| Discipline | What you are engineering | Where to learn it |
+| Layer | What you are engineering | Where to learn it |
 |---|---|---|
 | **1. Prompt Engineering** | The **string** sent into the LLM (system prompt / few-shot / format) | [Stage 2](02-prompt-engineering.md) |
 | **2. Context Engineering** | The **information** placed inside the window (RAG / memory / tool defs / history assembly) | [Stage 6](06-memory-rag.md) |
-| **3. Harness Engineering**<br>(**This section**) | The **runtime outside the LLM** (loop / retry / sandbox / observability / deploy) | This stage |
+| **3. Harness Engineering**<br>(**This section**) | The **execution and control layer around the model** (loop / retry / sandbox / observability / deployment) | This stage |
 
 **How do you tell which layer you are working on? Ask**:
 
 1. Am I changing the **string itself**? → Prompt engineering
 2. Am I changing the **information put into the window**? → Context engineering
-3. Am I changing the **code around the model call**? → Harness engineering
+3. Am I changing the **surrounding program that calls the model**? → Harness engineering
 
-→ The 3 layers are **orthogonal**: a one-call RAG app is still doing context engineering (the point is how you assemble the window); a 50-call chatbot with no retrieval is still only doing prompt engineering.
+→ The three layers are **orthogonal**: a one-call RAG app is still doing context engineering (the key is how the window is assembled); a 50-call chatbot with no retrieval is still only doing prompt engineering.
 
 ### The 8 Core Components of a Harness
 
-**A Harness = The "tool belt" for wrapping an LLM agent into a production system**. A production agent runtime consists of these 8 components (the first 6 are built into the runtime, the 7th, eval, is a plug-in tool, and the 8th, cost/latency, is a cross-cutting concern across all layers):
+**Harness Engineering (agent runtime design) = connecting the LLM, tools, memory, state, workflow control, error handling, eval, observability, and deployment into an executable, observable, maintainable agent system.**
+
+→ Everything that is **not part of the model weights**, and is not just the prompt string itself, falls under harness. A production-grade agent runtime includes these 8 core components (the first 6 are built into the runtime, the 7th, eval, is a plug-in tool, and the 8th, cost / latency, is a cross-cutting concern):
 
 | Component | What it Does | Corresponding Exercise in this Stage |
 |---|---|---|
@@ -122,27 +133,27 @@ To turn an LLM into a usable agent, there are 3 **engineering disciplines**. **T
 | **Tool registry** | Dynamic tool dispatch, permission gates, sandboxing | (Present in every framework / SDK) |
 | **Context manager** | Message history management, context window control, auto-compaction | Stage 6 + This stage's Exercise 4 SDK |
 | **Safety layer** | Permission prompts, sandboxed execution, interception of destructive ops | (Built into Claude Code, customizable in SDKs) |
-| **Retry / recovery** | How to handle tool failure (exception vs. LLM self-reflection on errors) | Exercise 4 SDK Advanced |
+| **Retry / recovery** | How to handle tool failure (exception vs. the LLM reflecting on the error itself) | Exercise 4 SDK Advanced |
 | **Telemetry / Observability** | Metrics, logging, token counting, trace export | **Exercise 3 Observability** |
 | **Eval harness** | Regression testing, quality gates, A/B testing | **Exercise 2 Eval** |
 | **Cost / Latency optimization** ⭐ Required for 2024-2026 | Prompt caching, model routing, thinking budget, batching, semantic cache | **Exercise 6 Cost optimization** (New) |
 
-**Key difference between Framework vs. Harness**:
-- **Framework** ([Stage 4](04-agent-frameworks.md)) defines the **API** — what the interface you call looks like.
-- **Harness** (This section) defines the **runtime** — how it runs, how it recovers, how it's observed.
+**Framework vs. Harness: key difference**:
+- **Framework** ([Stage 4](04-agent-frameworks.md)) defines the **API** — what the interface you call looks like
+- **Harness** (this section) defines the **runtime** — how it runs, how it recovers, and how it is observed
 
 ### Reference Implementations
 
 Want to see what a production-grade harness looks like? Two references:
 
-- **The entire Claude Code runtime** — is a reference harness implementation. **For an exercise on reading the source, see [Stage 5.6](05-claude-code-ecosystem.md#56--dissecting-claude-code-source-a-reference-harness-implementation-track-b-must-see)** (clone `claude-agent-sdk-python` and dissect the main loop + the locations of the first 6 runtime components from the table above; the 7th, Eval harness, is a plugin, and the 8th, Cost / Latency, is cross-cutting, see the deep-dive below).
-- **`anthropics/claude-agent-sdk-python`** source — the specific repo used in the exercise above.
+- **The entire Claude Code runtime** — is a reference harness implementation. **For a source-reading exercise, see [Stage 5.6](05-claude-code-ecosystem.md#56--dissecting-claude-code-source-a-reference-harness-implementation-track-b-must-see)** (clone `claude-agent-sdk-python` and dissect the main loop + where the first 6 runtime components from the table above live; the 7th, Eval harness, is a plugin, and the 8th, Cost / Latency, is cross-cutting, see the deep-dive below)
+- **`anthropics/claude-agent-sdk-python`** source — the specific repo used in the exercise above
 
-→ The remaining 6 exercises in this stage (multi-agent / eval / observability / SDK / deploy / cost) each represent an aspect of the harness. Completing the entire stage = piecing together a complete mental model of harness engineering.
+→ The remaining 6 exercises in this stage (multi-agent / eval / observability / SDK / deploy / cost) each cover one facet of the harness. Completing the full stage = assembling a complete mental model of harness engineering.
 
-### Deep Dive on the 8th Component — Cost / Latency Optimization (Required for 2024-2026 Production)
+### Deep dive into the 8th core component — Cost / Latency Optimization (Required for 2024-2026 Productionization)
 
-When a production agent runs for a while, **cost and latency will eat up most of your budget and user experience**. From 2024-2026, frontier models are treating this as a first-class API feature—**knowing how to use it = saving 50-90% on cost / latency**.
+When a production agent runs long enough, **cost and latency will eat up most of your budget and user experience**. From 2024-2026, frontier models have treated this as a first-class API feature—**knowing how to use it = saving 50-90% on cost / latency**.
 
 | Technique | How it Saves | 2026 Status |
 |---|---|---|
@@ -154,15 +165,15 @@ When a production agent runs for a while, **cost and latency will eat up most of
 | **Semantic caching** | Sharing answers for similar queries (not just exact matches) | Built into [GPTCache](https://github.com/zilliztech/GPTCache) / Helicone |
 
 **How Track A can use this** (for those using CLI agents):
-- Set up prompt caching in Claude Code / Cursor to save 50-90% on daily session costs.
-- Use [RouteLLM](https://github.com/lm-sys/RouteLLM) / [OpenRouter](https://openrouter.ai/) to dynamically switch models (use Haiku / Flash for simple questions, Opus / Pro for difficult ones).
-- Use the `thinking_budget` parameter in the Claude API to control the token limit for reasoning models.
+- Set up prompt caching in Claude Code / Cursor to save 50-90% on daily session costs
+- Use [RouteLLM](https://github.com/lm-sys/RouteLLM) / [OpenRouter](https://openrouter.ai/) to dynamically switch models (simple questions use Haiku / Flash, difficult ones use Opus / Pro)
+- Use the `thinking_budget` parameter in the Claude API to control the token limit for reasoning models
 
 **How Track B can build this** (for those writing their own agents):
-- Build a custom cascade router that maps query embeddings → classifier → model.
-- Monitor token cost within the agent loop and automatically downgrade if the budget is exceeded.
-- Integrate a semantic cache layer in production deployment.
-- Observability platforms like [Helicone](https://github.com/Helicone/helicone) / [langfuse](https://github.com/langfuse/langfuse) already have these features built-in, so you don't have to write them yourself.
+- Build a custom cascade router that maps query embeddings → classifier → model
+- Monitor token cost within the agent loop and automatically downgrade if the budget is exceeded
+- Integrate a semantic cache layer in the deployed environment
+- Observability platforms like [Helicone](https://github.com/Helicone/helicone) / [langfuse](https://github.com/langfuse/langfuse) already have these features built in, so you do not have to write them yourself
 
 ## 🛠 Hands-on Exercises (Basic Illustrative Exercises)
 
@@ -184,9 +195,9 @@ Package an agent into Docker and deploy it to the cloud (any provider will do). 
 ### Exercise 6: Cost Optimization (New) ⭐
 Measure the token cost of any of your previous exercise agents, then add prompt caching and measure again. Observe the relationship between cache hit rate and cost reduction. **Bonus**: Connect to [RouteLLM](https://github.com/lm-sys/RouteLLM) or [OpenRouter](https://openrouter.ai/) and implement cascade routing (simple queries → Haiku / difficult queries → Opus), and measure the average cost.
 
-## 📊 Agent Benchmark Landscape (Latest as of 2026-05) + ⚠ Reward-Hacking Warning
+## 📊 Agent Benchmark Landscape: How to read it, not just the leaderboard + ⚠ Reward-Hacking Warning
 
-Before choosing a model or building an agent, you'll want to look at benchmark numbers—but in **April 2026, UC Berkeley discovered that all 8 major agent benchmarks can be reward-hacked to ~100%**. Below is the 2026 leaderboard status + how to interpret it without being misled.
+Before choosing a model or building an agent, you'll want to look at benchmark numbers—but in **April 2026, UC Berkeley discovered that all 8 major agent benchmarks can be reward-hacked to ~100%**. Below is the 2026 leaderboard status + how to read it without getting misled.
 
 ### Mainstream Agent Benchmark SOTA as of 2026-05
 
@@ -225,7 +236,7 @@ This means that for numbers on the leaderboard like "Claude 87.6% / GPT 85.0%", 
 
 > 💡 **The discipline of production agent eval**:
 > - Don't take external benchmark numbers as ground truth; they tell you the "upper limit," not "real-world performance."
-> - Your own eval set (internal hold-out test) is the basis for production decisions.
+> - Your own eval set (internal hold-out test) is the basis for go-live decisions.
 > - Every time a model is upgraded → run it against your internal eval set for validation, don't just look at the vendor's published benchmark improvements.
 > - Connect to [langfuse](https://github.com/langfuse/langfuse) / [promptfoo](https://github.com/promptfoo/promptfoo) to automate eval and run it with every deployment.
 

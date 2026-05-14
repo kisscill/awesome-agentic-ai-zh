@@ -1,4 +1,4 @@
-# Stage 2 — Prompt Engineering
+# Stage 2 — Prompt 设计（Prompt Engineering）
 
 > [繁体中文](./02-prompt-engineering.md) | **简体中文** | [English](./02-prompt-engineering.en.md)
 
@@ -527,7 +527,7 @@ LLM-powered system 的工程实践可以拆成 **3 层 stack**。这不是 1 次
 
 - **Prompt Engineering**（本 stage）= 工程 **送进模型的那段字符串**
 - **Context Engineering**（Stage 6）= 工程 **每次 call 时，context window 里装什么信息**——动态组装 RAG retrieve 结果、memory、tool definitions、对话 history
-- **Harness Engineering**（Stage 7）= 工程 **模型外面的 runtime / scaffolding**——agent loop、retry、sandbox、observability、deployment 等所有非 LLM 代码
+- **Harness Engineering**（Stage 7）= 工程 **模型外围的执行与控制层**——agent loop、retry、sandbox、observability、deployment 等所有非 LLM 代码
 
 → 三层 **正交**：一次 call 的 RAG app 也在做 context engineering（重点是组 context，不是 call 几次）；50 次 call 但没做 retrieval 的 chatbot 仍然只是在做 prompt engineering。
 
@@ -537,7 +537,7 @@ LLM-powered system 的工程实践可以拆成 **3 层 stack**。这不是 1 次
 |---|---|---|
 | **1. Prompt Engineering** | 送进 LLM 的字符串本身（system prompt / few-shot / format） | **本 stage（Stage 2）** |
 | **2. Context Engineering** | context window 里装什么信息（RAG / memory / tool defs / history） | [Stage 6 — Context Engineering：RAG 与 Memory](06-memory-rag.zh-Hans.md) |
-| **3. Harness Engineering** | LLM 外面的 runtime scaffolding（agent loop / retry / sandbox / observability） | [Stage 7 — Multi-Agent · Production](07-multi-agent-production.zh-Hans.md) |
+| **3. Harness Engineering** | 模型外围的执行与控制层（agent loop / retry / sandbox / observability） | [Stage 7 — Multi-Agent · Production 化](07-multi-agent-production.zh-Hans.md) |
 
 > 💡 **Karpathy 2025-06**：context engineering 是把 **刚好对下一步有用的信息** 填进 context window 的精细艺术。
 >

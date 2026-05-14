@@ -1,4 +1,4 @@
-# Stage 8 — Agent Interfaces · Computer Use · Browser Use · Code Sandbox
+# Stage 8 — Agent 操作介面（Agent Interfaces）：Computer Use · Browser Use · Code Sandbox
 
 > [繁体中文](08-agent-interfaces.md) | **简体中文** | [English](08-agent-interfaces.en.md)
 

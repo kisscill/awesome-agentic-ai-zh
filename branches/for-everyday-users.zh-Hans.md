@@ -1,4 +1,4 @@
-# 给日常用户 — 专业分支
+# 日常使用者延伸路线（For Everyday Users）
 
 > [繁體中文](./for-everyday-users.md) | **简体中文** | [English](./for-everyday-users.en.md)
 

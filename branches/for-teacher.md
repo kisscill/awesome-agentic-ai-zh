@@ -1,4 +1,4 @@
-# 給教師 — 專業分支
+# 教師延伸路線（For Teachers / Educators）
 
 > **繁體中文** | [简体中文](./for-teacher.zh-Hans.md) | [English](./for-teacher.en.md)
 

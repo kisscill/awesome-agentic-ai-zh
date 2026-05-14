@@ -1,4 +1,4 @@
-# For Developers — Specialized Branch
+# Extension Path: For Developers
 
 > [繁體中文](./for-developer.md) | [简体中文](./for-developer.zh-Hans.md) | **English**
 

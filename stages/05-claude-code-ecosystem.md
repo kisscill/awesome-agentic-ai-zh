@@ -1,4 +1,4 @@
-# Stage 5 — Claude Code 生態系 ⭐⭐
+# Stage 5 — Claude Code 生態系（Claude Code Ecosystem）⭐⭐
 
 > **繁體中文** | [简体中文](./05-claude-code-ecosystem.zh-Hans.md) | [English](./05-claude-code-ecosystem.en.md)
 
@@ -16,7 +16,7 @@
 
 > ⚠️ **想用本機 LLM？這個 stage 不是那條路線。** Claude Code 需要 Anthropic API / OAuth，不能直接改接 Ollama 或本機 endpoint。離線、隱私資料或不想用 API 額度時，請看 [`resources/cookbook.md` Recipe 6](../resources/cookbook.md#6-本機-llm--cli-agent-快速-walkthrough)，用 OpenCode / goose / Aider / Hermes 這類支援 BYO LLM 的 CLI agent。
 
-> 📋 **本章組成**：6 個子章（5.1 基礎 / 5.2 MCP / 5.3 Skills / 5.4 Plugins / 5.5 Subagents / 5.6 Claude Code Source 解剖），每個子章都有「學習目標 → 必修閱讀 → 動手練習 → 精選 Projects」 → 章末 自我檢查。**注意**：harness engineering（處理 LLM 外面的 runtime / scaffolding 的工程） 的 **discipline 級概念**在 [Stage 7](07-multi-agent-production.md) 講；5.6 是拿 Claude Code 當 reference implementation 的 case study  
+> 📋 **本章組成**：6 個子章（5.1 基礎 / 5.2 MCP / 5.3 Skills / 5.4 Plugins / 5.5 Subagents / 5.6 Claude Code Source 解剖），每個子章都有「學習目標 → 必修閱讀 → 動手練習 → 精選 Projects」 → 章末 自我檢查。**注意**：Harness Engineering（Agent 執行系統設計）的**學科級概念**在 [Stage 7](07-multi-agent-production.md) 系統整理；本章 5.6 則把 Claude Code 當成案例，觀察一個成熟 agent 工具如何處理工具、記憶、設定、權限與執行流程  
 > 🔑 **關鍵名詞**：見 [`resources/glossary.md` §5](../resources/glossary.md#5-claude-code-生態)
 
 ## Stack 一覽

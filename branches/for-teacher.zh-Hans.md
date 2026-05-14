@@ -1,4 +1,4 @@
-# 给教师 — 专业分支
+# 教师延伸路线（For Teachers / Educators）
 
 > [繁體中文](./for-teacher.md) | **简体中文** | [English](./for-teacher.en.md)
 

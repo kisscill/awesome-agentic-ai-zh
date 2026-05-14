@@ -1,4 +1,4 @@
-# A1 — CLI Agent 入門 + 選擇
+# A1 — 選一個 CLI Agent，開始用它做事（CLI Agent Intro & Selection）
 
 > **繁體中文** | [简体中文](./A1-cli-intro.zh-Hans.md) | [English](./A1-cli-intro.en.md)
 

@@ -325,13 +325,14 @@ The discipline of engineering **what information goes into the context window on
 
 ### Harness Engineering
 
-The discipline of engineering the **execution and control layer around the model** — everything that is not model weights and not just the prompt string itself: agent loop / tool registry / context manager / permissions / safety layer / memory layer / eval / observability / retry / circuit breaker, etc. Simon Willison 2025: **coding agent = LLM + harness**. Addy Osmani: harness = all the code that is not the model itself. [OpenAI also used the term "Harness Engineering" in February 2026](https://openai.com/index/harness-engineering). Claude Code, Cursor, OpenCode, etc. are harnesses. **A framework wraps an LLM into an agent; a harness wraps an agent into a product that can actually be used in production.**
+The discipline of engineering the **execution and control layer around the model** — everything that is not model weights and not just the prompt string itself: agent loop / tool registry / context manager / permissions / safety layer / memory layer / eval / observability / retry / circuit breaker, etc. Simon Willison 2025: **coding agent = LLM + harness**. Addy Osmani: harness = all the code that is not the model itself. [OpenAI also used the term "Harness Engineering" in February 2026](https://openai.com/index/harness-engineering). Claude Code, Cursor, OpenCode, etc. are harnesses. **A framework wraps an LLM into an agent; a harness wraps an agent into a product that can actually go live.**
 
 Contrast:
 - **Framework** (Stage 4) defines the **API**: what the interface you call looks like
 - **Harness** (this term) defines the **runtime**: how it runs, how it recovers, how it is observed
 
-📍 Detail: [Stage 7](../stages/07-multi-agent-production.en.md)
+📍 Discipline-level concept (**8 core components** / prompt→context→harness three-layer engineering split / framework vs harness): [Stage 7 §Harness Engineering](../stages/07-multi-agent-production.en.md)
+📍 Reference implementation case study (reading Claude Code source): [Stage 5 §5.6](../stages/05-claude-code-ecosystem.en.md)
 📍 Further: [`anthropics/claude-agent-sdk-python`](https://github.com/anthropics/claude-agent-sdk-python), [`ai-boost/awesome-harness-engineering`](https://github.com/ai-boost/awesome-harness-engineering), [`ZhangHanDong/harness-engineering-from-cc-to-ai-coding`](https://github.com/ZhangHanDong/harness-engineering-from-cc-to-ai-coding)
 
 ---

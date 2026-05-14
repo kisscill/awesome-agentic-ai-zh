@@ -1,4 +1,4 @@
-# 给研究者 — 专业分支
+# 研究者延伸路线（For Researchers）
 
 > [繁體中文](./for-researcher.md) | **简体中文** | [English](./for-researcher.en.md)
 

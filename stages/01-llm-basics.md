@@ -1,4 +1,4 @@
-# Stage 1 — LLM 基礎
+# Stage 1 — LLM 基礎（LLM Basics）
 
 > **繁體中文** | [简体中文](./01-llm-basics.zh-Hans.md) | [English](./01-llm-basics.en.md)
 
@@ -10,6 +10,16 @@
 
 > 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 →〔可選 · 概念地圖〕→ 動手練習 → 精選 Projects → 自我檢查  
 > 🔑 **關鍵名詞**：見 [`resources/glossary.md`](../resources/glossary.md)（每 stage 用到的術語都收在那裡）
+
+### 三個核心詞（先記住、後面 stage 都會用到）
+
+| 詞 | 中文 | 一句話 |
+|---|---|---|
+| **token** | 詞元 | 模型計算文字長度與費用的基本單位（中文 1 字 ≈ 1.5-2 token） |
+| **context window** | 上下文視窗 | 模型一次能看到多少 token（Claude 200k / GPT-4o 128k / Gemini 2M）|
+| **temperature** | 隨機程度參數 | 控制回答穩定或發散（0 = 最穩定、1 = 創意；分類任務用 0.0-0.3、創作用 0.7-1.0）|
+
+→ 這 3 個詞貫穿後續所有 stage。Stage 1 的目標就是讓你用 API 跑出來、親手摸到它們如何影響輸出。
 
 ## 📌 學習目標
 

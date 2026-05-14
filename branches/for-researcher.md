@@ -1,4 +1,4 @@
-# 給研究者 — 專業分支
+# 研究者延伸路線（For Researchers）
 
 > **繁體中文** | [简体中文](./for-researcher.zh-Hans.md) | [English](./for-researcher.en.md)
 

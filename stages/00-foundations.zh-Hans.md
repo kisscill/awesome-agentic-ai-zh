@@ -1,4 +1,4 @@
-# Stage 0 — 基础准备
+# Stage 0 — 基础准备（Foundations）
 
 > [繁體中文](./00-foundations.md) | **简体中文** | [English](./00-foundations.en.md)
 

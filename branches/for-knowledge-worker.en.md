@@ -1,4 +1,4 @@
-# For Knowledge Workers — Specialized Branch
+# Extension Path: For Knowledge Workers
 
 > [繁體中文](./for-knowledge-worker.md) | [简体中文](./for-knowledge-worker.zh-Hans.md) | **English**
 

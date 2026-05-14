@@ -1,4 +1,4 @@
-# Stage 3 — Tool Use & Agent 入門 ⭐
+# Stage 3 — 工具使用與第一個 Agent（Tool Use & Hello Agent）⭐
 
 > **繁體中文** | [简体中文](./03-tool-use-and-hello-agent.zh-Hans.md) | [English](./03-tool-use-and-hello-agent.en.md)
 
@@ -43,7 +43,7 @@ AI (Artificial Intelligence、人工智慧)
 | **LLM** | 把文字映射到文字的單一模型 | 給 prompt → 回字 | GPT-5、Claude、Llama 3、Qwen |
 | **Agent** | LLM + 工具 + loop 的**系統** | 給任務 → 自己跑多步驟達成 | Cursor、Claude Code、Hermes Agent |
 
-**一句 punchline**：LLM 是個會說話的腦袋；agent 是大腦 + 手腳 + 完整工作流程的 worker。
+**一句話**：LLM 像是會理解與產生文字的大腦；Agent 則是把這個大腦接上工具、流程與回饋迴圈，讓它能完成多步驟任務的系統。
 
 ### Agent 的 3 個**最小必要**部件（這就是 agent vs LLM 的核心差別）
 

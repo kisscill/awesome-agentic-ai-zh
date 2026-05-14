@@ -1,4 +1,4 @@
-# A2 — CLI Workflow Patterns
+# A2 — 建立可重複使用的 CLI 工作流程（CLI Workflow Patterns）
 
 > **繁體中文** | [简体中文](./A2-cli-workflow.zh-Hans.md) | [English](./A2-cli-workflow.en.md)
 

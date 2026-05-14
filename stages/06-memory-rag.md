@@ -1,4 +1,4 @@
-# Stage 6 — Context Engineering：RAG 與 Memory
+# Stage 6 — 上下文管理（Context Engineering）：RAG 與 Memory
 
 > **繁體中文** | [简体中文](./06-memory-rag.zh-Hans.md) | [English](./06-memory-rag.en.md)
 
