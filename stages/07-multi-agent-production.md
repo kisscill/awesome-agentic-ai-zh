@@ -92,21 +92,30 @@
 
 ## 🏗 Harness Engineering — production agent runtime 的工程學 ⭐ 本 stage 核心概念
 
-### Discipline 定位：prompt → context → harness 三層
+### Discipline 定位：prompt → context → harness 三層（stack 三層、不是 call 次數）
 
-把 LLM 用成 production agent 系統、有 3 層**工程學科**（discipline）。每一層 cover 不同問題、後一層假設前一層已經沒問題：
+把 LLM 變成可用 agent、有 3 層**工程學科**——這 3 層**對應 stack 的不同位置**、不是 1 次 call vs 多次 call 的差別。Karpathy / Simon Willison / Hamel Husain 2025 共識：
 
-| Discipline | 解決什麼問題 | 主要技巧 | 在哪學 |
+| Discipline | 工程「什麼」 | 主要技巧 | 在哪學 |
 |---|---|---|---|
-| **1. Prompt Engineering** | 單次 LLM call 怎麼問才會準 | system prompt / few-shot / CoT / structured output | **[Stage 2](02-prompt-engineering.md)** |
-| **2. Context Engineering** | 跨多次 call 怎麼動態組裝 prompt | RAG retrieval / memory / context window 管理 / tool description 排序 | **[Stage 6](06-memory-rag.md)** + Stage 2 §進階 |
-| **3. Harness Engineering**<br>（**本節**） | 把多個 LLM call 包成 production agent runtime | agent loop / retry / safety / telemetry / observability / cost control | **本 stage** |
+| **1. Prompt Engineering** | **「**送進 LLM 的那段文字**」**——人寫的那串 instruction 怎麼長 | system prompt / few-shot / CoT / structured output / 格式控制 | **[Stage 2](02-prompt-engineering.md)** |
+| **2. Context Engineering** | **「**每次 call 時、 context window 裡裝什麼資訊**」**——動態把 RAG retrieve 結果、memory、tool definitions、對話 history **組裝成 LLM 看得到的上下文** | RAG retrieval / memory layer / context window 預算 / tool description 排序 / compress / isolate | **[Stage 6](06-memory-rag.md)** + Stage 2 §進階 |
+| **3. Harness Engineering**<br>（**本節**） | **「**模型外面的 runtime / scaffolding**」**——讓 agent 穩定跑 production 的所有非 LLM 程式碼：loop、retry、sandbox、observability、deployment | agent loop / tool registry / retry / safety / telemetry / observability / cost control | **本 stage** |
 
-→ **2025 後段「harness engineering」才正式成為業界共識詞**（Anthropic / Cursor / Cognition 等 AI coding tool 團隊用得最多）——因為前兩層已經被 prompt eng / context eng 解決得差不多了、production agent 的剩餘複雜度都在 runtime 工程。
+→ 三層**正交**（orthogonal）：1 次 call 的 RAG app 在做 context engineering；50 次 call 的 agent 但沒做 retrieval / memory 管理、那只在做 prompt engineering 而已。Call 次數**不是**判斷哪一層的依據。
+
+> 💡 **Karpathy 2025-06 原話**：「context engineering 是把對下一步有用的資訊**剛好填進** context window 的精細藝術」——it's about *what goes in the window*, not *how many windows you open*.
+>
+> 💡 **Simon Willison / Addy Osmani 對 harness 定義**：「coding agent = LLM + harness」、「harness = 所有不是 model 本身的程式碼（tools / loop / sandbox / observability）」。OpenAI 2025 也用 "Harness Engineering" 當官方詞。
+
+**怎麼分辨你正在做哪一層？問 3 個問題**：
+1. 我在改的是**字串本身**嗎？→ Prompt engineering
+2. 我在改的是**送進 context window 的資訊組合**嗎？→ Context engineering
+3. 我在改的是**呼叫模型的外圍程式**嗎？→ Harness engineering
 
 ### Harness 的 8 個核心元件
 
-**Harness = 把 LLM agent 包成 production 系統的「工具帶」**。一個 production agent runtime 包含這 8 個元件（前 6 個是 runtime 內建、第 7 個 eval 是外掛工具、第 8 個 cost / latency 是 cross-cutting concern 跨所有層）：
+**Harness = LLM 外圍的 runtime scaffolding**——所有不屬於 model weights、也不屬於 prompt string 本身的程式碼。一個 production agent runtime 包含這 8 個元件（前 6 個是 runtime 內建、第 7 個 eval 是外掛工具、第 8 個 cost / latency 是 cross-cutting concern 跨所有層）：
 
 | 元件 | 做什麼 | 對應本 stage 練習 |
 |---|---|---|

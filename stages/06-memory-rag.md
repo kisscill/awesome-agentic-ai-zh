@@ -12,15 +12,23 @@
 
 ## 🎯 Context Engineering 是什麼（先定位）
 
-**Context Engineering = 跨多次 LLM call 怎麼動態組裝 prompt 的工程學科**——prompt → context → harness 三層 lineage 的中間層。完整定義 + 三層 discipline 表已在 [Stage 2 §進階 prompt → context → harness](02-prompt-engineering.md#-進階prompt--context--harness-三層-engineering) 展開、最上層接 [Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)。
+**Context Engineering = 工程「每次 LLM call 時、context window 裡裝什麼資訊」的學科**——它不是「跨幾次 call」的問題、是「**送進 LLM 的上下文怎麼組**」的問題。把 RAG retrieve 結果、memory、tool definitions、對話 history **動態組裝成 LLM 看得到的 context**——這就是本 stage 主軸。
+
+> 💡 **Karpathy 2025-06 原話**：「context engineering 是把對下一步有用的資訊**剛好填進** context window 的精細藝術」（[原 tweet](https://x.com/karpathy/status/1937902205765607626)）。重點是 *what goes in the window*、不是開幾個 window。
+>
+> 三層 stack 中的位置（[Stage 2 §進階](02-prompt-engineering.md#-進階prompt--context--harness-三層-engineering) 有完整對照）：
+> - **prompt eng**（Stage 2）= 工程那段**字串**
+> - **context eng**（本 stage）= 工程 window 裡的**資訊**
+> - **harness eng**（[Stage 7](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)）= 工程模型**外面的 runtime**
 
 > 📺 **視覺學習**：[李宏毅 2025 第 2 講 — Context Engineering：AI Agent 背後的關鍵技術](https://www.youtube.com/watch?v=lVdajtNpaGI)（NTU 生成式人工智慧與機器學習導論 2025）
 
-**本 stage 聚焦 context engineering 3 個 problem domain 的前兩個**：
+**Context engineering 4 個 sub-problem**（Lance Martin 2025 framework: Write / Select / Compress / Isolate）：
 
-1. **Retrieval** — 從外部知識庫撈相關片段（RAG / vector search / GraphRAG / hybrid search）
-2. **Memory 管理** — short-term / long-term / episodic / semantic memory 怎麼分層、怎麼存、怎麼忘
-3. **Context window 預算** — 接 Stage 7 §Harness 處理
+1. **Select**（本 stage 主軸）— retrieval：要把**哪些**外部資訊撈進 window（RAG / vector search / GraphRAG / hybrid search）
+2. **Write**（本 stage 主軸）— memory：要把**哪些**互動 / 教訓 / user preference 寫進長期記憶供之後 retrieve
+3. **Compress** — 對話太長時怎麼壓（summary / truncate / hierarchical）—— 部分本 stage、部分 Stage 7 §Harness `context manager`
+4. **Isolate** — 多 agent 時各自 context 怎麼分隔——主要 Stage 7 §multi-agent 處理
 
 ### 4 個常被搞混的概念 — 一張表分清楚
 

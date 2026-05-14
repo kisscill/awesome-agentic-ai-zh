@@ -435,17 +435,25 @@ text = msg.content[0].text
 
 ## 🔭 進階：prompt → context → harness 三層 engineering
 
-當你發現「**單一 prompt 已經 cover 不了**」——要動態組 system prompt + 拉 memory + 塞 retrieved chunks + 接多個 tool definitions——這已經不叫 prompt engineering，叫 **context engineering**。是 prompt engineering 的下一層。
+LLM-powered system 的工程實踐分成 **3 層 stack**（不是 1 次 call vs N 次 call）。每一層工程的對象**不一樣**：
 
-再往上一層、把多個 LLM call + tool 包成 production runtime 系統時、就到了 **harness engineering**（2025 後段業界正式詞彙）。
+- **Prompt Engineering**（本 stage）= 工程「**送進模型的那段字串**」
+- **Context Engineering**（Stage 6）= 工程「**每次 call 時、 context window 裡裝什麼資訊**」——把 RAG retrieve 結果、memory、tool definitions、對話 history 動態組裝
+- **Harness Engineering**（Stage 7）= 工程「**模型外面的 runtime / scaffolding**」——agent loop、retry、sandbox、observability、deployment 等所有非 LLM 程式碼
+
+→ 三層**正交**：一次 call 的 RAG app 也在做 context engineering（重點是組 context、不是 call 幾次）；50 次 call 但沒做 retrieval 的 chatbot 仍只在做 prompt engineering。
 
 **完整三層 lineage（本路線的學習進度）**：
 
-| Discipline | 解決什麼 | 在哪一 stage 完整學 |
+| Discipline | 工程「什麼」 | 在哪一 stage 完整學 |
 |---|---|---|
-| **1. Prompt Engineering** | 單次 LLM call 怎麼問才準 | **本 stage（Stage 2）** |
-| **2. Context Engineering** | 跨多次 call 怎麼動態組 prompt | [Stage 6 — Memory · RAG](06-memory-rag.md) |
-| **3. Harness Engineering** | 把多個 LLM call 包成 production runtime | [**Stage 7 §Harness Engineering**](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念) ⭐ 完整對照表 |
+| **1. Prompt Engineering** | 送進 LLM 的字串本身（system prompt / few-shot / format） | **本 stage（Stage 2）** |
+| **2. Context Engineering** | context window 裡裝什麼資訊（RAG / memory / tool defs / history） | [Stage 6 — Memory · RAG · Context Engineering](06-memory-rag.md) |
+| **3. Harness Engineering** | LLM 外面的 runtime scaffolding（agent loop / retry / sandbox / observability） | [**Stage 7 §Harness Engineering**](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念) ⭐ 完整對照表 |
+
+> 💡 **Karpathy 2025-06**：「context engineering 是把對下一步有用的資訊**剛好填進** context window 的精細藝術」（it's about *what goes in the window*）。
+>
+> 💡 **Simon Willison / Addy Osmani**：「coding agent = LLM + harness」、harness = 所有不是 model 本身的程式碼。OpenAI 2025 也用 "Harness Engineering" 當官方詞。
 
 **這個 stage 不用學完後兩層**，只是給方向性提示——進入 Stage 6 / 7 時會接續這個 lineage。
 
