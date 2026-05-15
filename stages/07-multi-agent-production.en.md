@@ -56,19 +56,7 @@ Engineering work can be split into three layers, corresponding to different posi
 
 **Multi-agent is not the default; it is a design you use only when the task truly needs it.** In most scenarios, you should first try a simple workflow or a single agent; **only when the task is naturally decomposable, needs parallel exploration, a single context is not enough, or explicit role separation is needed, is multi-agent worth introducing**. Forcing it brings **3-10× token cost, difficult debugging, and severe context fragmentation (context gets split across multiple agents, and no one sees the whole picture)**.
 
-| Stance | Source | Core argument |
-|---|---|---|
-| **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents), [How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | Multi-agent is suitable for **high-value tasks that benefit from parallel exploration, need many tools, or exceed a single context**; token usage can be many times higher than a single chat. |
-| **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | Context fragmentation is severe in multi-agent systems, and maintaining shared state is painful; only consider it after exhausting single-agent + long-context options. |
-
-Only use multi-agent when you see these **4 clear signals** (for details, see [Stage 4 When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it)):
-
-1. **Natural Task Decomposition** — A large task has clear sub-steps and can be completed step by step → Sequential / Planner-Executor
-2. **Token Explosion** — A single-agent prompt cannot fit all tool descriptions / context → Supervisor-Worker
-3. **Role Conflict** — Using the same LLM as both writer and critic leads to self-justification → Debate / Peer review
-4. **Parallel Acceleration** — Running 3 research subtasks at the same time reduces wall-clock time to 1/3 → Parallel / Map-Reduce
-
-**None of these 4 signals present?** → A single agent + good prompts + tool use is enough. Don't force multi-agent. **The harness engineering part of this stage (8 components / eval / observability) still applies even if you end up using a single agent**—so this stage is still required reading even if you decide against multi-agent.
+> 📌 **The decision framework's canonical home is Stage 4**: the full Anthropic / Cognition stance comparison + the 4 "should you go multi-agent" signals + each signal's corresponding pattern live in [Stage 4 §When do you really need multi-agent](04-agent-frameworks.md#when-do-you-really-need-multi-agent-dont-force-it) (design-phase decision). This section is only the last sanity check before production — **none of the 4 signals present?** → a single agent + good prompts + tool use is enough; don't force multi-agent. **The harness engineering part of this stage (8 components / eval / observability) still applies even if you end up using a single agent**—so this stage is still required reading even if you decide against multi-agent.
 
 ## 📌 Learning Objectives
 

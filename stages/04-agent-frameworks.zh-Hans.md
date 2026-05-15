@@ -224,4 +224,4 @@ Stage 3 教你写 single tool / multi-tool selection（手写 `if/elif/else` 路
 
 不要想把这些全部学完。挑**一个 production 等级的（LangGraph）**跟**一个快速雏形用的（CrewAI）**深入学。其他的 README 浏览过去就好，知道有这些选项存在即可。
 
-**Memory 预备**（学的时候可能碰到、不用先读）：有些 framework 功能会用到 memory 概念 — LangGraph 的 checkpointing（状态持久化）、CrewAI agent 之间传递任务结果（轻量 memory）。这些在 [Stage 6 — Memory & RAG](06-memory-rag.zh-Hans.md) 完整讲；本 stage 看不懂某个 framework 功能时、再去那边查就好，**不用先读完才能进 Stage 4**。
+**Memory 预备**（学的时候可能碰到、不用先读）：有些 framework 功能会用到 memory 概念 — LangGraph 的 checkpointing（状态持久化）、CrewAI agent 之间传递任务结果（轻量 memory）。这些在 [Stage 6 — Memory & RAG](06-memory-rag.zh-Hans.md) 完整讲；本 stage 看不懂某个 framework 功能时、再去那边查就好，**不用先读完才能继续本 stage**。
