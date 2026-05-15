@@ -7,9 +7,19 @@
 ⏱ **時間估算**：1-2 週（約 8-15 小時）
 
 > 📋 **本章組成**：學習目標 → 進入條件 → 必修閱讀 → 動手練習 → 精選 Projects → 自我檢查
-> 🔑 **關鍵名詞**：見 [`resources/glossary.md` 5 + 6](../../resources/glossary.md#5-claude-code-生態)（MCP / observability / eval / prompt caching / cost tracking）
+> 🔑 **關鍵名詞**（本章用到）：
+> - **本章一定會用**：MCP（讓 CLI 接外部資料 / 工具）、CI（每次 push 自動跑檢查）
+> - **延伸閱讀名詞**：observability（追蹤 CLI 行為）、eval（量化 CLI 品質）、prompt caching（重複 context 省錢）、cost tracking（token 花費紀錄）
+>
+> 完整定義見 [`resources/glossary.md` 5 + 6](../../resources/glossary.md#5-claude-code-生態)。
 
-CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**。MCP server 整合、CI 自動化、cost / observability。這節之後，CLI 不只是你個人在用的工具，而是 team 工作流的一部分。
+CLI 跑得順了之後、下一步：**把 CLI 接到你的真實團隊流程**。這節達成 3 件事：
+
+1. **工具連接** — MCP server 把 CLI 接到 Slack / Gmail / 你的 internal API
+2. **自動檢查** — CI（GitHub Actions）每個 PR 自動跑 CLI review
+3. **成本與紀錄** — observability 工具追蹤每個任務的 cost / latency
+
+這節之後、CLI 不只是你個人在用的工具、而是 team 工作流的一部分。
 
 ## 📌 學習目標
 
@@ -31,7 +41,7 @@ CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**
 ## 📚 必修閱讀
 
 1. [**Stage 5.2 — MCP（Model Context Protocol）**](../../stages/05-claude-code-ecosystem.md#52--mcpmodel-context-protocol-基礎) — MCP 概念跟基礎
-2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — 90% cost reduction 的關鍵技巧
+2. [**Anthropic — Prompt Caching**](https://www.anthropic.com/news/prompt-caching) — 在符合快取條件時（context 不變、≤ 5 分鐘 reuse window 等）可大幅降低重複上下文的成本；實際比例依工作流而異、請以官方文章的條件為準
 3. [**Stage 7 — 常用 Multi-Agent / Production 工具推薦**](../../stages/07-multi-agent-production.md#-常用-multi-agent--production-工具推薦按用途分類) — langfuse / Helicone / weave 等 observability 工具表
 4. [**`resources/cli-agents-guide.md`** 「常見坑」](../../resources/cli-agents-guide.md) — production 用 CLI 最常踩的問題
 
@@ -68,7 +78,7 @@ CLI 跑得順了之後，下一步：**把它接到你的真實工作流程裡**
 
 ## 🧭 進階概念在 CLI 日常工作中的應用（6 個 playbooks）🆕
 
-Track A 的人**已經在用** [Stage 7.5 的進階概念](../../stages/07.5-advanced-agentic-concepts.md)、只是沒命名它。下面 6 個 playbook 不是教概念、是**告訴你「什麼情境該做什麼」**——每個 ≤ 6 行。**想深挖原理 → 進 Stage 7.5。**
+Track A 的人**已經在用** [Stage 7.5 的進階概念](../../stages/07.5-advanced-agentic-concepts.md)、只是沒命名它。下面挑 **最常用 2-3 個 playbook** 細看、其餘折疊為延伸閱讀——每個 ≤ 6 行。**想深挖原理 → 進 Stage 7.5。**
 
 > 📌 **規則**：每個 playbook 看完先問自己「下一個 PR 會做不同的事嗎？」**會** → applied；**不會** → 跳下一個。
 
@@ -127,7 +137,7 @@ Track A 的人**已經在用** [Stage 7.5 的進階概念](../../stages/07.5-adv
 ### 📋 Playbook 5：控制成本
 
 - **When**：用 Codex 跑大批 work、每月 API 帳單失控、想壓在 budget 內
-- **Do**：`plan.yml` 設 `max_cost_usd`、便宜 model（Haiku）跑探索 / 貴 model（Opus）只跑 polish；開 prompt caching（90% 折扣）；自動化 QA（不靠人時間）
+- **Do**：`plan.yml` 設 `max_cost_usd`、便宜 model（Haiku）跑探索 / 貴 model（Opus）只跑 polish；開 prompt caching（符合快取條件時可大幅降低重複 context 成本）；自動化 QA（不靠人時間）
 - **Concepts**：Cost-aware Budget Gates + Throughput-Merge Philosophy · 📊 圖見 [concept-cluster](../../resources/diagrams/concept-cluster.png) Config × 韌性 cluster
 - **Read more**：
 

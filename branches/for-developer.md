@@ -16,12 +16,16 @@
 
 ## 精選 Projects
 
-> 7 個主流 CLI agent（Claude Code / Codex / OpenCode / Gemini CLI / goose / Aider / Hermes Agent）的並列比較見 [`resources/cli-agents-guide.md`](../resources/cli-agents-guide.md)。第一次接觸 CLI agent 想要 step-by-step 入門 → [`tracks/cli/A1-cli-intro.md`](../tracks/cli/A1-cli-intro.md)（Track A 第一站）。要把 CLI 接到日常工具（GitHub、Linear、Atlassian、Postgres、Playwright、Figma 等）→ [`resources/mcp-skills-catalog.md`](../resources/mcp-skills-catalog.md)（62 個分類整理）。下面只列開發者該知道的關鍵 entry。
+> **CLI agent 比較**：7 個主流 CLI agent（Claude Code / Codex / OpenCode / Gemini CLI / goose / Aider / Hermes Agent）的並列比較見 [`resources/cli-agents-guide.md`](../resources/cli-agents-guide.md)。第一次接觸 CLI agent 想要 step-by-step 入門 → [`tracks/cli/A1-cli-intro.md`](../tracks/cli/A1-cli-intro.md)（Track A 第一站）。
+>
+> **MCP catalog**：要把 CLI 接到日常工具（GitHub、Linear、Atlassian、Postgres、Playwright、Figma 等）→ [`resources/mcp-skills-catalog.md`](../resources/mcp-skills-catalog.md)（62 個分類整理）。
+>
+> 本頁只列**跟開發者 workflow 直接相關**的工具入口。
 
 ### Coding Agents
 
 #### [Cursor](https://www.cursor.com/) ⭐⭐⭐⭐⭐
-編輯器整合的 AI 結對程式設計工具。AI 輔助 coding 的業界標準。
+編輯器整合的 AI 結對程式設計工具。在 AI 編輯器類工具中採用度高、可作為比較其他 IDE agent 的基準。
 
 #### [Aider-AI/aider](https://github.com/Aider-AI/aider) ⭐⭐⭐⭐⭐
 ★ 44k+ · Apache-2.0 — git-aware 的 CLI pair-programmer。直接編輯你 repo 中的檔案，commit 都自動寫好。**「git-native AI 編輯流程」的開源範本**。模型不限。
@@ -51,7 +55,7 @@
 
 ### 推薦工具
 
-- [**yamadashy/repomix**](https://github.com/yamadashy/repomix) ⭐⭐⭐⭐⭐ ★ 24k+ — 把整個 codebase packed 成單一 AI-friendly 檔案（XML / Markdown / JSON），方便 Claude Code / Codex 做 code review / refactoring。內建 MCP server mode + tree-sitter 壓縮（約 70% token 節省）+ secretlint 過濾敏感資訊。**Track A 很值得當 daily driver 的工具。**
+- [**yamadashy/repomix**](https://github.com/yamadashy/repomix) ⭐⭐⭐⭐⭐ ★ 24k+ — **典型開發者用途：打包整個 codebase 給 reviewer / refactor agent**。輸出單一 AI-friendly 檔案（XML / Markdown / JSON），方便 Claude Code / Codex 做 code review / refactoring。技術細節（MCP server mode、tree-sitter 壓縮、secretlint 過濾）見官方 README。**Track A 很值得當 daily driver 的工具。**
 
 ## 必練流程
 
@@ -122,7 +126,7 @@ jobs:
 - **Tier 2**：自寫 Skills + MCP server——把你的 dev workflow 包成 skill team 共用
 - **Tier 3**：CI 自動跑 agent + production observability——進到 [Stage 7](../stages/07-multi-agent-production.md) 領域
 
-> Tier 0-1 應該滿足 90% 開發者。**升級到 Tier 2+ 要先確認 ROI**——團隊夠大、流程夠重複、事故不可逆，才值得 invest。
+> 多數個人開發者可先停在 Tier 0-1。**升級到 Tier 2+ 要先確認 ROI**——團隊夠大、流程夠重複、事故不可逆、才值得 invest。
 
 ## 也適用其他分支
 

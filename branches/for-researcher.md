@@ -2,7 +2,7 @@
 
 > **繁體中文** | [简体中文](./for-researcher.zh-Hans.md) | [English](./for-researcher.en.md)
 
-> 🚀 **第一次裝 Python / 申請 API key？** 先看 [`resources/setup-guide.md` A-C](../resources/setup-guide.md)。本分支預設你會跑 Python script、有 API key、會用 git。
+> 🚀 **計算型研究者**（會跑 Python script、有 API key、會用 git）可直接進階；**非程式背景研究者**（人文社科、臨床研究、文獻為主）可先從文獻 Q&A（NotebookLM）、Zotero AI 工具開始、需要時再看 [`resources/setup-guide.md` A-C](../resources/setup-guide.md)。
 
 > [← 回主路線 README](../README.md) · 走完 **Track A 的 A3** 或 **Track B 的 Stage 7** 後從這裡接續。把 agentic AI 應用到研究流程上。
 
@@ -35,7 +35,7 @@
 | Stars | ★ 8k+ |
 | License | Apache-2.0 |
 
-**教什麼**：對 PDF 文件做高準確率的 RAG，每個答案都附 grounded citation（句子層級的引用）。
+**教什麼**：對 PDF 文件以 **citation-grounded Q&A** 為設計目標——每個答案附句子層級的引用、減少幻覺風險。實際準確率依文件類型而異、評測結果以官方 benchmark / paper 為準。
 
 **適合誰**：寫文獻回顧、需要「查文獻時答案要可追溯」的研究者。比一般 RAG 更嚴謹。
 
@@ -63,7 +63,7 @@
 | Stars | ★ 28k+ |
 | License | MIT |
 
-**教什麼**：multi-perspective outline-then-write pipeline——agent 從多個角度先產大綱、再展開成 Wikipedia-style 文章。Stanford OVAL 出品。
+**教什麼**：multi-perspective outline-then-write pipeline——**白話三步**：(1) 先模擬不同觀點提出問題、(2) 把問題整理成大綱、(3) 最後生成 Wikipedia-style 草稿。Stanford OVAL 出品。
 
 **適合誰**：想學「**outline-driven 寫作**」的人。從零產主題 brief 時的好工具，類似 NotebookLM structured report 流程的開源版。
 
@@ -106,7 +106,9 @@
 
 ### 研究工作流 Skills（本 repo 維護者出品）
 
-> 這幾個是本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）日常在用的研究 skill / workspace。一併放到這裡讓其他研究者直接用。完整 entry 內容在 [`resources/mcp-skills-catalog.md` 13-14](../resources/mcp-skills-catalog.md#13-研究工作流-skills學術--paper--文獻)。
+> 這幾個是本 repo 維護者 [@WenyuChiou](https://github.com/WenyuChiou)（Lehigh CEE PhD candidate）日常在用的研究 skill / workspace。一併放到這裡讓其他研究者直接用。
+>
+> ⚠️ **揭露**：這些是**維護者自用工具、尚未經過第三方獨立評測**——不能跟 NotebookLM / GROBID / GPTresearcher 這類已有 paper / 社群採用度的工具當同等選項。適用情境：研究流程跟維護者類似（PhD 學位寫作、跨 paper 文獻整理）；限制：缺第三方 benchmark、未必適合你的領域。完整 entry 內容在 [`resources/mcp-skills-catalog.md` 13-14](../resources/mcp-skills-catalog.md#13-研究工作流-skills學術--paper--文獻)。
 
 #### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 
