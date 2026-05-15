@@ -100,14 +100,9 @@
 
 **Multi-agent 不只有 framework 這條路**。Anthropic 自家的 Claude Code 提供另一個 abstraction 層：[subagent](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制-2025-新功能) — 寫一個 `.claude/agents/<name>.md` 檔就是一個 subagent，**不需要 framework**。
 
-跟 framework 路線的根本差異：
+跟 framework 路線的根本差異（一句話）：**framework 路線**跨 LLM provider、寫 Python orchestration code、checkpointing / audit trail 完整；**Claude Code subagent** 只在 Claude Code runtime 內、寫 markdown 不寫 code、天生 context 隔離。
 
-| 維度 | Framework 路線（本 stage 主題） | Claude Code subagent |
-|---|---|---|
-| **跑哪** | 多數 framework 跨 LLM provider（LangGraph / CrewAI / AutoGen）；OpenAI Agents SDK 跟 Strands Agents 例外、綁定自家生態 | 只在 Claude Code runtime 內 |
-| **怎麼寫** | Python code + `langgraph.graph()` / `Crew(agents=...)` 之類 | `.claude/agents/X.md` markdown + frontmatter（檔案開頭的 YAML metadata） |
-| **適合誰** | 跨 LLM provider production system | 已 commit Claude Code 的工程團隊 |
-| **核心 benefit** | **checkpointing + state persistence**（LangGraph）、**audit trail / time-travel debug**（production 稽核必備）、orchestration 控制、跨 provider 可攜 | context preservation + 角色 specialization + tool constraint + cost control（route 到便宜 model）|
+> 📌 **完整逐維度對照表（啟動方式 / runtime / context 隔離 / provider lock-in / 學習曲線）的 canonical 在 [Stage 5.5 開頭](05-claude-code-ecosystem.md#55--subagentsclaude-code-原生-multi-agent-機制-2025-新功能)**——本 stage 只需知道「multi-agent 還有 Claude Code 原生這第二條路」、逐項實作差異到 5.5 再看。
 
 **何時選 subagent 而非 framework**：
 - 你已經在用 Claude Code 跑日常工作

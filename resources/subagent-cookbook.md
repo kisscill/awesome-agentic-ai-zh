@@ -29,17 +29,9 @@
 
 在你的 Claude Code session 內跑 `/agents` 一個指令、會列出全部當前可用的 subagent（內建 + plugin + 自訂）。
 
-**Claude Code 預設內建的 7 個**（截至 2025-11、可能會變動）：
+**Claude Code 預設內建 7 個** subagent：`general-purpose` / `code-reviewer` / `Explore` / `Plan` / `frontend-developer` / `claude-code-guide` / `statusline-setup`（截至 2025-11、可能會變動）。
 
-| 名稱 | 一句話功能 |
-|---|---|
-| `general-purpose` | 通用研究 / 多步驟任務 / fallback |
-| `code-reviewer` | Review diff、找 bug + 安全問題 |
-| `Explore` | 唯讀搜尋 codebase、找 code |
-| `Plan` | 設計 step-by-step 實作計畫 |
-| `frontend-developer` | React / UI / 響應式 / a11y（accessibility 縮寫、視障 / 鍵盤使用者也能用的設計）|
-| `claude-code-guide` | 問 Claude Code 自己的 feature 怎麼用 |
-| `statusline-setup` | 設定 status line（小工具）— 直接呼叫即可、無獨立 recipe |
+> 📌 **每個內建 subagent 的功能說明 + 「遇到 X 任務用 Y」decision table 的 canonical 在 [Stage 5.5 §可派遣的 subagent 有哪些](../stages/05-claude-code-ecosystem.md#可派遣的-subagent-有哪些)**——本 cookbook 聚焦「怎麼派遣」的 15 個 recipe，內建清單與選用邏輯以 Stage 5.5 為準。
 
 > 💡 **如果 `/agents` 列表跟這份 cookbook 不一致**：表示你裝了 plugin 或 Claude Code 版本不同。**recipe 名字對不上時、找最接近的 subagent 用就好**（例如沒有 `Explore`、用 `general-purpose` 也能跑搜尋）。
 
