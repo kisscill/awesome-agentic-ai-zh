@@ -62,11 +62,20 @@
 
 ---
 
+## 結業專題 / Capstone
+
+走完一條軌道後,做一個能展示的作品 + 自評。題目、必要條件、四級評分 rubric 全在 [`CAPSTONE.md`](CAPSTONE.md)——這份清單只放打勾入口,標準不重複。
+
+- [ ] **Track A Capstone** — 組一條會重複用的 CLI-agent 工作流 · [`CAPSTONE.md`](CAPSTONE.md)
+- [ ] **Track B Capstone** — build + **評測** 一個 multi-agent / RAG 系統 · [`CAPSTONE.md`](CAPSTONE.md)
+
+---
+
 ## 一條最短可行路線(如果你只想要一個建議)
 
 不想自己排?照這個走,大約能在最少繞路下到「能動手做事」:
 
-`Stage 0 → Stage 1 → Stage 2 →` 選軌道 `→`(Track A: `A1 → A2 → Stage 5 → A3`;Track B: `Stage 3 → Stage 4 → Stage 5 → Stage 6`)`→` 你的 branch `→`(進階,Track B 適用:`Stage 7 → 7.5 → 8`;Track A 的 Stage 8 已在上方主線)
+`Stage 0 → Stage 1 → Stage 2 →` 選軌道 `→`(Track A: `A1 → A2 → Stage 5 → A3`;Track B: `Stage 3 → Stage 4 → Stage 5 → Stage 6`)`→` 你的 branch `→`(進階,Track B 適用:`Stage 7 → 7.5 → 8`;Track A 的 Stage 8 已在上方主線)`→` 你那軌的 **Capstone**(見 [`CAPSTONE.md`](CAPSTONE.md))
 
 ---
 
