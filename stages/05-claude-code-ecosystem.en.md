@@ -805,6 +805,78 @@ A single table to cover 4 projects. **Pick an entry point by looking at "Best fo
 
 ---
 
+## 5.7 — SDK: Take Claude Code Apart and Rebuild It Your Way ⭐ Track B optional — production only
+
+> 🎯 **Who this section is for**: 99% of readers are done after 5.1-5.6. Only descend here if there's something CLI genuinely can't do for you. Stage 5.6 had you read the SDK source for harness understanding; this section is to make you *use* the SDK as your own service.
+
+### One analogy that separates SDK / CLI / `CLAUDE.md`
+
+- **CLI** (`claude` / `codex` / etc.) = a **ready-made car**. Get in, drive.
+- Editing `CLAUDE.md` / `AGENTS.md` / adding hooks / writing skills = **tuning the car's performance** so it drives better for your routines. Still the same car.
+- **SDK** (`claude-agent-sdk-python` / `openai-agents-python`) = **building a new car from the engine up** — controlling the agent loop, tool dispatch, and memory wiring yourself in Python / TS.
+
+**99% of learners plateau at "tuning the car" and that's enough.** Only climb to the SDK rung when tuning genuinely can't reach your target scenario.
+
+### Three-rung ladder — which one are you on?
+
+1. **Rung 1 — Use the CLI directly.** 90% of solo + team use cases. See 5.1.
+2. **Rung 2 — CLI + customisation.** Write `CLAUDE.md`, add hooks, write skills, install plugins. See 5.1-5.4. **Most people stop here, and that's enough.**
+3. **Rung 3 — SDK.** Embed the agent inside your code. This section.
+
+### When do you actually need rung 3?
+
+Concrete scenarios (not abstract):
+- **Embedded in your existing web app / backend** — users don't open a terminal, so CLI is unavailable.
+- **Triggered by cron / scheduler** — no human pressing enter; CLI's interactive mode doesn't fit.
+- **Wrapped as a company-internal layer** — adding auth, audit logs, rate limits, custom prompt templates — exposing CLI's power through controlled channels.
+- **Multi-agent runs with programmatic hand-off control** — finer than Stage 5.5's Task-tool dispatch.
+
+If none of these describe your task, you probably don't need the SDK. **Go back to 5.1-5.4.**
+
+### Hello SDK (4 lines of Python)
+
+```python
+from claude_agent_sdk import query
+
+async for msg in query(prompt="Check current state with git status"):
+    print(msg)  # all message types print safely; filter for AssistantMessage to get the agent's reply
+```
+
+That's it — wrap in `async def` and it runs. `query()` yields several message types (`AssistantMessage` / `ResultMessage` / `SystemMessage` / etc.); the `print(msg)` above prints any of them safely. To get the agent's actual reply you check `isinstance(msg, AssistantMessage)` and then read `msg.content`. Retry / streaming / prompt caching are in Stage 7 Exercise 4.
+
+### vs CLI / vs Customisation comparison (read this AFTER the sections above)
+
+| | CLI (claude / codex) | CLI + custom (CLAUDE.md / hooks) | SDK |
+|---|---|---|---|
+| Embed in your app | ❌ | ❌ | ✅ |
+| Cron / scheduled runs | ⚠️ Barely (`-p` flag) | ⚠️ Same | ✅ |
+| Switch language / env | Bound to Node / Bash | Same | Python / TS |
+| Programmatic control | ❌ | ❌ | ✅ |
+| Custom system prompt | Limited | Limited | Fully open |
+| Learning cost | 1 day | 1-2 weeks | 1 month+ |
+| Who it's for | Solo daily use | Solo / small team long-term | Building a product / service |
+
+### Two main SDKs
+
+| | [claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) | [openai-agents-python](https://github.com/openai/openai-agents-python) |
+|---|---|---|
+| Publisher | Anthropic | OpenAI |
+| Models | Claude (Opus / Sonnet / Haiku) | OpenAI series + others |
+| Strengths | Same tool / skill / hook abstraction as Claude Code | Handoff / agents-as-tools pattern; built-in sandbox since April 2026 |
+| Best fit | Already on Claude Code, embedding into a service | Already committed to the OpenAI ecosystem |
+
+Both are MIT-licensed with clean APIs. **The real question is which model your downstream picks.**
+
+### What's next
+
+- **Read code**: back to 5.6, read `claude-agent-sdk-python`'s `_internal/client.py` — now that you've used the SDK, the main loop reads with more meaning.
+- **Practice the SDK at production depth**: Stage 7 Exercise 4 (streaming + prompt caching); Stage 7 Exercise 5 (FastAPI + Docker production deploy).
+- **If you realise you don't actually need the SDK**: that's a good outcome — go back to 5.1-5.4 and master "CLI + customisation". It's usually a better return than writing your own SDK service.
+
+> 💡 **This section vs Stage 7**: this section is "what the SDK is, when to use it" (positioning + entry); Stage 7 is "writing an agent service that's ready to deploy with the SDK" (streaming / caching / deployment).
+
+---
+
 ## ✅ Self-Check Before Stage 6
 
 Can you:

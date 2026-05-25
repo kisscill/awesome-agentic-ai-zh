@@ -805,6 +805,78 @@ You are a senior code reviewer. When invoked:
 
 ---
 
+## 5.7 — SDK：把 Claude Code 拆开来自己组 ⭐ Track B 可选、production 才需要
+
+> 🎯 **这节是给谁看的**：99% 的人读完 5.1-5.6 已经够用，**只在你想做 CLI 做不到的事**才往下走。Stage 5.6 叫你读 SDK source 是为了理解 harness 内部；这节是为了让你**会用 SDK** 包成自己的服务。
+
+### 1 个比喻把 SDK / CLI / `CLAUDE.md` 分清楚
+
+- **CLI**（`claude` / `codex` / 等）= 一台**现成的车子**，点一下就能上路
+- 改 `CLAUDE.md` / `AGENTS.md` / 加 hooks / 写 skills = **调车子的性能**，让它开得更顺、更贴你工作习惯 —— 一样是这台车
+- **SDK**（`claude-agent-sdk-python` / `openai-agents-python`）= **把车子从引擎开始重造一台** —— 用 Python / TS 控制 agent loop、tool dispatch、memory 怎么接
+
+**99% 的学习者天花板停在“调车”就够了。** 只在“调车怎么调都到不了你要的场景”时，才需要爬到 SDK。
+
+### 阶梯式三层 —— 你现在在哪？
+
+1. **第 1 层 直接用 CLI** —— 90% 的个人 + 团队使用情境。看 5.1
+2. **第 2 层 CLI + 自定** —— 写 `CLAUDE.md`、加 hooks、自己写 skill、套 plugin。看 5.1-5.4。**多数人停在这层、且够用**
+3. **第 3 层 SDK** —— 把 agent 嵌进你的应用。这节在教
+
+### 什么时候才需要爬到第 3 层
+
+具体场景（不抽象）：
+- **嵌进你已有的 web app / 后端** —— 用户不开 terminal，就不能用 CLI
+- **cron / scheduler 自动触发** —— 没有人在 session 里点 enter，CLI 交互模式不适用
+- **公司内部包一层** —— 加 auth、audit log、限额、自定 prompt template，让 CLI 的能力以受控方式对外
+- **同时跑多 agent、要 programmatic 控制 hand-off** —— 比 Stage 5.5 的 Task tool 更细的控制权
+
+如果你做的不在上面，你大概不需要 SDK。**该回 5.1-5.4。**
+
+### Hello SDK（4 行 Python）
+
+```python
+from claude_agent_sdk import query
+
+async for msg in query(prompt="用 git status 看当前状态"):
+    print(msg)  # 所有 message type 都能 print；要拿 agent 回复要 filter AssistantMessage
+```
+
+就这样 —— 包进 `async def` 就能跑。`query()` 会 yield 多种 message type（`AssistantMessage` / `ResultMessage` / `SystemMessage` 等），上面的 `print(msg)` 全部都能安全打印；想拿到 agent 真正的回复要 `isinstance(msg, AssistantMessage)` 再取 `msg.content` —— retry / streaming / prompt caching 等进阶用法在 Stage 7 练习 4。
+
+### vs CLI / vs 自定 对照表（看完上面再看这张）
+
+| | CLI（claude / codex） | CLI + 自定（改 CLAUDE.md / hooks） | SDK |
+|---|---|---|---|
+| 嵌进你的 app | ❌ | ❌ | ✅ |
+| cron / 排程跑 | ⚠️ 勉强（`-p` flag） | ⚠️ 同左 | ✅ |
+| 换语言 / 环境 | 绑 Node / Bash | 同左 | Python / TS 随你 |
+| programmatic 控制 | ❌ | ❌ | ✅ |
+| 客制 system prompt | 受限 | 受限 | 完全自由 |
+| 学习成本 | 1 天 | 1-2 周 | 1 个月+ |
+| 适合谁 | 个人日常用 | 个人 / 小团队长期用 | 包成产品 / 服务 |
+
+### 两个主要 SDK
+
+| | [claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) | [openai-agents-python](https://github.com/openai/openai-agents-python) |
+|---|---|---|
+| 出品 | Anthropic 官方 | OpenAI 官方 |
+| 模型 | Claude（Opus / Sonnet / Haiku） | OpenAI 系列 + 其他 |
+| 强项 | 跟 Claude Code 一致的 tool / skill / hook 抽象 | handoff / agents-as-tools 模式、2026-04 内建 sandbox |
+| 适合 | 已在用 Claude Code 想嵌服务的人 | 已 commit OpenAI 生态的人 |
+
+两个都 MIT 授权、API 设计干净，**重点是你的下游选哪家模型**。
+
+### 接下来
+
+- **看代码**：回 5.6，读 `claude-agent-sdk-python` 的 `_internal/client.py` —— 你现在会用 SDK 了，读那边的 main loop 会看懂更多
+- **动手练 SDK 进阶**：Stage 7 练习 4（streaming + prompt caching）；Stage 7 练习 5（FastAPI + Docker production deploy）
+- **如果你发现你其实不需要 SDK**：那很好 —— 回 5.1-5.4，把 CLI + 自定这层用透，通常已经比写 SDK 划算
+
+> 💡 **本节跟 Stage 7 的区别**：本节学“SDK 是什么、什么时候用”（定位 + 入门）；Stage 7 学“用 SDK 写一个可上线部署的 agent 服务”（streaming / caching / deploy）。
+
+---
+
 ## ✅ 进入 Stage 6 前的自我检查
 
 你能不能：
