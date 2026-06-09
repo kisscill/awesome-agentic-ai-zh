@@ -8,7 +8,7 @@ Corresponds to [Stage 1 — LLM Basics](../../../stages/01-llm-basics.en.md) Exe
 
 ## Why this matters
 
-Production agents in Stages 3-7 will absolutely hit API errors:
+Production agents in Stages 3-8 will absolutely hit API errors:
 
 - Rate limit (429) — different subscription tiers, you can hit it anytime
 - Network jitter (connection reset) — cross-DC / VPN happens daily

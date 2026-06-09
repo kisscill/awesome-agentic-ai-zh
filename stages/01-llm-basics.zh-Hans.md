@@ -385,7 +385,7 @@ single: input=14 output=48 → $0.000254
 - prompt 超长 → context window 满了会发生什么
 - 网络断掉 → 写一个有 exponential backoff 的 retry wrapper
 
-这是后面 Stage 3-7 写 production agent 一定会用到的基础。
+这是后面 Stage 3-8 写 production agent 一定会用到的基础。
 
 → **基础 starter 范本** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/)（含 mock-based test、不用真的断网就能验证 retry 逻辑；illustrative，**不是 chapter-length 完整教程**）
 

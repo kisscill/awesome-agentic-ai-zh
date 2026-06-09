@@ -10,7 +10,7 @@
 
 ## 為什麼這題重要
 
-Stage 3-7 的 production agent 一定會碰到 API 錯誤：
+Stage 3-8 的 production agent 一定會碰到 API 錯誤：
 
 - Rate limit（429）→ 雲端 API 訂閱階級不一樣、隨時可能撞到
 - 網路抖（connection reset）→ 跨機房 / VPN 是日常

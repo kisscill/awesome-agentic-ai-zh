@@ -386,7 +386,7 @@ Trigger error conditions deliberately and write retry logic:
 - Over-long prompt → what happens when the context window is full
 - Network drop → write a retry wrapper with exponential backoff
 
-This is foundational for Stage 3-7's production agent code.
+This is foundational for Stage 3-8's production agent code.
 
 → **Starter template** → [`examples/stage-1/05-error-handling/`](../examples/stage-1/05-error-handling/) (mock-based tests so you can verify the retry logic without unplugging your ethernet cable; illustrative, **not a chapter-length tutorial**)
 
